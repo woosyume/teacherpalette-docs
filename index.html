@@ -184,36 +184,6 @@
   }
   .btn-secondary:hover { transform: translateY(-1px); border-color: var(--accent); }
 
-  /* Hero stat strip — "8 tools · 1 app · 0 tracking" 임팩트 라인 */
-  .stat-strip {
-    margin-top: 44px;
-    display: inline-flex; align-items: baseline; gap: 22px;
-    padding: 14px 28px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 999px;
-    backdrop-filter: saturate(160%) blur(20px);
-    -webkit-backdrop-filter: saturate(160%) blur(20px);
-    box-shadow: var(--shadow);
-  }
-  .stat { display: inline-flex; align-items: baseline; gap: 8px; }
-  .stat-num {
-    font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
-    font-size: 22px; font-weight: 700;
-    background: linear-gradient(135deg, #0176D3 0%, #E44D8B 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
-  }
-  .stat-label {
-    font-size: 12px; font-weight: 500;
-    color: var(--text-dim);
-    text-transform: uppercase; letter-spacing: 0.08em;
-  }
-  .stat-sep {
-    color: var(--text-dim); opacity: 0.35;
-    font-size: 18px;
-  }
 
   /* ── Sections ─────────────────────────────────────────────── */
   section { padding: 80px 24px; }
@@ -371,23 +341,6 @@
     <span data-lang-ja>描画・スポットライト・ホワイトボード・タイマー・カーソル — プレゼンターに必要なすべてを、1 つのネイティブ macOS オーバーレイに。Zoom・Meet・Teams の上でそのまま動作。</span>
   </p>
 
-  <!-- All-in-one stat strip: 여러 앱을 하나로 대체한다는 메시지 시각화 -->
-  <div class="stat-strip" aria-hidden="true">
-    <div class="stat">
-      <span class="stat-num">8+</span>
-      <span class="stat-label"><span data-lang-en>tools</span><span data-lang-ko>도구</span><span data-lang-ja>ツール</span></span>
-    </div>
-    <span class="stat-sep">·</span>
-    <div class="stat">
-      <span class="stat-num">1</span>
-      <span class="stat-label"><span data-lang-en>app</span><span data-lang-ko>앱</span><span data-lang-ja>アプリ</span></span>
-    </div>
-    <span class="stat-sep">·</span>
-    <div class="stat">
-      <span class="stat-num">0</span>
-      <span class="stat-label"><span data-lang-en>tracking</span><span data-lang-ko>추적</span><span data-lang-ja>トラッキング</span></span>
-    </div>
-  </div>
   <div class="cta-row">
     <a href="#" class="btn btn-primary">
       <span data-lang-en>Download for macOS</span>
