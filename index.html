@@ -120,20 +120,45 @@
   }
   .brand-name { font-weight: 700; font-size: 17px; }
   .header-controls { display: flex; align-items: center; gap: 8px; }
-  .lang-switch, .theme-switch {
+  /* 언어 dropdown — 9개는 segmented에 안 맞아 select 스타일로 */
+  .lang-select {
+    position: relative; display: inline-flex; align-items: center;
+    background: var(--bg-alt); border-radius: 8px;
+    border: 1px solid var(--border); padding: 3px 10px 3px 12px;
+  }
+  .lang-select::before {
+    content: "🌐"; margin-right: 6px; font-size: 12px;
+  }
+  .lang-select select {
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    border: none; background: transparent; color: var(--text);
+    padding: 5px 22px 5px 0; font-size: 12px; font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+  }
+  .lang-select::after {
+    content: ""; position: absolute; right: 10px; top: 50%;
+    width: 6px; height: 6px;
+    border-right: 1.5px solid var(--text-dim);
+    border-bottom: 1.5px solid var(--text-dim);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+  .theme-switch {
     display: inline-flex; background: var(--bg-alt);
     border-radius: 8px; padding: 3px; border: 1px solid var(--border);
   }
-  .lang-switch button, .theme-switch button {
+  .theme-switch button {
     border: none; background: transparent; color: var(--text-dim);
     padding: 5px 10px; font-size: 12px; font-weight: 500;
     border-radius: 6px; cursor: pointer; transition: all 0.15s;
   }
-  .lang-switch button.active, .theme-switch button.active {
+  .theme-switch button.active {
     background: var(--bg); color: var(--text);
     box-shadow: 0 1px 2px rgba(0,0,0,0.08);
   }
-  .lang-switch button:hover, .theme-switch button:hover { color: var(--text); }
+  .theme-switch button:hover { color: var(--text); }
 
   /* ── Hero ─────────────────────────────────────────────────── */
   .hero {
@@ -541,6 +566,35 @@
     .dm-hud  { animation: none; opacity: 1; }
   }
 
+  /* Languages visual — 9 flag cards grid, 활성 언어 highlight */
+  .visual-languages {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    padding: 24px;
+    width: 100%;
+  }
+  .lang-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px 8px;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 6px rgba(0,0,0,0.05);
+    transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+  .lang-card .flag { font-size: 28px; line-height: 1; }
+  .lang-card .name { font-size: 10.5px; font-weight: 600; color: var(--text-dim); letter-spacing: -0.01em; }
+  /* 활성 카드는 JS가 지정 */
+  .lang-card.active {
+    transform: translateY(-2px);
+    border-color: var(--spot-color);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.15),
+      0 0 0 2px var(--spot-soft),
+      0 8px 20px var(--spot-soft);
+  }
+  .lang-card.active .name { color: var(--text); }
+
   /* HUD visual — 앱 실제 HUD 배지 재현 */
   .visual-hud {
     display: flex; align-items: center; justify-content: center; gap: 20px;
@@ -635,15 +689,44 @@
   footer .links a:hover { color: var(--accent); }
   footer .copy { color: var(--text-dim); font-size: 12px; }
 
-  /* ── Utility ──────────────────────────────────────────────── */
-  [data-lang-en], [data-lang-ko], [data-lang-ja] { display: none; }
-  html[lang="en"] [data-lang-en] { display: revert; }
-  html[lang="ko"] [data-lang-ko] { display: revert; }
-  html[lang="ja"] [data-lang-ja] { display: revert; }
-  /* inline인 경우 display 조정 */
+  /* ── i18n Utility (9 languages) ────────────────────────────
+     각 언어별 span을 감추고 활성 언어만 표시. fallback:
+     특정 언어 span이 없는 경우 JS가 [data-lang-en]을 fallback으로 표시. */
+  [data-lang-en], [data-lang-ko], [data-lang-ja],
+  [data-lang-zh], [data-lang-fr], [data-lang-de],
+  [data-lang-es], [data-lang-pt], [data-lang-it] { display: none; }
+  html[lang="en"]    [data-lang-en] { display: revert; }
+  html[lang="ko"]    [data-lang-ko] { display: revert; }
+  html[lang="ja"]    [data-lang-ja] { display: revert; }
+  html[lang="zh"]    [data-lang-zh] { display: revert; }
+  html[lang="fr"]    [data-lang-fr] { display: revert; }
+  html[lang="de"]    [data-lang-de] { display: revert; }
+  html[lang="es"]    [data-lang-es] { display: revert; }
+  html[lang="pt"]    [data-lang-pt] { display: revert; }
+  html[lang="it"]    [data-lang-it] { display: revert; }
+  /* inline 스팬 명시적 표시 */
   html[lang="en"] span[data-lang-en],
   html[lang="ko"] span[data-lang-ko],
-  html[lang="ja"] span[data-lang-ja] { display: inline; }
+  html[lang="ja"] span[data-lang-ja],
+  html[lang="zh"] span[data-lang-zh],
+  html[lang="fr"] span[data-lang-fr],
+  html[lang="de"] span[data-lang-de],
+  html[lang="es"] span[data-lang-es],
+  html[lang="pt"] span[data-lang-pt],
+  html[lang="it"] span[data-lang-it] { display: inline; }
+  /* fallback 클래스: JS가 활성 언어 span이 없는 요소에 자동 부여 */
+  html[lang="zh"] .fb-en [data-lang-en],
+  html[lang="fr"] .fb-en [data-lang-en],
+  html[lang="de"] .fb-en [data-lang-en],
+  html[lang="es"] .fb-en [data-lang-en],
+  html[lang="pt"] .fb-en [data-lang-en],
+  html[lang="it"] .fb-en [data-lang-en] { display: revert; }
+  html[lang="zh"] span.fb-en[data-lang-en],
+  html[lang="fr"] span.fb-en[data-lang-en],
+  html[lang="de"] span.fb-en[data-lang-en],
+  html[lang="es"] span.fb-en[data-lang-en],
+  html[lang="pt"] span.fb-en[data-lang-en],
+  html[lang="it"] span.fb-en[data-lang-en] { display: inline; }
 </style>
 </head>
 <body>
@@ -655,11 +738,19 @@
       <img class="brand-logo" src="img/logo.png" alt="TeacherPalette">
     </a>
     <div class="header-controls">
-      <div class="lang-switch" role="group" aria-label="Language">
-        <button data-lang-btn="en">EN</button>
-        <button data-lang-btn="ko">한</button>
-        <button data-lang-btn="ja">日</button>
-      </div>
+      <label class="lang-select" aria-label="Language">
+        <select id="lang-select">
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="ja">日本語</option>
+          <option value="zh">简体中文</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+          <option value="pt">Português</option>
+          <option value="it">Italiano</option>
+        </select>
+      </label>
       <div class="theme-switch" role="group" aria-label="Theme">
         <button data-theme-btn="light" title="Light">☀︎</button>
         <button data-theme-btn="dark" title="Dark">☾</button>
@@ -675,6 +766,12 @@
     <span data-lang-en>The all-in-one presenter toolkit</span>
     <span data-lang-ko>발표자를 위한 올인원 툴킷</span>
     <span data-lang-ja>プレゼンター向けオールインワン</span>
+    <span data-lang-zh>一体化演讲者工具包</span>
+    <span data-lang-fr>La boîte à outils tout-en-un du présentateur</span>
+    <span data-lang-de>Das All-in-One-Toolkit für Präsentierende</span>
+    <span data-lang-es>El kit todo en uno para presentadores</span>
+    <span data-lang-pt>O kit tudo-em-um para apresentadores</span>
+    <span data-lang-it>Il toolkit tutto-in-uno per presentatori</span>
   </div>
   <h1 style="line-height: 1;">
     <img class="hero-logo" src="img/logo.png" alt="TeacherPalette">
@@ -683,6 +780,12 @@
     <span data-lang-en>Draw, spotlight, whiteboard, timer, cursor — everything a live presenter needs, in one native macOS overlay. Built to run on top of Zoom, Meet, and Teams.</span>
     <span data-lang-ko>드로잉, 스포트라이트, 화이트보드, 타이머, 커서 — 발표자에게 필요한 모든 도구를 하나의 네이티브 macOS 오버레이 앱에. Zoom·Meet·Teams 위에서 그대로 작동합니다.</span>
     <span data-lang-ja>描画・スポットライト・ホワイトボード・タイマー・カーソル — プレゼンターに必要なすべてを、1 つのネイティブ macOS オーバーレイに。Zoom・Meet・Teams の上でそのまま動作。</span>
+    <span data-lang-zh>绘图、聚光灯、白板、计时器、光标 — 现场演讲者所需的一切,尽在一个原生 macOS 悬浮层。可运行于 Zoom、Meet、Teams 之上。</span>
+    <span data-lang-fr>Dessin, projecteur, tableau blanc, minuteur, curseur — tout ce dont un présentateur a besoin, dans une seule superposition native macOS. Conçu pour fonctionner par-dessus Zoom, Meet et Teams.</span>
+    <span data-lang-de>Zeichnen, Spotlight, Whiteboard, Timer, Cursor — alles, was ein Live-Präsentierender braucht, in einem einzigen nativen macOS-Overlay. Läuft über Zoom, Meet und Teams.</span>
+    <span data-lang-es>Dibujo, foco, pizarra, temporizador, cursor — todo lo que un presentador en vivo necesita, en una única superposición nativa de macOS. Diseñado para funcionar sobre Zoom, Meet y Teams.</span>
+    <span data-lang-pt>Desenho, holofote, quadro, timer, cursor — tudo que um apresentador ao vivo precisa, em uma única sobreposição nativa do macOS. Feito para rodar sobre Zoom, Meet e Teams.</span>
+    <span data-lang-it>Disegno, riflettore, lavagna, timer, cursore — tutto ciò che serve a un presentatore live, in un'unica sovrapposizione nativa per macOS. Progettato per funzionare sopra Zoom, Meet e Teams.</span>
   </p>
 
   <div class="cta-row">
@@ -690,11 +793,23 @@
       <span data-lang-en>Download for macOS</span>
       <span data-lang-ko>macOS용 다운로드</span>
       <span data-lang-ja>macOS 版をダウンロード</span>
+      <span data-lang-zh>下载 macOS 版</span>
+      <span data-lang-fr>Télécharger pour macOS</span>
+      <span data-lang-de>Für macOS herunterladen</span>
+      <span data-lang-es>Descargar para macOS</span>
+      <span data-lang-pt>Baixar para macOS</span>
+      <span data-lang-it>Scarica per macOS</span>
     </a>
     <a href="#features" class="btn btn-secondary">
       <span data-lang-en>See features</span>
       <span data-lang-ko>기능 살펴보기</span>
       <span data-lang-ja>機能を見る</span>
+      <span data-lang-zh>查看功能</span>
+      <span data-lang-fr>Voir les fonctionnalités</span>
+      <span data-lang-de>Funktionen ansehen</span>
+      <span data-lang-es>Ver funciones</span>
+      <span data-lang-pt>Ver recursos</span>
+      <span data-lang-it>Vedi le funzioni</span>
     </a>
   </div>
 </section>
@@ -707,11 +822,23 @@
         <span data-lang-en>One app. Every tool you need.</span>
         <span data-lang-ko>앱 하나에, 필요한 모든 도구.</span>
         <span data-lang-ja>アプリひとつに、必要な機能すべて。</span>
+        <span data-lang-zh>一款应用,涵盖所需一切。</span>
+        <span data-lang-fr>Une seule app. Tous les outils nécessaires.</span>
+        <span data-lang-de>Eine App. Alle Werkzeuge, die du brauchst.</span>
+        <span data-lang-es>Una app. Todas las herramientas que necesitas.</span>
+        <span data-lang-pt>Um app. Todas as ferramentas que você precisa.</span>
+        <span data-lang-it>Un'unica app. Tutti gli strumenti che ti servono.</span>
       </h2>
       <p>
-        <span data-lang-en>Drawing, whiteboard, spotlight, laser, custom cursor, palette, multi-display, timer — one download replaces a whole toolbox of single-purpose apps.</span>
-        <span data-lang-ko>드로잉, 화이트보드, 스포트라이트, 레이저, 커스텀 커서, 팔레트, 멀티 디스플레이, 타이머까지 — 한 번의 설치로 여러 개의 개별 앱을 대체합니다.</span>
-        <span data-lang-ja>描画、ホワイトボード、スポットライト、レーザー、カスタムカーソル、パレット、マルチディスプレイ、タイマー — 個別アプリの寄せ集めを、1 つのダウンロードでまとめて置き換え。</span>
+        <span data-lang-en>Drawing, whiteboard, spotlight, laser, custom cursor, palette, timer — one download replaces a whole toolbox of single-purpose apps.</span>
+        <span data-lang-ko>드로잉, 화이트보드, 스포트라이트, 레이저, 커스텀 커서, 팔레트, 타이머까지 — 한 번의 설치로 여러 개의 개별 앱을 대체합니다.</span>
+        <span data-lang-ja>描画、ホワイトボード、スポットライト、レーザー、カスタムカーソル、パレット、タイマー — 個別アプリの寄せ集めを、1 つのダウンロードでまとめて置き換え。</span>
+        <span data-lang-zh>绘图、白板、聚光灯、激光笔、自定义光标、调色板、计时器 — 一次下载替代一整套单一功能应用。</span>
+        <span data-lang-fr>Dessin, tableau blanc, projecteur, laser, curseur personnalisé, palette, minuteur — un seul téléchargement remplace toute une boîte à outils d'apps à usage unique.</span>
+        <span data-lang-de>Zeichnen, Whiteboard, Spotlight, Laser, eigener Cursor, Palette, Timer — ein einziger Download ersetzt eine ganze Werkzeugkiste von Einzelzweck-Apps.</span>
+        <span data-lang-es>Dibujo, pizarra, foco, láser, cursor personalizado, paleta, temporizador — una sola descarga reemplaza toda una caja de herramientas de apps de un solo propósito.</span>
+        <span data-lang-pt>Desenho, quadro branco, holofote, laser, cursor personalizado, paleta, timer — um único download substitui uma caixa inteira de apps de propósito único.</span>
+        <span data-lang-it>Disegno, lavagna, riflettore, laser, cursore personalizzato, palette, timer — un unico download sostituisce un'intera cassetta di app monoscopo.</span>
       </p>
     </div>
 
@@ -724,14 +851,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>Drawing tools</span>
-          <span data-lang-ko>드로잉 도구</span>
-          <span data-lang-ja>描画ツール</span>
+          <span data-lang-en>Drawing tools</span><span data-lang-ko>드로잉 도구</span><span data-lang-ja>描画ツール</span>
+          <span data-lang-zh>绘图工具</span><span data-lang-fr>Outils de dessin</span><span data-lang-de>Zeichenwerkzeuge</span>
+          <span data-lang-es>Herramientas de dibujo</span><span data-lang-pt>Ferramentas de desenho</span><span data-lang-it>Strumenti di disegno</span>
         </h3>
         <p>
           <span data-lang-en>Pen, highlighter, arrow, rectangle, text, and pixel/stroke eraser. Auto-clear on release.</span>
           <span data-lang-ko>펜, 형광펜, 화살표, 사각형, 텍스트, 픽셀/획 지우개. 손 뗄 때 자동 삭제 옵션.</span>
           <span data-lang-ja>ペン・マーカー・矢印・四角形・テキスト・ピクセル/ストローク消しゴム。ペンを離すと自動消去可能。</span>
+          <span data-lang-zh>画笔、荧光笔、箭头、矩形、文本和像素/笔画橡皮。抬手自动清除可选。</span>
+          <span data-lang-fr>Stylo, surligneur, flèche, rectangle, texte et gomme pixel/trait. Effacement auto au relâchement.</span>
+          <span data-lang-de>Stift, Marker, Pfeil, Rechteck, Text und Pixel/Strich-Radierer. Auto-Löschen beim Loslassen.</span>
+          <span data-lang-es>Bolígrafo, marcador, flecha, rectángulo, texto y borrador de píxel/trazo. Borrado automático al soltar.</span>
+          <span data-lang-pt>Caneta, marca-texto, seta, retângulo, texto e borracha de pixel/traço. Limpeza automática ao soltar.</span>
+          <span data-lang-it>Penna, evidenziatore, freccia, rettangolo, testo e gomma pixel/tratto. Auto-cancellazione al rilascio.</span>
         </p>
       </div>
 
@@ -745,14 +878,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>Whiteboard mode</span>
-          <span data-lang-ko>화이트보드 모드</span>
-          <span data-lang-ja>ホワイトボードモード</span>
+          <span data-lang-en>Whiteboard mode</span><span data-lang-ko>화이트보드 모드</span><span data-lang-ja>ホワイトボードモード</span>
+          <span data-lang-zh>白板模式</span><span data-lang-fr>Mode tableau blanc</span><span data-lang-de>Whiteboard-Modus</span>
+          <span data-lang-es>Modo pizarra</span><span data-lang-pt>Modo quadro branco</span><span data-lang-it>Modalità lavagna</span>
         </h3>
         <p>
           <span data-lang-en>Multi-page whiteboard with instant page switching, drag & drop images, and one-click PDF export.</span>
           <span data-lang-ko>여러 페이지를 즉시 전환, 이미지 드래그 앤 드롭, 원클릭 PDF 저장까지.</span>
           <span data-lang-ja>複数ページ即時切替、画像ドラッグ&ドロップ、ワンクリック PDF 保存。</span>
+          <span data-lang-zh>多页白板,即时切换、拖放图片、一键导出 PDF。</span>
+          <span data-lang-fr>Tableau multi-pages avec changement instantané, glisser-déposer d'images et export PDF en un clic.</span>
+          <span data-lang-de>Mehrseitiges Whiteboard mit sofortigem Seitenwechsel, Drag & Drop von Bildern und PDF-Export mit einem Klick.</span>
+          <span data-lang-es>Pizarra de varias páginas con cambio instantáneo, arrastrar y soltar imágenes y exportación PDF con un clic.</span>
+          <span data-lang-pt>Quadro branco de várias páginas, troca instantânea, arrastar e soltar imagens e exportação PDF com um clique.</span>
+          <span data-lang-it>Lavagna multi-pagina con cambio istantaneo, drag & drop di immagini ed export PDF con un clic.</span>
         </p>
       </div>
 
@@ -766,14 +905,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>Spotlight & laser</span>
-          <span data-lang-ko>스포트라이트 & 레이저</span>
-          <span data-lang-ja>スポットライト & レーザー</span>
+          <span data-lang-en>Spotlight & laser</span><span data-lang-ko>스포트라이트 & 레이저</span><span data-lang-ja>スポットライト & レーザー</span>
+          <span data-lang-zh>聚光灯与激光笔</span><span data-lang-fr>Projecteur & laser</span><span data-lang-de>Spotlight & Laser</span>
+          <span data-lang-es>Foco y láser</span><span data-lang-pt>Holofote & laser</span><span data-lang-it>Riflettore & laser</span>
         </h3>
         <p>
           <span data-lang-en>Dim everything except a bright circle around your cursor. Trailing laser pointer for pointing without clicking.</span>
           <span data-lang-ko>커서 주변만 밝게, 나머지는 어둡게. 클릭 없이 시선을 유도하는 레이저 포인터.</span>
           <span data-lang-ja>カーソル周りだけ明るく、他は暗く。クリックなしで視線を誘導するレーザーポインター。</span>
+          <span data-lang-zh>除光标周围的高亮圆外,其他区域全部变暗。带轨迹的激光笔,无需点击即可指引视线。</span>
+          <span data-lang-fr>Assombrit tout sauf un cercle lumineux autour de votre curseur. Pointeur laser avec traînée pour désigner sans cliquer.</span>
+          <span data-lang-de>Dunkelt alles außer einem hellen Kreis um deinen Cursor ab. Laserpointer mit Nachlauf zum Zeigen ohne Klicken.</span>
+          <span data-lang-es>Oscurece todo excepto un círculo brillante alrededor del cursor. Puntero láser con estela para señalar sin hacer clic.</span>
+          <span data-lang-pt>Escurece tudo, exceto um círculo brilhante ao redor do cursor. Ponteiro laser com rastro para apontar sem clicar.</span>
+          <span data-lang-it>Oscura tutto tranne un cerchio luminoso attorno al cursore. Puntatore laser con scia per indicare senza cliccare.</span>
         </p>
       </div>
 
@@ -787,14 +932,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>Multi-display</span>
-          <span data-lang-ko>멀티 디스플레이</span>
-          <span data-lang-ja>マルチディスプレイ</span>
+          <span data-lang-en>Multi-display</span><span data-lang-ko>멀티 디스플레이</span><span data-lang-ja>マルチディスプレイ</span>
+          <span data-lang-zh>多显示器</span><span data-lang-fr>Multi-écrans</span><span data-lang-de>Multi-Display</span>
+          <span data-lang-es>Multi-pantalla</span><span data-lang-pt>Multi-tela</span><span data-lang-it>Multi-schermo</span>
         </h3>
         <p>
           <span data-lang-en>Full support for multiple monitors and iPad Sidecar. Choose which screen to annotate, whiteboard, or BRB.</span>
           <span data-lang-ko>여러 모니터와 iPad Sidecar 완벽 지원. 어느 화면에서 그릴지, 화이트보드 띄울지 선택.</span>
           <span data-lang-ja>複数モニターと iPad Sidecar に完全対応。描画・ホワイトボード・BRB を任意の画面で。</span>
+          <span data-lang-zh>完整支持多显示器和 iPad Sidecar。可选择在哪个屏幕上批注、开白板或显示暂离页。</span>
+          <span data-lang-fr>Prise en charge complète de plusieurs écrans et iPad Sidecar. Choisissez sur quel écran annoter, ouvrir le tableau ou afficher la pause.</span>
+          <span data-lang-de>Volle Unterstützung für mehrere Monitore und iPad Sidecar. Wähle, auf welchem Bildschirm annotiert, Whiteboard oder Pause angezeigt wird.</span>
+          <span data-lang-es>Compatibilidad completa con varios monitores e iPad Sidecar. Elige en qué pantalla anotar, abrir la pizarra o mostrar la pausa.</span>
+          <span data-lang-pt>Suporte total para vários monitores e iPad Sidecar. Escolha em qual tela anotar, abrir o quadro ou mostrar pausa.</span>
+          <span data-lang-it>Supporto completo per più monitor e iPad Sidecar. Scegli su quale schermo annotare, aprire lavagna o pausa.</span>
         </p>
       </div>
 
@@ -807,14 +958,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>Rebindable shortcuts</span>
-          <span data-lang-ko>재설정 가능한 단축키</span>
-          <span data-lang-ja>カスタマイズ可能なショートカット</span>
+          <span data-lang-en>Rebindable shortcuts</span><span data-lang-ko>재설정 가능한 단축키</span><span data-lang-ja>カスタマイズ可能なショートカット</span>
+          <span data-lang-zh>可自定义快捷键</span><span data-lang-fr>Raccourcis reconfigurables</span><span data-lang-de>Anpassbare Kurzbefehle</span>
+          <span data-lang-es>Atajos reasignables</span><span data-lang-pt>Atalhos personalizáveis</span><span data-lang-it>Scorciatoie riassegnabili</span>
         </h3>
         <p>
           <span data-lang-en>Every ⌘⇧ shortcut is remappable. Works from any focused app — Zoom, Slides, Keynote, Chrome.</span>
           <span data-lang-ko>모든 ⌘⇧ 단축키를 원하는 키로. Zoom·Slides·Keynote·Chrome 등 어떤 앱에서도 작동.</span>
           <span data-lang-ja>すべての ⌘⇧ ショートカットを再割当可能。Zoom・Slides・Keynote・Chrome など、どのアプリでも動作。</span>
+          <span data-lang-zh>所有 ⌘⇧ 快捷键均可重新映射。在任何焦点应用中都可用 — Zoom、Slides、Keynote、Chrome。</span>
+          <span data-lang-fr>Chaque raccourci ⌘⇧ est réassignable. Fonctionne depuis n'importe quelle app active — Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-de>Jeder ⌘⇧-Kurzbefehl ist neu zuweisbar. Funktioniert aus jeder aktiven App — Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-es>Cada atajo ⌘⇧ es reasignable. Funciona desde cualquier app activa — Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-pt>Cada atalho ⌘⇧ é remapeável. Funciona a partir de qualquer app em foco — Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-it>Ogni scorciatoia ⌘⇧ è riassegnabile. Funziona da qualsiasi app attiva — Zoom, Slides, Keynote, Chrome.</span>
         </p>
       </div>
 
@@ -830,14 +987,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>BRB timer</span>
-          <span data-lang-ko>BRB 타이머</span>
-          <span data-lang-ja>BRB タイマー</span>
+          <span data-lang-en>BRB timer</span><span data-lang-ko>BRB 타이머</span><span data-lang-ja>BRB タイマー</span>
+          <span data-lang-zh>暂离计时器</span><span data-lang-fr>Minuteur de pause</span><span data-lang-de>Pause-Timer</span>
+          <span data-lang-es>Temporizador de pausa</span><span data-lang-pt>Timer de intervalo</span><span data-lang-it>Timer di pausa</span>
         </h3>
         <p>
           <span data-lang-en>Full-screen "Be Right Back" overlay with a countdown for breaks. Students see when you'll return.</span>
           <span data-lang-ko>휴식 시간을 알리는 전체화면 "잠시 후 돌아오겠습니다" 오버레이 + 카운트다운.</span>
           <span data-lang-ja>休憩を伝える全画面「戻ってきます」オーバーレイ + カウントダウン。</span>
+          <span data-lang-zh>全屏"马上回来"叠加层,带倒计时。让学生看到您何时回来。</span>
+          <span data-lang-fr>Superposition plein écran « Je reviens » avec compte à rebours. Les étudiants voient quand vous revenez.</span>
+          <span data-lang-de>Vollbild-„Bin gleich zurück"-Overlay mit Countdown. Studenten sehen, wann du zurückkommst.</span>
+          <span data-lang-es>Superposición a pantalla completa «Vuelvo enseguida» con cuenta atrás. Los estudiantes ven cuándo regresas.</span>
+          <span data-lang-pt>Sobreposição em tela cheia "Volto já" com contagem regressiva. Alunos veem quando você retorna.</span>
+          <span data-lang-it>Sovrapposizione a schermo intero "Torno subito" con conto alla rovescia. Gli studenti vedono quando torni.</span>
         </p>
       </div>
     </div>
@@ -853,9 +1016,9 @@
       <div class="spotlight" style="--spot-color:#E44D8B;--spot-soft:rgba(228,77,139,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
-            <span data-lang-en>My Palette</span>
-            <span data-lang-ko>마이 팔레트</span>
-            <span data-lang-ja>マイパレット</span>
+            <span data-lang-en>My Palette</span><span data-lang-ko>마이 팔레트</span><span data-lang-ja>マイパレット</span>
+            <span data-lang-zh>我的调色板</span><span data-lang-fr>Ma palette</span><span data-lang-de>Meine Palette</span>
+            <span data-lang-es>Mi paleta</span><span data-lang-pt>Minha paleta</span><span data-lang-it>La mia palette</span>
           </span>
           <h3>
             <span data-lang-en>Only the tools you actually use, minimized out of the way.</span>
@@ -927,9 +1090,9 @@
       <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
-            <span data-lang-en>Drawing mode</span>
-            <span data-lang-ko>드로잉 모드</span>
-            <span data-lang-ja>描画モード</span>
+            <span data-lang-en>Drawing mode</span><span data-lang-ko>드로잉 모드</span><span data-lang-ja>描画モード</span>
+            <span data-lang-zh>绘图模式</span><span data-lang-fr>Mode dessin</span><span data-lang-de>Zeichenmodus</span>
+            <span data-lang-es>Modo dibujo</span><span data-lang-pt>Modo desenho</span><span data-lang-it>Modalità disegno</span>
           </span>
           <h3>
             <span data-lang-en>You'll always know when drawing is live.</span>
@@ -983,9 +1146,9 @@
       <div class="spotlight" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
-            <span data-lang-en>One-hand cycling</span>
-            <span data-lang-ko>원핸드 순환</span>
-            <span data-lang-ja>片手サイクル</span>
+            <span data-lang-en>One-hand cycling</span><span data-lang-ko>원핸드 순환</span><span data-lang-ja>片手サイクル</span>
+            <span data-lang-zh>单手循环</span><span data-lang-fr>Cycle à une main</span><span data-lang-de>Einhand-Wechsel</span>
+            <span data-lang-es>Cambio con una mano</span><span data-lang-pt>Ciclo com uma mão</span><span data-lang-it>Ciclo a una mano</span>
           </span>
           <h3>
             <span data-lang-en>Change tools and colors without lifting a finger from the trackpad.</span>
@@ -1034,9 +1197,9 @@
       <div class="spotlight reverse" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
-            <span data-lang-en>Custom Cursor</span>
-            <span data-lang-ko>나만의 커서</span>
-            <span data-lang-ja>マイカーソル</span>
+            <span data-lang-en>Custom Cursor</span><span data-lang-ko>나만의 커서</span><span data-lang-ja>マイカーソル</span>
+            <span data-lang-zh>自定义光标</span><span data-lang-fr>Curseur personnalisé</span><span data-lang-de>Eigener Cursor</span>
+            <span data-lang-es>Cursor personalizado</span><span data-lang-pt>Cursor personalizado</span><span data-lang-it>Cursore personalizzato</span>
           </span>
           <h3>
             <span data-lang-en>Ditch the arrow. Point with anything.</span>
@@ -1074,9 +1237,9 @@
       <div class="spotlight" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
-            <span data-lang-en>Live HUD</span>
-            <span data-lang-ko>실시간 HUD</span>
-            <span data-lang-ja>ライブ HUD</span>
+            <span data-lang-en>Live HUD</span><span data-lang-ko>실시간 HUD</span><span data-lang-ja>ライブ HUD</span>
+            <span data-lang-zh>实时 HUD</span><span data-lang-fr>HUD en direct</span><span data-lang-de>Live-HUD</span>
+            <span data-lang-es>HUD en vivo</span><span data-lang-pt>HUD ao vivo</span><span data-lang-it>HUD in tempo reale</span>
           </span>
           <h3>
             <span data-lang-en>Every change confirmed on screen — no need to look at the toolbar.</span>
@@ -1126,6 +1289,87 @@
         </div>
       </div>
 
+      <!-- ── 6. 9개 언어 지원 ────────────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>9 languages</span><span data-lang-ko>9개 언어</span><span data-lang-ja>9 言語</span>
+            <span data-lang-zh>9 种语言</span><span data-lang-fr>9 langues</span><span data-lang-de>9 Sprachen</span>
+            <span data-lang-es>9 idiomas</span><span data-lang-pt>9 idiomas</span><span data-lang-it>9 lingue</span>
+          </span>
+          <h3>
+            <span data-lang-en>Present in your own language — instantly.</span>
+            <span data-lang-ko>당신의 언어로, 즉시 시작하세요.</span>
+            <span data-lang-ja>あなたの言語で、すぐに始められます。</span>
+            <span data-lang-zh>用您自己的语言 — 立即开始。</span>
+            <span data-lang-fr>Présentez dans votre propre langue — instantanément.</span>
+            <span data-lang-de>Präsentiere in deiner eigenen Sprache — sofort.</span>
+            <span data-lang-es>Presenta en tu propio idioma — al instante.</span>
+            <span data-lang-pt>Apresente no seu próprio idioma — instantaneamente.</span>
+            <span data-lang-it>Presenta nella tua lingua — subito.</span>
+          </h3>
+          <p>
+            <span data-lang-en>TeacherPalette speaks 9 languages out of the box. On first launch we auto-detect your system language — you can also switch anytime from Settings.</span>
+            <span data-lang-ko>TeacherPalette는 9개 언어를 기본 지원합니다. 첫 실행 시 시스템 언어를 자동 감지하며, 언제든 설정에서 변경할 수 있습니다.</span>
+            <span data-lang-ja>TeacherPalette は 9 言語をネイティブサポート。初回起動時にシステム言語を自動検出、いつでも設定から変更できます。</span>
+            <span data-lang-zh>TeacherPalette 原生支持 9 种语言。首次启动时自动检测系统语言,您也可随时在设置中切换。</span>
+            <span data-lang-fr>TeacherPalette prend en charge 9 langues nativement. Détection automatique de la langue système au premier lancement, changement possible à tout moment dans les Paramètres.</span>
+            <span data-lang-de>TeacherPalette unterstützt 9 Sprachen von Haus aus. Beim ersten Start wird deine Systemsprache automatisch erkannt — jederzeit über Einstellungen wechselbar.</span>
+            <span data-lang-es>TeacherPalette soporta 9 idiomas de forma nativa. En el primer inicio detecta automáticamente tu idioma — puedes cambiarlo en Ajustes cuando quieras.</span>
+            <span data-lang-pt>TeacherPalette suporta 9 idiomas nativamente. Na primeira execução detecta automaticamente o idioma do sistema — troque quando quiser nas Preferências.</span>
+            <span data-lang-it>TeacherPalette supporta 9 lingue nativamente. Al primo avvio rileva automaticamente la lingua di sistema — cambiabile in qualsiasi momento dalle Impostazioni.</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>9 languages built in — no plugins or add-ons</span>
+              <span data-lang-ko>9개 언어 기본 내장 — 플러그인 불필요</span>
+              <span data-lang-ja>9 言語をネイティブ搭載 — プラグイン不要</span>
+              <span data-lang-zh>9 种语言原生内置 — 无需插件</span>
+              <span data-lang-fr>9 langues intégrées — aucun plugin nécessaire</span>
+              <span data-lang-de>9 Sprachen integriert — keine Plugins nötig</span>
+              <span data-lang-es>9 idiomas incorporados — sin plugins</span>
+              <span data-lang-pt>9 idiomas nativos — sem plugins</span>
+              <span data-lang-it>9 lingue integrate — nessun plugin</span>
+            </li>
+            <li>
+              <span data-lang-en>Auto-detected on first launch based on your macOS system language</span>
+              <span data-lang-ko>첫 실행 시 macOS 시스템 언어에 맞춰 자동 감지</span>
+              <span data-lang-ja>初回起動時に macOS システム言語から自動検出</span>
+              <span data-lang-zh>首次启动时根据 macOS 系统语言自动检测</span>
+              <span data-lang-fr>Détection automatique au premier lancement selon la langue macOS</span>
+              <span data-lang-de>Automatische Erkennung beim ersten Start basierend auf macOS-Systemsprache</span>
+              <span data-lang-es>Detección automática al iniciar según el idioma de macOS</span>
+              <span data-lang-pt>Detecção automática no primeiro uso baseada no idioma do macOS</span>
+              <span data-lang-it>Rilevamento automatico al primo avvio in base alla lingua macOS</span>
+            </li>
+            <li>
+              <span data-lang-en>Switch anytime from Settings → Language — takes effect instantly</span>
+              <span data-lang-ko>언제든 설정 → 언어에서 변경 — 즉시 적용</span>
+              <span data-lang-ja>いつでも設定 → 言語から変更可能 — 即時反映</span>
+              <span data-lang-zh>随时在设置 → 语言中切换 — 立即生效</span>
+              <span data-lang-fr>Changer à tout moment via Paramètres → Langue — effet immédiat</span>
+              <span data-lang-de>Jederzeit über Einstellungen → Sprache wechseln — sofort wirksam</span>
+              <span data-lang-es>Cambia cuando quieras en Ajustes → Idioma — efecto inmediato</span>
+              <span data-lang-pt>Troque quando quiser em Preferências → Idioma — efeito imediato</span>
+              <span data-lang-it>Cambia da Impostazioni → Lingua — effetto immediato</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-languages" aria-hidden="true">
+            <div class="lang-card" data-lang-code="en"><span class="flag">🇺🇸</span><span class="name">English</span></div>
+            <div class="lang-card" data-lang-code="ko"><span class="flag">🇰🇷</span><span class="name">한국어</span></div>
+            <div class="lang-card" data-lang-code="ja"><span class="flag">🇯🇵</span><span class="name">日本語</span></div>
+            <div class="lang-card" data-lang-code="zh"><span class="flag">🇨🇳</span><span class="name">简体中文</span></div>
+            <div class="lang-card" data-lang-code="fr"><span class="flag">🇫🇷</span><span class="name">Français</span></div>
+            <div class="lang-card" data-lang-code="de"><span class="flag">🇩🇪</span><span class="name">Deutsch</span></div>
+            <div class="lang-card" data-lang-code="es"><span class="flag">🇪🇸</span><span class="name">Español</span></div>
+            <div class="lang-card" data-lang-code="pt"><span class="flag">🇧🇷</span><span class="name">Português</span></div>
+            <div class="lang-card" data-lang-code="it"><span class="flag">🇮🇹</span><span class="name">Italiano</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1135,9 +1379,9 @@
   <div class="section-inner">
     <div class="section-header">
       <h2>
-        <span data-lang-en>System requirements</span>
-        <span data-lang-ko>시스템 요구사항</span>
-        <span data-lang-ja>システム要件</span>
+        <span data-lang-en>System requirements</span><span data-lang-ko>시스템 요구사항</span><span data-lang-ja>システム要件</span>
+        <span data-lang-zh>系统要求</span><span data-lang-fr>Configuration requise</span><span data-lang-de>Systemanforderungen</span>
+        <span data-lang-es>Requisitos del sistema</span><span data-lang-pt>Requisitos do sistema</span><span data-lang-it>Requisiti di sistema</span>
       </h2>
     </div>
     <div class="req-grid">
@@ -1147,25 +1391,25 @@
       </div>
       <div class="req-item">
         <div class="req-label">
-          <span data-lang-en>Processor</span>
-          <span data-lang-ko>프로세서</span>
-          <span data-lang-ja>プロセッサ</span>
+          <span data-lang-en>Processor</span><span data-lang-ko>프로세서</span><span data-lang-ja>プロセッサ</span>
+          <span data-lang-zh>处理器</span><span data-lang-fr>Processeur</span><span data-lang-de>Prozessor</span>
+          <span data-lang-es>Procesador</span><span data-lang-pt>Processador</span><span data-lang-it>Processore</span>
         </div>
         <div class="req-value">Apple Silicon / Intel</div>
       </div>
       <div class="req-item">
         <div class="req-label">
-          <span data-lang-en>Storage</span>
-          <span data-lang-ko>저장공간</span>
-          <span data-lang-ja>ストレージ</span>
+          <span data-lang-en>Storage</span><span data-lang-ko>저장공간</span><span data-lang-ja>ストレージ</span>
+          <span data-lang-zh>存储</span><span data-lang-fr>Stockage</span><span data-lang-de>Speicher</span>
+          <span data-lang-es>Almacenamiento</span><span data-lang-pt>Armazenamento</span><span data-lang-it>Archiviazione</span>
         </div>
         <div class="req-value">~20 MB</div>
       </div>
       <div class="req-item">
         <div class="req-label">
-          <span data-lang-en>Permissions</span>
-          <span data-lang-ko>필요 권한</span>
-          <span data-lang-ja>必要な権限</span>
+          <span data-lang-en>Permissions</span><span data-lang-ko>필요 권한</span><span data-lang-ja>必要な権限</span>
+          <span data-lang-zh>权限</span><span data-lang-fr>Autorisations</span><span data-lang-de>Berechtigungen</span>
+          <span data-lang-es>Permisos</span><span data-lang-pt>Permissões</span><span data-lang-it>Autorizzazioni</span>
         </div>
         <div class="req-value">Input Monitoring</div>
       </div>
@@ -1301,21 +1545,27 @@
   <div class="section-inner">
     <div class="section-header">
       <h2>
-        <span data-lang-en>Get help</span>
-        <span data-lang-ko>지원</span>
-        <span data-lang-ja>サポート</span>
+        <span data-lang-en>Get help</span><span data-lang-ko>지원</span><span data-lang-ja>サポート</span>
+        <span data-lang-zh>获取帮助</span><span data-lang-fr>Assistance</span><span data-lang-de>Hilfe</span>
+        <span data-lang-es>Ayuda</span><span data-lang-pt>Ajuda</span><span data-lang-it>Assistenza</span>
       </h2>
       <p>
         <span data-lang-en>Feature request, bug report, or a general question — reach out anytime.</span>
         <span data-lang-ko>기능 제안, 버그 신고, 일반 문의 — 언제든 연락 주세요.</span>
         <span data-lang-ja>機能リクエスト、バグ報告、一般的なご質問 — いつでもご連絡ください。</span>
+        <span data-lang-zh>功能建议、错误报告或一般问题 — 欢迎随时联系。</span>
+        <span data-lang-fr>Suggestion de fonctionnalité, rapport de bug ou question générale — contactez-nous à tout moment.</span>
+        <span data-lang-de>Funktionswunsch, Fehlerbericht oder allgemeine Frage — jederzeit erreichbar.</span>
+        <span data-lang-es>Solicitud de función, informe de error o consulta general — contáctanos en cualquier momento.</span>
+        <span data-lang-pt>Sugestão de recurso, relatório de bug ou dúvida geral — entre em contato a qualquer momento.</span>
+        <span data-lang-it>Richiesta di funzione, segnalazione bug o domanda generica — contattaci quando vuoi.</span>
       </p>
     </div>
     <div style="text-align: center;">
       <a href="mailto:woosyume@gmail.com" class="btn btn-primary">
-        <span data-lang-en>Contact support</span>
-        <span data-lang-ko>이메일로 문의</span>
-        <span data-lang-ja>お問い合わせ</span>
+        <span data-lang-en>Contact support</span><span data-lang-ko>이메일로 문의</span><span data-lang-ja>お問い合わせ</span>
+        <span data-lang-zh>联系支持</span><span data-lang-fr>Contacter le support</span><span data-lang-de>Support kontaktieren</span>
+        <span data-lang-es>Contactar soporte</span><span data-lang-pt>Contatar suporte</span><span data-lang-it>Contatta il supporto</span>
       </a>
     </div>
   </div>
@@ -1325,19 +1575,19 @@
 <footer>
   <div class="links">
     <a href="#features">
-      <span data-lang-en>Features</span>
-      <span data-lang-ko>기능</span>
-      <span data-lang-ja>機能</span>
+      <span data-lang-en>Features</span><span data-lang-ko>기능</span><span data-lang-ja>機能</span>
+      <span data-lang-zh>功能</span><span data-lang-fr>Fonctionnalités</span><span data-lang-de>Funktionen</span>
+      <span data-lang-es>Funciones</span><span data-lang-pt>Recursos</span><span data-lang-it>Funzioni</span>
     </a>
     <a href="#privacy">
-      <span data-lang-en>Privacy</span>
-      <span data-lang-ko>개인정보</span>
-      <span data-lang-ja>プライバシー</span>
+      <span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span>
+      <span data-lang-zh>隐私</span><span data-lang-fr>Confidentialité</span><span data-lang-de>Datenschutz</span>
+      <span data-lang-es>Privacidad</span><span data-lang-pt>Privacidade</span><span data-lang-it>Privacy</span>
     </a>
     <a href="#support">
-      <span data-lang-en>Support</span>
-      <span data-lang-ko>지원</span>
-      <span data-lang-ja>サポート</span>
+      <span data-lang-en>Support</span><span data-lang-ko>지원</span><span data-lang-ja>サポート</span>
+      <span data-lang-zh>支持</span><span data-lang-fr>Support</span><span data-lang-de>Support</span>
+      <span data-lang-es>Soporte</span><span data-lang-pt>Suporte</span><span data-lang-it>Supporto</span>
     </a>
     <a href="mailto:woosyume@gmail.com">Email</a>
   </div>
@@ -1349,26 +1599,62 @@
     const root = document.documentElement;
     const LS_LANG = 'tp.lang';
     const LS_THEME = 'tp.theme';
+    const SUPPORTED = ['en', 'ko', 'ja', 'zh', 'fr', 'de', 'es', 'pt', 'it'];
 
-    // ── 언어 초기값: localStorage → navigator.language → 'en' ───
-    function detectLang() {
-      const saved = localStorage.getItem(LS_LANG);
-      if (saved && ['en', 'ko', 'ja'].includes(saved)) return saved;
+    /// navigator.language 접두어를 지원 언어로 매핑
+    function langFromNavigator() {
       const nav = (navigator.language || 'en').toLowerCase();
       if (nav.startsWith('ko')) return 'ko';
       if (nav.startsWith('ja')) return 'ja';
+      if (nav.startsWith('zh')) return 'zh';
+      if (nav.startsWith('fr')) return 'fr';
+      if (nav.startsWith('de')) return 'de';
+      if (nav.startsWith('es')) return 'es';
+      if (nav.startsWith('pt')) return 'pt';
+      if (nav.startsWith('it')) return 'it';
       return 'en';
     }
+    function detectLang() {
+      const saved = localStorage.getItem(LS_LANG);
+      if (saved && SUPPORTED.includes(saved)) return saved;
+      return langFromNavigator();
+    }
+
+    /// 활성 언어 span이 없는 부모 요소에 .fb-en 부여 →
+    /// CSS가 그 요소 내부의 [data-lang-en]을 fallback으로 표시.
+    /// 짧은 마케팅 텍스트는 9언어 다 있고, 긴 문단은 en/ko/ja만 있음 —
+    /// 나머지 언어를 선택했을 때 자연스러운 fallback을 위한 장치.
+    function applyFallback(lang) {
+      // 각 [data-lang-en] 요소의 부모를 검사해서
+      // 그 부모 안에 [data-lang-{lang}] 형제가 있는지 확인
+      const fbGroups = new Set();
+      document.querySelectorAll('[data-lang-en]').forEach(el => {
+        const parent = el.parentElement;
+        if (!parent) return;
+        parent.classList.remove('fb-en');
+        if (lang === 'en' || lang === 'ko' || lang === 'ja') return;
+        // 같은 부모 안에 해당 언어 span 있는지
+        const hasTargetLang = parent.querySelector(`[data-lang-${lang}]`);
+        if (!hasTargetLang) {
+          fbGroups.add(parent);
+        }
+      });
+      fbGroups.forEach(p => p.classList.add('fb-en'));
+    }
+
     function setLang(lang) {
       root.setAttribute('lang', lang);
       localStorage.setItem(LS_LANG, lang);
-      document.querySelectorAll('[data-lang-btn]').forEach(b => {
-        b.classList.toggle('active', b.dataset.langBtn === lang);
+      const sel = document.getElementById('lang-select');
+      if (sel) sel.value = lang;
+      applyFallback(lang);
+      // 언어 지원 spotlight의 국기 카드 highlight
+      document.querySelectorAll('.lang-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.langCode === lang);
       });
     }
-    document.querySelectorAll('[data-lang-btn]').forEach(b => {
-      b.addEventListener('click', () => setLang(b.dataset.langBtn));
-    });
+    const sel = document.getElementById('lang-select');
+    if (sel) sel.addEventListener('change', e => setLang(e.target.value));
     setLang(detectLang());
 
     // ── 테마 초기값: localStorage → prefers-color-scheme → 'light' ───
