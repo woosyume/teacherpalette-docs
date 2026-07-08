@@ -184,6 +184,37 @@
   }
   .btn-secondary:hover { transform: translateY(-1px); border-color: var(--accent); }
 
+  /* Hero stat strip — "8 tools · 1 app · 0 tracking" 임팩트 라인 */
+  .stat-strip {
+    margin-top: 44px;
+    display: inline-flex; align-items: baseline; gap: 22px;
+    padding: 14px 28px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    backdrop-filter: saturate(160%) blur(20px);
+    -webkit-backdrop-filter: saturate(160%) blur(20px);
+    box-shadow: var(--shadow);
+  }
+  .stat { display: inline-flex; align-items: baseline; gap: 8px; }
+  .stat-num {
+    font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+    font-size: 22px; font-weight: 700;
+    background: linear-gradient(135deg, #0176D3 0%, #E44D8B 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 12px; font-weight: 500;
+    color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .stat-sep {
+    color: var(--text-dim); opacity: 0.35;
+    font-size: 18px;
+  }
+
   /* ── Sections ─────────────────────────────────────────────── */
   section { padding: 80px 24px; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
@@ -327,18 +358,36 @@
 <section class="hero">
   <img class="hero-app-icon" src="img/icon-512.png" alt="TeacherPalette app icon">
   <div class="hero-badge">
-    <span data-lang-en>Built for presenters</span>
-    <span data-lang-ko>발표자를 위한 도구</span>
-    <span data-lang-ja>プレゼンター向け</span>
+    <span data-lang-en>The all-in-one presenter toolkit</span>
+    <span data-lang-ko>발표자를 위한 올인원 툴킷</span>
+    <span data-lang-ja>プレゼンター向けオールインワン</span>
   </div>
   <h1 style="line-height: 1;">
     <img class="hero-logo" src="img/logo.png" alt="TeacherPalette">
   </h1>
   <p class="hero-sub">
-    <span data-lang-en>Draw, highlight, and focus attention on your Mac screen during live presentations. A native macOS annotation overlay for Zoom, Meet, and Teams.</span>
-    <span data-lang-ko>맥 화면 위에 직접 그리고, 강조하고, 시선을 모으세요. Zoom·Meet·Teams 발표를 위한 네이티브 macOS 오버레이 도구입니다.</span>
-    <span data-lang-ja>Mac の画面上に描画・ハイライト・注目を集める。Zoom・Meet・Teams でのライブプレゼンに最適なネイティブ macOS オーバーレイツールです。</span>
+    <span data-lang-en>Draw, spotlight, whiteboard, timer, cursor — everything a live presenter needs, in one native macOS overlay. Built to run on top of Zoom, Meet, and Teams.</span>
+    <span data-lang-ko>드로잉, 스포트라이트, 화이트보드, 타이머, 커서 — 발표자에게 필요한 모든 도구를 하나의 네이티브 macOS 오버레이 앱에. Zoom·Meet·Teams 위에서 그대로 작동합니다.</span>
+    <span data-lang-ja>描画・スポットライト・ホワイトボード・タイマー・カーソル — プレゼンターに必要なすべてを、1 つのネイティブ macOS オーバーレイに。Zoom・Meet・Teams の上でそのまま動作。</span>
   </p>
+
+  <!-- All-in-one stat strip: 여러 앱을 하나로 대체한다는 메시지 시각화 -->
+  <div class="stat-strip" aria-hidden="true">
+    <div class="stat">
+      <span class="stat-num">8+</span>
+      <span class="stat-label"><span data-lang-en>tools</span><span data-lang-ko>도구</span><span data-lang-ja>ツール</span></span>
+    </div>
+    <span class="stat-sep">·</span>
+    <div class="stat">
+      <span class="stat-num">1</span>
+      <span class="stat-label"><span data-lang-en>app</span><span data-lang-ko>앱</span><span data-lang-ja>アプリ</span></span>
+    </div>
+    <span class="stat-sep">·</span>
+    <div class="stat">
+      <span class="stat-num">0</span>
+      <span class="stat-label"><span data-lang-en>tracking</span><span data-lang-ko>추적</span><span data-lang-ja>トラッキング</span></span>
+    </div>
+  </div>
   <div class="cta-row">
     <a href="#" class="btn btn-primary">
       <span data-lang-en>Download for macOS</span>
@@ -358,14 +407,14 @@
   <div class="section-inner">
     <div class="section-header">
       <h2>
-        <span data-lang-en>Made for live presentations</span>
-        <span data-lang-ko>라이브 발표에 최적화</span>
-        <span data-lang-ja>ライブプレゼンに最適化</span>
+        <span data-lang-en>One app. Every tool you need.</span>
+        <span data-lang-ko>앱 하나에, 필요한 모든 도구.</span>
+        <span data-lang-ja>アプリひとつに、必要な機能すべて。</span>
       </h2>
       <p>
-        <span data-lang-en>Every feature designed around the flow of a live presentation — annotate slides, run a whiteboard, focus the eye, hand off cleanly.</span>
-        <span data-lang-ko>라이브 발표 흐름에 맞춘 기능만 담았습니다. 슬라이드 위 필기, 화이트보드, 시선 유도, 매끄러운 전환.</span>
-        <span data-lang-ja>ライブプレゼンの流れに沿った機能だけを厳選。スライドへの書き込み、ホワイトボード、注目誘導、スムーズな切替。</span>
+        <span data-lang-en>Drawing, whiteboard, spotlight, laser, custom cursor, palette, multi-display, timer — one download replaces a whole toolbox of single-purpose apps.</span>
+        <span data-lang-ko>드로잉, 화이트보드, 스포트라이트, 레이저, 커스텀 커서, 팔레트, 멀티 디스플레이, 타이머까지 — 한 번의 설치로 여러 개의 개별 앱을 대체합니다.</span>
+        <span data-lang-ja>描画、ホワイトボード、スポットライト、レーザー、カスタムカーソル、パレット、マルチディスプレイ、タイマー — 個別アプリの寄せ集めを、1 つのダウンロードでまとめて置き換え。</span>
       </p>
     </div>
 
