@@ -240,6 +240,350 @@
   .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
   .feature-card p { color: var(--text-dim); font-size: 14px; line-height: 1.55; }
 
+  /* ── Spotlight sections (deep-dive) ────────────────────────
+     핵심 3개 기능(마이 팔레트, 원핸드 도구/색상 순환, 나만의 커서)을
+     alternating 2-column layout으로 크게 강조. 배경에 accent 컬러 wash. */
+  .spotlight-list { display: flex; flex-direction: column; gap: 96px; }
+  .spotlight {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .spotlight.reverse { direction: rtl; }
+  .spotlight.reverse > * { direction: ltr; }
+
+  .spotlight-copy { max-width: 480px; }
+  .spotlight-eyebrow {
+    display: inline-block; padding: 5px 12px;
+    background: var(--spot-soft, var(--accent-soft));
+    color: var(--spot-color, var(--accent));
+    border-radius: 999px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.02em; margin-bottom: 18px;
+  }
+  .spotlight-copy h3 {
+    font-size: clamp(26px, 3vw, 34px); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.2;
+  }
+  .spotlight-copy p {
+    color: var(--text-dim); font-size: 16px; line-height: 1.6; margin-bottom: 12px;
+  }
+  .spotlight-copy ul {
+    margin-top: 18px; padding-left: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .spotlight-copy li {
+    color: var(--text); font-size: 14px; padding-left: 26px; position: relative;
+    line-height: 1.5;
+  }
+  .spotlight-copy li::before {
+    content: ""; position: absolute; left: 0; top: 7px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--spot-color, var(--accent));
+    box-shadow: 0 0 0 4px var(--spot-soft, var(--accent-soft));
+  }
+  .spotlight-copy li::after {
+    content: ""; position: absolute; left: 5px; top: 11px;
+    width: 6px; height: 3px; border-left: 2px solid white; border-bottom: 2px solid white;
+    transform: rotate(-45deg);
+  }
+
+  /* Visual (right side) */
+  .spotlight-visual {
+    position: relative; aspect-ratio: 1 / 0.85;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    backdrop-filter: saturate(160%) blur(20px);
+    -webkit-backdrop-filter: saturate(160%) blur(20px);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  /* 카드 배경에 accent 컬러 wash */
+  .spotlight-visual::before {
+    content: ""; position: absolute; inset: -30%;
+    background: radial-gradient(circle at center,
+                var(--spot-color, var(--accent)) 0%, transparent 55%);
+    opacity: 0.12; pointer-events: none;
+    filter: blur(10px);
+  }
+  .spotlight-visual > * { position: relative; z-index: 1; }
+
+  /* Palette visual — 실제 앱 미니 팔레트 창 모사 */
+  .visual-palette {
+    width: 230px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.06);
+    padding: 14px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  [data-theme="dark"] .visual-palette {
+    background: #22242c;
+    border-color: rgba(255, 255, 255, 0.10);
+  }
+  .vp-header {
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  [data-theme="dark"] .vp-header { border-bottom-color: rgba(255,255,255,0.08); }
+  .vp-traffic { display: flex; gap: 6px; }
+  .vp-traffic .tl { width: 11px; height: 11px; border-radius: 50%; }
+  .vp-traffic .tl.red    { background: #FF5F57; }
+  .vp-traffic .tl.yellow { background: #FFBD44; }
+  .vp-traffic .tl.green  { background: rgba(0, 0, 0, 0.15); }
+  [data-theme="dark"] .vp-traffic .tl.green { background: rgba(255,255,255,0.15); }
+  .vp-drag {
+    flex: 1; height: 4px; border-radius: 2px;
+    background: rgba(0, 0, 0, 0.14);
+    max-width: 40px; margin-right: 20px;
+  }
+  [data-theme="dark"] .vp-drag { background: rgba(255,255,255,0.18); }
+
+  .vp-colors {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px 12px; justify-items: center;
+  }
+  .vp-colors .c {
+    width: 36px; height: 36px; border-radius: 50%;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25),
+                0 2px 4px rgba(0,0,0,0.10);
+  }
+  .vp-colors .c.selected {
+    box-shadow: 0 0 0 3px #ffffff,
+                0 0 0 5.5px #0176D3,
+                inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  [data-theme="dark"] .vp-colors .c.selected {
+    box-shadow: 0 0 0 3px #22242c,
+                0 0 0 5.5px #58a6ff,
+                inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .vp-colors .c-slot {
+    width: 36px; height: 36px; border-radius: 50%;
+    color: rgba(0,0,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+  }
+  [data-theme="dark"] .vp-colors .c-slot { color: rgba(255,255,255,0.4); }
+  .vp-colors .c-slot svg { width: 16px; height: 16px; stroke-width: 1.6; }
+
+  .vp-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 6px 0;
+    color: rgba(0,0,0,0.42);
+  }
+  [data-theme="dark"] .vp-footer { color: rgba(255,255,255,0.45); }
+  .vp-footer svg { width: 18px; height: 18px; stroke-width: 1.6; }
+  .vp-dots {
+    display: grid; grid-template-columns: repeat(3, 3px); gap: 2px;
+  }
+  .vp-dots span { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+
+  /* Scroll cycle visual — 마우스+화살표 */
+  .visual-scroll {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+  .visual-scroll .mouse {
+    width: 60px; height: 92px; border-radius: 30px;
+    border: 2.5px solid var(--spot-color, var(--accent));
+    position: relative;
+  }
+  .visual-scroll .mouse::after {
+    content: ""; position: absolute; left: 50%; top: 14px;
+    transform: translateX(-50%);
+    width: 4px; height: 14px; border-radius: 2px;
+    background: var(--spot-color, var(--accent));
+    animation: scrollTick 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollTick {
+    0%, 100% { transform: translate(-50%, 0); opacity: 1; }
+    50%      { transform: translate(-50%, 8px); opacity: 0.5; }
+  }
+  .visual-scroll .color-bar {
+    display: flex; gap: 8px;
+  }
+  .visual-scroll .color-bar .dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .visual-scroll .kbd {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-dim); font-size: 13px; font-weight: 500;
+  }
+  .visual-scroll .kbd kbd {
+    padding: 3px 8px; background: var(--card-bg);
+    border: 1px solid var(--card-border); border-radius: 6px;
+    font-family: ui-monospace, "SF Mono", monospace; font-size: 12px;
+  }
+
+  /* Custom cursor visual — macOS Dock 스타일 프리셋 */
+  .visual-cursor {
+    display: flex; align-items: flex-end; justify-content: center; gap: 20px;
+    padding: 32px 24px 40px;
+    position: relative;
+  }
+  /* Dock 반사 floor 힌트 */
+  .visual-cursor::after {
+    content: ""; position: absolute; left: 20%; right: 20%; bottom: 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--card-border) 50%, transparent 100%);
+    opacity: 0.5;
+  }
+  .visual-cursor .cursor-preview {
+    width: 68px; height: 68px; border-radius: 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(240,240,245,0.85) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px; line-height: 1;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      0 1px 2px rgba(0,0,0,0.06),
+      0 8px 24px rgba(0,0,0,0.10);
+    opacity: 0.72;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    position: relative;
+  }
+  [data-theme="dark"] .visual-cursor .cursor-preview {
+    background: linear-gradient(180deg, rgba(60,62,72,0.95) 0%, rgba(40,42,52,0.85) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 1px 2px rgba(0,0,0,0.3),
+      0 8px 24px rgba(0,0,0,0.35);
+  }
+  .visual-cursor .cursor-preview.active {
+    opacity: 1;
+    transform: translateY(-14px) scale(1.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      0 4px 10px rgba(0,0,0,0.08),
+      0 14px 36px var(--spot-soft),
+      0 0 0 2.5px var(--spot-color);
+  }
+  [data-theme="dark"] .visual-cursor .cursor-preview.active {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.15),
+      0 4px 10px rgba(0,0,0,0.3),
+      0 14px 36px var(--spot-soft),
+      0 0 0 2.5px var(--spot-color);
+  }
+
+  /* Drawing mode visual — 화면 mock + 4코너 블롭 pulse + 중앙 HUD */
+  .visual-drawmode {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+  .drawmode-screen {
+    position: absolute; inset: 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(250,250,252,0.45) 100%);
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  [data-theme="dark"] .drawmode-screen {
+    background: linear-gradient(180deg, rgba(28,30,38,0.6) 0%, rgba(22,24,32,0.5) 100%);
+    border-color: rgba(255,255,255,0.06);
+  }
+  /* 4개 코너 블롭 — sequential pulse */
+  .dm-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(32px);
+    opacity: 0;
+    animation: dmBlobPulse 4.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none;
+  }
+  .dm-blob.tl { top: -50px;  left: -50px;   width: 180px; height: 180px; background: rgba(1,118,211,0.55);   animation-delay: 0s; }
+  .dm-blob.tr { top: -40px;  right: -50px;  width: 160px; height: 160px; background: rgba(228,77,139,0.50);  animation-delay: 0.35s; }
+  .dm-blob.br { bottom: -50px; right: -40px; width: 180px; height: 180px; background: rgba(240,180,41,0.55); animation-delay: 0.7s; }
+  .dm-blob.bl { bottom: -40px; left: -50px;  width: 170px; height: 170px; background: rgba(22,160,133,0.50); animation-delay: 1.05s; }
+  @keyframes dmBlobPulse {
+    0%       { opacity: 0;    transform: scale(0.72); }
+    20%, 65% { opacity: 0.95; transform: scale(1); }
+    100%     { opacity: 0;    transform: scale(0.85); }
+  }
+  /* 중앙 "Drawing ON" HUD — 배지 스타일 with entry animation */
+  .dm-hud {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 20px 26px;
+    background: rgba(28, 30, 40, 0.9);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 22px;
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    color: white;
+    animation: dmHudAppear 4.5s cubic-bezier(0.2, 0.9, 0.3, 1) infinite;
+  }
+  .dm-hud .dm-hud-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    background: linear-gradient(135deg, #0176D3 0%, #4EA5F0 100%);
+    box-shadow: 0 6px 18px rgba(1,118,211,0.55);
+  }
+  .dm-hud .dm-hud-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .dm-hud .dm-hud-label {
+    font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+  }
+  @keyframes dmHudAppear {
+    0%       { opacity: 0; transform: scale(0.85); }
+    15%, 78% { opacity: 1; transform: scale(1); }
+    100%     { opacity: 0; transform: scale(0.95); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dm-blob { animation: none; opacity: 0.6; }
+    .dm-hud  { animation: none; opacity: 1; }
+  }
+
+  /* HUD visual — 앱 실제 HUD 배지 재현 */
+  .visual-hud {
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+    padding: 20px;
+  }
+  .hud-badge {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 18px 22px;
+    background: rgba(28, 30, 40, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 20px;
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+    min-width: 108px;
+  }
+  .hud-badge .hud-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    background: var(--hud-color, #0176D3);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.6),
+                0 6px 18px var(--hud-glow, rgba(1, 118, 211, 0.6));
+  }
+  .hud-badge.tool .hud-icon {
+    background: linear-gradient(135deg, #0176D3 0%, #4EA5F0 100%);
+    box-shadow: 0 6px 18px rgba(1, 118, 211, 0.55);
+  }
+  .hud-badge .hud-icon svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .hud-badge .hud-label {
+    font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: white; letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 780px) {
+    .spotlight { grid-template-columns: 1fr; gap: 32px; }
+    .spotlight.reverse { direction: ltr; }
+    .spotlight-copy { max-width: none; }
+    .spotlight-list { gap: 64px; }
+    .visual-hud { flex-wrap: wrap; }
+  }
+
   /* ── Requirements ─────────────────────────────────────────── */
   .requirements-section {
     /* 반투명 배경 — 블롭이 뒤로 은은히 비쳐 sections 간 리듬감 부여 */
@@ -433,26 +777,6 @@
         </p>
       </div>
 
-      <!-- Custom cursor — 핑크 -->
-      <div class="feature-card" style="--icon-color:#E44D66;--icon-color-2:#FF7A9B;--icon-shadow:rgba(228,77,102,0.45);">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M5 3l14 6-6 2-2 6L5 3z"/>
-            <path d="M13 13l6 6"/>
-          </svg>
-        </div>
-        <h3>
-          <span data-lang-en>Custom cursor</span>
-          <span data-lang-ko>나만의 커서</span>
-          <span data-lang-ja>マイカーソル</span>
-        </h3>
-        <p>
-          <span data-lang-en>Replace the arrow with your own image. Multiple cursor presets, swap on the fly. Click highlight ripple.</span>
-          <span data-lang-ko>화살표 대신 원하는 이미지로. 여러 커서 저장, 즉시 전환. 클릭 시 파문 효과.</span>
-          <span data-lang-ja>矢印を好きな画像に。複数プリセット保存、即時切替。クリック時の波紋エフェクト付き。</span>
-        </p>
-      </div>
-
       <!-- Multi-display — 틸 -->
       <div class="feature-card" style="--icon-color:#16A085;--icon-color-2:#4FD1B5;--icon-shadow:rgba(22,160,133,0.45);">
         <div class="feature-icon">
@@ -494,28 +818,6 @@
         </p>
       </div>
 
-      <!-- Custom palette — 마젠타 -->
-      <div class="feature-card" style="--icon-color:#E44D8B;--icon-color-2:#FFB0D0;--icon-shadow:rgba(228,77,139,0.45);">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2a10 10 0 00-1.1 19.94c.6.08 1.1-.4 1.1-1V19a2 2 0 012-2h1a5 5 0 005-5A10 10 0 0012 2z"/>
-            <circle cx="7.5" cy="10.5" r="1" fill="currentColor" stroke="none"/>
-            <circle cx="16.5" cy="10.5" r="1" fill="currentColor" stroke="none"/>
-            <circle cx="12" cy="7"    r="1" fill="currentColor" stroke="none"/>
-          </svg>
-        </div>
-        <h3>
-          <span data-lang-en>Custom palette</span>
-          <span data-lang-ko>커스텀 팔레트</span>
-          <span data-lang-ja>カスタムパレット</span>
-        </h3>
-        <p>
-          <span data-lang-en>Save favorite colors, custom slots, and cycle through with ⌥ + Scroll for one-hand color switching.</span>
-          <span data-lang-ko>즐겨찾기 색상 저장, 커스텀 슬롯, ⌥ + 스크롤로 한 손 색상 전환.</span>
-          <span data-lang-ja>お気に入りカラー保存、カスタムスロット、⌥ + スクロールで片手カラー切替。</span>
-        </p>
-      </div>
-
       <!-- BRB timer — 오렌지 -->
       <div class="feature-card" style="--icon-color:#E67E22;--icon-color-2:#F5A768;--icon-shadow:rgba(230,126,34,0.45);">
         <div class="feature-icon">
@@ -538,6 +840,292 @@
           <span data-lang-ja>休憩を伝える全画面「戻ってきます」オーバーレイ + カウントダウン。</span>
         </p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SPOTLIGHT DEEP-DIVES ═══════════════════ -->
+<section style="padding-top: 40px;">
+  <div class="section-inner">
+    <div class="spotlight-list">
+
+      <!-- ── 1. 마이 팔레트 ─────────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#E44D8B;--spot-soft:rgba(228,77,139,0.14);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>My Palette</span>
+            <span data-lang-ko>마이 팔레트</span>
+            <span data-lang-ja>マイパレット</span>
+          </span>
+          <h3>
+            <span data-lang-en>Only the tools you actually use, minimized out of the way.</span>
+            <span data-lang-ko>정말 쓰는 도구만, 발표 화면을 방해하지 않게 최소화.</span>
+            <span data-lang-ja>本当に使う道具だけ、プレゼン画面を邪魔せず最小化。</span>
+          </h3>
+          <p>
+            <span data-lang-en>Pick the colors and tools you want and hide the rest. The palette collapses to a tiny badge so nothing distracts your audience.</span>
+            <span data-lang-ko>필요한 색상과 도구만 골라 담고 나머지는 감추세요. 팔레트는 작은 배지로 접혀서 청중의 시선을 방해하지 않습니다.</span>
+            <span data-lang-ja>必要な色と道具だけを選び、残りは非表示に。パレットは小さなバッジに折りたたまれ、視聴者の視線を邪魔しません。</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>Curate favorite colors and custom slots per session</span>
+              <span data-lang-ko>세션마다 즐겨찾기 색상 + 커스텀 슬롯 큐레이션</span>
+              <span data-lang-ja>セッションごとにお気に入りとカスタムスロットを整理</span>
+            </li>
+            <li>
+              <span data-lang-en>Collapse to a small badge — one click to summon full toolbar</span>
+              <span data-lang-ko>작은 배지로 접기 — 클릭 한 번에 풀 툴바 복귀</span>
+              <span data-lang-ja>小さなバッジに折りたたみ — クリックで元のツールバーに復元</span>
+            </li>
+            <li>
+              <span data-lang-en>Even when minimized, every shortcut fires globally — from any app, any screen</span>
+              <span data-lang-ko>완전히 최소화된 상태에서도, 단축키는 어느 앱·어느 화면에서든 작동</span>
+              <span data-lang-ja>完全に最小化された状態でも、ショートカットはどのアプリ・どの画面からでも起動</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-palette" aria-hidden="true">
+            <!-- Window header: 신호등 + drag handle -->
+            <div class="vp-header">
+              <div class="vp-traffic">
+                <span class="tl red"></span>
+                <span class="tl yellow"></span>
+                <span class="tl green"></span>
+              </div>
+              <div class="vp-drag"></div>
+            </div>
+            <!-- 2행 3열 컬러 원 (마지막은 undo 아이콘) -->
+            <div class="vp-colors">
+              <div class="c" style="background:#1a1a1a;"></div>
+              <div class="c" style="background:#F0C420;"></div>
+              <div class="c selected" style="background:#0033AA;"></div>
+              <div class="c" style="background:#A084D5;"></div>
+              <div class="c" style="background:#3FAA5E;"></div>
+              <div class="c-slot" title="undo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 00-15-6.7L3 13"/>
+                </svg>
+              </div>
+            </div>
+            <!-- 하단 컨트롤: trash / move / resize dots -->
+            <div class="vp-footer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18M3 12h18M8 7l-5 5 5 5M16 7l5 5-5 5M7 8l5-5 5 5M7 16l5 5 5-5"/>
+              </svg>
+              <div class="vp-dots"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 2. 드로잉 모드 활성화 ──────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Drawing mode</span>
+            <span data-lang-ko>드로잉 모드</span>
+            <span data-lang-ja>描画モード</span>
+          </span>
+          <h3>
+            <span data-lang-en>You'll always know when drawing is live.</span>
+            <span data-lang-ko>드로잉 상태를 놓칠 일이 없습니다.</span>
+            <span data-lang-ja>描画中かどうかを見逃しません。</span>
+          </h3>
+          <p>
+            <span data-lang-en>The moment you enable drawing mode, a soft paint-blob halo blooms into every screen edge and a HUD confirms the state. No more accidental clicks, no more guessing which display is active.</span>
+            <span data-lang-ko>드로잉 모드를 켜는 순간, 모든 화면 가장자리에 물감 블롭이 은은하게 번지고 HUD가 상태를 확인해줍니다. 실수로 클릭할 일도, 어느 화면이 활성인지 헷갈릴 일도 없습니다.</span>
+            <span data-lang-ja>描画モードを有効にした瞬間、すべての画面の縁に絵の具ブロブがふわりと広がり、HUD が状態を教えてくれます。誤クリックも、どの画面が有効か迷うこともありません。</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>Paint-blob halo animates in around every connected display</span>
+              <span data-lang-ko>연결된 모든 디스플레이 가장자리에 물감 블롭 애니메이션</span>
+              <span data-lang-ja>接続されたすべてのディスプレイの縁で絵の具ブロブがアニメーション</span>
+            </li>
+            <li>
+              <span data-lang-en>HUD badge confirms Drawing ON — visible only to you, never to the audience</span>
+              <span data-lang-ko>Drawing ON HUD 배지로 확인 — 발표자에게만 보이고 청중에게는 보이지 않음</span>
+              <span data-lang-ja>Drawing ON の HUD バッジで確認 — 発表者にのみ表示、参加者には非表示</span>
+            </li>
+            <li>
+              <span data-lang-en>Turn off with the same shortcut — halo fades away instantly</span>
+              <span data-lang-ko>같은 단축키로 끄기 — 블롭이 즉시 사라집니다</span>
+              <span data-lang-ja>同じショートカットでオフ — ブロブが即座に消えます</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-drawmode" aria-hidden="true">
+            <div class="drawmode-screen"></div>
+            <div class="dm-blob tl"></div>
+            <div class="dm-blob tr"></div>
+            <div class="dm-blob br"></div>
+            <div class="dm-blob bl"></div>
+            <div class="dm-hud">
+              <div class="dm-hud-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 3l3 6 4-6M4 12h16l-2 9H6z"/>
+                  <path d="M12 2v22"/>
+                </svg>
+              </div>
+              <div class="dm-hud-label">Drawing ON</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 3. 원핸드 툴/색상 순환 ─────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>One-hand cycling</span>
+            <span data-lang-ko>원핸드 순환</span>
+            <span data-lang-ja>片手サイクル</span>
+          </span>
+          <h3>
+            <span data-lang-en>Change tools and colors without lifting a finger from the trackpad.</span>
+            <span data-lang-ko>트랙패드에서 손을 떼지 않고 도구와 색상을 전환.</span>
+            <span data-lang-ja>トラックパッドから手を離さずに、道具と色を切り替え。</span>
+          </h3>
+          <p>
+            <span data-lang-en>Hold Command or Option, scroll — watch the tool and color glide past a HUD in the corner. Keep your rhythm, keep your flow.</span>
+            <span data-lang-ko>Command 또는 Option을 누른 채 스크롤하면 도구와 색상이 화면 구석의 HUD로 부드럽게 지나갑니다. 리듬을 끊지 않고 발표에 집중.</span>
+            <span data-lang-ja>Command または Option を押しながらスクロール。ツールと色が画面隅の HUD をなめらかに流れます。リズムを崩さず、発表に集中。</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>⌘ + Scroll — cycle drawing tools (pen, highlighter, arrow, eraser…)</span>
+              <span data-lang-ko>⌘ + 스크롤 — 드로잉 도구 순환 (펜, 형광펜, 화살표, 지우개…)</span>
+              <span data-lang-ja>⌘ + スクロール — 描画ツールをサイクル (ペン、マーカー、矢印、消しゴム…)</span>
+            </li>
+            <li>
+              <span data-lang-en>⌥ + Scroll — cycle through your favorite palette colors</span>
+              <span data-lang-ko>⌥ + 스크롤 — 즐겨찾기 팔레트 색상 순환</span>
+              <span data-lang-ja>⌥ + スクロール — お気に入りパレットの色をサイクル</span>
+            </li>
+            <li>
+              <span data-lang-en>Corner HUD confirms the change without stealing focus</span>
+              <span data-lang-ko>구석 HUD가 변경을 즉시 확인 — 집중은 발표 화면 그대로</span>
+              <span data-lang-ja>コーナー HUD が変更を即座に確認 — 集中はプレゼン画面のまま</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-scroll" aria-hidden="true">
+            <div class="mouse"></div>
+            <div class="color-bar">
+              <span class="dot" style="background:#0176D3;"></span>
+              <span class="dot" style="background:#16A085;"></span>
+              <span class="dot" style="background:#F0B429;box-shadow:0 0 0 2.5px white, 0 0 0 5px #F0B429, inset 0 1px 0 rgba(255,255,255,0.3);"></span>
+              <span class="dot" style="background:#E44D66;"></span>
+              <span class="dot" style="background:#7B5EA7;"></span>
+            </div>
+            <div class="kbd"><kbd>⌥</kbd> + scroll</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 4. 나만의 커서 ─────────────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Custom Cursor</span>
+            <span data-lang-ko>나만의 커서</span>
+            <span data-lang-ja>マイカーソル</span>
+          </span>
+          <h3>
+            <span data-lang-en>Ditch the arrow. Point with anything.</span>
+            <span data-lang-ko>화살표는 그만. 뭐든지 커서로 삼으세요.</span>
+            <span data-lang-ja>矢印はもう終わり。何でもカーソルに。</span>
+          </h3>
+          <p>
+            <span data-lang-en>Drop in any image — a paw print, a laser dot, your brand mascot — and it becomes your cursor. Save multiple presets and swap on the fly.</span>
+            <span data-lang-ko>어떤 이미지든 넣으면 커서가 됩니다 — 발자국, 레이저 점, 브랜드 마스코트. 여러 프리셋을 저장해 즉시 전환하세요.</span>
+            <span data-lang-ja>どんな画像でもドロップすれば、それがカーソルに — 足跡、レーザードット、ブランドマスコット。複数のプリセットを保存し、即時切替。</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>Save up to <strong>6 cursor images</strong> as presets</span>
+              <span data-lang-ko>최대 <strong>6개의 커서 이미지</strong>를 프리셋으로 저장</span>
+              <span data-lang-ja>最大 <strong>6 個のカーソル画像</strong> をプリセットとして保存</span>
+            </li>
+            <li>
+              <span data-lang-en>Pair with laser, click highlight, or cursor highlight — layer effects for fresh, purposeful ways to guide attention</span>
+              <span data-lang-ko>레이저·클릭 강조·커서 강조 효과와 병행 사용 — 여러 효과를 겹쳐 신선하고 목적 있는 시선 유도</span>
+              <span data-lang-ja>レーザー・クリック強調・カーソルハイライトと組み合わせて — 効果を重ねて新鮮で目的のある視線誘導</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-cursor" aria-hidden="true">
+            <div class="cursor-preview">🐾</div>
+            <div class="cursor-preview active">🎯</div>
+            <div class="cursor-preview">✨</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 5. HUD 알림 ────────────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Live HUD</span>
+            <span data-lang-ko>실시간 HUD</span>
+            <span data-lang-ja>ライブ HUD</span>
+          </span>
+          <h3>
+            <span data-lang-en>Every change confirmed on screen — no need to look at the toolbar.</span>
+            <span data-lang-ko>변경할 때마다 화면으로 확인 — 툴바를 볼 필요 없어요.</span>
+            <span data-lang-ja>変更するたびに画面で確認 — ツールバーを見る必要なし。</span>
+          </h3>
+          <p>
+            <span data-lang-en>Switch a tool, cycle a color, toggle any mode — a floating HUD badge quietly appears with the icon, name, and even the actual color swatch, then fades. Confirmation without distraction.</span>
+            <span data-lang-ko>도구 변경, 색상 순환, 모드 토글 — 그때마다 화면에 HUD 배지가 잠깐 떠서 아이콘·이름·실제 색상 스와치까지 보여주고 스르륵 사라집니다. 방해 없이 확인.</span>
+            <span data-lang-ja>ツール切替、色サイクル、モード切替 — そのたびに HUD バッジが浮かび、アイコン・名前・実際のカラースウォッチまで表示してすっと消えます。邪魔せず確認。</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>Tool changes show the icon + name of the new tool</span>
+              <span data-lang-ko>도구 변경 시 새 도구의 아이콘 + 이름 표시</span>
+              <span data-lang-ja>ツール切替時、新しいツールのアイコン + 名前を表示</span>
+            </li>
+            <li>
+              <span data-lang-en>Color cycling reveals the actual swatch color</span>
+              <span data-lang-ko>색상 순환 시 실제 색상 스와치를 그대로 표시</span>
+              <span data-lang-ja>色サイクル時、実際のカラースウォッチをそのまま表示</span>
+            </li>
+            <li>
+              <span data-lang-en>Never visible in screen-shared content — hidden from Zoom capture</span>
+              <span data-lang-ko>화면 공유 중에는 참가자에게 보이지 않음 — Zoom 캡처에서 숨김</span>
+              <span data-lang-ja>画面共有中は参加者に見えません — Zoom キャプチャから除外</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-hud" aria-hidden="true">
+            <!-- Tool HUD -->
+            <div class="hud-badge tool">
+              <div class="hud-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+              <div class="hud-label">Pen</div>
+            </div>
+            <!-- Color HUD -->
+            <div class="hud-badge" style="--hud-color:#E44D8B;--hud-glow:rgba(228,77,139,0.65);">
+              <div class="hud-icon"></div>
+              <div class="hud-label">Magenta</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
