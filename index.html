@@ -210,6 +210,345 @@
   .btn-secondary:hover { transform: translateY(-1px); border-color: var(--accent); }
 
 
+  /* ── Live Demo (Hero 아래) ─────────────────────────────────
+     페이지 배경(물감 블롭) 위에 슬라이드 + 툴바가 떠 있는 구성.
+     별도 카드 컨테이너 없이 배경 흐름 그대로 유지 → 페이지의 일부처럼 자연스럽게 흐름. */
+  .demo-section {
+    padding: 30px 24px 70px;
+    position: relative;
+  }
+  .demo-stage {
+    position: relative;
+    max-width: 980px; margin: 0 auto;
+    min-height: 440px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* 슬라이드 — 배경과 경계가 자연스럽게 녹아드는 스타일 */
+  .demo-slide {
+    position: relative; z-index: 1;
+    width: min(660px, 100%);
+    aspect-ratio: 16 / 9;
+    padding: 44px 56px;
+    display: flex; flex-direction: column; gap: 22px;
+    border-radius: 24px;
+    /* 반투명 + backdrop-blur로 배경 물감 블롭이 은은히 비쳐 뚜렷한 경계감 완화 */
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    /* 부드럽게 사방으로 퍼지는 shadow — 경계선보다는 발광에 가까운 느낌 */
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 10px 40px -8px rgba(0, 0, 0, 0.08),
+      0 40px 80px -20px rgba(0, 0, 0, 0.10);
+  }
+  [data-theme="dark"] .demo-slide {
+    background: rgba(28, 30, 40, 0.55);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.06) inset,
+      0 10px 40px -8px rgba(0, 0, 0, 0.4),
+      0 40px 80px -20px rgba(0, 0, 0, 0.5);
+  }
+  .demo-slide > * { position: relative; z-index: 1; }
+  .demo-slide h4 {
+    font-size: 26px; font-weight: 700; letter-spacing: -0.02em;
+    color: var(--text); margin: 0;
+  }
+  .demo-slide .demo-subtitle {
+    font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+  .demo-bullets { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 14px; }
+  .demo-bullets li {
+    font-size: 17px; color: var(--text); position: relative;
+    padding-left: 24px;
+  }
+  .demo-bullets li::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+  }
+  /* 툴바 mockup — 슬라이드와 통일된 부드러운 스타일 */
+  .demo-toolbar {
+    position: absolute; z-index: 2;
+    right: -10px; top: 50%; transform: translateY(-50%);
+    width: 184px;
+    padding: 10px 12px 14px;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 20px;
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 8px 32px -6px rgba(0, 0, 0, 0.10),
+      0 24px 60px -16px rgba(0, 0, 0, 0.12);
+    animation: toolbarFloat 6s ease-in-out infinite;
+  }
+  [data-theme="dark"] .demo-toolbar {
+    background: rgba(30, 32, 40, 0.55);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.06) inset,
+      0 8px 32px -6px rgba(0, 0, 0, 0.4),
+      0 24px 60px -16px rgba(0, 0, 0, 0.5);
+  }
+  /* 툴바 안쪽에 드로잉 모드 물감 블롭 — 앱 실제 동작 재현 (은은하게) */
+  .demo-toolbar::before {
+    content: ""; position: absolute; inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(120px 100px at 20% 15%,  rgba(240, 196, 32, 0.16) 0%, transparent 62%),
+      radial-gradient(140px 120px at 85% 30%,  rgba(228, 77, 102, 0.14) 0%, transparent 62%),
+      radial-gradient(130px 110px at 75% 88%,  rgba(1, 118, 211, 0.15) 0%, transparent 62%),
+      radial-gradient(110px  90px at 15% 78%,  rgba(22, 160, 133, 0.12) 0%, transparent 65%);
+    filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    animation: toolbarBlobBloom 8s ease-in-out infinite;
+  }
+  .demo-toolbar > * { position: relative; z-index: 1; }
+  @keyframes toolbarBlobBloom {
+    0%          { opacity: 0; }
+    3%          { opacity: 0; }
+    10%, 88%    { opacity: 1; }
+    96%, 100%   { opacity: 0; }
+  }
+  @keyframes toolbarFloat {
+    0%, 100% { transform: translateY(-50%); }
+    50%      { transform: translateY(calc(-50% - 6px)); }
+  }
+  .tb-traffic { display: flex; gap: 5px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.06); margin-bottom: 10px; }
+  [data-theme="dark"] .tb-traffic { border-bottom-color: rgba(255,255,255,0.08); }
+  .tb-traffic span { width: 10px; height: 10px; border-radius: 50%; }
+  .tb-traffic .r { background: #FF5F57; }
+  .tb-traffic .y { background: #FFBD44; }
+  .tb-traffic .g { background: rgba(0,0,0,0.14); }
+  [data-theme="dark"] .tb-traffic .g { background: rgba(255,255,255,0.15); }
+  .tb-section { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: #0176D3; margin-bottom: 6px; }
+  .tb-tool {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px; border-radius: 8px;
+    font-size: 12px; color: var(--text);
+    margin-bottom: 3px;
+    transition: color 0.3s;
+  }
+  .tb-icon {
+    width: 14px; height: 14px; flex-shrink: 0;
+    color: currentColor;
+  }
+  .tb-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .tb-kbd { margin-left: auto; font-size: 10px; opacity: 0.6; font-family: ui-monospace, "SF Mono", monospace; }
+
+  /* 도구별 순환 active — 각 도구가 그림 그리는 시점에만 활성 스타일 */
+  /* 형광펜 그리기: 5~22% (0.4~1.8s) → Highlight active 0~28% */
+  .tb-tool.tool-highlight { animation: activeHighlight 8s ease-in-out infinite; }
+  @keyframes activeHighlight {
+    0%, 28%    { background: rgba(240, 196, 32, 0.16); color: #B98A00; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(240, 196, 32, 0.5); }
+    30%, 100%  { background: transparent; color: var(--text); font-weight: 400; box-shadow: none; }
+  }
+  /* 화살표: 30~48% → Arrow active */
+  .tb-tool.tool-arrow { animation: activeArrow 8s ease-in-out infinite; }
+  @keyframes activeArrow {
+    0%, 28%    { background: transparent; color: var(--text); font-weight: 400; box-shadow: none; }
+    30%, 55%   { background: rgba(228, 77, 102, 0.14); color: #E44D66; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(228, 77, 102, 0.5); }
+    57%, 100%  { background: transparent; color: var(--text); font-weight: 400; box-shadow: none; }
+  }
+  /* Pen: 55%~ 끝 (원 + 필기) */
+  .tb-tool.tool-pen { animation: activePen 8s ease-in-out infinite; }
+  @keyframes activePen {
+    0%, 55%    { background: transparent; color: var(--text); font-weight: 400; box-shadow: none; }
+    57%, 92%   { background: rgba(1, 118, 211, 0.12); color: #0176D3; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(1, 118, 211, 0.42); }
+    94%, 100%  { background: transparent; color: var(--text); font-weight: 400; box-shadow: none; }
+  }
+
+  /* 색상 팔레트 */
+  .tb-colors {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
+  }
+  [data-theme="dark"] .tb-colors { border-top-color: rgba(255,255,255,0.08); }
+  .tb-col {
+    aspect-ratio: 1; border-radius: 50%;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+    position: relative;
+  }
+  /* 각 색상별 순차 selected 애니메이션 — 도구 activation과 동기화 */
+  /* 노랑: 형광펜 시점 (0-28%) */
+  .tb-col.col-yellow { animation: colYellow 8s ease-in-out infinite; }
+  @keyframes colYellow {
+    0%, 28%    { box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px #F0C420, inset 0 1px 0 rgba(255,255,255,0.3); }
+    30%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  [data-theme="dark"] .tb-col.col-yellow { animation-name: colYellowDark; }
+  @keyframes colYellowDark {
+    0%, 28%    { box-shadow: 0 0 0 2px #1c1f28, 0 0 0 3.5px #F0C420, inset 0 1px 0 rgba(255,255,255,0.3); }
+    30%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  /* 핑크: 화살표 시점 (30-55%) */
+  .tb-col.col-pink { animation: colPink 8s ease-in-out infinite; }
+  @keyframes colPink {
+    0%, 28%    { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    30%, 55%   { box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px #E44D66, inset 0 1px 0 rgba(255,255,255,0.3); }
+    57%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  [data-theme="dark"] .tb-col.col-pink { animation-name: colPinkDark; }
+  @keyframes colPinkDark {
+    0%, 28%    { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    30%, 55%   { box-shadow: 0 0 0 2px #1c1f28, 0 0 0 3.5px #E44D66, inset 0 1px 0 rgba(255,255,255,0.3); }
+    57%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  /* 초록: 원 시점 (55-70%) */
+  .tb-col.col-green { animation: colGreen 8s ease-in-out infinite; }
+  @keyframes colGreen {
+    0%, 55%    { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    57%, 70%   { box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px #16A085, inset 0 1px 0 rgba(255,255,255,0.3); }
+    72%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  [data-theme="dark"] .tb-col.col-green { animation-name: colGreenDark; }
+  @keyframes colGreenDark {
+    0%, 55%    { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    57%, 70%   { box-shadow: 0 0 0 2px #1c1f28, 0 0 0 3.5px #16A085, inset 0 1px 0 rgba(255,255,255,0.3); }
+    72%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  /* 파랑(필기): 70-92% */
+  .tb-col.col-blue { animation: colBlue 8s ease-in-out infinite; }
+  @keyframes colBlue {
+    0%, 70%    { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    72%, 92%   { box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px #0176D3, inset 0 1px 0 rgba(255,255,255,0.3); }
+    94%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+  [data-theme="dark"] .tb-col.col-blue { animation-name: colBlueDark; }
+  @keyframes colBlueDark {
+    0%, 70%    { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    72%, 92%   { box-shadow: 0 0 0 2px #1c1f28, 0 0 0 3.5px #58a6ff, inset 0 1px 0 rgba(255,255,255,0.3); }
+    94%, 100%  { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  }
+
+  /* SVG 오버레이 — 슬라이드 내부에 정확히 겹침. 툴바는 절대 안 가림.
+     viewBox 660×371이 슬라이드 실제 사이즈와 매칭 → 좌표가 텍스트와 정확 일치 */
+  .demo-overlay {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 2;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+  .demo-overlay svg { width: 100%; height: 100%; display: block; }
+  .demo-stroke {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  /* 각 요소별 애니메이션 — 8초 loop */
+  .demo-stroke.highlight {
+    stroke: #F0C420;
+    stroke-width: 20;
+    opacity: 0.55;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: demoDraw1 8s ease-in-out infinite;
+  }
+  .demo-stroke.arrow {
+    stroke: #E44D66;
+    stroke-width: 4;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: demoDraw2 8s ease-in-out infinite;
+  }
+  .demo-stroke.arrowhead {
+    stroke: #E44D66;
+    stroke-width: 4;
+    fill: none;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: demoDraw3 8s ease-in-out infinite;
+  }
+  .demo-stroke.circle {
+    stroke: #16A085;
+    stroke-width: 4;
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: demoDraw4 8s ease-in-out infinite;
+  }
+  /* Focus! 필기 — 각 글자를 SVG path로 stroke tracing → 실시간 필기감 */
+  .demo-handwrite-stroke {
+    fill: none;
+    stroke: #0176D3;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* 각 글자별로 dasharray/dashoffset + delay를 CSS로 각기 부여 */
+  }
+
+  /* 형광펜: 0.5s 시작 → 1.5s 완료 → 7s에 fade out */
+  @keyframes demoDraw1 {
+    0%, 6%       { stroke-dashoffset: 500; opacity: 0.55; }
+    18%, 85%     { stroke-dashoffset: 0;   opacity: 0.55; }
+    93%          { stroke-dashoffset: 0;   opacity: 0; }
+    100%         { stroke-dashoffset: 500; opacity: 0; }
+  }
+  /* 화살표 몸통: 2s 시작 → 3s 완료 */
+  @keyframes demoDraw2 {
+    0%, 25%      { stroke-dashoffset: 400; }
+    37%, 85%     { stroke-dashoffset: 0; }
+    93%          { stroke-dashoffset: 0; opacity: 0; }
+    100%         { stroke-dashoffset: 400; opacity: 0; }
+  }
+  /* 화살촉: 3s 시작 → 3.3s 완료 */
+  @keyframes demoDraw3 {
+    0%, 37%      { stroke-dashoffset: 60; }
+    41%, 85%     { stroke-dashoffset: 0; }
+    93%          { stroke-dashoffset: 0; opacity: 0; }
+    100%         { stroke-dashoffset: 60; opacity: 0; }
+  }
+  /* 원: 3.8s 시작 → 4.8s 완료 */
+  @keyframes demoDraw4 {
+    0%, 47%      { stroke-dashoffset: 320; }
+    60%, 85%     { stroke-dashoffset: 0; }
+    93%          { stroke-dashoffset: 0; opacity: 0; }
+    100%         { stroke-dashoffset: 320; opacity: 0; }
+  }
+  /* Focus! 필기 — 각 글자마다 다른 delay로 순차적 필기감.
+     각 letter는 자기 dasharray 값을 --off CSS var로 저장 → keyframes에서 이 값 사용.
+     ← 이 방식으로 짧은 path 글자(!, o)도 초기에 완전히 숨겨짐 (dashoffset이 자기 dasharray와 정확히 매칭). */
+  .letter-F { --off: 200; stroke-dasharray: 200; stroke-dashoffset: 200; animation: writeLetter 8s ease-in-out infinite; animation-delay: 0s; }
+  .letter-o { --off: 200; stroke-dasharray: 200; stroke-dashoffset: 200; animation: writeLetter 8s ease-in-out infinite; animation-delay: 0.15s; }
+  .letter-c { --off: 200; stroke-dasharray: 200; stroke-dashoffset: 200; animation: writeLetter 8s ease-in-out infinite; animation-delay: 0.28s; }
+  .letter-u { --off: 200; stroke-dasharray: 200; stroke-dashoffset: 200; animation: writeLetter 8s ease-in-out infinite; animation-delay: 0.4s; }
+  .letter-s { --off: 200; stroke-dasharray: 200; stroke-dashoffset: 200; animation: writeLetter 8s ease-in-out infinite; animation-delay: 0.55s; }
+  .letter-x { --off: 200; stroke-dasharray: 200; stroke-dashoffset: 200; animation: writeLetter 8s ease-in-out infinite; animation-delay: 0.72s; }
+  /* 첫 프레임부터 opacity 0 — 시퀀스 도달 전엔 완전히 안 보이도록 */
+  @keyframes writeLetter {
+    0%           { stroke-dashoffset: var(--off); opacity: 0; }
+    67%          { stroke-dashoffset: var(--off); opacity: 0; }
+    68%          { stroke-dashoffset: var(--off); opacity: 1; }
+    76%, 88%     { stroke-dashoffset: 0;          opacity: 1; }
+    95%          { stroke-dashoffset: 0;          opacity: 0; }
+    100%         { stroke-dashoffset: var(--off); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-stroke, .demo-handwrite-stroke { animation: none; stroke-dashoffset: 0; opacity: 1; }
+    .demo-toolbar, .demo-toolbar::before, .tb-tool, .tb-col { animation: none; }
+  }
+  /* 좁은 화면에서 툴바는 툴바 그림 그대로 하단으로 이동 */
+  @media (max-width: 900px) {
+    .demo-toolbar {
+      position: relative; right: auto; top: auto; transform: none;
+      margin: 20px auto 0; width: 220px;
+      animation: none;
+    }
+    .demo-stage { flex-direction: column; min-height: 0; }
+  }
+  @media (max-width: 640px) {
+    .demo-slide { padding: 32px 28px; }
+    .demo-slide h4 { font-size: 22px; }
+    .demo-bullets li { font-size: 15px; }
+    /* 좁은 화면에선 SVG 오버레이 스케일 조정 (슬라이드에 맞춰 정렬 유지) */
+    .demo-overlay { display: none; }
+  }
+
   /* ── Sections ─────────────────────────────────────────────── */
   section { padding: 80px 24px; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
@@ -812,6 +1151,104 @@
       <span data-lang-it>Vedi le funzioni</span>
     </a>
   </div>
+</section>
+
+<!-- ═══════════════════════ LIVE DEMO ══════════════════════════════ -->
+<section class="demo-section" aria-label="Live demonstration">
+  <div class="demo-stage">
+    <!-- 슬라이드 카드 -->
+    <div class="demo-slide">
+      <span class="demo-subtitle">
+        <span data-lang-en>Live lecture</span><span data-lang-ko>실시간 강의</span><span data-lang-ja>ライブ講義</span>
+        <span data-lang-zh>实时讲课</span><span data-lang-fr>Cours en direct</span><span data-lang-de>Live-Vorlesung</span>
+        <span data-lang-es>Clase en vivo</span><span data-lang-pt>Aula ao vivo</span><span data-lang-it>Lezione dal vivo</span>
+      </span>
+      <h4>
+        <span data-lang-en>Q3 Product Roadmap</span><span data-lang-ko>3분기 제품 로드맵</span><span data-lang-ja>Q3 プロダクトロードマップ</span>
+        <span data-lang-zh>Q3 产品路线图</span><span data-lang-fr>Feuille de route Q3</span><span data-lang-de>Q3 Produkt-Roadmap</span>
+        <span data-lang-es>Hoja de ruta Q3</span><span data-lang-pt>Roadmap Q3</span><span data-lang-it>Roadmap del Q3</span>
+      </h4>
+      <ul class="demo-bullets">
+        <li>
+          <span data-lang-en>Ship v2.0 API to production</span><span data-lang-ko>v2.0 API 프로덕션 배포</span><span data-lang-ja>v2.0 API 本番リリース</span>
+          <span data-lang-zh>发布 v2.0 API 到生产环境</span><span data-lang-fr>Livrer l'API v2.0 en production</span><span data-lang-de>v2.0 API in Produktion bringen</span>
+          <span data-lang-es>Lanzar API v2.0 a producción</span><span data-lang-pt>Lançar API v2.0 em produção</span><span data-lang-it>Rilasciare API v2.0 in produzione</span>
+        </li>
+        <li>
+          <span data-lang-en>Migrate legacy database</span><span data-lang-ko>레거시 DB 마이그레이션</span><span data-lang-ja>レガシー DB 移行</span>
+          <span data-lang-zh>迁移遗留数据库</span><span data-lang-fr>Migrer la base héritée</span><span data-lang-de>Legacy-DB migrieren</span>
+          <span data-lang-es>Migrar la base heredada</span><span data-lang-pt>Migrar banco de dados legado</span><span data-lang-it>Migrare il database legacy</span>
+        </li>
+        <li>
+          <span data-lang-en>Onboard 5 new enterprise customers</span><span data-lang-ko>기업 고객 5곳 온보딩</span><span data-lang-ja>新規エンタープライズ顧客 5 社</span>
+          <span data-lang-zh>接入 5 家新企业客户</span><span data-lang-fr>Intégrer 5 nouveaux clients</span><span data-lang-de>5 neue Enterprise-Kunden onboarden</span>
+          <span data-lang-es>Incorporar 5 clientes empresariales</span><span data-lang-pt>Integrar 5 novos clientes</span><span data-lang-it>Onboarding di 5 nuovi clienti</span>
+        </li>
+      </ul>
+
+      <!-- SVG 오버레이: 슬라이드 안에만 그림. viewBox 660×371 = 슬라이드 좌표계와 매칭 -->
+      <div class="demo-overlay">
+        <svg viewBox="0 0 660 371" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <!-- 1) 형광펜 — 첫 번째 bullet 텍스트에 겹쳐서 그림 (y ≈ 텍스트 중앙) -->
+          <path class="demo-stroke highlight"
+                d="M 78 178 Q 180 176 280 179 Q 340 181 360 177"/>
+
+          <!-- 2) 화살표 — 오른쪽에서 세 번째 bullet 텍스트를 향해 -->
+          <path class="demo-stroke arrow"
+                d="M 460 190 C 480 220 300 240 165 232"/>
+          <path class="demo-stroke arrowhead"
+                d="M 180 222 L 165 232 L 180 244"/>
+
+          <!-- 3) 원 — 세 번째 bullet 앞 dot을 정확히 감싸도록 위치 조정 -->
+          <ellipse class="demo-stroke circle"
+                   cx="60" cy="253" rx="14" ry="11"
+                   transform="rotate(-6 60 253)"/>
+
+          <!-- 4) Focus! 필기 — 슬라이드 안 오른쪽 하단 여백에 -->
+          <g transform="translate(430 300) rotate(-4)">
+            <path class="demo-handwrite-stroke letter-F"
+                  d="M 4 -22 C 2 -8 0 6 -2 22 M 4 -22 L 30 -22 M 2 -2 L 22 -2"/>
+            <path class="demo-handwrite-stroke letter-o"
+                  d="M 52 4 C 42 4 40 -8 50 -12 C 62 -12 64 0 54 4 Z"/>
+            <path class="demo-handwrite-stroke letter-c"
+                  d="M 88 -8 C 78 -14 68 -8 70 4 C 72 12 84 12 90 4"/>
+            <path class="demo-handwrite-stroke letter-u"
+                  d="M 104 -10 C 104 4 106 12 114 8 C 122 4 122 -6 124 -12 M 124 -12 C 124 0 126 8 132 6"/>
+            <path class="demo-handwrite-stroke letter-s"
+                  d="M 158 -8 C 150 -14 140 -6 148 0 C 160 4 162 14 150 12 C 146 12 144 10 144 8"/>
+            <path class="demo-handwrite-stroke letter-x"
+                  d="M 178 -22 C 176 -14 174 -4 174 4 M 174 12 L 174 14"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 앱 툴바 mockup — 도구/색상이 시퀀스에 맞춰 자동 순환 -->
+    <div class="demo-toolbar" aria-hidden="true">
+      <div class="tb-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+      <div class="tb-section">DRAWING</div>
+      <div class="tb-tool tool-pen">
+        <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
+        <span>Pen</span><span class="tb-kbd">⌘⇧P</span>
+      </div>
+      <div class="tb-tool tool-highlight">
+        <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M9 11l-6 6v4h4l6-6M14 6l4 4M13 2l7 7-11 11H2v-7L13 2z"/></svg></span>
+        <span>Highlight</span><span class="tb-kbd">⌘⇧H</span>
+      </div>
+      <div class="tb-tool tool-arrow">
+        <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M5 3l14 6-6 2-2 6L5 3z"/></svg></span>
+        <span>Arrow</span><span class="tb-kbd">⌘⇧A</span>
+      </div>
+      <div class="tb-colors">
+        <span class="tb-col" style="background:#111;"></span>
+        <span class="tb-col col-yellow" style="background:#F0C420;"></span>
+        <span class="tb-col col-blue" style="background:#0176D3;"></span>
+        <span class="tb-col col-pink" style="background:#E44D66;"></span>
+        <span class="tb-col col-green" style="background:#16A085;"></span>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ═══════════════════════ FEATURES ═══════════════════════════════ -->
