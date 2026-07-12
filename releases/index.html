@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's New — TeacherPalette</title>
+<meta name="description" content="Release notes and changelog for TeacherPalette macOS annotation app.">
+<link rel="icon" href="../img/icon-256.png">
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-alt: #f5f5f7;
+    --text: #1d1d1f;
+    --text-dim: #6e6e73;
+    --text-muted: #86868b;
+    --accent: #0176D3;
+    --accent-soft: rgba(1, 118, 211, 0.08);
+    --accent-strong: rgba(1, 118, 211, 0.14);
+    --border: rgba(0, 0, 0, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.72);
+    --card-border: rgba(0, 0, 0, 0.06);
+    --sidebar-bg: rgba(255, 255, 255, 0.5);
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+    --blob-blue:   rgba(1, 118, 211, 0.10);
+    --blob-purple: rgba(123, 94, 167, 0.10);
+    --blob-yellow: rgba(240, 180, 41, 0.12);
+    --blob-pink:   rgba(228, 77, 102, 0.10);
+    --blob-teal:   rgba(22, 160, 133, 0.08);
+  }
+  [data-theme="dark"] {
+    --bg: #0a0a0f;
+    --bg-alt: #12131a;
+    --text: #f5f5f7;
+    --text-dim: #9c9ca6;
+    --text-muted: #6e6e78;
+    --accent: #58a6ff;
+    --accent-soft: rgba(88, 166, 255, 0.14);
+    --accent-strong: rgba(88, 166, 255, 0.22);
+    --border: rgba(255, 255, 255, 0.10);
+    --card-bg: rgba(28, 30, 40, 0.60);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --sidebar-bg: rgba(20, 22, 30, 0.55);
+    --shadow: 0 1px 2px rgba(0,0,0,0.30), 0 8px 32px rgba(0,0,0,0.24);
+    --blob-blue:   rgba(88, 166, 255, 0.14);
+    --blob-purple: rgba(160, 130, 220, 0.14);
+    --blob-yellow: rgba(255, 200, 80, 0.14);
+    --blob-pink:   rgba(255, 105, 135, 0.12);
+    --blob-teal:   rgba(52, 199, 170, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+                 "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Hiragino Sans", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(600px 500px at 12% 15%,  var(--blob-blue)   0%, transparent 60%),
+      radial-gradient(700px 550px at 88% 30%,  var(--blob-purple) 0%, transparent 60%),
+      radial-gradient(500px 500px at 20% 70%,  var(--blob-yellow) 0%, transparent 60%),
+      radial-gradient(650px 500px at 82% 82%,  var(--blob-pink)   0%, transparent 60%),
+      radial-gradient(550px 500px at 50% 100%, var(--blob-teal)   0%, transparent 65%);
+    filter: blur(20px);
+  }
+
+  /* 다국어 표시 규칙 (index.html과 동일) */
+  [data-lang-en],[data-lang-ko],[data-lang-ja],[data-lang-zh],[data-lang-fr],
+  [data-lang-de],[data-lang-es],[data-lang-pt],[data-lang-it] { display: none; }
+  html[lang="en"] [data-lang-en], html[lang="ko"] [data-lang-ko],
+  html[lang="ja"] [data-lang-ja], html[lang="zh"] [data-lang-zh],
+  html[lang="fr"] [data-lang-fr], html[lang="de"] [data-lang-de],
+  html[lang="es"] [data-lang-es], html[lang="pt"] [data-lang-pt],
+  html[lang="it"] [data-lang-it] { display: inline; }
+
+  nav.topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  [data-theme="dark"] nav.topbar { background: rgba(10,10,15,0.72); }
+  a.breadcrumb {
+    display: inline-flex; align-items: center; gap: 4px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 13px;
+    padding: 4px 0;
+    margin-bottom: 12px;
+    transition: color 0.15s;
+  }
+  a.breadcrumb:hover { color: var(--accent); }
+  a.breadcrumb svg { width: 14px; height: 14px; }
+  nav.topbar a.home {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+  }
+  nav.topbar .brand-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 0 12px rgba(1,118,211,0.15);
+  }
+  nav.topbar .brand-logo {
+    display: block; height: 22px; width: auto;
+    transition: filter 0.2s;
+  }
+  [data-theme="dark"] nav.topbar .brand-logo { filter: invert(1); }
+  nav.topbar .spacer { flex: 1; }
+  nav.topbar .theme-toggle {
+    background: transparent; border: 1px solid var(--border);
+    padding: 6px 10px; border-radius: 8px; cursor: pointer;
+    font-size: 13px; color: var(--text); transition: background 0.15s;
+  }
+  nav.topbar .theme-toggle:hover { background: var(--accent-soft); }
+
+  .layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 780px) {
+    .layout { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+    aside.sidebar { position: static !important; }
+  }
+
+  header.title {
+    grid-column: 1 / -1;
+    margin-bottom: 8px;
+  }
+  header.title h1 {
+    font-size: 34px; font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  header.title p {
+    color: var(--text-dim); font-size: 15px;
+  }
+
+  aside.sidebar {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    background: var(--sidebar-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 8px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  aside.sidebar .label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    padding: 6px 10px 10px;
+  }
+  aside.sidebar a.tab {
+    display: flex; align-items: center; justify-content: space-between;
+    text-decoration: none; color: var(--text);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    transition: background 0.12s;
+    margin-bottom: 2px;
+  }
+  aside.sidebar a.tab:hover { background: var(--accent-soft); }
+  aside.sidebar a.tab.active {
+    background: var(--accent-strong);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  aside.sidebar a.tab .date {
+    font-size: 11px; color: var(--text-muted); font-weight: 400;
+  }
+  aside.sidebar a.tab.active .date { color: var(--accent); opacity: 0.75; }
+
+  main.content { min-width: 0; }
+  article.release {
+    display: none;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  article.release.active { display: block; }
+  article.release h2 {
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 4px;
+  }
+  article.release h2 .ver {
+    font-family: ui-monospace, SF Mono, Menlo, monospace;
+    font-size: 20px; color: var(--accent);
+  }
+  article.release .meta {
+    color: var(--text-muted); font-size: 13px;
+    margin-bottom: 24px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  article.release h3 {
+    font-size: 17px; font-weight: 700;
+    margin-top: 28px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  article.release h3:first-of-type { margin-top: 0; }
+  article.release ul { list-style: none; padding: 0; }
+  article.release li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  article.release li::before {
+    content: "";
+    position: absolute;
+    left: 6px; top: 10px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+  article.release li strong { font-weight: 600; }
+  article.release li em { font-style: normal; color: var(--text-dim); font-size: 13px; }
+  article.release .upgrade-note {
+    margin-top: 32px;
+    padding: 16px 20px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="home" id="home-link" href="../index.html">
+    <img class="brand-icon" src="../img/icon-256.png" alt="">
+    <img class="brand-logo" src="../img/logo.png" alt="TeacherPalette">
+  </a>
+  <div class="spacer"></div>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+
+<div class="layout">
+
+  <header class="title">
+    <a class="breadcrumb" id="back-link" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      <span data-lang-en>Back to home</span>
+      <span data-lang-ko>메인으로</span>
+      <span data-lang-ja>ホームへ戻る</span>
+      <span data-lang-zh>返回首页</span>
+      <span data-lang-fr>Retour à l'accueil</span>
+      <span data-lang-de>Zurück zur Startseite</span>
+      <span data-lang-es>Volver al inicio</span>
+      <span data-lang-pt>Voltar ao início</span>
+      <span data-lang-it>Torna alla home</span>
+    </a>
+    <h1>
+      <span data-lang-en>What's New</span>
+      <span data-lang-ko>업데이트 소식</span>
+      <span data-lang-ja>更新履歴</span>
+      <span data-lang-zh>更新日志</span>
+      <span data-lang-fr>Nouveautés</span>
+      <span data-lang-de>Neuerungen</span>
+      <span data-lang-es>Novedades</span>
+      <span data-lang-pt>Novidades</span>
+      <span data-lang-it>Novità</span>
+    </h1>
+    <p>
+      <span data-lang-en>Latest updates for TeacherPalette</span>
+      <span data-lang-ko>TeacherPalette 최신 업데이트</span>
+      <span data-lang-ja>TeacherPalette最新アップデート</span>
+      <span data-lang-zh>TeacherPalette 最新更新</span>
+      <span data-lang-fr>Dernières mises à jour de TeacherPalette</span>
+      <span data-lang-de>Neueste Updates von TeacherPalette</span>
+      <span data-lang-es>Últimas actualizaciones de TeacherPalette</span>
+      <span data-lang-pt>Últimas atualizações do TeacherPalette</span>
+      <span data-lang-it>Ultimi aggiornamenti di TeacherPalette</span>
+    </p>
+  </header>
+
+  <aside class="sidebar">
+    <div class="label">
+      <span data-lang-en>Versions</span>
+      <span data-lang-ko>버전</span>
+      <span data-lang-ja>バージョン</span>
+      <span data-lang-zh>版本</span>
+      <span data-lang-fr>Versions</span>
+      <span data-lang-de>Versionen</span>
+      <span data-lang-es>Versiones</span>
+      <span data-lang-pt>Versões</span>
+      <span data-lang-it>Versioni</span>
+    </div>
+    <a class="tab active" href="#v1.1.5" data-version="v1.1.5">
+      <span>1.1.5</span>
+      <span class="date">2026.07</span>
+    </a>
+  </aside>
+
+  <main class="content">
+    <article class="release active" id="v1.1.5">
+      <h2>
+        TeacherPalette
+        <span class="ver">1.1.5</span>
+      </h2>
+      <div class="meta">
+        <span data-lang-en>July 2026 · Major UI redesign + Setup Wizard</span>
+        <span data-lang-ko>2026년 7월 · 대규모 UI 리뉴얼 + 설정 마법사</span>
+        <span data-lang-ja>2026年7月 · 大幅なUIリニューアル + セットアップウィザード</span>
+        <span data-lang-zh>2026年7月 · 大规模 UI 更新 + 设置向导</span>
+        <span data-lang-fr>Juillet 2026 · Refonte majeure de l'UI + Assistant de configuration</span>
+        <span data-lang-de>Juli 2026 · Umfassende UI-Überarbeitung + Setup-Assistent</span>
+        <span data-lang-es>Julio 2026 · Rediseño mayor de UI + Asistente de configuración</span>
+        <span data-lang-pt>Julho 2026 · Redesign de UI + Assistente de configuração</span>
+        <span data-lang-it>Luglio 2026 · Ridisegno UI + Configurazione guidata</span>
+      </div>
+
+      <h3>
+        ✨
+        <span data-lang-en>New Features</span>
+        <span data-lang-ko>새로운 기능</span>
+        <span data-lang-ja>新機能</span>
+        <span data-lang-zh>新功能</span>
+        <span data-lang-fr>Nouveautés</span>
+        <span data-lang-de>Neue Funktionen</span>
+        <span data-lang-es>Nuevas funciones</span>
+        <span data-lang-pt>Novos recursos</span>
+        <span data-lang-it>Nuove funzionalità</span>
+      </h3>
+      <ul>
+        <li>
+          <strong><span data-lang-en>Setup Wizard</span><span data-lang-ko>첫 실행 마법사</span><span data-lang-ja>初回セットアップウィザード</span><span data-lang-zh>首次设置向导</span><span data-lang-fr>Assistant de configuration</span><span data-lang-de>Ersteinrichtungsassistent</span><span data-lang-es>Asistente de configuración</span><span data-lang-pt>Assistente inicial</span><span data-lang-it>Configurazione guidata</span></strong>
+          — <span data-lang-en>quickly pick your language, 3 favorite colors, and default drawing tool on first launch.</span><span data-lang-ko>처음 앱을 열면 언어 → 자주 쓰는 색상 3개 → 기본 도구 순서로 빠르게 설정할 수 있어요.</span><span data-lang-ja>初回起動時に言語→よく使う色3つ→デフォルトツールを素早く設定できます。</span><span data-lang-zh>首次启动时快速选择语言、3 种常用颜色和默认工具。</span><span data-lang-fr>Choisissez rapidement langue, 3 couleurs favorites et outil par défaut au premier lancement.</span><span data-lang-de>Sprache, 3 Lieblingsfarben und Standardwerkzeug beim ersten Start schnell wählen.</span><span data-lang-es>Elige rápidamente idioma, 3 colores favoritos y herramienta por defecto al iniciar.</span><span data-lang-pt>Escolha idioma, 3 cores favoritas e ferramenta padrão no primeiro uso.</span><span data-lang-it>Scegli lingua, 3 colori preferiti e strumento predefinito al primo avvio.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>Splash screen</span><span data-lang-ko>스플래시 화면</span><span data-lang-ja>スプラッシュ画面</span><span data-lang-zh>启动画面</span><span data-lang-fr>Écran de démarrage</span><span data-lang-de>Splash-Bildschirm</span><span data-lang-es>Pantalla de bienvenida</span><span data-lang-pt>Tela de abertura</span><span data-lang-it>Schermata iniziale</span></strong>
+          — <span data-lang-en>a smooth loading screen appears briefly on app launch.</span><span data-lang-ko>앱 실행 시 부드러운 로딩 화면이 잠깐 등장합니다.</span><span data-lang-ja>アプリ起動時にスムーズなロード画面が短時間表示されます。</span><span data-lang-zh>启动应用时短暂显示流畅的加载画面。</span><span data-lang-fr>Un écran de chargement fluide apparaît brièvement au démarrage.</span><span data-lang-de>Ein sanfter Ladebildschirm erscheint beim App-Start.</span><span data-lang-es>Aparece brevemente al iniciar la app.</span><span data-lang-pt>Uma tela de carregamento suave aparece brevemente.</span><span data-lang-it>Una schermata di caricamento appare brevemente all'avvio.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>Tab to cycle tools</span><span data-lang-ko>Tab으로 도구 전환</span><span data-lang-ja>Tabでツール切替</span><span data-lang-zh>Tab 切换工具</span><span data-lang-fr>Tab pour changer d'outil</span><span data-lang-de>Tab zum Werkzeugwechsel</span><span data-lang-es>Tab para cambiar herramienta</span><span data-lang-pt>Tab para trocar ferramenta</span><span data-lang-it>Tab per cambiare strumento</span></strong>
+          — <span data-lang-en>press Tab in drawing mode to cycle through tools (same as ⌘+Scroll).</span><span data-lang-ko>드로잉 모드에서 Tab 키만 누르면 도구가 순환됩니다 (⌘+스크롤과 동일).</span><span data-lang-ja>描画モードでTabキーだけで道具が切り替わります。</span><span data-lang-zh>绘图模式下按 Tab 即可循环切换工具。</span><span data-lang-fr>Appuyez sur Tab en mode dessin pour changer d'outil.</span><span data-lang-de>Im Zeichenmodus mit Tab durch Werkzeuge wechseln.</span><span data-lang-es>Pulsa Tab en modo dibujo para cambiar herramienta.</span><span data-lang-pt>Pressione Tab no modo desenho para trocar de ferramenta.</span><span data-lang-it>Premi Tab in modalità disegno per cambiare strumento.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>Whiteboard start hint</span><span data-lang-ko>화이트보드 시작 힌트</span><span data-lang-ja>ホワイトボード開始ヒント</span><span data-lang-zh>白板起始提示</span><span data-lang-fr>Indice de démarrage du tableau</span><span data-lang-de>Whiteboard-Starthinweis</span><span data-lang-es>Sugerencia de inicio en pizarra</span><span data-lang-pt>Dica ao abrir o quadro</span><span data-lang-it>Suggerimento all'avvio della lavagna</span></strong>
+          — <span data-lang-en>an "start drawing" hint appears briefly when you open the whiteboard.</span><span data-lang-ko>화이트보드를 열면 "여기에 그려보세요" 안내가 잠깐 표시됩니다.</span><span data-lang-ja>ホワイトボードを開くと「描いてみよう」ヒントが少しの間表示されます。</span><span data-lang-zh>打开白板时短暂显示"开始绘画"提示。</span><span data-lang-fr>Un indice "commencez à dessiner" s'affiche brièvement à l'ouverture.</span><span data-lang-de>Ein "Los, zeichne!"-Hinweis erscheint kurz.</span><span data-lang-es>Aparece un mensaje "empieza a dibujar" brevemente.</span><span data-lang-pt>Uma dica "comece a desenhar" aparece brevemente.</span><span data-lang-it>Un suggerimento "inizia a disegnare" appare brevemente.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>Laser + Custom Cursor together</span><span data-lang-ko>레이저 + 나만의 커서 동시 사용</span><span data-lang-ja>レーザー + カスタムカーソル同時使用</span><span data-lang-zh>激光 + 自定义光标同时使用</span><span data-lang-fr>Laser + curseur personnalisé simultanés</span><span data-lang-de>Laser + benutzerdefinierter Cursor gleichzeitig</span><span data-lang-es>Láser + cursor personalizado a la vez</span><span data-lang-pt>Laser + cursor personalizado juntos</span><span data-lang-it>Laser + cursore personalizzato insieme</span></strong>
+          — <span data-lang-en>you can now use the laser alongside other tools.</span><span data-lang-ko>이제 레이저를 켜도 다른 도구와 함께 쓸 수 있어요.</span><span data-lang-ja>レーザーを他のツールと同時に使えるようになりました。</span><span data-lang-zh>现在可以在使用其他工具时同时开启激光。</span><span data-lang-fr>Le laser peut désormais être utilisé avec d'autres outils.</span><span data-lang-de>Der Laser lässt sich jetzt mit anderen Werkzeugen kombinieren.</span><span data-lang-es>Ahora puedes usar el láser junto con otras herramientas.</span><span data-lang-pt>Agora o laser pode ser usado com outras ferramentas.</span><span data-lang-it>Ora puoi usare il laser insieme ad altri strumenti.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>10 spotlight sizes</span><span data-lang-ko>스포트라이트 크기 10단계</span><span data-lang-ja>スポットライト10段階サイズ</span><span data-lang-zh>10 档聚光灯尺寸</span><span data-lang-fr>10 tailles de projecteur</span><span data-lang-de>10 Spotlight-Größen</span><span data-lang-es>10 tamaños de foco</span><span data-lang-pt>10 tamanhos de holofote</span><span data-lang-it>10 dimensioni del faro</span></strong>
+          — <span data-lang-en>from XS to MAX. Scroll on the canvas to resize while spotlight is active.</span><span data-lang-ko>XS부터 MAX까지 세밀하게. 스포트라이트가 켜져 있을 때 스크롤로 즉시 조절 가능.</span><span data-lang-ja>XSからMAXまで細かく。スポットライト有効時にスクロールで即調整。</span><span data-lang-zh>从 XS 到 MAX,聚光灯开启时可用滚轮直接调整。</span><span data-lang-fr>De XS à MAX. Molette pour ajuster en direct.</span><span data-lang-de>Von XS bis MAX. Scrollrad zum direkten Anpassen.</span><span data-lang-es>De XS a MAX. Rueda para ajustar al vuelo.</span><span data-lang-pt>De XS a MAX. Role para ajustar em tempo real.</span><span data-lang-it>Da XS a MAX. Scroll per regolare al volo.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>Reset user settings</span><span data-lang-ko>유저 설정 초기화</span><span data-lang-ja>ユーザー設定リセット</span><span data-lang-zh>重置用户设置</span><span data-lang-fr>Réinitialiser les paramètres</span><span data-lang-de>Benutzereinstellungen zurücksetzen</span><span data-lang-es>Restablecer configuración</span><span data-lang-pt>Redefinir configurações</span><span data-lang-it>Ripristina impostazioni</span></strong>
+          <em>(<span data-lang-en>Settings → General</span><span data-lang-ko>설정 → 일반</span><span data-lang-ja>設定 → 一般</span><span data-lang-zh>设置 → 通用</span><span data-lang-fr>Réglages → Général</span><span data-lang-de>Einstellungen → Allgemein</span><span data-lang-es>Ajustes → General</span><span data-lang-pt>Ajustes → Geral</span><span data-lang-it>Impostazioni → Generale</span>)</em>
+          — <span data-lang-en>restore all preferences to defaults.</span><span data-lang-ko>모든 사용자 설정을 기본값으로 되돌립니다.</span><span data-lang-ja>すべての設定を初期化します。</span><span data-lang-zh>将所有偏好恢复为默认值。</span><span data-lang-fr>Rétablir tous les paramètres.</span><span data-lang-de>Alle Einstellungen zurücksetzen.</span><span data-lang-es>Restablecer todo.</span><span data-lang-pt>Redefinir todas as preferências.</span><span data-lang-it>Ripristina tutte le impostazioni.</span>
+        </li>
+        <li>
+          <strong><span data-lang-en>About window</span><span data-lang-ko>About 창</span><span data-lang-ja>Aboutウィンドウ</span><span data-lang-zh>关于窗口</span><span data-lang-fr>Fenêtre À propos</span><span data-lang-de>Info-Fenster</span><span data-lang-es>Ventana Acerca de</span><span data-lang-pt>Janela Sobre</span><span data-lang-it>Finestra Informazioni</span></strong>
+          — <span data-lang-en>check app info from the menu bar.</span><span data-lang-ko>상단 메뉴바에서 앱 정보를 확인할 수 있어요.</span><span data-lang-ja>メニューバーからアプリ情報を確認できます。</span><span data-lang-zh>可从菜单栏查看应用信息。</span><span data-lang-fr>Consultez les infos de l'app depuis la barre de menus.</span><span data-lang-de>App-Infos aus der Menüleiste anzeigen.</span><span data-lang-es>Consulta la información desde la barra de menús.</span><span data-lang-pt>Veja informações do app pela barra de menus.</span><span data-lang-it>Info sull'app dalla barra dei menu.</span>
+        </li>
+      </ul>
+
+      <h3>
+        🎨
+        <span data-lang-en>Design Improvements</span>
+        <span data-lang-ko>디자인 개선</span>
+        <span data-lang-ja>デザインの改善</span>
+        <span data-lang-zh>设计改进</span>
+        <span data-lang-fr>Améliorations design</span>
+        <span data-lang-de>Design-Verbesserungen</span>
+        <span data-lang-es>Mejoras de diseño</span>
+        <span data-lang-pt>Melhorias no design</span>
+        <span data-lang-it>Miglioramenti al design</span>
+      </h3>
+      <ul>
+        <li><span data-lang-en>Complete UI redesign in native macOS style — each section grouped like cards.</span><span data-lang-ko>macOS 순정 감성으로 UI 전면 리뉴얼 — 각 섹션이 카드처럼 그룹핑.</span><span data-lang-ja>macOSネイティブ感でUI全面リニューアル — 各セクションがカード風にグループ化。</span><span data-lang-zh>UI 全面 macOS 原生化,各区块以卡片形式分组。</span><span data-lang-fr>Interface repensée façon macOS natif — sections groupées comme des cartes.</span><span data-lang-de>UI komplett im nativen macOS-Stil — Abschnitte als Karten gruppiert.</span><span data-lang-es>UI rediseñada al estilo nativo de macOS — secciones agrupadas como tarjetas.</span><span data-lang-pt>UI redesenhada em estilo macOS nativo — seções em cartões.</span><span data-lang-it>UI ridisegnata in stile macOS nativo — sezioni raggruppate come carte.</span></li>
+        <li><span data-lang-en>Shortcuts now display as real keycap-style badges.</span><span data-lang-ko>단축키를 실제 키캡 스타일로 표시.</span><span data-lang-ja>ショートカットが実物のキーキャップ風に表示。</span><span data-lang-zh>快捷键以真实键帽样式显示。</span><span data-lang-fr>Raccourcis affichés comme de vraies touches.</span><span data-lang-de>Kurzbefehle als echte Keycap-Badges.</span><span data-lang-es>Atajos mostrados como teclas reales.</span><span data-lang-pt>Atalhos exibidos como teclas reais.</span><span data-lang-it>Scorciatoie mostrate come veri tasti.</span></li>
+        <li><span data-lang-en>Tool icons and color swatches gently scale up on hover.</span><span data-lang-ko>도구 아이콘 · 색상에 마우스를 올리면 살짝 커지는 부드러운 반응.</span><span data-lang-ja>ツールアイコン・色にホバーで少し拡大する滑らかな反応。</span><span data-lang-zh>工具图标和色板悬停时轻微放大。</span><span data-lang-fr>Icônes et pastilles s'agrandissent doucement au survol.</span><span data-lang-de>Werkzeuge und Farben vergrößern sich beim Hovern sanft.</span><span data-lang-es>Iconos y colores crecen suavemente al pasar el ratón.</span><span data-lang-pt>Ícones e cores ampliam ao passar o mouse.</span><span data-lang-it>Icone e colori si ingrandiscono al passaggio del mouse.</span></li>
+        <li><span data-lang-en>Subtle paint blob effect in the app background (drawing mode).</span><span data-lang-ko>앱 배경에 은은한 물감 블롭 효과 (드로잉 모드 시).</span><span data-lang-ja>アプリ背景に淡い絵の具ブロブ効果(描画モード時)。</span><span data-lang-zh>绘图模式下应用背景加入淡淡的水彩晕染效果。</span><span data-lang-fr>Effet subtil de taches de peinture en arrière-plan (mode dessin).</span><span data-lang-de>Sanfte Farbblobs im Hintergrund (Zeichenmodus).</span><span data-lang-es>Manchas de pintura sutiles al fondo (modo dibujo).</span><span data-lang-pt>Efeito sutil de manchas de tinta ao fundo (modo desenho).</span><span data-lang-it>Effetto blob di colore sullo sfondo (modalità disegno).</span></li>
+        <li><span data-lang-en>Smooth fade transition between toolbar and My Palette.</span><span data-lang-ko>툴바와 나만의 팔레트 전환 시 부드러운 페이드.</span><span data-lang-ja>ツールバーとマイパレット切替時に滑らかなフェード。</span><span data-lang-zh>工具栏与我的调色板切换时平滑淡入淡出。</span><span data-lang-fr>Transition douce entre la barre d'outils et Ma palette.</span><span data-lang-de>Sanfter Übergang zwischen Toolbar und Meine Palette.</span><span data-lang-es>Transición suave entre la barra y Mi paleta.</span><span data-lang-pt>Transição suave entre a barra e Minha paleta.</span><span data-lang-it>Transizione fluida tra barra e La mia palette.</span></li>
+        <li><span data-lang-en>Whiteboard · BRB screens redesigned with glass-like material.</span><span data-lang-ko>화이트보드 · BRB 화면을 유리 재질 감성으로 재디자인.</span><span data-lang-ja>ホワイトボード・BRB画面をガラス風にリデザイン。</span><span data-lang-zh>白板与稍等页面重新以玻璃质感设计。</span><span data-lang-fr>Tableau blanc · BRB refaits en style verre.</span><span data-lang-de>Whiteboard · BRB im Glas-Look neu gestaltet.</span><span data-lang-es>Pizarra · BRB rediseñados con estilo cristal.</span><span data-lang-pt>Quadro · BRB redesenhados em estilo vidro.</span><span data-lang-it>Lavagna · BRB ridisegnate in stile vetro.</span></li>
+        <li><span data-lang-en>Settings window restructured with sidebar + detail (System Settings style).</span><span data-lang-ko>Settings 창을 왼쪽 사이드바 + 오른쪽 상세로 재구성 (macOS 시스템 설정 스타일).</span><span data-lang-ja>設定ウィンドウをサイドバー+詳細に再構成(macOSシステム設定風)。</span><span data-lang-zh>设置窗口重构为左侧栏 + 右侧详情(仿系统设置)。</span><span data-lang-fr>Réglages restructurés en barre latérale + détails.</span><span data-lang-de>Einstellungen mit Sidebar + Detail neu strukturiert.</span><span data-lang-es>Ajustes con barra lateral + detalle.</span><span data-lang-pt>Ajustes com barra lateral + detalhe.</span><span data-lang-it>Impostazioni con barra laterale + dettaglio.</span></li>
+        <li><span data-lang-en>Font size follows system accessibility settings.</span><span data-lang-ko>시스템 접근성 설정에 따라 앱 텍스트 크기 자동 조정.</span><span data-lang-ja>システムアクセシビリティ設定に応じてテキストサイズ調整。</span><span data-lang-zh>字体大小随系统辅助功能自动调整。</span><span data-lang-fr>Taille de police adaptée aux réglages d'accessibilité.</span><span data-lang-de>Schriftgröße folgt den System-Barrierefreiheitseinstellungen.</span><span data-lang-es>Tamaño de fuente según ajustes de accesibilidad.</span><span data-lang-pt>Tamanho da fonte segue as configurações de acessibilidade.</span><span data-lang-it>Dimensione carattere segue le impostazioni di accessibilità.</span></li>
+      </ul>
+
+      <h3>
+        🔧
+        <span data-lang-en>Improvements</span>
+        <span data-lang-ko>개선 사항</span>
+        <span data-lang-ja>改善</span>
+        <span data-lang-zh>改进</span>
+        <span data-lang-fr>Améliorations</span>
+        <span data-lang-de>Verbesserungen</span>
+        <span data-lang-es>Mejoras</span>
+        <span data-lang-pt>Melhorias</span>
+        <span data-lang-it>Miglioramenti</span>
+      </h3>
+      <ul>
+        <li><span data-lang-en>Click an active tool again to turn off drawing mode.</span><span data-lang-ko>활성 도구를 다시 클릭하면 드로잉 모드 종료.</span><span data-lang-ja>アクティブなツールを再クリックで描画モード終了。</span><span data-lang-zh>再次点击当前工具即可关闭绘图模式。</span><span data-lang-fr>Re-cliquez sur l'outil actif pour quitter le mode dessin.</span><span data-lang-de>Aktives Werkzeug erneut klicken beendet Zeichenmodus.</span><span data-lang-es>Vuelve a hacer clic para salir del modo dibujo.</span><span data-lang-pt>Clique novamente na ferramenta para sair.</span><span data-lang-it>Riclicca sullo strumento per uscire dal disegno.</span></li>
+        <li><span data-lang-en>⌘Q and ⌘M now work in My Palette mode too.</span><span data-lang-ko>⌘Q, ⌘M을 나만의 팔레트 모드에서도 사용 가능.</span><span data-lang-ja>マイパレットモードでも⌘Qと⌘Mが動作。</span><span data-lang-zh>我的调色板模式下也支持 ⌘Q 与 ⌘M。</span><span data-lang-fr>⌘Q et ⌘M fonctionnent aussi en mode Ma palette.</span><span data-lang-de>⌘Q und ⌘M jetzt auch in Meine Palette.</span><span data-lang-es>⌘Q y ⌘M también en Mi paleta.</span><span data-lang-pt>⌘Q e ⌘M também em Minha paleta.</span><span data-lang-it>⌘Q e ⌘M anche in La mia palette.</span></li>
+        <li><span data-lang-en>Trackpad haptic feedback when switching tools/colors.</span><span data-lang-ko>도구 · 색상 변경 시 트랙패드 촉각 진동.</span><span data-lang-ja>ツール・色変更時にトラックパッドの触覚振動。</span><span data-lang-zh>切换工具或颜色时触控板触感反馈。</span><span data-lang-fr>Retour haptique lors du changement d'outil/couleur.</span><span data-lang-de>Haptisches Feedback beim Werkzeug-/Farbwechsel.</span><span data-lang-es>Vibración háptica al cambiar herramienta/color.</span><span data-lang-pt>Feedback tátil ao trocar ferramenta/cor.</span><span data-lang-it>Feedback aptico al cambio di strumento/colore.</span></li>
+        <li><span data-lang-en>Dock icon shows a small mark when drawing is active.</span><span data-lang-ko>드로잉 활성 시 Dock 아이콘에 작은 표시.</span><span data-lang-ja>描画中はDockアイコンに小さな印。</span><span data-lang-zh>绘图开启时 Dock 图标显示小提示。</span><span data-lang-fr>Icône Dock affiche une marque en mode dessin.</span><span data-lang-de>Dock-Symbol zeigt Markierung bei Zeichenmodus.</span><span data-lang-es>Icono en el Dock muestra marca al dibujar.</span><span data-lang-pt>Ícone no Dock com marca ao desenhar.</span><span data-lang-it>Icona nel Dock con contrassegno mentre disegni.</span></li>
+        <li><span data-lang-en>Menu bar icon changes color based on drawing state.</span><span data-lang-ko>드로잉 상태에 따라 메뉴바 아이콘 컬러 · 회색 자동 전환.</span><span data-lang-ja>描画状態でメニューバーアイコンの色が切替。</span><span data-lang-zh>菜单栏图标随绘图状态自动变色。</span><span data-lang-fr>Icône de la barre de menus change selon l'état.</span><span data-lang-de>Menüleisten-Symbol wechselt Farbe je nach Zustand.</span><span data-lang-es>Icono de la barra de menús cambia según estado.</span><span data-lang-pt>Ícone da barra muda de cor conforme o estado.</span><span data-lang-it>Icona nella barra dei menu cambia colore per lo stato.</span></li>
+        <li><span data-lang-en>Effects section unified — spotlight, laser, cursor highlight, custom cursor all use the same toggle style.</span><span data-lang-ko>이펙트 섹션 통일 — 스포트라이트, 레이저, 커서 강조, 나만의 커서 모두 같은 토글 스타일.</span><span data-lang-ja>エフェクト欄を統一 — スポットライト・レーザー・カーソル強調・カスタムカーソルが同じスタイル。</span><span data-lang-zh>特效区统一 — 聚光灯、激光、光标强调、自定义光标同一切换样式。</span><span data-lang-fr>Section effets uniformisée — même style de bascule pour tous.</span><span data-lang-de>Effekte-Abschnitt vereinheitlicht — gleicher Toggle-Stil.</span><span data-lang-es>Sección de efectos unificada — mismo estilo de toggle.</span><span data-lang-pt>Seção de efeitos unificada — mesmo estilo de toggle.</span><span data-lang-it>Sezione effetti uniformata — stesso stile di toggle.</span></li>
+      </ul>
+
+      <h3>
+        🐛
+        <span data-lang-en>Bug Fixes</span>
+        <span data-lang-ko>버그 수정</span>
+        <span data-lang-ja>バグ修正</span>
+        <span data-lang-zh>问题修复</span>
+        <span data-lang-fr>Corrections</span>
+        <span data-lang-de>Fehlerbehebungen</span>
+        <span data-lang-es>Correcciones</span>
+        <span data-lang-pt>Correções</span>
+        <span data-lang-it>Correzioni</span>
+      </h3>
+      <ul>
+        <li><span data-lang-en>App UI became unclickable when custom cursor was enabled.</span><span data-lang-ko>나만의 커서 활성 시 앱 화면 조작이 안 되던 문제.</span><span data-lang-ja>カスタムカーソル有効時にUI操作不能だった問題。</span><span data-lang-zh>启用自定义光标后无法操作应用界面。</span><span data-lang-fr>UI inutilisable avec le curseur personnalisé activé.</span><span data-lang-de>App-UI unbenutzbar bei aktivem benutzerdefinierten Cursor.</span><span data-lang-es>La UI no respondía con cursor personalizado activo.</span><span data-lang-pt>UI travava com cursor personalizado ativo.</span><span data-lang-it>UI non cliccabile con cursore personalizzato attivo.</span></li>
+        <li><span data-lang-en>Finder window hid behind the app when picking cursor images.</span><span data-lang-ko>나만의 커서 이미지 등록 시 파인더 창이 뒤로 숨거나 클릭이 안 되던 문제.</span><span data-lang-ja>カーソル画像選択時にFinderが背面に隠れる問題。</span><span data-lang-zh>选择光标图片时 Finder 窗口被遮挡。</span><span data-lang-fr>Finder caché lors de la sélection d'image de curseur.</span><span data-lang-de>Finder-Fenster wurde beim Auswählen verdeckt.</span><span data-lang-es>Finder se ocultaba al elegir imagen del cursor.</span><span data-lang-pt>Finder ocultava ao escolher imagem do cursor.</span><span data-lang-it>Finder nascosto durante la scelta immagine cursore.</span></li>
+        <li><span data-lang-en>Laser and cursor highlight now show together correctly.</span><span data-lang-ko>레이저와 커서 강조가 동시에 표시 안 되던 문제.</span><span data-lang-ja>レーザーとカーソル強調が同時表示されない問題。</span><span data-lang-zh>激光与光标强调无法同时显示的问题。</span><span data-lang-fr>Laser et curseur en surbrillance s'affichent ensemble.</span><span data-lang-de>Laser und Cursor-Hervorhebung nun gemeinsam sichtbar.</span><span data-lang-es>Láser y realce del cursor ahora se muestran juntos.</span><span data-lang-pt>Laser e realce do cursor exibidos juntos.</span><span data-lang-it>Laser e evidenziazione cursore ora visibili insieme.</span></li>
+        <li><span data-lang-en>First-run language screen buttons wouldn't respond.</span><span data-lang-ko>첫 실행 시 언어 선택 화면 버튼이 눌리지 않던 문제.</span><span data-lang-ja>初回起動時に言語選択画面のボタンが反応しない問題。</span><span data-lang-zh>首次启动时语言选择按钮无响应。</span><span data-lang-fr>Boutons du choix de langue non réactifs au premier lancement.</span><span data-lang-de>Sprachauswahl-Buttons beim ersten Start unreagierend.</span><span data-lang-es>Botones de idioma no respondían al primer inicio.</span><span data-lang-pt>Botões de idioma não respondiam no primeiro uso.</span><span data-lang-it>Pulsanti lingua non rispondevano al primo avvio.</span></li>
+        <li><span data-lang-en>Splash and toolbar/palette showed at the same time.</span><span data-lang-ko>스플래시 화면과 툴바 · 팔레트가 동시에 뜨던 문제.</span><span data-lang-ja>スプラッシュとツールバー・パレットが同時表示される問題。</span><span data-lang-zh>启动画面与工具栏/调色板同时显示。</span><span data-lang-fr>Splash et barre d'outils apparaissaient en même temps.</span><span data-lang-de>Splash und Toolbar/Palette gleichzeitig sichtbar.</span><span data-lang-es>Splash y barra/paleta aparecían a la vez.</span><span data-lang-pt>Splash e barra/paleta apareciam ao mesmo tempo.</span><span data-lang-it>Splash e barra/palette apparivano insieme.</span></li>
+        <li><span data-lang-en>Whiteboard start hint reappeared after Undo.</span><span data-lang-ko>화이트보드 undo 시 시작 안내가 다시 표시되던 문제.</span><span data-lang-ja>ホワイトボードでUndo後にヒントが再表示される問題。</span><span data-lang-zh>白板撤销后起始提示再次出现。</span><span data-lang-fr>L'indice du tableau réapparaissait après Annuler.</span><span data-lang-de>Whiteboard-Hinweis erschien nach Rückgängig erneut.</span><span data-lang-es>La pista de la pizarra volvía tras Deshacer.</span><span data-lang-pt>Dica do quadro reaparecia após Desfazer.</span><span data-lang-it>Suggerimento lavagna riappariva dopo Annulla.</span></li>
+        <li><span data-lang-en>Custom cursor icon not visible.</span><span data-lang-ko>커스텀 커서 아이콘이 안 보이던 문제.</span><span data-lang-ja>カスタムカーソルアイコンが表示されない問題。</span><span data-lang-zh>自定义光标图标不显示。</span><span data-lang-fr>Icône du curseur personnalisé invisible.</span><span data-lang-de>Benutzerdefiniertes Cursor-Symbol unsichtbar.</span><span data-lang-es>Icono del cursor personalizado no visible.</span><span data-lang-pt>Ícone do cursor personalizado invisível.</span><span data-lang-it>Icona del cursore personalizzato non visibile.</span></li>
+      </ul>
+
+      <h3>
+        ⚡️
+        <span data-lang-en>Performance</span>
+        <span data-lang-ko>성능</span>
+        <span data-lang-ja>パフォーマンス</span>
+        <span data-lang-zh>性能</span>
+        <span data-lang-fr>Performance</span>
+        <span data-lang-de>Leistung</span>
+        <span data-lang-es>Rendimiento</span>
+        <span data-lang-pt>Desempenho</span>
+        <span data-lang-it>Prestazioni</span>
+      </h3>
+      <ul>
+        <li><span data-lang-en>CPU drops to nearly 0% when cursor highlight is idle.</span><span data-lang-ko>커서 강조가 켜진 채로 정지 시 CPU 사용률 거의 0.</span><span data-lang-ja>カーソル強調が静止時にCPU使用率ほぼ0。</span><span data-lang-zh>光标强调静止时 CPU 使用率几乎为 0。</span><span data-lang-fr>CPU proche de 0% quand la surbrillance est immobile.</span><span data-lang-de>CPU nahe 0% bei ruhender Cursor-Hervorhebung.</span><span data-lang-es>CPU casi 0% cuando el realce está inmóvil.</span><span data-lang-pt>CPU quase 0% com realce parado.</span><span data-lang-it>CPU quasi 0% con evidenziazione ferma.</span></li>
+        <li><span data-lang-en>Reduced unnecessary work during drag & scroll.</span><span data-lang-ko>드래그 · 스크롤 중 불필요한 연산 대폭 감소.</span><span data-lang-ja>ドラッグ・スクロール中の無駄な処理を大幅削減。</span><span data-lang-zh>拖动与滚动时的多余计算显著减少。</span><span data-lang-fr>Moins d'opérations inutiles lors du glisser/défilement.</span><span data-lang-de>Weniger unnötige Arbeit beim Ziehen/Scrollen.</span><span data-lang-es>Menos cálculo innecesario al arrastrar/desplazar.</span><span data-lang-pt>Menos trabalho desnecessário ao arrastar/rolar.</span><span data-lang-it>Meno lavoro inutile durante trascinamento/scroll.</span></li>
+        <li><span data-lang-en>Faster favorite color lookup.</span><span data-lang-ko>즐겨찾기 색상 접근 속도 향상.</span><span data-lang-ja>お気に入り色のアクセスが高速化。</span><span data-lang-zh>收藏颜色查找更快。</span><span data-lang-fr>Accès plus rapide aux couleurs favorites.</span><span data-lang-de>Schnellerer Zugriff auf Lieblingsfarben.</span><span data-lang-es>Acceso más rápido a colores favoritos.</span><span data-lang-pt>Acesso mais rápido às cores favoritas.</span><span data-lang-it>Accesso più veloce ai colori preferiti.</span></li>
+      </ul>
+
+      <div class="upgrade-note">
+        💡
+        <strong><span data-lang-en>Upgrade note</span><span data-lang-ko>업그레이드 안내</span><span data-lang-ja>アップグレードのご案内</span><span data-lang-zh>升级说明</span><span data-lang-fr>Note de mise à niveau</span><span data-lang-de>Upgrade-Hinweis</span><span data-lang-es>Nota de actualización</span><span data-lang-pt>Nota de atualização</span><span data-lang-it>Nota aggiornamento</span></strong>:
+        <span data-lang-en>this release includes a major UI overhaul. When you launch, a new splash screen guides you smoothly into the app.</span>
+        <span data-lang-ko>이 버전은 UI가 크게 개선되었어요. 실행하면 새로운 스플래시 화면과 함께 자연스럽게 진입합니다.</span>
+        <span data-lang-ja>本バージョンはUIが大きく改善されました。起動時にスプラッシュ画面が滑らかに案内します。</span>
+        <span data-lang-zh>此版本 UI 大幅改进,启动时通过全新的启动画面自然过渡。</span>
+        <span data-lang-fr>Cette version comporte une refonte majeure de l'UI. Un nouvel écran d'accueil vous guide en douceur.</span>
+        <span data-lang-de>Diese Version enthält eine umfassende UI-Überarbeitung. Ein neuer Splash-Screen leitet dich sanft ins App.</span>
+        <span data-lang-es>Esta versión trae un rediseño mayor de UI. Una nueva pantalla te introduce con suavidad.</span>
+        <span data-lang-pt>Esta versão traz uma grande reformulação de UI, com uma nova tela de abertura.</span>
+        <span data-lang-it>Questa versione include un ridisegno importante dell'UI, con una nuova schermata iniziale.</span>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<script>
+  // ── 다국어 초기화 (URL param → localStorage → navigator) ──
+  const LS_LANG = 'tp.lang';
+  const SUPPORTED = ['en','ko','ja','zh','fr','de','es','pt','it'];
+  function detectLang() {
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang && SUPPORTED.includes(urlLang)) {
+      localStorage.setItem(LS_LANG, urlLang);
+      return urlLang;
+    }
+    const saved = localStorage.getItem(LS_LANG);
+    if (saved && SUPPORTED.includes(saved)) return saved;
+    const n = (navigator.language || 'en').toLowerCase();
+    if (n.startsWith('ko')) return 'ko';
+    if (n.startsWith('ja')) return 'ja';
+    if (n.startsWith('zh')) return 'zh';
+    if (n.startsWith('fr')) return 'fr';
+    if (n.startsWith('de')) return 'de';
+    if (n.startsWith('es')) return 'es';
+    if (n.startsWith('pt')) return 'pt';
+    if (n.startsWith('it')) return 'it';
+    return 'en';
+  }
+  const lang = detectLang();
+  document.documentElement.setAttribute('lang', lang);
+  // 홈/뒤로 링크에도 언어 유지
+  document.querySelectorAll('#home-link, #back-link').forEach(a => {
+    a.href = '../index.html?lang=' + lang;
+  });
+
+  // ── 탭 전환 ──
+  const tabs = document.querySelectorAll('aside.sidebar a.tab');
+  const releases = document.querySelectorAll('article.release');
+  function showRelease(version) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.version === version));
+    releases.forEach(a => a.classList.toggle('active', a.id === version));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      showRelease(tab.dataset.version);
+      history.replaceState(null, '', '#' + tab.dataset.version);
+    });
+  });
+  const hash = window.location.hash.slice(1);
+  if (hash && document.getElementById(hash)) showRelease(hash);
+
+  // ── 다크 모드 ──
+  const themeToggle = document.getElementById('themeToggle');
+  const LS_THEME = 'tp.theme';
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
+  }
+  const savedTheme = localStorage.getItem(LS_THEME)
+    || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(savedTheme);
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem(LS_THEME, next);
+  });
+</script>
+
+</body>
+</html>
