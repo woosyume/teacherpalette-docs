@@ -190,6 +190,31 @@
     border-radius: 999px; font-size: 12px; font-weight: 600;
     margin-bottom: 20px; letter-spacing: 0.02em;
   }
+  /* "New in 1.1.6" pill — hero 하단, 릴리스 노트 링크 */
+  .whats-new-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; margin-top: 14px;
+    background: linear-gradient(135deg, rgba(1,118,211,0.10), rgba(123,94,167,0.10));
+    border: 1px solid rgba(1,118,211,0.25);
+    border-radius: 999px;
+    font-size: 12px; font-weight: 600; color: var(--accent);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .whats-new-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(1,118,211,0.18);
+  }
+  .whats-new-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #FF6B00;
+    box-shadow: 0 0 0 3px rgba(255,107,0,0.18);
+    animation: pillPulse 2s ease-in-out infinite;
+  }
+  @keyframes pillPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(255,107,0,0.18); }
+    50%      { box-shadow: 0 0 0 6px rgba(255,107,0,0.05); }
+  }
   .hero-app-icon {
     width: 128px; height: 128px; margin: 0 auto 24px; display: block;
     border-radius: 28px;
@@ -1174,6 +1199,19 @@
       <span data-lang-it>Vedi le funzioni</span>
     </a>
   </div>
+
+  <a id="hero-whats-new" class="whats-new-pill" href="releases/index.html">
+    <span class="dot"></span>
+    <span data-lang-en>New in 1.1.6 — Drag to reorder · Tool cursor · Single-key shortcuts</span>
+    <span data-lang-ko>1.1.6 신규 — 드래그 재정렬 · 커서 도구 아이콘 · 1-키 단축키</span>
+    <span data-lang-ja>1.1.6 新機能 — ドラッグで並び替え · カーソルツールアイコン · 1キーショートカット</span>
+    <span data-lang-zh>1.1.6 新增 — 拖动重排 · 光标工具图标 · 单键快捷键</span>
+    <span data-lang-fr>Nouveau dans 1.1.6 — Glissez-réorganisez · Icône curseur · Raccourcis à touche unique</span>
+    <span data-lang-de>Neu in 1.1.6 — Drag-Sortierung · Cursor-Werkzeug · Einzeltasten-Shortcuts</span>
+    <span data-lang-es>Nuevo en 1.1.6 — Arrastrar y reordenar · Icono en cursor · Atajos de una tecla</span>
+    <span data-lang-pt>Novo na 1.1.6 — Arraste e reordene · Ícone no cursor · Atalhos de uma tecla</span>
+    <span data-lang-it>Novità in 1.1.6 — Trascina e riordina · Icona sul cursore · Scorciatoie a tasto singolo</span>
+  </a>
 </section>
 
 <!-- ═══════════════════════ LIVE DEMO ══════════════════════════════ -->
@@ -1252,15 +1290,15 @@
       <div class="tb-section">DRAWING</div>
       <div class="tb-tool tool-pen">
         <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
-        <span>Pen</span><span class="tb-kbd">⌘⇧P</span>
+        <span>Pen</span><span class="tb-kbd">⌥P</span>
       </div>
       <div class="tb-tool tool-highlight">
         <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M9 11l-6 6v4h4l6-6M14 6l4 4M13 2l7 7-11 11H2v-7L13 2z"/></svg></span>
-        <span>Highlight</span><span class="tb-kbd">⌘⇧H</span>
+        <span>Highlight</span><span class="tb-kbd">⌥H</span>
       </div>
       <div class="tb-tool tool-arrow">
         <span class="tb-icon"><svg viewBox="0 0 24 24"><path d="M5 3l14 6-6 2-2 6L5 3z"/></svg></span>
-        <span>Arrow</span><span class="tb-kbd">⌘⇧A</span>
+        <span>Arrow</span><span class="tb-kbd">⌥A</span>
       </div>
       <div class="tb-colors">
         <span class="tb-col" style="background:#111;"></span>
@@ -1418,20 +1456,20 @@
           </svg>
         </div>
         <h3>
-          <span data-lang-en>Rebindable shortcuts</span><span data-lang-ko>재설정 가능한 단축키</span><span data-lang-ja>カスタマイズ可能なショートカット</span>
-          <span data-lang-zh>可自定义快捷键</span><span data-lang-fr>Raccourcis reconfigurables</span><span data-lang-de>Anpassbare Kurzbefehle</span>
-          <span data-lang-es>Atajos reasignables</span><span data-lang-pt>Atalhos personalizáveis</span><span data-lang-it>Scorciatoie riassegnabili</span>
+          <span data-lang-en>Shortcuts that flow with you</span><span data-lang-ko>흐름을 끊지 않는 단축키</span><span data-lang-ja>流れを止めないショートカット</span>
+          <span data-lang-zh>不打断心流的快捷键</span><span data-lang-fr>Raccourcis dans le flux</span><span data-lang-de>Shortcuts, die mitfließen</span>
+          <span data-lang-es>Atajos que fluyen contigo</span><span data-lang-pt>Atalhos que fluem com você</span><span data-lang-it>Scorciatoie che scorrono con te</span>
         </h3>
         <p>
-          <span data-lang-en>Every ⌘⇧ shortcut is remappable. Works from any focused app — Zoom, Slides, Keynote, Chrome.</span>
-          <span data-lang-ko>모든 ⌘⇧ 단축키를 원하는 키로. Zoom·Slides·Keynote·Chrome 등 어떤 앱에서도 작동.</span>
-          <span data-lang-ja>すべての ⌘⇧ ショートカットを再割当可能。Zoom・Slides・Keynote・Chrome など、どのアプリでも動作。</span>
-          <span data-lang-zh>所有 ⌘⇧ 快捷键均可重新映射。在任何焦点应用中都可用 — Zoom、Slides、Keynote、Chrome。</span>
-          <span data-lang-fr>Chaque raccourci ⌘⇧ est réassignable. Fonctionne depuis n'importe quelle app active — Zoom, Slides, Keynote, Chrome.</span>
-          <span data-lang-de>Jeder ⌘⇧-Kurzbefehl ist neu zuweisbar. Funktioniert aus jeder aktiven App — Zoom, Slides, Keynote, Chrome.</span>
-          <span data-lang-es>Cada atajo ⌘⇧ es reasignable. Funciona desde cualquier app activa — Zoom, Slides, Keynote, Chrome.</span>
-          <span data-lang-pt>Cada atalho ⌘⇧ é remapeável. Funciona a partir de qualquer app em foco — Zoom, Slides, Keynote, Chrome.</span>
-          <span data-lang-it>Ogni scorciatoia ⌘⇧ è riassegnabile. Funziona da qualsiasi app attiva — Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-en>Two-tier hybrid: tools & effects use <b>⌥ + letter</b> (2-key), system actions keep <b>⌘⇧ + letter</b> (3-key, accident-proof). Plus single keys while drawing — <b>⌫</b> clears, <b>[ ]</b> resize, <b>1–5</b> pick favorite color. Fully remappable. Works from Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-ko>두 단계 하이브리드: 도구·이펙트는 <b>⌥ + 알파벳</b> (2-키), 시스템은 <b>⌘⇧ + 알파벳</b> (3-키, 실수 방지). 드로잉 중엔 1-키까지 — <b>⌫</b> 전체 삭제, <b>[ ]</b> 굵기 조절, <b>1~5</b> 즐겨찾기 색상. 모두 재정의 가능. Zoom·Slides·Keynote·Chrome에서 그대로 작동.</span>
+          <span data-lang-ja>2階層ハイブリッド: ツール・エフェクトは <b>⌥ + アルファベット</b> (2キー)、システムは <b>⌘⇧ + アルファベット</b> (3キー、誤操作防止)。描画中は1キーも — <b>⌫</b> 全消去、<b>[ ]</b> サイズ調整、<b>1〜5</b> お気に入り色。すべて再割当可能。Zoom・Slides・Keynote・Chrome で動作。</span>
+          <span data-lang-zh>双层混合快捷键：工具与特效使用 <b>⌥ + 字母</b> (2 键)，系统操作保留 <b>⌘⇧ + 字母</b> (3 键，防误触)。绘图时还有单键 — <b>⌫</b> 清空、<b>[ ]</b> 调整大小、<b>1–5</b> 收藏颜色。全部可重映射。Zoom、Slides、Keynote、Chrome 中通用。</span>
+          <span data-lang-fr>Hybride à deux niveaux : outils & effets en <b>⌥ + lettre</b> (2 touches), actions système en <b>⌘⇧ + lettre</b> (3 touches). En dessin, touches uniques — <b>⌫</b> tout effacer, <b>[ ]</b> taille, <b>1–5</b> couleur favorite. Entièrement réassignable. Fonctionne depuis Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-de>Zweistufig hybrid: Werkzeuge & Effekte mit <b>⌥ + Buchstabe</b> (2 Tasten), System mit <b>⌘⇧ + Buchstabe</b> (3 Tasten). Beim Zeichnen auch Einzeltasten — <b>⌫</b> Alles löschen, <b>[ ]</b> Größe, <b>1–5</b> Lieblingsfarbe. Vollständig neu zuweisbar. Funktioniert aus Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-es>Híbrido de dos niveles: herramientas y efectos con <b>⌥ + letra</b> (2 teclas), sistema con <b>⌘⇧ + letra</b> (3 teclas). Al dibujar, teclas únicas — <b>⌫</b> borrar todo, <b>[ ]</b> tamaño, <b>1–5</b> color favorito. Reasignable. Funciona desde Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-pt>Híbrido de dois níveis: ferramentas & efeitos com <b>⌥ + letra</b> (2 teclas), sistema com <b>⌘⇧ + letra</b> (3 teclas). Ao desenhar, teclas únicas — <b>⌫</b> limpar tudo, <b>[ ]</b> tamanho, <b>1–5</b> cor favorita. Remapeável. Funciona no Zoom, Slides, Keynote, Chrome.</span>
+          <span data-lang-it>Ibrido a due livelli: strumenti & effetti con <b>⌥ + lettera</b> (2 tasti), sistema con <b>⌘⇧ + lettera</b> (3 tasti). Durante il disegno, tasti singoli — <b>⌫</b> cancella tutto, <b>[ ]</b> dimensione, <b>1–5</b> colore preferito. Riassegnabile. Funziona da Zoom, Slides, Keynote, Chrome.</span>
         </p>
       </div>
 
@@ -1871,7 +1909,7 @@
           <span data-lang-zh>权限</span><span data-lang-fr>Autorisations</span><span data-lang-de>Berechtigungen</span>
           <span data-lang-es>Permisos</span><span data-lang-pt>Permissões</span><span data-lang-it>Autorizzazioni</span>
         </div>
-        <div class="req-value">Input Monitoring</div>
+        <div class="req-value">None required</div>
       </div>
     </div>
   </div>
@@ -1911,7 +1949,7 @@
       <p>Your preferences (shortcuts, color palette, toolbar position, whiteboard pages) are stored in macOS <code>UserDefaults</code> on your device only. They never leave your Mac. Deleting the app removes this data.</p>
 
       <h3>System permissions</h3>
-      <p>TeacherPalette requests <strong>Input Monitoring</strong> permission so keyboard shortcuts (e.g. ⌘⇧D to toggle drawing) work while other apps like Zoom or Keynote are in focus. This permission is used solely to detect your configured shortcut key combinations. Nothing is recorded, logged, or transmitted.</p>
+      <p>TeacherPalette does <strong>not</strong> require Input Monitoring or Accessibility permissions. Global keyboard shortcuts work through the macOS Carbon Event system, which does not require permission. Nothing is recorded, logged, or transmitted.</p>
 
       <h3>Third-party services</h3>
       <p>None. TeacherPalette is a self-contained app with no external integrations, no cloud sync, and no analytics SDKs.</p>
@@ -1946,7 +1984,7 @@
       <p>사용자 환경설정(단축키, 팔레트, 툴바 위치, 화이트보드 페이지)은 macOS <code>UserDefaults</code>를 통해 사용자 기기에만 저장됩니다. Mac 밖으로 나가지 않으며, 앱을 삭제하면 함께 사라집니다.</p>
 
       <h3>시스템 권한</h3>
-      <p>TeacherPalette는 <strong>Input Monitoring</strong> 권한을 요청합니다. 이는 Zoom, Keynote 등 다른 앱이 활성 상태에서도 단축키(예: ⌘⇧D로 드로잉 토글)가 작동하도록 하기 위함입니다. 사용자가 설정한 단축키 조합을 인식하는 목적에만 사용되며, 어떠한 입력도 기록·전송되지 않습니다.</p>
+      <p>TeacherPalette는 어떤 시스템 권한도 요구하지 않습니다. 모든 전역 단축키는 macOS Carbon Event API를 통해 작동하며, 별도 권한 요청 없이 즉시 사용 가능합니다. 입력 내용은 기록·전송되지 않습니다.</p>
 
       <h3>제3자 서비스</h3>
       <p>사용하지 않습니다. TeacherPalette는 외부 연동, 클라우드 동기화, 분석 SDK가 전혀 없는 독립 앱입니다.</p>
@@ -1981,7 +2019,7 @@
       <p>ユーザー設定(ショートカット、カラーパレット、ツールバー位置、ホワイトボードのページ)は macOS の <code>UserDefaults</code> を通じてご自身の端末のみに保存されます。Mac の外に出ることはなく、アプリを削除するとこれらのデータも削除されます。</p>
 
       <h3>システム権限</h3>
-      <p>TeacherPalette は <strong>入力監視(Input Monitoring)</strong> 権限を要求します。これは Zoom や Keynote など他のアプリがアクティブな状態でもショートカット(例: ⌘⇧D で描画のオン/オフ)が動作するようにするためです。設定されたショートカットの組み合わせを検出する目的のみに使用され、入力内容の記録や送信は一切ありません。</p>
+      <p>TeacherPalette はシステム権限を一切要求しません。すべてのグローバルショートカットは macOS の Carbon Event API 経由で動作し、権限ダイアログなしですぐに使えます。入力内容が記録・送信されることはありません。</p>
 
       <h3>第三者サービス</h3>
       <p>利用していません。TeacherPalette は外部連携、クラウド同期、分析 SDK を持たない独立したアプリです。</p>
@@ -2120,6 +2158,8 @@
       // What's New 링크에 현재 언어 파라미터 유지
       const whatsNewLink = document.getElementById('whats-new-link');
       if (whatsNewLink) whatsNewLink.href = 'releases/index.html?lang=' + lang;
+      const heroWhatsNew = document.getElementById('hero-whats-new');
+      if (heroWhatsNew) heroWhatsNew.href = 'releases/index.html?lang=' + lang;
       // Footer의 What's New 링크도 동기화 (있으면)
       document.querySelectorAll('a[href^="releases/"], a[href^="releases/index.html"]').forEach(a => {
         a.href = 'releases/index.html?lang=' + lang;
