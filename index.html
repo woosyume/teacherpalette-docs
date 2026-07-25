@@ -826,6 +826,66 @@
     font-family: ui-monospace, "SF Mono", monospace; font-size: 12px;
   }
 
+  /* Command palette visual — 검색창 + 결과 리스트 미니 창 모사 */
+  .visual-cmdk {
+    width: 260px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.06);
+    padding: 10px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  [data-theme="dark"] .visual-cmdk {
+    background: #22242c;
+    border-color: rgba(255, 255, 255, 0.10);
+  }
+  .cmdk-search {
+    display: flex; align-items: center; gap: 9px;
+    padding: 10px 12px; margin-bottom: 4px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.045);
+  }
+  [data-theme="dark"] .cmdk-search { background: rgba(255, 255, 255, 0.07); }
+  .cmdk-search-icon {
+    width: 15px; height: 15px; flex-shrink: 0;
+    fill: none; stroke: var(--spot-color, var(--accent)); stroke-width: 2.2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .cmdk-search-text {
+    font-size: 13.5px; color: var(--text);
+    font-family: ui-monospace, "SF Mono", monospace;
+  }
+  .cmdk-caret {
+    display: inline-block; width: 1.5px; height: 13px;
+    background: var(--spot-color, var(--accent));
+    margin-left: 1px; vertical-align: middle;
+    animation: cmdkBlink 1s step-end infinite;
+  }
+  @keyframes cmdkBlink { 50% { opacity: 0; } }
+  .cmdk-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 8px; border-radius: 9px;
+  }
+  .cmdk-row.active { background: var(--spot-soft, var(--accent-soft)); }
+  .cmdk-row-icon {
+    width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--row-color, var(--spot-color, var(--accent)));
+    color: #fff;
+  }
+  .cmdk-row-icon svg {
+    width: 14px; height: 14px; fill: none; stroke: currentColor;
+    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .cmdk-row-label { font-size: 13px; color: var(--text); flex: 1; }
+  .cmdk-row-kbd {
+    font-size: 10.5px; color: var(--text-dim);
+    font-family: ui-monospace, "SF Mono", monospace;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 5px; padding: 2px 6px; flex-shrink: 0;
+  }
+
   /* Custom cursor visual — macOS Dock 스타일 프리셋 */
   .visual-cursor {
     display: flex; align-items: flex-end; justify-content: center; gap: 20px;
@@ -1328,15 +1388,15 @@
         <span data-lang-it>Un'unica app. Tutti gli strumenti che ti servono.</span>
       </h2>
       <p>
-        <span data-lang-en>Drawing, whiteboard, spotlight, laser, custom cursor, palette, timer — one download replaces a whole toolbox of single-purpose apps.</span>
-        <span data-lang-ko>드로잉, 화이트보드, 스포트라이트, 레이저, 커스텀 커서, 팔레트, 타이머까지 — 한 번의 설치로 여러 개의 개별 앱을 대체합니다.</span>
-        <span data-lang-ja>描画、ホワイトボード、スポットライト、レーザー、カスタムカーソル、パレット、タイマー — 個別アプリの寄せ集めを、1 つのダウンロードでまとめて置き換え。</span>
-        <span data-lang-zh>绘图、白板、聚光灯、激光笔、自定义光标、调色板、计时器 — 一次下载替代一整套单一功能应用。</span>
-        <span data-lang-fr>Dessin, tableau blanc, projecteur, laser, curseur personnalisé, palette, minuteur — un seul téléchargement remplace toute une boîte à outils d'apps à usage unique.</span>
-        <span data-lang-de>Zeichnen, Whiteboard, Spotlight, Laser, eigener Cursor, Palette, Timer — ein einziger Download ersetzt eine ganze Werkzeugkiste von Einzelzweck-Apps.</span>
-        <span data-lang-es>Dibujo, pizarra, foco, láser, cursor personalizado, paleta, temporizador — una sola descarga reemplaza toda una caja de herramientas de apps de un solo propósito.</span>
-        <span data-lang-pt>Desenho, quadro branco, holofote, laser, cursor personalizado, paleta, timer — um único download substitui uma caixa inteira de apps de propósito único.</span>
-        <span data-lang-it>Disegno, lavagna, riflettore, laser, cursore personalizzato, palette, timer — un unico download sostituisce un'intera cassetta di app monoscopo.</span>
+        <span data-lang-en>Drawing, whiteboard, spotlight, laser, custom cursor, palette, timer — one download replaces a whole toolbox of single-purpose apps. Loaded with features, yet every one stays simple enough to actually use — no buried settings, no learning curve.</span>
+        <span data-lang-ko>드로잉, 화이트보드, 스포트라이트, 레이저, 커스텀 커서, 팔레트, 타이머까지 — 한 번의 설치로 여러 개의 개별 앱을 대체합니다. 기능은 많지만 설정은 늘 단순해서 진짜로 다 쓰게 돼요 — 파묻힌 설정도, 학습 곡선도 없어요.</span>
+        <span data-lang-ja>描画、ホワイトボード、スポットライト、レーザー、カスタムカーソル、パレット、タイマー — 個別アプリの寄せ集めを、1 つのダウンロードでまとめて置き換え。機能は豊富でも、どれも実際に使えるくらいシンプルなまま — 埋もれた設定も、学習コストもありません。</span>
+        <span data-lang-zh>绘图、白板、聚光灯、激光笔、自定义光标、调色板、计时器 — 一次下载替代一整套单一功能应用。功能丰富，却始终简单到真正会去用 —— 没有藏得很深的设置，也没有学习门槛。</span>
+        <span data-lang-fr>Dessin, tableau blanc, projecteur, laser, curseur personnalisé, palette, minuteur — un seul téléchargement remplace toute une boîte à outils d'apps à usage unique. Riche en fonctionnalités, mais chacune reste assez simple pour être vraiment utilisée — pas de réglages enfouis, pas de courbe d'apprentissage.</span>
+        <span data-lang-de>Zeichnen, Whiteboard, Spotlight, Laser, eigener Cursor, Palette, Timer — ein einziger Download ersetzt eine ganze Werkzeugkiste von Einzelzweck-Apps. Vollgepackt mit Funktionen, doch jede davon bleibt so einfach, dass man sie wirklich nutzt — keine verschachtelten Einstellungen, keine Lernkurve.</span>
+        <span data-lang-es>Dibujo, pizarra, foco, láser, cursor personalizado, paleta, temporizador — una sola descarga reemplaza toda una caja de herramientas de apps de un solo propósito. Repleto de funciones, pero cada una sigue siendo lo bastante sencilla para usarla de verdad — sin ajustes escondidos, sin curva de aprendizaje.</span>
+        <span data-lang-pt>Desenho, quadro branco, holofote, laser, cursor personalizado, paleta, timer — um único download substitui uma caixa inteira de apps de propósito único. Repleto de recursos, mas cada um continua simples o bastante para você realmente usar — sem ajustes escondidos, sem curva de aprendizado.</span>
+        <span data-lang-it>Disegno, lavagna, riflettore, laser, cursore personalizzato, palette, timer — un unico download sostituisce un'intera cassetta di app monoscopo. Pieno di funzionalità, eppure ognuna resta abbastanza semplice da usare davvero — nessuna impostazione nascosta, nessuna curva di apprendimento.</span>
       </p>
     </div>
 
@@ -1640,8 +1700,103 @@
         </div>
       </div>
 
-      <!-- ── 3. 원핸드 툴/색상 순환 ─────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
+      <!-- ── 3. ⌘K 커맨드 팔레트 ─────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#6C5CE7;--spot-soft:rgba(108,92,231,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Command Palette</span><span data-lang-ko>커맨드 팔레트</span><span data-lang-ja>コマンドパレット</span>
+            <span data-lang-zh>命令面板</span><span data-lang-fr>Palette de commandes</span><span data-lang-de>Befehlspalette</span>
+            <span data-lang-es>Paleta de comandos</span><span data-lang-pt>Paleta de comandos</span><span data-lang-it>Tavolozza dei comandi</span>
+          </span>
+          <h3>
+            <span data-lang-en>Forget the shortcuts. Just search for what you need.</span>
+            <span data-lang-ko>단축키를 몰라도, 검색 한 번이면 끝.</span>
+            <span data-lang-ja>ショートカットを覚えなくても、検索するだけ。</span>
+            <span data-lang-zh>记不住快捷键？搜索一下就好。</span>
+            <span data-lang-fr>Oubliez les raccourcis. Cherchez ce qu'il vous faut.</span>
+            <span data-lang-de>Shortcuts vergessen? Einfach suchen.</span>
+            <span data-lang-es>Olvida los atajos. Solo busca lo que necesitas.</span>
+            <span data-lang-pt>Esqueça os atalhos. Basta buscar o que precisa.</span>
+            <span data-lang-it>Scorciatoie? Basta cercare quello che ti serve.</span>
+          </h3>
+          <p>
+            <span data-lang-en>Press ⌘K anywhere in the app and a search bar appears — type a few letters and every tool, effect, and setting shows up instantly, ready to launch with one click or the arrow keys.</span>
+            <span data-lang-ko>앱 어디서든 ⌘K를 누르면 검색창이 뜹니다. 몇 글자만 입력해도 모든 도구·이펙트·설정이 바로 나타나고, 클릭이나 방향키로 즉시 실행할 수 있어요.</span>
+            <span data-lang-ja>アプリのどこからでも ⌘K を押すと検索バーが表示されます。数文字入力するだけで、すべてのツール・エフェクト・設定が即座に表示され、クリックや矢印キーで実行できます。</span>
+            <span data-lang-zh>在应用的任何位置按下 ⌘K，搜索框就会出现。只需输入几个字母，所有工具、特效和设置都会立即显示，点击或用方向键即可启动。</span>
+            <span data-lang-fr>Appuyez sur ⌘K n'importe où dans l'app pour afficher une barre de recherche — tapez quelques lettres et tous les outils, effets et réglages apparaissent instantanément, prêts à lancer d'un clic ou avec les flèches.</span>
+            <span data-lang-de>Drücke ⌘K an jeder Stelle in der App, und eine Suchleiste erscheint — tippe ein paar Buchstaben, und jedes Werkzeug, jeder Effekt und jede Einstellung wird sofort angezeigt, startklar per Klick oder Pfeiltasten.</span>
+            <span data-lang-es>Pulsa ⌘K en cualquier parte de la app y aparece una barra de búsqueda — escribe unas letras y todas las herramientas, efectos y ajustes aparecen al instante, listos para iniciar con un clic o las flechas.</span>
+            <span data-lang-pt>Pressione ⌘K em qualquer lugar do app e uma barra de busca aparece — digite algumas letras e todas as ferramentas, efeitos e configurações aparecem instantaneamente, prontos para iniciar com um clique ou as setas.</span>
+            <span data-lang-it>Premi ⌘K in qualsiasi punto dell'app e appare una barra di ricerca — digita qualche lettera e ogni strumento, effetto e impostazione appare all'istante, pronto da avviare con un clic o le freccette.</span>
+          </p>
+          <ul>
+            <li>
+              <span data-lang-en>Type a few letters — fuzzy search finds the right tool instantly</span>
+              <span data-lang-ko>몇 글자만 입력해도 원하는 도구를 즉시 찾아줍니다</span>
+              <span data-lang-ja>数文字入力するだけで、目的のツールを即座に検索</span>
+              <span data-lang-zh>只需输入几个字母 — 模糊搜索立即找到对应工具</span>
+              <span data-lang-fr>Tapez quelques lettres — la recherche floue trouve l'outil en un instant</span>
+              <span data-lang-de>Tippe ein paar Buchstaben — die Fuzzy-Suche findet sofort das richtige Werkzeug</span>
+              <span data-lang-es>Escribe unas letras — la búsqueda difusa encuentra la herramienta al instante</span>
+              <span data-lang-pt>Digite algumas letras — a busca aproximada encontra a ferramenta na hora</span>
+              <span data-lang-it>Digita qualche lettera — la ricerca fuzzy trova subito lo strumento giusto</span>
+            </li>
+            <li>
+              <span data-lang-en>Every tool, effect, and setting lives in one searchable list — no menus to dig through</span>
+              <span data-lang-ko>모든 도구·이펙트·설정이 검색 가능한 하나의 목록에 — 메뉴를 뒤질 필요 없음</span>
+              <span data-lang-ja>すべてのツール・エフェクト・設定が検索可能な一つのリストに — メニューを掘る必要なし</span>
+              <span data-lang-zh>所有工具、特效和设置都在一个可搜索的列表中 — 无需翻找菜单</span>
+              <span data-lang-fr>Tous les outils, effets et réglages dans une seule liste consultable — plus besoin de fouiller les menus</span>
+              <span data-lang-de>Jedes Werkzeug, jeder Effekt und jede Einstellung in einer durchsuchbaren Liste — kein Wühlen in Menüs mehr</span>
+              <span data-lang-es>Todas las herramientas, efectos y ajustes en una sola lista buscable — sin rebuscar en menús</span>
+              <span data-lang-pt>Todas as ferramentas, efeitos e configurações em uma única lista pesquisável — sem precisar vasculhar menus</span>
+              <span data-lang-it>Ogni strumento, effetto e impostazione in un'unica lista ricercabile — niente menu da scavare</span>
+            </li>
+            <li>
+              <span data-lang-en>Navigate with arrow keys or click — launch in one action</span>
+              <span data-lang-ko>방향키 또는 클릭으로 이동 — 한 번의 동작으로 실행</span>
+              <span data-lang-ja>矢印キーまたはクリックで移動 — ワンアクションで実行</span>
+              <span data-lang-zh>用方向键或点击浏览 — 一步即可启动</span>
+              <span data-lang-fr>Naviguez avec les flèches ou la souris — lancez en un seul geste</span>
+              <span data-lang-de>Navigiere mit den Pfeiltasten oder per Klick — starte mit einer einzigen Aktion</span>
+              <span data-lang-es>Navega con las flechas o con un clic — inicia con una sola acción</span>
+              <span data-lang-pt>Navegue com as setas ou clique — inicie com uma única ação</span>
+              <span data-lang-it>Naviga con le freccette o un clic — avvia con un'unica azione</span>
+            </li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-cmdk" aria-hidden="true">
+            <div class="cmdk-search">
+              <svg class="cmdk-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <span class="cmdk-search-text">laser<span class="cmdk-caret"></span></span>
+            </div>
+            <div class="cmdk-row active">
+              <div class="cmdk-row-icon" style="--row-color:#E44D66;">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+              </div>
+              <span class="cmdk-row-label">Laser Pointer</span>
+              <span class="cmdk-row-kbd">⌘⇧L</span>
+            </div>
+            <div class="cmdk-row">
+              <div class="cmdk-row-icon" style="--row-color:#0176D3;">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              </div>
+              <span class="cmdk-row-label">Cursor Highlight</span>
+            </div>
+            <div class="cmdk-row">
+              <div class="cmdk-row-icon" style="--row-color:#F0B429;">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+              </div>
+              <span class="cmdk-row-label">Click Highlight</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 4. 원핸드 툴/색상 순환 ─────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>One-hand cycling</span><span data-lang-ko>원핸드 순환</span><span data-lang-ja>片手サイクル</span>
@@ -1691,8 +1846,8 @@
         </div>
       </div>
 
-      <!-- ── 4. 나만의 커서 ─────────────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
+      <!-- ── 5. 나만의 커서 ─────────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Custom Cursor</span><span data-lang-ko>나만의 커서</span><span data-lang-ja>マイカーソル</span>
@@ -1731,8 +1886,8 @@
         </div>
       </div>
 
-      <!-- ── 5. HUD 알림 ────────────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
+      <!-- ── 6. HUD 알림 ────────────────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Live HUD</span><span data-lang-ko>실시간 HUD</span><span data-lang-ja>ライブ HUD</span>
@@ -1787,8 +1942,8 @@
         </div>
       </div>
 
-      <!-- ── 6. 9개 언어 지원 ────────────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
+      <!-- ── 7. 9개 언어 지원 ────────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>9 languages</span><span data-lang-ko>9개 언어</span><span data-lang-ja>9 言語</span>
