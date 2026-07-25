@@ -1080,6 +1080,71 @@
     .visual-hud { flex-wrap: wrap; }
   }
 
+  /* ── Pricing ──────────────────────────────────────────────── */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    max-width: 980px; margin: 0 auto; align-items: start;
+  }
+  .pricing-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 22px;
+    padding: 34px 28px 30px;
+    display: flex; flex-direction: column;
+    backdrop-filter: saturate(160%) blur(20px);
+    -webkit-backdrop-filter: saturate(160%) blur(20px);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1),
+                box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .pricing-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+  .pricing-card.featured {
+    border-color: rgba(1, 118, 211, 0.35);
+    box-shadow: 0 10px 30px rgba(1, 118, 211, 0.16), var(--shadow-hover);
+    transform: scale(1.035);
+    z-index: 1;
+  }
+  .pricing-card.featured:hover { transform: scale(1.035) translateY(-3px); }
+  [data-theme="dark"] .pricing-card.featured { border-color: rgba(88, 166, 255, 0.4); }
+  .pricing-ribbon {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, #0176D3 0%, #3B9CE5 100%);
+    color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em;
+    padding: 6px 16px; border-radius: 999px; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(1, 118, 211, 0.35);
+  }
+  .pricing-badge-label {
+    font-size: 12.5px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px;
+  }
+  .pricing-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
+  .pricing-price .amount { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
+  .pricing-price .period { font-size: 15px; color: var(--text-dim); font-weight: 500; }
+  .pricing-sub { font-size: 13.5px; color: var(--accent); font-weight: 600; margin-bottom: 24px; min-height: 18px; }
+  .pricing-features { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .pricing-features li { font-size: 14px; color: var(--text); padding-left: 24px; position: relative; line-height: 1.5; }
+  .pricing-features li::before {
+    content: ""; position: absolute; left: 0; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .pricing-features li::after {
+    content: ""; position: absolute; left: 4px; top: 9px;
+    width: 5px; height: 2.5px; border-left: 1.6px solid white; border-bottom: 1.6px solid white;
+    transform: rotate(-45deg);
+  }
+  .pricing-cta { justify-content: center; width: 100%; }
+  .pricing-footnote {
+    text-align: center; color: var(--text-dim); font-size: 12.5px;
+    max-width: 640px; margin: 40px auto 0; line-height: 1.6;
+  }
+  @media (max-width: 860px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .pricing-card.featured { transform: none; order: -1; }
+    .pricing-card.featured:hover { transform: translateY(-3px); }
+  }
+
   /* ── Requirements ─────────────────────────────────────────── */
   .requirements-section {
     /* 반투명 배경 — 블롭이 뒤로 은은히 비쳐 sections 간 리듬감 부여 */
@@ -1180,6 +1245,11 @@
       <img class="brand-logo" src="img/logo.png" alt="TeacherPalette">
     </a>
     <div class="header-controls">
+      <a class="header-link" href="#pricing">
+        <span data-lang-en>Pricing</span><span data-lang-ko>가격</span><span data-lang-ja>価格</span>
+        <span data-lang-zh>价格</span><span data-lang-fr>Tarifs</span><span data-lang-de>Preise</span>
+        <span data-lang-es>Precios</span><span data-lang-pt>Preços</span><span data-lang-it>Prezzi</span>
+      </a>
       <a class="header-link" href="releases/index.html" id="whats-new-link">
         <span data-lang-en>What's New</span><span data-lang-ko>업데이트</span><span data-lang-ja>更新履歴</span>
         <span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span>
@@ -2027,6 +2097,189 @@
   </div>
 </section>
 
+<!-- ═══════════════════════ PRICING ═════════════════════════════════ -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>
+        <span data-lang-en>Own it once, or subscribe your way.</span>
+        <span data-lang-ko>한 번 사서 평생, 아니면 편하게 구독.</span>
+        <span data-lang-ja>一度買って一生使うか、好きな形で定期購入。</span>
+        <span data-lang-zh>买断永享，或按需订阅。</span>
+        <span data-lang-fr>Achetez une fois, ou abonnez-vous à votre façon.</span>
+        <span data-lang-de>Einmal kaufen oder flexibel abonnieren.</span>
+        <span data-lang-es>Cómpralo una vez o suscríbete a tu manera.</span>
+        <span data-lang-pt>Compre uma vez ou assine do seu jeito.</span>
+        <span data-lang-it>Acquistalo una volta o abbonati come preferisci.</span>
+      </h2>
+      <p>
+        <span data-lang-en>Every plan unlocks the exact same app — no feature gates, no watermarks. Pick whichever fits how you present.</span>
+        <span data-lang-ko>모든 플랜에서 동일한 앱을 완전히 사용할 수 있어요 — 기능 제한도, 워터마크도 없습니다. 발표 스타일에 맞는 방식을 고르세요.</span>
+        <span data-lang-ja>どのプランでも同じアプリをすべて使えます — 機能制限もウォーターマークもありません。プレゼンのスタイルに合わせてお選びください。</span>
+        <span data-lang-zh>无论选择哪种方案，都能解锁完全相同的应用 — 没有功能限制，没有水印。选择最适合你演讲方式的方案。</span>
+        <span data-lang-fr>Chaque forfait débloque exactement la même application — aucune fonctionnalité verrouillée, aucun filigrane. Choisissez celui qui correspond à votre façon de présenter.</span>
+        <span data-lang-de>Jeder Plan schaltet genau dieselbe App frei — keine gesperrten Funktionen, keine Wasserzeichen. Wähle, was zu deiner Präsentationsweise passt.</span>
+        <span data-lang-es>Todos los planes desbloquean exactamente la misma app — sin funciones bloqueadas, sin marcas de agua. Elige el que mejor se adapte a tu forma de presentar.</span>
+        <span data-lang-pt>Todos os planos desbloqueiam exatamente o mesmo app — sem recursos bloqueados, sem marca d'água. Escolha o que combina com seu jeito de apresentar.</span>
+        <span data-lang-it>Ogni piano sblocca esattamente la stessa app — nessuna funzione bloccata, nessuna filigrana. Scegli quello più adatto al tuo modo di presentare.</span>
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Monthly -->
+      <div class="pricing-card">
+        <div class="pricing-badge-label">
+          <span data-lang-en>Monthly</span><span data-lang-ko>월간 구독</span><span data-lang-ja>月額プラン</span>
+          <span data-lang-zh>月付</span><span data-lang-fr>Mensuel</span><span data-lang-de>Monatlich</span>
+          <span data-lang-es>Mensual</span><span data-lang-pt>Mensal</span><span data-lang-it>Mensile</span>
+        </div>
+        <div class="pricing-price">
+          <span class="amount">$1.99</span>
+          <span class="period">
+            <span data-lang-en>/ month</span><span data-lang-ko>/ 월</span><span data-lang-ja>/ 月</span>
+            <span data-lang-zh>/ 月</span><span data-lang-fr>/ mois</span><span data-lang-de>/ Monat</span>
+            <span data-lang-es>/ mes</span><span data-lang-pt>/ mês</span><span data-lang-it>/ mese</span>
+          </span>
+        </div>
+        <div class="pricing-sub">
+          <span data-lang-en>7-day free trial</span><span data-lang-ko>7일 무료 체험</span><span data-lang-ja>7日間無料トライアル</span>
+          <span data-lang-zh>7 天免费试用</span><span data-lang-fr>Essai gratuit de 7 jours</span><span data-lang-de>7 Tage kostenlos testen</span>
+          <span data-lang-es>Prueba gratuita de 7 días</span><span data-lang-pt>Teste gratuito de 7 dias</span><span data-lang-it>Prova gratuita di 7 giorni</span>
+        </div>
+        <ul class="pricing-features">
+          <li>
+            <span data-lang-en>Every tool, fully unlocked</span><span data-lang-ko>모든 도구, 제한 없이 전부 사용</span><span data-lang-ja>すべての機能をフルアンロック</span>
+            <span data-lang-zh>所有工具，完全解锁</span><span data-lang-fr>Tous les outils, entièrement débloqués</span><span data-lang-de>Alle Werkzeuge, vollständig freigeschaltet</span>
+            <span data-lang-es>Todas las herramientas, totalmente desbloqueadas</span><span data-lang-pt>Todas as ferramentas, totalmente desbloqueadas</span><span data-lang-it>Tutti gli strumenti, completamente sbloccati</span>
+          </li>
+          <li>
+            <span data-lang-en>Free for 7 days, then $1.99/month</span><span data-lang-ko>7일 무료 체험 후 월 $1.99</span><span data-lang-ja>7日間無料、その後は月額 $1.99</span>
+            <span data-lang-zh>免费试用 7 天，之后每月 $1.99</span><span data-lang-fr>Gratuit pendant 7 jours, puis 1,99 $/mois</span><span data-lang-de>7 Tage kostenlos, danach 1,99 $/Monat</span>
+            <span data-lang-es>Gratis 7 días, luego $1.99/mes</span><span data-lang-pt>Grátis por 7 dias, depois US$ 1,99/mês</span><span data-lang-it>Gratis per 7 giorni, poi 1,99 $/mese</span>
+          </li>
+          <li>
+            <span data-lang-en>Cancel anytime, no questions asked</span><span data-lang-ko>언제든 자유롭게 해지</span><span data-lang-ja>いつでも自由にキャンセル</span>
+            <span data-lang-zh>随时取消，无需理由</span><span data-lang-fr>Annulez à tout moment, sans question</span><span data-lang-de>Jederzeit kündbar, ohne Wenn und Aber</span>
+            <span data-lang-es>Cancela cuando quieras, sin preguntas</span><span data-lang-pt>Cancele quando quiser, sem perguntas</span><span data-lang-it>Annulla in qualsiasi momento, senza domande</span>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-secondary pricing-cta">
+          <span data-lang-en>Start free trial</span><span data-lang-ko>무료 체험 시작</span><span data-lang-ja>無料トライアルを開始</span>
+          <span data-lang-zh>开始免费试用</span><span data-lang-fr>Démarrer l'essai gratuit</span><span data-lang-de>Kostenlos testen</span>
+          <span data-lang-es>Iniciar prueba gratuita</span><span data-lang-pt>Iniciar teste gratuito</span><span data-lang-it>Inizia la prova gratuita</span>
+        </a>
+      </div>
+
+      <!-- Annual — 추천 -->
+      <div class="pricing-card featured">
+        <div class="pricing-ribbon">
+          <span data-lang-en>Best Value</span><span data-lang-ko>가장 알찬 선택</span><span data-lang-ja>一番お得</span>
+          <span data-lang-zh>最划算</span><span data-lang-fr>Meilleur choix</span><span data-lang-de>Bestes Angebot</span>
+          <span data-lang-es>Mejor valor</span><span data-lang-pt>Melhor valor</span><span data-lang-it>Il più conveniente</span>
+        </div>
+        <div class="pricing-badge-label">
+          <span data-lang-en>Annual</span><span data-lang-ko>연간 구독</span><span data-lang-ja>年額プラン</span>
+          <span data-lang-zh>年付</span><span data-lang-fr>Annuel</span><span data-lang-de>Jährlich</span>
+          <span data-lang-es>Anual</span><span data-lang-pt>Anual</span><span data-lang-it>Annuale</span>
+        </div>
+        <div class="pricing-price">
+          <span class="amount">$9.99</span>
+          <span class="period">
+            <span data-lang-en>/ year</span><span data-lang-ko>/ 년</span><span data-lang-ja>/ 年</span>
+            <span data-lang-zh>/ 年</span><span data-lang-fr>/ an</span><span data-lang-de>/ Jahr</span>
+            <span data-lang-es>/ año</span><span data-lang-pt>/ ano</span><span data-lang-it>/ anno</span>
+          </span>
+        </div>
+        <div class="pricing-sub">
+          <span data-lang-en>7-day free trial · Save 58%</span><span data-lang-ko>7일 무료 체험 · 58% 절약</span><span data-lang-ja>7日間無料トライアル・58% お得</span>
+          <span data-lang-zh>7 天免费试用 · 节省 58%</span><span data-lang-fr>Essai gratuit de 7 jours · 58 % d'économie</span><span data-lang-de>7 Tage kostenlos · 58 % günstiger</span>
+          <span data-lang-es>Prueba gratuita de 7 días · Ahorra 58%</span><span data-lang-pt>Teste gratuito de 7 dias · Economize 58%</span><span data-lang-it>Prova gratuita di 7 giorni · Risparmia il 58%</span>
+        </div>
+        <ul class="pricing-features">
+          <li>
+            <span data-lang-en>Every tool, fully unlocked</span><span data-lang-ko>모든 도구, 제한 없이 전부 사용</span><span data-lang-ja>すべての機能をフルアンロック</span>
+            <span data-lang-zh>所有工具，完全解锁</span><span data-lang-fr>Tous les outils, entièrement débloqués</span><span data-lang-de>Alle Werkzeuge, vollständig freigeschaltet</span>
+            <span data-lang-es>Todas las herramientas, totalmente desbloqueadas</span><span data-lang-pt>Todas as ferramentas, totalmente desbloqueadas</span><span data-lang-it>Tutti gli strumenti, completamente sbloccati</span>
+          </li>
+          <li>
+            <span data-lang-en>Free for 7 days, then $9.99/year — under $1/month</span><span data-lang-ko>7일 무료 체험 후 연 $9.99 — 월 1달러도 안 돼요</span><span data-lang-ja>7日間無料、その後は年額 $9.99 — 月あたり1ドル未満</span>
+            <span data-lang-zh>免费试用 7 天，之后每年 $9.99 — 相当于每月不到 1 美元</span><span data-lang-fr>Gratuit pendant 7 jours, puis 9,99 $/an — moins de 1 $ par mois</span><span data-lang-de>7 Tage kostenlos, danach 9,99 $/Jahr — unter 1 $ pro Monat</span>
+            <span data-lang-es>Gratis 7 días, luego $9.99/año — menos de $1 al mes</span><span data-lang-pt>Grátis por 7 dias, depois US$ 9,99/ano — menos de US$ 1 por mês</span><span data-lang-it>Gratis per 7 giorni, poi 9,99 $/anno — meno di 1 $ al mese</span>
+          </li>
+          <li>
+            <span data-lang-en>One price, all year — no surprise renewals</span><span data-lang-ko>1년 내내 동일한 가격, 갑작스런 인상 없음</span><span data-lang-ja>1年間ずっと同じ価格 — 更新時の値上げなし</span>
+            <span data-lang-zh>全年同一价格，续订不涨价</span><span data-lang-fr>Un seul prix toute l'année, sans hausse surprise au renouvellement</span><span data-lang-de>Ein Preis das ganze Jahr — keine Überraschungen bei der Verlängerung</span>
+            <span data-lang-es>Un solo precio todo el año, sin subidas sorpresa al renovar</span><span data-lang-pt>Um único preço o ano todo, sem aumentos surpresa na renovação</span><span data-lang-it>Un prezzo unico per tutto l'anno, senza rincari a sorpresa al rinnovo</span>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary pricing-cta">
+          <span data-lang-en>Start free trial</span><span data-lang-ko>무료 체험 시작</span><span data-lang-ja>無料トライアルを開始</span>
+          <span data-lang-zh>开始免费试用</span><span data-lang-fr>Démarrer l'essai gratuit</span><span data-lang-de>Kostenlos testen</span>
+          <span data-lang-es>Iniciar prueba gratuita</span><span data-lang-pt>Iniciar teste gratuito</span><span data-lang-it>Inizia la prova gratuita</span>
+        </a>
+      </div>
+
+      <!-- One-time -->
+      <div class="pricing-card">
+        <div class="pricing-badge-label">
+          <span data-lang-en>One-Time</span><span data-lang-ko>원타임 구매</span><span data-lang-ja>一括購入</span>
+          <span data-lang-zh>一次性购买</span><span data-lang-fr>Achat unique</span><span data-lang-de>Einmalkauf</span>
+          <span data-lang-es>Compra única</span><span data-lang-pt>Compra única</span><span data-lang-it>Acquisto unico</span>
+        </div>
+        <div class="pricing-price">
+          <span class="amount">$14.99</span>
+          <span class="period">
+            <span data-lang-en>once</span><span data-lang-ko>1회 결제</span><span data-lang-ja>1回のみ</span>
+            <span data-lang-zh>仅一次</span><span data-lang-fr>paiement unique</span><span data-lang-de>einmalig</span>
+            <span data-lang-es>pago único</span><span data-lang-pt>pagamento único</span><span data-lang-it>pagamento unico</span>
+          </span>
+        </div>
+        <div class="pricing-sub">
+          <span data-lang-en>Pay once, use forever</span><span data-lang-ko>한 번 결제로 평생 사용</span><span data-lang-ja>一度の支払いで、永久に使える</span>
+          <span data-lang-zh>一次付款，永久使用</span><span data-lang-fr>Payez une fois, utilisez pour toujours</span><span data-lang-de>Einmal zahlen, für immer nutzen</span>
+          <span data-lang-es>Paga una vez, usa para siempre</span><span data-lang-pt>Pague uma vez, use para sempre</span><span data-lang-it>Paga una volta, usalo per sempre</span>
+        </div>
+        <ul class="pricing-features">
+          <li>
+            <span data-lang-en>Every tool, fully unlocked</span><span data-lang-ko>모든 도구, 제한 없이 전부 사용</span><span data-lang-ja>すべての機能をフルアンロック</span>
+            <span data-lang-zh>所有工具，完全解锁</span><span data-lang-fr>Tous les outils, entièrement débloqués</span><span data-lang-de>Alle Werkzeuge, vollständig freigeschaltet</span>
+            <span data-lang-es>Todas las herramientas, totalmente desbloqueadas</span><span data-lang-pt>Todas as ferramentas, totalmente desbloqueadas</span><span data-lang-it>Tutti gli strumenti, completamente sbloccati</span>
+          </li>
+          <li>
+            <span data-lang-en>No subscription, no recurring charges</span><span data-lang-ko>구독 없음, 반복 결제 없음</span><span data-lang-ja>サブスクなし、繰り返しの支払いなし</span>
+            <span data-lang-zh>无需订阅，不产生重复扣费</span><span data-lang-fr>Pas d'abonnement, aucun prélèvement récurrent</span><span data-lang-de>Kein Abo, keine wiederkehrenden Kosten</span>
+            <span data-lang-es>Sin suscripción, sin cargos recurrentes</span><span data-lang-pt>Sem assinatura, sem cobranças recorrentes</span><span data-lang-it>Nessun abbonamento, nessun costo ricorrente</span>
+          </li>
+          <li>
+            <span data-lang-en>Yours forever, on this Mac</span><span data-lang-ko>이 Mac에서 평생 소유</span><span data-lang-ja>このMacで、永久に使える</span>
+            <span data-lang-zh>在这台 Mac 上永久拥有</span><span data-lang-fr>À vous pour toujours, sur ce Mac</span><span data-lang-de>Für immer deins, auf diesem Mac</span>
+            <span data-lang-es>Es tuyo para siempre, en esta Mac</span><span data-lang-pt>Seu para sempre, neste Mac</span><span data-lang-it>Per sempre tuo, su questo Mac</span>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-secondary pricing-cta">
+          <span data-lang-en>Buy now</span><span data-lang-ko>지금 구매</span><span data-lang-ja>今すぐ購入</span>
+          <span data-lang-zh>立即购买</span><span data-lang-fr>Acheter maintenant</span><span data-lang-de>Jetzt kaufen</span>
+          <span data-lang-es>Comprar ahora</span><span data-lang-pt>Comprar agora</span><span data-lang-it>Acquista ora</span>
+        </a>
+      </div>
+
+    </div>
+
+    <p class="pricing-footnote">
+      <span data-lang-en>Prices shown in USD for reference. Final price, currency, and any applicable tax are set by the App Store for your country.</span>
+      <span data-lang-ko>위 금액은 참고용 USD 기준입니다. 실제 결제 금액과 화폐, 세금은 거주 국가의 App Store 기준으로 적용됩니다.</span>
+      <span data-lang-ja>表示価格は参考用の USD です。実際の金額・通貨・税額はお住まいの国の App Store の設定に基づきます。</span>
+      <span data-lang-zh>以上价格仅供参考，以美元计。实际支付金额、货币及税费以你所在国家/地区的 App Store 为准。</span>
+      <span data-lang-fr>Les prix indiqués sont en USD, à titre indicatif. Le prix final, la devise et les taxes applicables sont définis par l'App Store selon votre pays.</span>
+      <span data-lang-de>Die angezeigten Preise sind Richtwerte in USD. Der tatsächliche Preis, die Währung und anfallende Steuern richten sich nach dem App Store deines Landes.</span>
+      <span data-lang-es>Los precios mostrados son en USD, a modo de referencia. El precio final, la moneda y los impuestos aplicables los determina el App Store de tu país.</span>
+      <span data-lang-pt>Os preços exibidos são em USD, apenas para referência. O preço final, a moeda e os impostos aplicáveis são definidos pela App Store do seu país.</span>
+      <span data-lang-it>I prezzi mostrati sono in USD, a titolo indicativo. Il prezzo finale, la valuta e le eventuali imposte sono stabiliti dall'App Store del tuo paese.</span>
+    </p>
+  </div>
+</section>
+
 <!-- ═══════════════════════ REQUIREMENTS ═══════════════════════════ -->
 <section class="requirements-section">
   <div class="section-inner">
@@ -2231,6 +2484,11 @@
       <span data-lang-en>Features</span><span data-lang-ko>기능</span><span data-lang-ja>機能</span>
       <span data-lang-zh>功能</span><span data-lang-fr>Fonctionnalités</span><span data-lang-de>Funktionen</span>
       <span data-lang-es>Funciones</span><span data-lang-pt>Recursos</span><span data-lang-it>Funzioni</span>
+    </a>
+    <a href="#pricing">
+      <span data-lang-en>Pricing</span><span data-lang-ko>가격</span><span data-lang-ja>価格</span>
+      <span data-lang-zh>价格</span><span data-lang-fr>Tarifs</span><span data-lang-de>Preise</span>
+      <span data-lang-es>Precios</span><span data-lang-pt>Preços</span><span data-lang-it>Prezzi</span>
     </a>
     <a href="#privacy">
       <span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span>
