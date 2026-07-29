@@ -280,6 +280,18 @@
   .faq-video-frame .video-icon { font-size: 22px; opacity: 0.6; }
   .faq-video-frame .video-label { font-size: 12px; font-weight: 500; }
 
+  /* ── FAQ 패널 내부 하위 그룹 제목 (같은 종류별로 묶기) ───── */
+  .faq-subhead {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 30px 0 16px;
+  }
+  .faq-panel .faq-subhead:first-of-type { margin-top: 0; }
+  .faq-subhead .subhead-icon { font-size: 14px; text-transform: none; letter-spacing: 0; }
+  .faq-subhead::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
   .faq-cta {
     grid-column: 1 / -1;
     margin-top: 28px;
@@ -383,7 +395,7 @@
         <span data-lang-pt>Dicas para apresentações em tempo real</span>
         <span data-lang-it>Consigli per le presentazioni dal vivo</span>
       </span>
-      <span class="count">10</span>
+      <span class="count">16</span>
     </a>
   </aside>
 
@@ -608,6 +620,13 @@
         <span data-lang-it>Consigli per le presentazioni dal vivo</span>
       </h2>
 
+      <div class="faq-subhead">
+        <span class="subhead-icon">📡</span>
+        <span data-lang-en>Screen Sharing & Attention</span>
+        <span data-lang-ko>화면 공유 & 시선 유도</span>
+        <span data-lang-ja>画面共有 & 視線誘導</span>
+      </div>
+
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
           <span><span data-lang-en>Will my audience see the HUD badges or toolbar during screen sharing?</span><span data-lang-ko>화면 공유 중에 HUD 배지나 툴바가 청중에게 보이나요?</span><span data-lang-ja>画面共有中、HUDバッジやツールバーは視聴者に見えますか？</span></span>
@@ -632,6 +651,49 @@
 
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I make my cursor easier for my audience to see?</span><span data-lang-ko>커서를 청중이 더 잘 보이게 하려면?</span><span data-lang-ja>カーソルを視聴者に見やすくするには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Open Custom Cursor and drop in any image — a paw print, a laser dot, your brand mascot — to replace the default arrow. Save up to 6 presets and swap between them on the fly, or pair a custom cursor with the laser pointer or cursor highlight for a clearer, more purposeful way to guide attention.</span>
+          <span data-lang-ko>커스텀 커서에서 원하는 이미지(발자국, 레이저 점, 브랜드 마스코트 등)를 넣으면 기본 화살표를 대체할 수 있어요. 최대 6개의 프리셋을 저장해서 즉시 전환할 수 있고, 레이저 포인터나 커서 강조 효과와 함께 쓰면 더 확실하고 의도적으로 시선을 유도할 수 있어요.</span>
+          <span data-lang-ja>カスタムカーソルで好きな画像（足跡、レーザードット、ブランドマスコットなど）を設定すれば、デフォルトの矢印を置き換えられます。最大6個のプリセットを保存していつでも切り替えられ、レーザーポインターやカーソル強調と組み合わせれば、より分かりやすく意図的な視線誘導ができます。</span>
+        </p></div>
+        <div class="faq-video-frame" id="video-slot-custom-cursor">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Does Drawing mode ever interfere with normal clicking?</span><span data-lang-ko>드로잉 모드가 평소 클릭을 방해하지는 않나요?</span><span data-lang-ja>描画モードが通常のクリックを妨げることはありますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Drawing mode is clearly signposted so this doesn't happen by accident — a paint-blob halo blooms around every screen edge and a "Drawing ON" HUD badge confirms the state, visible only to you and never to your audience. Turn it off with the same shortcut and the halo fades away instantly, returning your clicks to normal.</span>
+          <span data-lang-ko>드로잉 모드는 상태가 명확히 표시되기 때문에 실수로 헷갈릴 일이 없어요 — 화면 가장자리에 물감 블롭이 번지고 "Drawing ON" HUD 배지로 상태를 확인할 수 있는데, 이건 발표자에게만 보이고 청중에게는 보이지 않아요. 같은 단축키로 끄면 블롭이 즉시 사라지고 클릭이 원래대로 돌아와요.</span>
+          <span data-lang-ja>描画モードは状態がはっきり表示されるため、誤操作の心配はありません — 画面の縁に絵の具のブロブが広がり、「Drawing ON」のHUDバッジで状態を確認できますが、これは発表者にのみ表示され、視聴者には見えません。同じショートカットでオフにすれば、ブロブは即座に消えてクリックは通常どおりに戻ります。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-subhead">
+        <span class="subhead-icon">🖥️</span>
+        <span data-lang-en>Multi-Display</span>
+        <span data-lang-ko>멀티 디스플레이</span>
+        <span data-lang-ja>マルチディスプレイ</span>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
           <span><span data-lang-en>How can I present using an iPad as a second display (Sidecar)?</span><span data-lang-ko>iPad를 세컨드 디스플레이(Sidecar)로 발표하려면?</span><span data-lang-ja>iPadをSidecarで第2ディスプレイとして発表するには？</span></span>
         </h3>
         <div class="faq-a"><p>
@@ -639,6 +701,13 @@
           <span data-lang-ko>TeacherPalette는 멀티 디스플레이와 iPad Sidecar를 완벽히 지원해요. 연결된 화면 중 어디에 드로잉·화이트보드·BRB 오버레이를 띄울지 고를 수 있어요. iPad에 Apple Pencil로 필기하면서, 다른 화면이나 프로젝터로 같은 내용을 청중에게 보여줄 때 유용해요.</span>
           <span data-lang-ja>TeacherPaletteはマルチディスプレイとiPad Sidecarに完全対応しています。接続されたどの画面に描画・ホワイトボード・BRBオーバーレイを表示するか選べます。iPadにApple Pencilで書き込みながら、別の画面やプロジェクターで同じ内容を視聴者に見せたいときに便利です。</span>
         </p></div>
+      </div>
+
+      <div class="faq-subhead">
+        <span class="subhead-icon">⏱️</span>
+        <span data-lang-en>Timers & Breaks</span>
+        <span data-lang-ko>타이머 & 휴식</span>
+        <span data-lang-ja>タイマー & 休憩</span>
       </div>
 
       <div class="faq-item">
@@ -650,6 +719,13 @@
           <span data-lang-ko>BRB 타이머를 실행하면 전체화면으로 "잠시 후 돌아오겠습니다" 오버레이와 카운트다운이 표시돼서 청중이 언제 돌아올지 정확히 알 수 있어요. 15/30/45/60초 프리셋을 고르거나 원하는 시간을 직접 입력할 수 있고, 자리를 비운 동안 작은 플로팅 타이머를 화면에 띄워둘 수 있어요. 시간이 끝나면 차임 알림이 울려요.</span>
           <span data-lang-ja>BRBタイマーを起動すると、全画面で「戻ってきます」の表示とカウントダウンが表示され、視聴者はいつ戻るかを正確に把握できます。15/30/45/60秒のプリセットから選ぶか、好きな時間を入力できます。離席中は小さなフローティングタイマーを画面に残しておけて、時間になるとチャイムが鳴ります。</span>
         </p></div>
+      </div>
+
+      <div class="faq-subhead">
+        <span class="subhead-icon">⌨️</span>
+        <span data-lang-en>Tools & Shortcuts</span>
+        <span data-lang-ko>도구 & 단축키</span>
+        <span data-lang-ja>ツール & ショートカット</span>
       </div>
 
       <div class="faq-item">
@@ -675,6 +751,49 @@
             <span data-lang-it>Video in arrivo</span>
           </span>
         </div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How does TeacherPalette's overall shortcut system work?</span><span data-lang-ko>TeacherPalette의 전체 단축키 체계는 어떻게 구성되나요?</span><span data-lang-ja>TeacherPaletteの全体的なショートカット体系はどうなっていますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Shortcuts are split into two tiers so muscle memory stays safe: tools and effects use a quick 2-key combo (<span class="kbd">⌥</span> + letter), while system-level actions like quitting or resetting use a deliberate 3-key combo (<span class="kbd">⌘⇧</span> + letter) so you never trigger them by accident. While actively drawing, single keys also work — <span class="kbd">⌫</span> clears the canvas, <span class="kbd">[</span>/<span class="kbd">]</span> resize your brush, and <span class="kbd">1</span>–<span class="kbd">5</span> jump straight to a favorite color. Every shortcut is fully remappable from Settings.</span>
+          <span data-lang-ko>단축키는 두 단계로 나뉘어 있어서 손이 헷갈릴 일이 없어요. 도구·이펙트는 빠른 2키 조합(<span class="kbd">⌥</span> + 글자)을 쓰고, 종료·초기화 같은 시스템 동작은 실수로 누르지 않도록 신중한 3키 조합(<span class="kbd">⌘⇧</span> + 글자)을 써요. 그리는 중에는 단일 키도 작동해요 — <span class="kbd">⌫</span>로 캔버스를 지우고, <span class="kbd">[</span>/<span class="kbd">]</span>로 붓 크기를 조절하고, <span class="kbd">1</span>–<span class="kbd">5</span>로 즐겨찾기 색상으로 바로 이동할 수 있어요. 모든 단축키는 Settings에서 원하는 대로 다시 지정할 수 있어요.</span>
+          <span data-lang-ja>ショートカットは2段構成になっていて、うっかり誤操作することがありません。ツール・エフェクトは素早い2キー操作（<span class="kbd">⌥</span> + 文字）、終了やリセットなどのシステム操作は誤って押さないよう慎重な3キー操作（<span class="kbd">⌘⇧</span> + 文字）を使います。描画中は単一キーも使えます — <span class="kbd">⌫</span>でキャンバスを消去、<span class="kbd">[</span>/<span class="kbd">]</span>でブラシサイズを調整、<span class="kbd">1</span>–<span class="kbd">5</span>でお気に入りの色に直接切り替えられます。すべてのショートカットは設定から自由に再割り当てできます。</span>
+        </p></div>
+        <div class="faq-video-frame" id="video-slot-shortcut-system">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I stop the toolbar from reordering itself while I work?</span><span data-lang-ko>작업 중에 툴바 순서가 바뀌는 걸 막으려면?</span><span data-lang-ja>作業中にツールバーの順番が変わってしまうのを防ぐには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Lock the toolbar from the toolbar menu to freeze the current tool order, so an accidental drag mid-presentation never scrambles your layout. Unlock anytime to rearrange tools, then lock again once you're happy with the order.</span>
+          <span data-lang-ko>툴바 메뉴에서 잠금을 켜면 현재 도구 순서가 그대로 고정돼서, 발표 중에 실수로 드래그해도 순서가 뒤바뀌지 않아요. 순서를 바꾸고 싶을 때는 언제든 잠금을 풀고 재배치한 다음, 마음에 드는 순서가 되면 다시 잠그면 돼요.</span>
+          <span data-lang-ja>ツールバーメニューでロックをオンにすると、現在のツールの並び順がそのまま固定され、発表中に誤ってドラッグしても順番が崩れません。並び替えたいときはいつでもロックを解除して再配置し、気に入った順番になったら再度ロックしましょう。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-subhead">
+        <span class="subhead-icon">📝</span>
+        <span data-lang-en>Whiteboard</span>
+        <span data-lang-ko>화이트보드</span>
+        <span data-lang-ja>ホワイトボード</span>
       </div>
 
       <div class="faq-item">
@@ -726,14 +845,14 @@
 
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
-          <span><span data-lang-en>How do I make my cursor easier for my audience to see?</span><span data-lang-ko>커서를 청중이 더 잘 보이게 하려면?</span><span data-lang-ja>カーソルを視聴者に見やすくするには？</span></span>
+          <span><span data-lang-en>Can I drop images straight onto the Whiteboard?</span><span data-lang-ko>화이트보드에 이미지를 바로 드래그해서 넣을 수 있나요?</span><span data-lang-ja>ホワイトボードに画像を直接ドラッグ＆ドロップできますか？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Open Custom Cursor and drop in any image — a paw print, a laser dot, your brand mascot — to replace the default arrow. Save up to 6 presets and swap between them on the fly, or pair a custom cursor with the laser pointer or cursor highlight for a clearer, more purposeful way to guide attention.</span>
-          <span data-lang-ko>커스텀 커서에서 원하는 이미지(발자국, 레이저 점, 브랜드 마스코트 등)를 넣으면 기본 화살표를 대체할 수 있어요. 최대 6개의 프리셋을 저장해서 즉시 전환할 수 있고, 레이저 포인터나 커서 강조 효과와 함께 쓰면 더 확실하고 의도적으로 시선을 유도할 수 있어요.</span>
-          <span data-lang-ja>カスタムカーソルで好きな画像（足跡、レーザードット、ブランドマスコットなど）を設定すれば、デフォルトの矢印を置き換えられます。最大6個のプリセットを保存していつでも切り替えられ、レーザーポインターやカーソル強調と組み合わせれば、より分かりやすく意図的な視線誘導ができます。</span>
+          <span data-lang-en>Yes — drag any image file from Finder (a diagram, a photo, a screenshot) straight onto the Whiteboard canvas and it drops in at full resolution, ready to annotate on top of. Combine it with a PDF page or a blank template for a quick visual aid without leaving the app.</span>
+          <span data-lang-ko>네, Finder에서 이미지 파일(도표·사진·스크린샷 등)을 화이트보드 캔버스로 바로 드래그하면 원본 해상도 그대로 놓이고 그 위에 바로 필기할 수 있어요. PDF 페이지나 빈 템플릿과 함께 쓰면 앱을 벗어나지 않고도 빠르게 시각 자료를 준비할 수 있어요.</span>
+          <span data-lang-ja>はい。Finderから画像ファイル（図・写真・スクリーンショットなど）をホワイトボードのキャンバスへ直接ドラッグすると、元の解像度のまま配置され、その上にすぐ書き込めます。PDFページや無地のテンプレートと組み合わせれば、アプリを離れずに素早く視覚資料を用意できます。</span>
         </p></div>
-        <div class="faq-video-frame" id="video-slot-custom-cursor">
+        <div class="faq-video-frame" id="video-slot-whiteboard-dragdrop">
           <span class="video-icon">🎬</span>
           <span class="video-label">
             <span data-lang-en>Video coming soon</span>
@@ -751,12 +870,48 @@
 
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
-          <span><span data-lang-en>Does Drawing mode ever interfere with normal clicking?</span><span data-lang-ko>드로잉 모드가 평소 클릭을 방해하지는 않나요?</span><span data-lang-ja>描画モードが通常のクリックを妨げることはありますか？</span></span>
+          <span><span data-lang-en>How do I quickly jump between whiteboard pages?</span><span data-lang-ko>화이트보드 페이지 사이를 빠르게 이동하려면?</span><span data-lang-ja>ホワイトボードのページ間を素早く移動するには？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Drawing mode is clearly signposted so this doesn't happen by accident — a paint-blob halo blooms around every screen edge and a "Drawing ON" HUD badge confirms the state, visible only to you and never to your audience. Turn it off with the same shortcut and the halo fades away instantly, returning your clicks to normal.</span>
-          <span data-lang-ko>드로잉 모드는 상태가 명확히 표시되기 때문에 실수로 헷갈릴 일이 없어요 — 화면 가장자리에 물감 블롭이 번지고 "Drawing ON" HUD 배지로 상태를 확인할 수 있는데, 이건 발표자에게만 보이고 청중에게는 보이지 않아요. 같은 단축키로 끄면 블롭이 즉시 사라지고 클릭이 원래대로 돌아와요.</span>
-          <span data-lang-ja>描画モードは状態がはっきり表示されるため、誤操作の心配はありません — 画面の縁に絵の具のブロブが広がり、「Drawing ON」のHUDバッジで状態を確認できますが、これは発表者にのみ表示され、視聴者には見えません。同じショートカットでオフにすれば、ブロブは即座に消えてクリックは通常どおりに戻ります。</span>
+          <span data-lang-en>Open the minimap in the side panel to see a thumbnail of every page in your session. Click any thumbnail to jump straight there — no need to scroll through everything in between. It's especially handy in longer sessions with dozens of pages.</span>
+          <span data-lang-ko>사이드 패널의 미니맵을 열면 세션의 모든 페이지가 썸네일로 표시돼요. 원하는 썸네일을 클릭하면 그 페이지로 바로 이동할 수 있어서, 사이에 있는 페이지를 일일이 스크롤할 필요가 없어요. 페이지가 수십 개인 긴 세션에서 특히 유용해요.</span>
+          <span data-lang-ja>サイドパネルのミニマップを開くと、セッション内のすべてのページがサムネイルで表示されます。目的のサムネイルをクリックすればそのページへ直接移動でき、間のページを一つずつスクロールする必要はありません。ページ数が数十に及ぶ長いセッションで特に便利です。</span>
+        </p></div>
+        <div class="faq-video-frame" id="video-slot-whiteboard-minimap">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Can my whiteboard notes save automatically as I go?</span><span data-lang-ko>화이트보드 필기가 진행되는 동안 자동으로 저장되게 할 수 있나요?</span><span data-lang-ja>ホワイトボードのメモを進行中に自動保存できますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Choose a folder once in Settings, and your whiteboard keeps saving a PDF copy there continuously as you write — nothing to remember when you wrap up. It's a good safety net on top of Session History, especially if you want a plain PDF to share afterward.</span>
+          <span data-lang-ko>Settings에서 폴더를 한 번만 지정하면, 필기하는 동안 화이트보드 내용이 계속 그 폴더에 PDF로 자동 저장돼요. 마무리할 때 따로 저장할 필요가 없어요. 이후에 공유용 PDF가 필요할 때 특히 유용하고, 세션 히스토리에 더해 안전장치 역할도 해줘요.</span>
+          <span data-lang-ja>設定でフォルダを一度指定すれば、書き込んでいる間ホワイトボードの内容が継続的にそのフォルダへPDFとして自動保存されます。終わるときに保存を忘れる心配がありません。後で共有用のPDFが欲しいときに特に便利で、セッション履歴に加えた安心材料にもなります。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Can I add a writing sound while I draw on the Whiteboard?</span><span data-lang-ko>화이트보드에서 필기할 때 사운드를 추가할 수 있나요?</span><span data-lang-ja>ホワイトボードで書き込む際に音を付けられますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Yes — turn on pen sound effects in Settings and a subtle writing sound plays while you draw with the pen, highlighter, eraser, or chalk in Whiteboard mode. It's a small touch that makes remote sessions feel a little more alive, and volume is adjustable.</span>
+          <span data-lang-ko>네, Settings에서 펜 사운드를 켜면 화이트보드 모드에서 펜·형광펜·지우개·분필로 그릴 때 은은한 필기 소리가 나요. 원격 세션이 조금 더 생동감 있게 느껴지도록 해주는 작은 디테일이고, 음량도 조절할 수 있어요.</span>
+          <span data-lang-ja>はい。設定でペンサウンドをオンにすると、ホワイトボードモードでペン・マーカー・消しゴム・チョークを使って描く際に、控えめな筆記音が鳴ります。リモートでのセッションを少し生き生きとした雰囲気にしてくれる小さな工夫で、音量も調整できます。</span>
         </p></div>
       </div>
     </article>
