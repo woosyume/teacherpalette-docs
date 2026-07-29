@@ -148,6 +148,23 @@
     color: var(--accent);
   }
   @media (max-width: 640px) { .header-link { display: none; } }
+  .header-cta {
+    text-decoration: none;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #0176D3 0%, #3B9CE5 100%);
+    box-shadow: 0 2px 6px rgba(1,118,211,0.28), inset 0 1px 0 rgba(255,255,255,0.2);
+    white-space: nowrap;
+    transition: transform 0.1s, box-shadow 0.15s;
+    margin-left: 4px;
+  }
+  .header-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(1,118,211,0.32), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
   /* 언어 dropdown — 9개는 segmented에 안 맞아 select 스타일로 */
   .lang-select {
     position: relative; display: inline-flex; align-items: center;
@@ -1293,11 +1310,6 @@
       <img class="brand-logo" src="img/logo.png" alt="TeacherPalette">
     </a>
     <div class="header-controls">
-      <a class="header-link" href="#pricing">
-        <span data-lang-en>Pricing</span><span data-lang-ko>가격</span><span data-lang-ja>価格</span>
-        <span data-lang-zh>价格</span><span data-lang-fr>Tarifs</span><span data-lang-de>Preise</span>
-        <span data-lang-es>Precios</span><span data-lang-pt>Preços</span><span data-lang-it>Prezzi</span>
-      </a>
       <a class="header-link" href="releases/index.html" id="whats-new-link">
         <span data-lang-en>What's New</span><span data-lang-ko>업데이트</span><span data-lang-ja>更新履歴</span>
         <span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span>
@@ -1335,6 +1347,11 @@
         <button data-theme-btn="light" title="Light">☀︎</button>
         <button data-theme-btn="dark" title="Dark">☾</button>
       </div>
+      <a class="header-cta" href="#pricing">
+        <span data-lang-en>Buy Now</span><span data-lang-ko>지금 구매하기</span><span data-lang-ja>今すぐ購入</span>
+        <span data-lang-zh>立即购买</span><span data-lang-fr>Acheter maintenant</span><span data-lang-de>Jetzt kaufen</span>
+        <span data-lang-es>Comprar ahora</span><span data-lang-pt>Comprar agora</span><span data-lang-it>Acquista ora</span>
+      </a>
     </div>
   </div>
 </header>
