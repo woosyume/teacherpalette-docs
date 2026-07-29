@@ -229,6 +229,36 @@
     max-width: 620px; margin: 0 auto 32px;
   }
   .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── Hero intro video (macOS 창 느낌의 프레임) ──────────────── */
+  .hero-video-frame {
+    max-width: 860px;
+    margin: 44px auto 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow), 0 40px 80px -24px rgba(0,0,0,0.18);
+  }
+  .hero-video-chrome {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.03);
+    border-bottom: 1px solid var(--card-border);
+  }
+  [data-theme="dark"] .hero-video-chrome { background: rgba(255,255,255,0.04); }
+  .hero-video-chrome .hvc-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .hero-video-chrome .hvc-r { background: #FF5F57; }
+  .hero-video-chrome .hvc-y { background: #FFBD44; }
+  .hero-video-chrome .hvc-g { background: #28C840; }
+  .hero-video {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 2402 / 1178;
+    background: #0a0a0f;
+  }
+  @media (max-width: 640px) {
+    .hero-video-frame { margin-top: 32px; border-radius: 12px; }
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 15px;
@@ -1365,6 +1395,15 @@
     <span data-lang-pt>Novo na 1.1.7 — Paleta de comandos ⌘K · Modelos de quadro e modo quadro-negro · Histórico de sessões reutilizável</span>
     <span data-lang-it>Novità in 1.1.7 — Tavolozza dei comandi ⌘K · Modelli lavagna e modalità lavagna nera · Cronologia sessioni riutilizzabile</span>
   </a>
+
+  <div class="hero-video-frame">
+    <div class="hero-video-chrome" aria-hidden="true">
+      <span class="hvc-dot hvc-r"></span><span class="hvc-dot hvc-y"></span><span class="hvc-dot hvc-g"></span>
+    </div>
+    <video class="hero-video" autoplay muted loop playsinline poster="media/intro-poster.jpg" aria-label="TeacherPalette intro demo">
+      <source src="media/teacherpalette-intro.mp4" type="video/mp4">
+    </video>
+  </div>
 </section>
 
 <!-- ═══════════════════════ LIVE DEMO ══════════════════════════════ -->
