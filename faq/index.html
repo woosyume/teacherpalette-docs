@@ -26,6 +26,11 @@
     --blob-yellow: rgba(240, 180, 41, 0.12);
     --blob-pink:   rgba(228, 77, 102, 0.10);
     --blob-teal:   rgba(22, 160, 133, 0.08);
+    --kbd-bg-top: #ffffff;
+    --kbd-bg-bot: #eceef1;
+    --kbd-border: rgba(0, 0, 0, 0.18);
+    --kbd-text: #2c2c2e;
+    --kbd-shadow: 0 1px 0 rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
   }
   [data-theme="dark"] {
     --bg: #0a0a0f;
@@ -46,6 +51,11 @@
     --blob-yellow: rgba(255, 200, 80, 0.14);
     --blob-pink:   rgba(255, 105, 135, 0.12);
     --blob-teal:   rgba(52, 199, 170, 0.12);
+    --kbd-bg-top: #3a3d46;
+    --kbd-bg-bot: #24262e;
+    --kbd-border: rgba(255, 255, 255, 0.18);
+    --kbd-text: #f0f0f2;
+    --kbd-shadow: 0 1px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -235,6 +245,40 @@
   .faq-item .faq-a { color: var(--text-dim); font-size: 14px; line-height: 1.75; padding-left: 24px; }
   .faq-item .faq-a p { margin: 0; }
 
+  /* ── 키캡 스타일 배지 (단축키 표기) ────────────────────── */
+  .kbd {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 22px; height: 22px; padding: 0 6px;
+    border-radius: 6px;
+    background: linear-gradient(to bottom, var(--kbd-bg-top), var(--kbd-bg-bot));
+    border: 1px solid var(--kbd-border);
+    box-shadow: var(--kbd-shadow);
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 12px; font-weight: 600;
+    color: var(--kbd-text);
+    vertical-align: -1px;
+    margin: 0 1px;
+  }
+  .kbd-plus { color: var(--text-muted); font-size: 11px; margin: 0 2px; }
+
+  /* ── 샘플 영상 프레임 (콘텐츠 준비 전 빈 플레이스홀더) ───── */
+  .faq-video-frame {
+    margin-top: 14px;
+    max-width: 480px;
+    aspect-ratio: 16 / 9;
+    border: 1.5px dashed var(--border);
+    border-radius: 12px;
+    background: var(--bg-alt);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+  }
+  .faq-video-frame .video-icon { font-size: 22px; opacity: 0.6; }
+  .faq-video-frame .video-label { font-size: 12px; font-weight: 500; }
+
   .faq-cta {
     grid-column: 1 / -1;
     margin-top: 28px;
@@ -417,10 +461,24 @@
           <span><span data-lang-en>How do I start drawing on my screen?</span><span data-lang-ko>화면에 그림을 그리려면 어떻게 하나요?</span><span data-lang-ja>画面に描画を始めるには？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Trigger Drawing mode with its shortcut (rebindable, ⌘⇧ + letter by default) — a soft halo appears around every screen edge and a HUD confirms it's on. Then pick a tool with ⌥ + letter, or scroll while holding ⌘ to cycle tools and ⌥ to cycle your favorite colors.</span>
-          <span data-lang-ko>단축키(기본값 ⌘⇧ + 알파벳, 자유롭게 재설정 가능)로 드로잉 모드를 켜면 화면 가장자리에 은은한 블롭이 나타나고 HUD로 켜졌는지 확인할 수 있어요. 그 다음 ⌥ + 알파벳으로 도구를 고르거나, ⌘를 누른 채 스크롤해서 도구를, ⌥를 누른 채 스크롤해서 즐겨찾기 색상을 순환할 수 있어요.</span>
-          <span data-lang-ja>ショートカット（デフォルトは⌘⇧＋文字、自由に再設定可能）で描画モードをオンにすると、画面の縁に淡いブロブが現れ、HUDでオンになったことを確認できます。その後、⌥＋文字でツールを選ぶか、⌘を押しながらスクロールでツールを、⌥を押しながらスクロールでお気に入りの色を切り替えられます。</span>
+          <span data-lang-en>Trigger Drawing mode with its shortcut (rebindable, <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span> by default) — a soft halo appears around every screen edge and a HUD confirms it's on. Then pick a tool with <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span>, or scroll while holding <span class="kbd">⌘</span> to cycle tools and <span class="kbd">⌥</span> to cycle your favorite colors.</span>
+          <span data-lang-ko>단축키(기본값 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>, 자유롭게 재설정 가능)로 드로잉 모드를 켜면 화면 가장자리에 은은한 블롭이 나타나고 HUD로 켜졌는지 확인할 수 있어요. 그 다음 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>으로 도구를 고르거나, <span class="kbd">⌘</span>를 누른 채 스크롤해서 도구를, <span class="kbd">⌥</span>를 누른 채 스크롤해서 즐겨찾기 색상을 순환할 수 있어요.</span>
+          <span data-lang-ja>ショートカット（デフォルトは<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>、自由に再設定可能）で描画モードをオンにすると、画面の縁に淡いブロブが現れ、HUDでオンになったことを確認できます。その後、<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>でツールを選ぶか、<span class="kbd">⌘</span>を押しながらスクロールでツールを、<span class="kbd">⌥</span>を押しながらスクロールでお気に入りの色を切り替えられます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-drawing-shortcuts">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -428,10 +486,24 @@
           <span><span data-lang-en>How do I open Whiteboard mode, and what can I do there?</span><span data-lang-ko>화이트보드 모드는 어떻게 열고, 뭘 할 수 있나요?</span><span data-lang-ja>ホワイトボードモードは何ができますか？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Launch Whiteboard from the toolbar or Command Palette (⌘K). You get multi-page canvases with instant page switching, Blank/Grid/Lined/Cornell Notes templates, a dark Chalkboard mode, drag-and-drop images, PDF loading and annotation, a minimap for jumping between pages, and automatic PDF saving as you go.</span>
-          <span data-lang-ko>툴바나 커맨드 팔레트(⌘K)에서 화이트보드를 실행할 수 있어요. 여러 페이지를 즉시 전환할 수 있고, 빈 화면·격자·괘선·코넬 노트 템플릿, 다크 톤의 칠판 모드, 이미지 드래그 앤 드롭, PDF 불러오기·필기, 페이지 이동용 미니맵, 그리고 진행 중에도 자동으로 PDF 저장까지 가능해요.</span>
-          <span data-lang-ja>ツールバーまたはコマンドパレット（⌘K）からホワイトボードを起動できます。複数ページをすぐに切り替えられ、無地・方眼・罫線・コーネル式のテンプレート、ダーク調の黒板モード、画像のドラッグ&ドロップ、PDFの読み込みと書き込み、ページ移動用のミニマップ、そして作業中も自動でPDF保存されます。</span>
+          <span data-lang-en>Launch Whiteboard from the toolbar or Command Palette (<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>). You get multi-page canvases with instant page switching, Blank/Grid/Lined/Cornell Notes templates, a dark Chalkboard mode, drag-and-drop images, PDF loading and annotation, a minimap for jumping between pages, and automatic PDF saving as you go.</span>
+          <span data-lang-ko>툴바나 커맨드 팔레트(<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>)에서 화이트보드를 실행할 수 있어요. 여러 페이지를 즉시 전환할 수 있고, 빈 화면·격자·괘선·코넬 노트 템플릿, 다크 톤의 칠판 모드, 이미지 드래그 앤 드롭, PDF 불러오기·필기, 페이지 이동용 미니맵, 그리고 진행 중에도 자동으로 PDF 저장까지 가능해요.</span>
+          <span data-lang-ja>ツールバーまたはコマンドパレット（<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>）からホワイトボードを起動できます。複数ページをすぐに切り替えられ、無地・方眼・罫線・コーネル式のテンプレート、ダーク調の黒板モード、画像のドラッグ&ドロップ、PDFの読み込みと書き込み、ページ移動用のミニマップ、そして作業中も自動でPDF保存されます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-whiteboard-mode">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -443,6 +515,20 @@
           <span data-lang-ko>Settings에서 My Palette를 열어 보이게 할 색상과 도구만 골라 담고 나머지는 숨길 수 있어요. 작은 배지로 접어두면 청중 시야를 가리지 않고, 클릭 한 번이면 다시 풀 툴바로 돌아와요. 최소화된 상태에서도 모든 단축키는 그대로 작동해요.</span>
           <span data-lang-ja>設定からMy Paletteを開き、表示したい色とツールだけを選んで残りは非表示にできます。小さなバッジに折りたためば視聴者の視界を邪魔せず、クリック一つで元のツールバーに戻せます。最小化していてもすべてのショートカットはそのまま動作します。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-my-palette">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -450,10 +536,24 @@
           <span><span data-lang-en>How do I customize keyboard shortcuts?</span><span data-lang-ko>키보드 단축키는 어떻게 바꾸나요?</span><span data-lang-ja>キーボードショートカットの変更方法は？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Every shortcut is rebindable from Settings. By default, tools and effects use a quick 2-key combo (⌥ + letter), while system actions use a 3-key combo (⌘⇧ + letter) to prevent accidental triggers. While actively drawing, single keys also work — ⌫ clears the page, [ ] resizes your stroke, and 1–5 jump to favorite colors.</span>
-          <span data-lang-ko>모든 단축키는 Settings에서 다시 지정할 수 있어요. 기본값은 도구·이펙트는 빠른 2키 조합(⌥ + 알파벳), 시스템 동작은 실수 방지를 위한 3키 조합(⌘⇧ + 알파벳)이에요. 드로잉 중에는 단일 키도 작동해요 — ⌫는 전체 삭제, [ ]는 굵기 조절, 1~5는 즐겨찾기 색상으로 바로 이동.</span>
-          <span data-lang-ja>すべてのショートカットは設定から再設定できます。デフォルトでは、ツールやエフェクトは素早い2キー（⌥＋文字）、システム操作は誤操作防止のための3キー（⌘⇧＋文字）です。描画中は単一キーも使えます — ⌫で全消去、[ ]で太さ調整、1〜5でお気に入りの色に直接切り替え。</span>
+          <span data-lang-en>Every shortcut is rebindable from Settings. By default, tools and effects use a quick 2-key combo (<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span>), while system actions use a 3-key combo (<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span>) to prevent accidental triggers. While actively drawing, single keys also work — <span class="kbd">⌫</span> clears the page, <span class="kbd">[</span> <span class="kbd">]</span> resizes your stroke, and <span class="kbd">1</span>–<span class="kbd">5</span> jump to favorite colors.</span>
+          <span data-lang-ko>모든 단축키는 Settings에서 다시 지정할 수 있어요. 기본값은 도구·이펙트는 빠른 2키 조합(<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>), 시스템 동작은 실수 방지를 위한 3키 조합(<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>)이에요. 드로잉 중에는 단일 키도 작동해요 — <span class="kbd">⌫</span>는 전체 삭제, <span class="kbd">[</span> <span class="kbd">]</span>는 굵기 조절, <span class="kbd">1</span>~<span class="kbd">5</span>는 즐겨찾기 색상으로 바로 이동.</span>
+          <span data-lang-ja>すべてのショートカットは設定から再設定できます。デフォルトでは、ツールやエフェクトは素早い2キー（<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）、システム操作は誤操作防止のための3キー（<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）です。描画中は単一キーも使えます — <span class="kbd">⌫</span>で全消去、<span class="kbd">[</span> <span class="kbd">]</span>で太さ調整、<span class="kbd">1</span>〜<span class="kbd">5</span>でお気に入りの色に直接切り替え。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-custom-shortcuts">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -531,10 +631,24 @@
           <span><span data-lang-en>How do I switch tools or colors without breaking my teaching flow?</span><span data-lang-ko>강의 흐름을 끊지 않고 도구·색상을 바꾸려면?</span><span data-lang-ja>授業の流れを止めずにツール・色を切り替えるには？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Two options that both keep your hands where they are: hold ⌘ and scroll to cycle drawing tools, or hold ⌥ and scroll to cycle your favorite colors — a corner HUD confirms the change without stealing focus. Or press ⌘K anywhere to open the Command Palette and search for any tool, effect, or setting by name instead of memorizing shortcuts.</span>
-          <span data-lang-ko>손을 트랙패드에서 떼지 않고도 전환할 수 있는 방법이 두 가지 있어요. ⌘를 누른 채 스크롤하면 드로잉 도구가 순환되고, ⌥를 누른 채 스크롤하면 즐겨찾기 색상이 순환돼요. 구석의 HUD가 방해 없이 변경을 확인해줘요. 또는 어디서든 ⌘K를 눌러 커맨드 팔레트를 열고, 단축키를 외울 필요 없이 이름으로 도구·이펙트·설정을 검색할 수 있어요.</span>
-          <span data-lang-ja>手を止めずに切り替える方法が2つあります。⌘を押しながらスクロールすると描画ツールが、⌥を押しながらスクロールするとお気に入りの色が切り替わります。コーナーのHUDが集中を妨げずに変更を確認します。あるいはどこからでも⌘Kを押してコマンドパレットを開き、ショートカットを覚えなくても名前でツール・エフェクト・設定を検索できます。</span>
+          <span data-lang-en>Two options that both keep your hands where they are: hold <span class="kbd">⌘</span> and scroll to cycle drawing tools, or hold <span class="kbd">⌥</span> and scroll to cycle your favorite colors — a corner HUD confirms the change without stealing focus. Or press <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span> anywhere to open the Command Palette and search for any tool, effect, or setting by name instead of memorizing shortcuts.</span>
+          <span data-lang-ko>손을 트랙패드에서 떼지 않고도 전환할 수 있는 방법이 두 가지 있어요. <span class="kbd">⌘</span>를 누른 채 스크롤하면 드로잉 도구가 순환되고, <span class="kbd">⌥</span>를 누른 채 스크롤하면 즐겨찾기 색상이 순환돼요. 구석의 HUD가 방해 없이 변경을 확인해줘요. 또는 어디서든 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>를 눌러 커맨드 팔레트를 열고, 단축키를 외울 필요 없이 이름으로 도구·이펙트·설정을 검색할 수 있어요.</span>
+          <span data-lang-ja>手を止めずに切り替える方法が2つあります。<span class="kbd">⌘</span>を押しながらスクロールすると描画ツールが、<span class="kbd">⌥</span>を押しながらスクロールするとお気に入りの色が切り替わります。コーナーのHUDが集中を妨げずに変更を確認します。あるいはどこからでも<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>を押してコマンドパレットを開き、ショートカットを覚えなくても名前でツール・エフェクト・設定を検索できます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-tool-color-switch">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -557,6 +671,20 @@
           <span data-lang-ko>자유롭게 그릴 때는 빈 화면, 도표나 수학 문제엔 격자, 일반 필기엔 괘선, 구조화된 노트가 필요하면 코넬 노트로 페이지를 시작해보세요. 전통적인 칠판 느낌이 필요할 땐 칠판 모드로 바꿔서 다크 캔버스와 분필 도구를 써보세요 — 분위기를 바꾸거나 특정 과목의 스타일에 맞출 때 좋아요.</span>
           <span data-lang-ja>自由に描きたいときは無地、図やグラフ・数式には方眼、通常のノートには罫線、構造化したノートを取りたいときはコーネル式でページを始めてみてください。伝統的な黒板の雰囲気が欲しいときは黒板モードに切り替えて、ダークキャンバスとチョークツールを使いましょう — 雰囲気を変えたいときや特定の教科のスタイルに合わせたいときに便利です。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-whiteboard-template">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -579,6 +707,20 @@
           <span data-lang-ko>커스텀 커서에서 원하는 이미지(발자국, 레이저 점, 브랜드 마스코트 등)를 넣으면 기본 화살표를 대체할 수 있어요. 최대 6개의 프리셋을 저장해서 즉시 전환할 수 있고, 레이저 포인터나 커서 강조 효과와 함께 쓰면 더 확실하고 의도적으로 시선을 유도할 수 있어요.</span>
           <span data-lang-ja>カスタムカーソルで好きな画像（足跡、レーザードット、ブランドマスコットなど）を設定すれば、デフォルトの矢印を置き換えられます。最大6個のプリセットを保存していつでも切り替えられ、レーザーポインターやカーソル強調と組み合わせれば、より分かりやすく意図的な視線誘導ができます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-custom-cursor">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item">
