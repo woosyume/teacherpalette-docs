@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — TeacherPalette</title>
+<meta name="description" content="Frequently asked questions about TeacherPalette — getting started and live teaching tips for the macOS presenter toolkit.">
+<link rel="icon" href="../img/icon-256.png">
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-alt: #f5f5f7;
+    --text: #1d1d1f;
+    --text-dim: #6e6e73;
+    --text-muted: #86868b;
+    --accent: #0176D3;
+    --accent-soft: rgba(1, 118, 211, 0.08);
+    --accent-strong: rgba(1, 118, 211, 0.14);
+    --border: rgba(0, 0, 0, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.72);
+    --card-border: rgba(0, 0, 0, 0.06);
+    --sidebar-bg: rgba(255, 255, 255, 0.5);
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+    --blob-blue:   rgba(1, 118, 211, 0.10);
+    --blob-purple: rgba(123, 94, 167, 0.10);
+    --blob-yellow: rgba(240, 180, 41, 0.12);
+    --blob-pink:   rgba(228, 77, 102, 0.10);
+    --blob-teal:   rgba(22, 160, 133, 0.08);
+  }
+  [data-theme="dark"] {
+    --bg: #0a0a0f;
+    --bg-alt: #12131a;
+    --text: #f5f5f7;
+    --text-dim: #9c9ca6;
+    --text-muted: #6e6e78;
+    --accent: #58a6ff;
+    --accent-soft: rgba(88, 166, 255, 0.14);
+    --accent-strong: rgba(88, 166, 255, 0.22);
+    --border: rgba(255, 255, 255, 0.10);
+    --card-bg: rgba(28, 30, 40, 0.60);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --sidebar-bg: rgba(20, 22, 30, 0.55);
+    --shadow: 0 1px 2px rgba(0,0,0,0.30), 0 8px 32px rgba(0,0,0,0.24);
+    --blob-blue:   rgba(88, 166, 255, 0.14);
+    --blob-purple: rgba(160, 130, 220, 0.14);
+    --blob-yellow: rgba(255, 200, 80, 0.14);
+    --blob-pink:   rgba(255, 105, 135, 0.12);
+    --blob-teal:   rgba(52, 199, 170, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+                 "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Hiragino Sans", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(600px 500px at 12% 15%,  var(--blob-blue)   0%, transparent 60%),
+      radial-gradient(700px 550px at 88% 30%,  var(--blob-purple) 0%, transparent 60%),
+      radial-gradient(500px 500px at 20% 70%,  var(--blob-yellow) 0%, transparent 60%),
+      radial-gradient(650px 500px at 82% 82%,  var(--blob-pink)   0%, transparent 60%),
+      radial-gradient(550px 500px at 50% 100%, var(--blob-teal)   0%, transparent 65%);
+    filter: blur(20px);
+  }
+
+  /* ── i18n Utility (9 languages, en/ko/ja/zh/fr/de/es/pt/it) ──────
+     각 언어별 span/div을 감추고 활성 언어만 표시. fallback:
+     특정 언어(en/ko/ja 외 6개)에 해당하는 요소가 없으면 JS가
+     그 요소의 부모에 .fb-en 클래스를 부여해서 [data-lang-en]을 보여줌
+     (index.html의 Privacy/Terms 섹션과 동일한 패턴). */
+  [data-lang-en], [data-lang-ko], [data-lang-ja],
+  [data-lang-zh], [data-lang-fr], [data-lang-de],
+  [data-lang-es], [data-lang-pt], [data-lang-it] { display: none; }
+  html[lang="en"]    [data-lang-en] { display: revert; }
+  html[lang="ko"]    [data-lang-ko] { display: revert; }
+  html[lang="ja"]    [data-lang-ja] { display: revert; }
+  html[lang="zh"]    [data-lang-zh] { display: revert; }
+  html[lang="fr"]    [data-lang-fr] { display: revert; }
+  html[lang="de"]    [data-lang-de] { display: revert; }
+  html[lang="es"]    [data-lang-es] { display: revert; }
+  html[lang="pt"]    [data-lang-pt] { display: revert; }
+  html[lang="it"]    [data-lang-it] { display: revert; }
+  html[lang="en"] span[data-lang-en],
+  html[lang="ko"] span[data-lang-ko],
+  html[lang="ja"] span[data-lang-ja],
+  html[lang="zh"] span[data-lang-zh],
+  html[lang="fr"] span[data-lang-fr],
+  html[lang="de"] span[data-lang-de],
+  html[lang="es"] span[data-lang-es],
+  html[lang="pt"] span[data-lang-pt],
+  html[lang="it"] span[data-lang-it] { display: inline; }
+  html[lang="zh"] .fb-en [data-lang-en],
+  html[lang="fr"] .fb-en [data-lang-en],
+  html[lang="de"] .fb-en [data-lang-en],
+  html[lang="es"] .fb-en [data-lang-en],
+  html[lang="pt"] .fb-en [data-lang-en],
+  html[lang="it"] .fb-en [data-lang-en] { display: revert; }
+  html[lang="zh"] span.fb-en[data-lang-en],
+  html[lang="fr"] span.fb-en[data-lang-en],
+  html[lang="de"] span.fb-en[data-lang-en],
+  html[lang="es"] span.fb-en[data-lang-en],
+  html[lang="pt"] span.fb-en[data-lang-en],
+  html[lang="it"] span.fb-en[data-lang-en] { display: inline; }
+
+  nav.topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  [data-theme="dark"] nav.topbar { background: rgba(10,10,15,0.72); }
+  a.breadcrumb {
+    display: inline-flex; align-items: center; gap: 4px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 13px;
+    padding: 4px 0;
+    margin-bottom: 12px;
+    transition: color 0.15s;
+  }
+  a.breadcrumb:hover { color: var(--accent); }
+  a.breadcrumb svg { width: 14px; height: 14px; }
+  nav.topbar a.home {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+  }
+  nav.topbar .brand-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 0 12px rgba(1,118,211,0.15);
+  }
+  nav.topbar .brand-logo {
+    display: block; height: 22px; width: auto;
+    transition: filter 0.2s;
+  }
+  [data-theme="dark"] nav.topbar .brand-logo { filter: invert(1); }
+  nav.topbar .spacer { flex: 1; }
+  nav.topbar .theme-toggle {
+    background: transparent; border: 1px solid var(--border);
+    padding: 6px 10px; border-radius: 8px; cursor: pointer;
+    font-size: 13px; color: var(--text); transition: background 0.15s;
+  }
+  nav.topbar .theme-toggle:hover { background: var(--accent-soft); }
+
+  .layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 780px) {
+    .layout { grid-template-columns: 1fr; padding: 24px 20px 60px; gap: 24px; }
+    aside.sidebar { position: static !important; }
+  }
+
+  header.title { grid-column: 1 / -1; margin-bottom: 8px; }
+  header.title h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+  header.title p { color: var(--text-dim); font-size: 15px; }
+
+  aside.sidebar {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    background: var(--sidebar-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 8px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  aside.sidebar .label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted);
+    padding: 6px 10px 10px;
+  }
+  aside.sidebar a.tab {
+    display: flex; align-items: center; justify-content: space-between;
+    text-decoration: none; color: var(--text);
+    padding: 8px 12px; border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    transition: background 0.12s;
+    margin-bottom: 2px;
+  }
+  aside.sidebar a.tab:hover { background: var(--accent-soft); }
+  aside.sidebar a.tab.active { background: var(--accent-strong); color: var(--accent); font-weight: 600; }
+  aside.sidebar a.tab .count {
+    font-size: 11px; color: var(--text-muted); font-weight: 400;
+    background: var(--bg-alt); border-radius: 999px; padding: 1px 7px;
+  }
+  aside.sidebar a.tab.active .count { color: var(--accent); background: rgba(1,118,211,0.10); }
+  [data-theme="dark"] aside.sidebar a.tab.active .count { background: rgba(88,166,255,0.16); }
+
+  main.content { min-width: 0; }
+  article.faq-panel {
+    display: none;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  article.faq-panel.active { display: block; }
+  article.faq-panel > h2 {
+    font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 24px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item { margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .faq-item h3 {
+    font-size: 15.5px; font-weight: 700; line-height: 1.5;
+    display: flex; gap: 8px; margin-bottom: 10px;
+  }
+  .faq-item h3 .q-mark { color: var(--accent); flex-shrink: 0; }
+  .faq-item .faq-a { color: var(--text-dim); font-size: 14px; line-height: 1.75; padding-left: 24px; }
+  .faq-item .faq-a p { margin: 0; }
+
+  .faq-cta {
+    grid-column: 1 / -1;
+    margin-top: 28px;
+    padding: 26px 28px;
+    background: var(--accent-soft);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    text-align: center;
+  }
+  .faq-cta p { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+  .faq-cta a.btn-support {
+    display: inline-block;
+    background: var(--accent); color: #fff;
+    text-decoration: none;
+    font-size: 14px; font-weight: 600;
+    padding: 10px 22px; border-radius: 10px;
+    transition: opacity 0.15s;
+  }
+  .faq-cta a.btn-support:hover { opacity: 0.88; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="home" id="home-link" href="../index.html">
+    <img class="brand-icon" src="../img/icon-256.png" alt="">
+    <img class="brand-logo" src="../img/logo.png" alt="TeacherPalette">
+  </a>
+  <div class="spacer"></div>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+
+<div class="layout">
+
+  <header class="title">
+    <a class="breadcrumb" id="back-link" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      <span data-lang-en>Back to home</span>
+      <span data-lang-ko>메인으로</span>
+      <span data-lang-ja>ホームへ戻る</span>
+      <span data-lang-zh>返回首页</span>
+      <span data-lang-fr>Retour à l'accueil</span>
+      <span data-lang-de>Zurück zur Startseite</span>
+      <span data-lang-es>Volver al inicio</span>
+      <span data-lang-pt>Voltar ao início</span>
+      <span data-lang-it>Torna alla home</span>
+    </a>
+    <h1>FAQ</h1>
+    <p>
+      <span data-lang-en>Answers to common questions about TeacherPalette</span>
+      <span data-lang-ko>TeacherPalette에 대해 자주 묻는 질문에 대한 답변</span>
+      <span data-lang-ja>TeacherPaletteに関するよくある質問への回答</span>
+      <span data-lang-zh>TeacherPalette 常见问题解答</span>
+      <span data-lang-fr>Réponses aux questions fréquentes sur TeacherPalette</span>
+      <span data-lang-de>Antworten auf häufige Fragen zu TeacherPalette</span>
+      <span data-lang-es>Respuestas a preguntas frecuentes sobre TeacherPalette</span>
+      <span data-lang-pt>Respostas para perguntas frequentes sobre o TeacherPalette</span>
+      <span data-lang-it>Risposte alle domande frequenti su TeacherPalette</span>
+    </p>
+  </header>
+
+  <aside class="sidebar">
+    <div class="label">
+      <span data-lang-en>Categories</span>
+      <span data-lang-ko>카테고리</span>
+      <span data-lang-ja>カテゴリー</span>
+      <span data-lang-zh>分类</span>
+      <span data-lang-fr>Catégories</span>
+      <span data-lang-de>Kategorien</span>
+      <span data-lang-es>Categorías</span>
+      <span data-lang-pt>Categorias</span>
+      <span data-lang-it>Categorie</span>
+    </div>
+    <a class="tab active" href="#getting-started" data-cat="getting-started">
+      <span>
+        🚀
+        <span data-lang-en>Getting Started</span>
+        <span data-lang-ko>시작하기</span>
+        <span data-lang-ja>はじめに</span>
+        <span data-lang-zh>快速上手</span>
+        <span data-lang-fr>Prise en main</span>
+        <span data-lang-de>Erste Schritte</span>
+        <span data-lang-es>Primeros pasos</span>
+        <span data-lang-pt>Primeiros passos</span>
+        <span data-lang-it>Per iniziare</span>
+      </span>
+      <span class="count">10</span>
+    </a>
+    <a class="tab" href="#live-teaching" data-cat="live-teaching">
+      <span>
+        🎥
+        <span data-lang-en>Live Teaching Tips</span>
+        <span data-lang-ko>라이브 강의 활용 팁</span>
+        <span data-lang-ja>ライブ授業活用のヒント</span>
+        <span data-lang-zh>直播教学技巧</span>
+        <span data-lang-fr>Astuces pour l'enseignement en direct</span>
+        <span data-lang-de>Tipps für den Live-Unterricht</span>
+        <span data-lang-es>Consejos para clases en vivo</span>
+        <span data-lang-pt>Dicas para aulas em tempo real</span>
+        <span data-lang-it>Consigli per l'insegnamento dal vivo</span>
+      </span>
+      <span class="count">10</span>
+    </a>
+  </aside>
+
+  <main class="content">
+    <article class="faq-panel active" id="getting-started">
+      <h2>
+        🚀
+        <span data-lang-en>Getting Started</span>
+        <span data-lang-ko>시작하기</span>
+        <span data-lang-ja>はじめに</span>
+        <span data-lang-zh>快速上手</span>
+        <span data-lang-fr>Prise en main</span>
+        <span data-lang-de>Erste Schritte</span>
+        <span data-lang-es>Primeros pasos</span>
+        <span data-lang-pt>Primeiros passos</span>
+        <span data-lang-it>Per iniziare</span>
+      </h2>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>What is TeacherPalette?</span><span data-lang-ko>TeacherPalette가 뭔가요?</span><span data-lang-ja>TeacherPaletteとは何ですか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>TeacherPalette is a native macOS overlay for live teaching and presenting — drawing, spotlight, whiteboard, timer, and cursor tools that run on top of Zoom, Google Meet, Microsoft Teams, or any app on your screen.</span>
+          <span data-lang-ko>TeacherPalette는 실시간 강의·발표를 위한 네이티브 macOS 오버레이 앱이에요. 드로잉, 스포트라이트, 화이트보드, 타이머, 커서 도구를 Zoom·Google Meet·Microsoft Teams는 물론 화면에 떠 있는 어떤 앱 위에서도 그대로 쓸 수 있어요.</span>
+          <span data-lang-ja>TeacherPaletteは、ライブ授業やプレゼンのためのネイティブmacOSオーバーレイアプリです。描画・スポットライト・ホワイトボード・タイマー・カーソルツールをZoom・Google Meet・Microsoft Teams、あるいは画面上のどんなアプリの上でもそのまま使えます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>What are the system requirements?</span><span data-lang-ko>시스템 요구사항이 어떻게 되나요?</span><span data-lang-ja>システム要件を教えてください。</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>macOS Sequoia 15.0 or later, on Apple Silicon or Intel Macs. The app itself is tiny (about 20 MB). The only permission it ever asks for is Screen Recording, and only because the Magnifier tool needs it to capture your screen — no other data leaves your Mac.</span>
+          <span data-lang-ko>macOS Sequoia 15.0 이상, Apple Silicon·Intel Mac 모두 지원해요. 앱 용량은 아주 작아요(약 20MB). 요청하는 권한은 화면 기록(Screen Recording) 하나뿐인데, 이것도 Magnifier(확대) 도구가 화면을 캡처하기 위해 필요한 것뿐이에요 — 다른 어떤 데이터도 Mac 밖으로 나가지 않아요.</span>
+          <span data-lang-ja>macOS Sequoia 15.0以降、Apple SiliconとIntel Macの両方に対応。アプリ自体はごく小さく（約20MB）。要求する権限は画面録画（Screen Recording）のみで、これはMagnifier（拡大）ツールが画面をキャプチャするために必要なだけです — 他のデータがMacの外に出ることはありません。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I install it and get started?</span><span data-lang-ko>설치하고 시작하려면 어떻게 하나요?</span><span data-lang-ja>インストールして始めるには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Download TeacherPalette, drag it into Applications, and open it. The first launch walks you through a short onboarding tour that introduces the toolbar, Whiteboard, and the essential shortcuts — you can replay this tour anytime from Settings.</span>
+          <span data-lang-ko>TeacherPalette를 다운로드해서 Applications 폴더로 옮기고 실행하면 돼요. 처음 실행하면 툴바·화이트보드·필수 단축키를 소개하는 짧은 온보딩 투어가 시작돼요. 이 투어는 Settings에서 언제든 다시 볼 수 있어요.</span>
+          <span data-lang-ja>TeacherPaletteをダウンロードしてApplicationsフォルダに移動し、起動するだけです。初回起動時にはツールバー・ホワイトボード・必須ショートカットを紹介する短いオンボーディングツアーが始まります。このツアーは設定からいつでも再生できます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Does it support my language?</span><span data-lang-ko>제 언어도 지원되나요?</span><span data-lang-ja>自分の言語には対応していますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Yes — TeacherPalette speaks 9 languages out of the box (English, Korean, Japanese, Simplified Chinese, French, German, Spanish, Portuguese, and Italian). It auto-detects your macOS system language on first launch, and you can switch anytime from Settings → Language.</span>
+          <span data-lang-ko>네, TeacherPalette는 9개 언어(영어·한국어·일본어·중국어 간체·프랑스어·독일어·스페인어·포르투갈어·이탈리아어)를 기본으로 지원해요. 첫 실행 시 macOS 시스템 언어를 자동으로 감지하고, Settings → Language에서 언제든 바꿀 수 있어요.</span>
+          <span data-lang-ja>はい、TeacherPaletteは9言語（英語・韓国語・日本語・簡体字中国語・フランス語・ドイツ語・スペイン語・ポルトガル語・イタリア語）をネイティブサポートしています。初回起動時にmacOSのシステム言語を自動検出し、設定→言語からいつでも切り替えられます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>What's the difference between the one-time purchase and the subscription?</span><span data-lang-ko>원타임 구매와 구독은 뭐가 다른가요?</span><span data-lang-ja>買い切りとサブスクリプションの違いは？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Both unlock the exact same features. The one-time purchase ($17.99) is a single payment for lifetime use — no renewals, ever. The monthly ($2.99) and annual ($9.99) subscriptions include a 7-day free trial and renew automatically until you cancel. Pick whichever fits how you plan to use the app.</span>
+          <span data-lang-ko>두 가지 모두 기능은 완전히 동일해요. 원타임 구매($17.99)는 한 번 결제하면 평생 쓸 수 있어요 — 갱신이 전혀 없어요. 월간($2.99)·연간($9.99) 구독은 7일 무료 체험이 포함되고 해지하기 전까지 자동으로 갱신돼요. 사용 계획에 맞는 방식을 고르시면 돼요.</span>
+          <span data-lang-ja>どちらも機能はまったく同じです。買い切り購入（$17.99）は一度の支払いで永久に使えます — 更新は一切ありません。月額（$2.99）・年額（$9.99）サブスクリプションには7日間の無料トライアルが含まれ、解約するまで自動的に更新されます。使い方に合わせてお選びください。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I start drawing on my screen?</span><span data-lang-ko>화면에 그림을 그리려면 어떻게 하나요?</span><span data-lang-ja>画面に描画を始めるには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Trigger Drawing mode with its shortcut (rebindable, ⌘⇧ + letter by default) — a soft halo appears around every screen edge and a HUD confirms it's on. Then pick a tool with ⌥ + letter, or scroll while holding ⌘ to cycle tools and ⌥ to cycle your favorite colors.</span>
+          <span data-lang-ko>단축키(기본값 ⌘⇧ + 알파벳, 자유롭게 재설정 가능)로 드로잉 모드를 켜면 화면 가장자리에 은은한 블롭이 나타나고 HUD로 켜졌는지 확인할 수 있어요. 그 다음 ⌥ + 알파벳으로 도구를 고르거나, ⌘를 누른 채 스크롤해서 도구를, ⌥를 누른 채 스크롤해서 즐겨찾기 색상을 순환할 수 있어요.</span>
+          <span data-lang-ja>ショートカット（デフォルトは⌘⇧＋文字、自由に再設定可能）で描画モードをオンにすると、画面の縁に淡いブロブが現れ、HUDでオンになったことを確認できます。その後、⌥＋文字でツールを選ぶか、⌘を押しながらスクロールでツールを、⌥を押しながらスクロールでお気に入りの色を切り替えられます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I open Whiteboard mode, and what can I do there?</span><span data-lang-ko>화이트보드 모드는 어떻게 열고, 뭘 할 수 있나요?</span><span data-lang-ja>ホワイトボードモードは何ができますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Launch Whiteboard from the toolbar or Command Palette (⌘K). You get multi-page canvases with instant page switching, Blank/Grid/Lined/Cornell Notes templates, a dark Chalkboard mode, drag-and-drop images, PDF loading and annotation, a minimap for jumping between pages, and automatic PDF saving as you go.</span>
+          <span data-lang-ko>툴바나 커맨드 팔레트(⌘K)에서 화이트보드를 실행할 수 있어요. 여러 페이지를 즉시 전환할 수 있고, 빈 화면·격자·괘선·코넬 노트 템플릿, 다크 톤의 칠판 모드, 이미지 드래그 앤 드롭, PDF 불러오기·필기, 페이지 이동용 미니맵, 그리고 진행 중에도 자동으로 PDF 저장까지 가능해요.</span>
+          <span data-lang-ja>ツールバーまたはコマンドパレット（⌘K）からホワイトボードを起動できます。複数ページをすぐに切り替えられ、無地・方眼・罫線・コーネル式のテンプレート、ダーク調の黒板モード、画像のドラッグ&ドロップ、PDFの読み込みと書き込み、ページ移動用のミニマップ、そして作業中も自動でPDF保存されます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I customize my toolbar (My Palette)?</span><span data-lang-ko>툴바(My Palette)는 어떻게 커스텀하나요?</span><span data-lang-ja>ツールバー（My Palette）はどうカスタマイズしますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Open My Palette from Settings to pick exactly which colors and tools you want visible, and hide the rest. Collapse it to a small badge so it stays out of your audience's view — one click brings the full toolbar back, and every shortcut still fires globally even while it's minimized.</span>
+          <span data-lang-ko>Settings에서 My Palette를 열어 보이게 할 색상과 도구만 골라 담고 나머지는 숨길 수 있어요. 작은 배지로 접어두면 청중 시야를 가리지 않고, 클릭 한 번이면 다시 풀 툴바로 돌아와요. 최소화된 상태에서도 모든 단축키는 그대로 작동해요.</span>
+          <span data-lang-ja>設定からMy Paletteを開き、表示したい色とツールだけを選んで残りは非表示にできます。小さなバッジに折りたためば視聴者の視界を邪魔せず、クリック一つで元のツールバーに戻せます。最小化していてもすべてのショートカットはそのまま動作します。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I customize keyboard shortcuts?</span><span data-lang-ko>키보드 단축키는 어떻게 바꾸나요?</span><span data-lang-ja>キーボードショートカットの変更方法は？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Every shortcut is rebindable from Settings. By default, tools and effects use a quick 2-key combo (⌥ + letter), while system actions use a 3-key combo (⌘⇧ + letter) to prevent accidental triggers. While actively drawing, single keys also work — ⌫ clears the page, [ ] resizes your stroke, and 1–5 jump to favorite colors.</span>
+          <span data-lang-ko>모든 단축키는 Settings에서 다시 지정할 수 있어요. 기본값은 도구·이펙트는 빠른 2키 조합(⌥ + 알파벳), 시스템 동작은 실수 방지를 위한 3키 조합(⌘⇧ + 알파벳)이에요. 드로잉 중에는 단일 키도 작동해요 — ⌫는 전체 삭제, [ ]는 굵기 조절, 1~5는 즐겨찾기 색상으로 바로 이동.</span>
+          <span data-lang-ja>すべてのショートカットは設定から再設定できます。デフォルトでは、ツールやエフェクトは素早い2キー（⌥＋文字）、システム操作は誤操作防止のための3キー（⌘⇧＋文字）です。描画中は単一キーも使えます — ⌫で全消去、[ ]で太さ調整、1〜5でお気に入りの色に直接切り替え。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I replay the onboarding tour?</span><span data-lang-ko>온보딩 투어를 다시 보려면 어떻게 하나요?</span><span data-lang-ja>オンボーディングツアーを再生するには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Go to Settings and look for the tour/tutorial option — it replays the full walkthrough, including the newer Whiteboard introduction, any time you want a refresher.</span>
+          <span data-lang-ko>Settings에서 투어·튜토리얼 항목을 찾으면 돼요. 최근에 추가된 화이트보드 소개까지 포함한 전체 투어를 원할 때마다 다시 볼 수 있어요.</span>
+          <span data-lang-ja>設定でツアー・チュートリアルの項目を探してください。新しく追加されたホワイトボードの案内も含めて、いつでも全体のツアーを見返せます。</span>
+        </p></div>
+      </div>
+    </article>
+
+    <article class="faq-panel" id="live-teaching">
+      <h2>
+        🎥
+        <span data-lang-en>Live Teaching Tips</span>
+        <span data-lang-ko>라이브 강의 활용 팁</span>
+        <span data-lang-ja>ライブ授業活用のヒント</span>
+        <span data-lang-zh>直播教学技巧</span>
+        <span data-lang-fr>Astuces pour l'enseignement en direct</span>
+        <span data-lang-de>Tipps für den Live-Unterricht</span>
+        <span data-lang-es>Consejos para clases en vivo</span>
+        <span data-lang-pt>Dicas para aulas em tempo real</span>
+        <span data-lang-it>Consigli per l'insegnamento dal vivo</span>
+      </h2>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Will my students see the HUD badges or toolbar during screen sharing?</span><span data-lang-ko>화면 공유 중에 HUD 배지나 툴바가 학생들에게 보이나요?</span><span data-lang-ja>画面共有中、HUDバッジやツールバーは生徒に見えますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>No. The floating HUD badges that confirm tool and color changes are never visible in screen-shared content — they're hidden from Zoom (and similar) capture. Your audience only sees your actual drawing, whiteboard, or spotlight — not your controls.</span>
+          <span data-lang-ko>아니요. 도구·색상 변경을 알려주는 HUD 배지는 화면 공유 화면에는 절대 보이지 않아요 — Zoom 등의 캡처에서 숨겨져 있어요. 청중에게는 실제 드로잉·화이트보드·스포트라이트만 보이고, 컨트롤은 보이지 않아요.</span>
+          <span data-lang-ja>いいえ。ツールや色の変更を知らせるHUDバッジは、画面共有には一切表示されません — Zoomなどのキャプチャから除外されています。視聴者には実際の描画・ホワイトボード・スポットライトだけが見え、操作パネルは見えません。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I use Spotlight and the laser pointer to guide attention?</span><span data-lang-ko>스포트라이트와 레이저 포인터로 시선을 유도하려면?</span><span data-lang-ja>スポットライトとレーザーポインターで視線を誘導するには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Turn on Spotlight to dim everything except a bright circle around your cursor — great for focusing attention on one part of a slide. Add the trailing laser pointer to point things out without needing to click, and combine either with a custom cursor for an even clearer visual cue.</span>
+          <span data-lang-ko>스포트라이트를 켜면 커서 주변의 밝은 원만 남고 나머지는 어두워져요. 슬라이드의 한 부분에 시선을 모으기에 좋아요. 클릭 없이도 가리킬 수 있는 궤적형 레이저 포인터를 더하거나, 커스텀 커서와 함께 써서 더 확실한 시각적 신호를 줄 수 있어요.</span>
+          <span data-lang-ja>スポットライトをオンにすると、カーソル周りの明るい円だけが残り、他は暗くなります。スライドの一部に視線を集めたいときに便利です。クリックせずに指し示せる軌跡付きレーザーポインターを加えたり、カスタムカーソルと組み合わせてさらに分かりやすい視覚的サインを作れます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How can I teach using an iPad as a second display (Sidecar)?</span><span data-lang-ko>iPad를 세컨드 디스플레이(Sidecar)로 강의하려면?</span><span data-lang-ja>iPadをSidecarで第2ディスプレイとして授業するには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>TeacherPalette fully supports multiple displays and iPad Sidecar. Pick which connected screen should show your drawing, Whiteboard, or BRB overlay — handy for writing on an iPad with Apple Pencil while a separate display or projector shows the same content to your class.</span>
+          <span data-lang-ko>TeacherPalette는 멀티 디스플레이와 iPad Sidecar를 완벽히 지원해요. 연결된 화면 중 어디에 드로잉·화이트보드·BRB 오버레이를 띄울지 고를 수 있어요. iPad에 Apple Pencil로 필기하면서, 다른 화면이나 프로젝터로 같은 내용을 학생들에게 보여줄 때 유용해요.</span>
+          <span data-lang-ja>TeacherPaletteはマルチディスプレイとiPad Sidecarに完全対応しています。接続されたどの画面に描画・ホワイトボード・BRBオーバーレイを表示するか選べます。iPadにApple Pencilで書き込みながら、別の画面やプロジェクターで同じ内容を生徒に見せたいときに便利です。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I use the BRB timer during a break?</span><span data-lang-ko>휴식 시간에 BRB 타이머는 어떻게 쓰나요?</span><span data-lang-ja>休憩中にBRBタイマーを使うには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Trigger the BRB timer to show a full-screen "Be Right Back" overlay with a countdown, so students know exactly when you'll return. Pick a quick preset (15/30/45/60 sec) or type a custom time, keep a small floating timer on screen if you step away from the overlay, and a chime plays when time's up.</span>
+          <span data-lang-ko>BRB 타이머를 실행하면 전체화면으로 "잠시 후 돌아오겠습니다" 오버레이와 카운트다운이 표시돼서 학생들이 언제 돌아올지 정확히 알 수 있어요. 15/30/45/60초 프리셋을 고르거나 원하는 시간을 직접 입력할 수 있고, 자리를 비운 동안 작은 플로팅 타이머를 화면에 띄워둘 수 있어요. 시간이 끝나면 차임 알림이 울려요.</span>
+          <span data-lang-ja>BRBタイマーを起動すると、全画面で「戻ってきます」の表示とカウントダウンが表示され、生徒はいつ戻るかを正確に把握できます。15/30/45/60秒のプリセットから選ぶか、好きな時間を入力できます。離席中は小さなフローティングタイマーを画面に残しておけて、時間になるとチャイムが鳴ります。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I switch tools or colors without breaking my teaching flow?</span><span data-lang-ko>강의 흐름을 끊지 않고 도구·색상을 바꾸려면?</span><span data-lang-ja>授業の流れを止めずにツール・色を切り替えるには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Two options that both keep your hands where they are: hold ⌘ and scroll to cycle drawing tools, or hold ⌥ and scroll to cycle your favorite colors — a corner HUD confirms the change without stealing focus. Or press ⌘K anywhere to open the Command Palette and search for any tool, effect, or setting by name instead of memorizing shortcuts.</span>
+          <span data-lang-ko>손을 트랙패드에서 떼지 않고도 전환할 수 있는 방법이 두 가지 있어요. ⌘를 누른 채 스크롤하면 드로잉 도구가 순환되고, ⌥를 누른 채 스크롤하면 즐겨찾기 색상이 순환돼요. 구석의 HUD가 방해 없이 변경을 확인해줘요. 또는 어디서든 ⌘K를 눌러 커맨드 팔레트를 열고, 단축키를 외울 필요 없이 이름으로 도구·이펙트·설정을 검색할 수 있어요.</span>
+          <span data-lang-ja>手を止めずに切り替える方法が2つあります。⌘を押しながらスクロールすると描画ツールが、⌥を押しながらスクロールするとお気に入りの色が切り替わります。コーナーのHUDが集中を妨げずに変更を確認します。あるいはどこからでも⌘Kを押してコマンドパレットを開き、ショートカットを覚えなくても名前でツール・エフェクト・設定を検索できます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I reuse the same whiteboard material across multiple classes?</span><span data-lang-ko>같은 화이트보드 자료를 여러 반에서 재사용하려면?</span><span data-lang-ja>同じホワイトボードの資料を複数のクラスで再利用するには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Every Whiteboard session now saves automatically. Reopen a past lesson from Session History exactly as you left it, rename it for a specific class, or clean it up with one-by-one or bulk delete — great for teaching the same material to several sections without redrawing it each time.</span>
+          <span data-lang-ko>이제 모든 화이트보드 세션이 자동으로 저장돼요. 세션 히스토리에서 이전 강의를 그대로 다시 열거나, 특정 반에 맞게 이름을 바꾸거나, 하나씩 또는 한 번에 정리할 수 있어요. 같은 자료로 여러 반을 가르칠 때 매번 다시 그릴 필요가 없어요.</span>
+          <span data-lang-ja>すべてのホワイトボードセッションは自動保存されるようになりました。セッション履歴から過去の授業をそのまま再度開いたり、特定のクラス用に名前を変えたり、個別またはまとめて削除して整理できます。同じ資料で複数のクラスを教える際、毎回書き直す必要がありません。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Which whiteboard template should I use, and what's Chalkboard mode?</span><span data-lang-ko>화이트보드 템플릿은 뭘 써야 하고, 칠판 모드는 뭔가요?</span><span data-lang-ja>ホワイトボードのテンプレートは何を使えばいい？黒板モードとは？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Start each page as Blank for free drawing, Grid for diagrams and math, Lined for regular notes, or Cornell Notes for structured note-taking. Switch to Chalkboard mode for a dark canvas with a chalk tool when you want that classic blackboard feel — great for a change of pace or a specific subject's visual style.</span>
+          <span data-lang-ko>자유롭게 그릴 때는 빈 화면, 도표나 수학 문제엔 격자, 일반 필기엔 괘선, 구조화된 노트가 필요하면 코넬 노트로 페이지를 시작해보세요. 전통적인 칠판 느낌이 필요할 땐 칠판 모드로 바꿔서 다크 캔버스와 분필 도구를 써보세요 — 분위기를 바꾸거나 특정 과목의 스타일에 맞출 때 좋아요.</span>
+          <span data-lang-ja>自由に描きたいときは無地、図やグラフ・数式には方眼、通常のノートには罫線、構造化したノートを取りたいときはコーネル式でページを始めてみてください。伝統的な黒板の雰囲気が欲しいときは黒板モードに切り替えて、ダークキャンバスとチョークツールを使いましょう — 雰囲気を変えたいときや特定の教科のスタイルに合わせたいときに便利です。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Can I annotate PDFs like slides or worksheets live?</span><span data-lang-ko>슬라이드·워크시트 같은 PDF에 실시간으로 필기할 수 있나요?</span><span data-lang-ja>スライドやワークシートのPDFにリアルタイムで書き込みできますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Yes — load a PDF (slides, worksheets, sheet music) straight into Whiteboard and annotate it page by page. Larger files show a loading progress bar, and the minimap lets you jump between pages without scrolling through everything.</span>
+          <span data-lang-ko>네, 슬라이드·워크시트·악보 같은 PDF를 화이트보드로 바로 불러와 페이지별로 필기할 수 있어요. 용량이 큰 파일은 로딩 진행률이 표시되고, 미니맵으로 전체를 스크롤하지 않고도 원하는 페이지로 바로 이동할 수 있어요.</span>
+          <span data-lang-ja>はい、スライド・ワークシート・楽譜などのPDFをそのままホワイトボードに読み込み、ページごとに書き込めます。大きいファイルは読み込み進捗が表示され、ミニマップを使えば全体をスクロールせずに目的のページへ直接移動できます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I make my cursor easier for students to see?</span><span data-lang-ko>커서를 학생들이 더 잘 보이게 하려면?</span><span data-lang-ja>カーソルを生徒に見やすくするには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Open Custom Cursor and drop in any image — a paw print, a laser dot, your brand mascot — to replace the default arrow. Save up to 6 presets and swap between them on the fly, or pair a custom cursor with the laser pointer or cursor highlight for a clearer, more purposeful way to guide attention.</span>
+          <span data-lang-ko>커스텀 커서에서 원하는 이미지(발자국, 레이저 점, 브랜드 마스코트 등)를 넣으면 기본 화살표를 대체할 수 있어요. 최대 6개의 프리셋을 저장해서 즉시 전환할 수 있고, 레이저 포인터나 커서 강조 효과와 함께 쓰면 더 확실하고 의도적으로 시선을 유도할 수 있어요.</span>
+          <span data-lang-ja>カスタムカーソルで好きな画像（足跡、レーザードット、ブランドマスコットなど）を設定すれば、デフォルトの矢印を置き換えられます。最大6個のプリセットを保存していつでも切り替えられ、レーザーポインターやカーソル強調と組み合わせれば、より分かりやすく意図的な視線誘導ができます。</span>
+        </p></div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>Does Drawing mode ever interfere with normal clicking?</span><span data-lang-ko>드로잉 모드가 평소 클릭을 방해하지는 않나요?</span><span data-lang-ja>描画モードが通常のクリックを妨げることはありますか？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Drawing mode is clearly signposted so this doesn't happen by accident — a paint-blob halo blooms around every screen edge and a "Drawing ON" HUD badge confirms the state, visible only to you and never to your audience. Turn it off with the same shortcut and the halo fades away instantly, returning your clicks to normal.</span>
+          <span data-lang-ko>드로잉 모드는 상태가 명확히 표시되기 때문에 실수로 헷갈릴 일이 없어요 — 화면 가장자리에 물감 블롭이 번지고 "Drawing ON" HUD 배지로 상태를 확인할 수 있는데, 이건 발표자에게만 보이고 청중에게는 보이지 않아요. 같은 단축키로 끄면 블롭이 즉시 사라지고 클릭이 원래대로 돌아와요.</span>
+          <span data-lang-ja>描画モードは状態がはっきり表示されるため、誤操作の心配はありません — 画面の縁に絵の具のブロブが広がり、「Drawing ON」のHUDバッジで状態を確認できますが、これは発表者にのみ表示され、視聴者には見えません。同じショートカットでオフにすれば、ブロブは即座に消えてクリックは通常どおりに戻ります。</span>
+        </p></div>
+      </div>
+    </article>
+
+    <div class="faq-cta">
+      <p>
+        <span data-lang-en>Still have a question?</span>
+        <span data-lang-ko>궁금한 점이 더 있으신가요?</span>
+        <span data-lang-ja>まだ気になることがありますか？</span>
+        <span data-lang-zh>还有其他问题吗？</span>
+        <span data-lang-fr>Encore une question ?</span>
+        <span data-lang-de>Noch eine Frage?</span>
+        <span data-lang-es>¿Todavía tienes una pregunta?</span>
+        <span data-lang-pt>Ainda tem alguma pergunta?</span>
+        <span data-lang-it>Hai ancora un dubbio?</span>
+      </p>
+      <a href="mailto:support@teacherpalette.com" class="btn-support">
+        <span data-lang-en>Contact support</span><span data-lang-ko>이메일로 문의</span><span data-lang-ja>お問い合わせ</span>
+        <span data-lang-zh>联系支持</span><span data-lang-fr>Contacter le support</span><span data-lang-de>Support kontaktieren</span>
+        <span data-lang-es>Contactar soporte</span><span data-lang-pt>Contatar suporte</span><span data-lang-it>Contatta il supporto</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script>
+  // ── 다국어 초기화 (URL param → localStorage → navigator) ──
+  const LS_LANG = 'tp.lang';
+  const SUPPORTED = ['en','ko','ja','zh','fr','de','es','pt','it'];
+  function detectLang() {
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang && SUPPORTED.includes(urlLang)) {
+      localStorage.setItem(LS_LANG, urlLang);
+      return urlLang;
+    }
+    const saved = localStorage.getItem(LS_LANG);
+    if (saved && SUPPORTED.includes(saved)) return saved;
+    const n = (navigator.language || 'en').toLowerCase();
+    if (n.startsWith('ko')) return 'ko';
+    if (n.startsWith('ja')) return 'ja';
+    if (n.startsWith('zh')) return 'zh';
+    if (n.startsWith('fr')) return 'fr';
+    if (n.startsWith('de')) return 'de';
+    if (n.startsWith('es')) return 'es';
+    if (n.startsWith('pt')) return 'pt';
+    if (n.startsWith('it')) return 'it';
+    return 'en';
+  }
+  const lang = detectLang();
+  document.documentElement.setAttribute('lang', lang);
+  // 홈/뒤로 링크에도 언어 유지
+  document.querySelectorAll('#home-link, #back-link').forEach(a => {
+    a.href = '../index.html?lang=' + lang;
+  });
+
+  // ── Fallback: en/ko/ja만 있는 요소는 나머지 6개 언어에서 영어로 표시 ──
+  // (index.html의 Privacy/Terms 섹션과 동일한 applyFallback 패턴)
+  (function applyFallback(l) {
+    if (l === 'en' || l === 'ko' || l === 'ja') return;
+    const fbGroups = new Set();
+    document.querySelectorAll('[data-lang-en]').forEach(el => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      const hasTargetLang = parent.querySelector(`[data-lang-${l}]`);
+      if (!hasTargetLang) fbGroups.add(parent);
+    });
+    fbGroups.forEach(p => p.classList.add('fb-en'));
+  })(lang);
+
+  // ── 카테고리 탭 전환 ──
+  const tabs = document.querySelectorAll('aside.sidebar a.tab');
+  const panels = document.querySelectorAll('article.faq-panel');
+  function showCategory(cat) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+    panels.forEach(p => p.classList.toggle('active', p.id === cat));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      showCategory(tab.dataset.cat);
+      history.replaceState(null, '', '#' + tab.dataset.cat);
+    });
+  });
+  const hash = window.location.hash.slice(1);
+  if (hash && document.getElementById(hash)) showCategory(hash);
+
+  // ── 다크 모드 ──
+  const themeToggle = document.getElementById('themeToggle');
+  const LS_THEME = 'tp.theme';
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
+  }
+  const savedTheme = localStorage.getItem(LS_THEME)
+    || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(savedTheme);
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem(LS_THEME, next);
+  });
+</script>
+
+</body>
+</html>

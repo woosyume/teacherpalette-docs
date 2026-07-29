@@ -1264,6 +1264,11 @@
         <span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span>
         <span data-lang-es>Novedades</span><span data-lang-pt>Novidades</span><span data-lang-it>Novità</span>
       </a>
+      <a class="header-link" href="faq/index.html" id="faq-link">
+        <span data-lang-en>FAQ</span><span data-lang-ko>자주 묻는 질문</span><span data-lang-ja>よくある質問</span>
+        <span data-lang-zh>常见问题</span><span data-lang-fr>FAQ</span><span data-lang-de>FAQ</span>
+        <span data-lang-es>Preguntas frecuentes</span><span data-lang-pt>Perguntas frequentes</span><span data-lang-it>FAQ</span>
+      </a>
       <a class="header-link" href="#privacy">
         <span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span>
         <span data-lang-zh>隐私</span><span data-lang-fr>Confidentialité</span><span data-lang-de>Datenschutz</span>
@@ -2723,6 +2728,11 @@
       <span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span>
       <span data-lang-es>Novedades</span><span data-lang-pt>Novidades</span><span data-lang-it>Novità</span>
     </a>
+    <a href="faq/index.html" id="footer-faq-link">
+      <span data-lang-en>FAQ</span><span data-lang-ko>자주 묻는 질문</span><span data-lang-ja>よくある質問</span>
+      <span data-lang-zh>常见问题</span><span data-lang-fr>FAQ</span><span data-lang-de>FAQ</span>
+      <span data-lang-es>Preguntas frecuentes</span><span data-lang-pt>Perguntas frequentes</span><span data-lang-it>FAQ</span>
+    </a>
     <a href="mailto:support@teacherpalette.com">Email</a>
   </div>
   <div class="copy">© 2026 woosyume. All rights reserved.</div>
@@ -2794,6 +2804,10 @@
       // Footer의 What's New 링크도 동기화 (있으면)
       document.querySelectorAll('a[href^="releases/"], a[href^="releases/index.html"]').forEach(a => {
         a.href = 'releases/index.html?lang=' + lang;
+      });
+      // FAQ 링크(헤더 + 푸터)도 현재 언어 파라미터 유지
+      document.querySelectorAll('a[href^="faq/"], a[href^="faq/index.html"]').forEach(a => {
+        a.href = 'faq/index.html?lang=' + lang;
       });
     }
     const sel = document.getElementById('lang-select');
