@@ -215,6 +215,33 @@
   }
   aside.sidebar a.tab.active .count { color: var(--accent); background: rgba(1,118,211,0.10); }
   [data-theme="dark"] aside.sidebar a.tab.active .count { background: rgba(88,166,255,0.16); }
+  aside.sidebar a.tab > span:first-child { display: inline-flex; align-items: center; gap: 7px; }
+
+  /* ── 심플 라인 아이콘 (이모지 대체) ─────────────────────── */
+  .tab-icon, .head-icon { display: inline-flex; flex-shrink: 0; }
+  .tab-icon svg, .head-icon svg, .subhead-icon svg {
+    stroke: currentColor; fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .tab-icon svg { width: 15px; height: 15px; }
+  .head-icon svg { width: 21px; height: 21px; color: var(--accent); }
+  .subhead-icon svg { width: 14px; height: 14px; }
+
+  /* ── Live Presentation Tips 하위 그룹 서브 네비 ──────────── */
+  .subtabs { margin: 2px 0 4px 4px; padding-left: 10px; border-left: 1px solid var(--border); }
+  a.subtab {
+    display: flex; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--text-dim);
+    padding: 5px 10px; border-radius: 7px;
+    font-size: 12.5px; font-weight: 500;
+    transition: background 0.12s, color 0.12s;
+  }
+  a.subtab:hover { background: var(--accent-soft); color: var(--accent); }
+  a.subtab svg {
+    width: 12px; height: 12px; flex-shrink: 0;
+    stroke: currentColor; fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
 
   main.content { min-width: 0; }
   article.faq-panel {
@@ -383,7 +410,7 @@
     </div>
     <a class="tab active" href="#getting-started" data-cat="getting-started">
       <span>
-        🚀
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 5h13l-3.5 4L18 13H5"/></svg></span>
         <span data-lang-en>Getting Started</span>
         <span data-lang-ko>시작하기</span>
         <span data-lang-ja>はじめに</span>
@@ -398,7 +425,7 @@
     </a>
     <a class="tab" href="#live-teaching" data-cat="live-teaching">
       <span>
-        🎥
+        <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 00-4 12.6c.3.24.5.6.5 1v.4h7v-.4c0-.4.2-.76.5-1A7 7 0 0012 2z"/></svg></span>
         <span data-lang-en>Live Presentation Tips</span>
         <span data-lang-ko>라이브 발표 활용 팁</span>
         <span data-lang-ja>ライブ発表活用のヒント</span>
@@ -409,14 +436,52 @@
         <span data-lang-pt>Dicas para apresentações em tempo real</span>
         <span data-lang-it>Consigli per le presentazioni dal vivo</span>
       </span>
-      <span class="count">16</span>
+      <span class="count">20</span>
     </a>
+    <div class="subtabs">
+      <a class="subtab" href="#tip-screen-sharing">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
+        <span data-lang-en>Screen Sharing & Attention</span>
+        <span data-lang-ko>화면 공유 & 시선 유도</span>
+        <span data-lang-ja>画面共有 & 視線誘導</span>
+      </a>
+      <a class="subtab" href="#tip-drawing-shapes">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span data-lang-en>Drawing & Shapes</span>
+        <span data-lang-ko>드로잉 & 도형</span>
+        <span data-lang-ja>描画 & 図形</span>
+      </a>
+      <a class="subtab" href="#tip-multi-display">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span data-lang-en>Multi-Display</span>
+        <span data-lang-ko>멀티 디스플레이</span>
+        <span data-lang-ja>マルチディスプレイ</span>
+      </a>
+      <a class="subtab" href="#tip-timers-breaks">
+        <svg viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+        <span data-lang-en>Timers & Breaks</span>
+        <span data-lang-ko>타이머 & 휴식</span>
+        <span data-lang-ja>タイマー & 休憩</span>
+      </a>
+      <a class="subtab" href="#tip-tools-shortcuts">
+        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M10 14h.01M14 14h.01M18 14h.01M7 18h10"/></svg>
+        <span data-lang-en>Tools & Shortcuts</span>
+        <span data-lang-ko>도구 & 단축키</span>
+        <span data-lang-ja>ツール & ショートカット</span>
+      </a>
+      <a class="subtab" href="#tip-whiteboard">
+        <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-4"/><path d="M9 13l2 2 4-4"/></svg>
+        <span data-lang-en>Whiteboard</span>
+        <span data-lang-ko>화이트보드</span>
+        <span data-lang-ja>ホワイトボード</span>
+      </a>
+    </div>
   </aside>
 
   <main class="content">
     <article class="faq-panel" id="getting-started">
       <h2>
-        🚀
+        <span class="head-icon"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 5h13l-3.5 4L18 13H5"/></svg></span>
         <span data-lang-en>Getting Started</span>
         <span data-lang-ko>시작하기</span>
         <span data-lang-ja>はじめに</span>
@@ -622,7 +687,7 @@
 
     <article class="faq-panel" id="live-teaching">
       <h2>
-        🎥
+        <span class="head-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 00-4 12.6c.3.24.5.6.5 1v.4h7v-.4c0-.4.2-.76.5-1A7 7 0 0012 2z"/></svg></span>
         <span data-lang-en>Live Presentation Tips</span>
         <span data-lang-ko>라이브 발표 활용 팁</span>
         <span data-lang-ja>ライブ発表活用のヒント</span>
@@ -634,8 +699,8 @@
         <span data-lang-it>Consigli per le presentazioni dal vivo</span>
       </h2>
 
-      <div class="faq-subhead">
-        <span class="subhead-icon">📡</span>
+      <div class="faq-subhead" id="tip-screen-sharing">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></span>
         <span data-lang-en>Screen Sharing & Attention</span>
         <span data-lang-ko>화면 공유 & 시선 유도</span>
         <span data-lang-ja>画面共有 & 視線誘導</span>
@@ -710,8 +775,8 @@
         </p></div>
       </div>
 
-      <div class="faq-subhead">
-        <span class="subhead-icon">✏️</span>
+      <div class="faq-subhead" id="tip-drawing-shapes">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
         <span data-lang-en>Drawing & Shapes</span>
         <span data-lang-ko>드로잉 & 도형</span>
         <span data-lang-ja>描画 & 図形</span>
@@ -728,8 +793,8 @@
         </p></div>
       </div>
 
-      <div class="faq-subhead">
-        <span class="subhead-icon">🖥️</span>
+      <div class="faq-subhead" id="tip-multi-display">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
         <span data-lang-en>Multi-Display</span>
         <span data-lang-ko>멀티 디스플레이</span>
         <span data-lang-ja>マルチディスプレイ</span>
@@ -746,8 +811,8 @@
         </p></div>
       </div>
 
-      <div class="faq-subhead">
-        <span class="subhead-icon">⏱️</span>
+      <div class="faq-subhead" id="tip-timers-breaks">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></span>
         <span data-lang-en>Timers & Breaks</span>
         <span data-lang-ko>타이머 & 휴식</span>
         <span data-lang-ja>タイマー & 休憩</span>
@@ -764,8 +829,8 @@
         </p></div>
       </div>
 
-      <div class="faq-subhead">
-        <span class="subhead-icon">⌨️</span>
+      <div class="faq-subhead" id="tip-tools-shortcuts">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M10 14h.01M14 14h.01M18 14h.01M7 18h10"/></svg></span>
         <span data-lang-en>Tools & Shortcuts</span>
         <span data-lang-ko>도구 & 단축키</span>
         <span data-lang-ja>ツール & ショートカット</span>
@@ -854,8 +919,8 @@
         </p></div>
       </div>
 
-      <div class="faq-subhead">
-        <span class="subhead-icon">📝</span>
+      <div class="faq-subhead" id="tip-whiteboard">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-4"/><path d="M9 13l2 2 4-4"/></svg></span>
         <span data-lang-en>Whiteboard</span>
         <span data-lang-ko>화이트보드</span>
         <span data-lang-ja>ホワイトボード</span>
