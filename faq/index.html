@@ -218,7 +218,6 @@
 
   main.content { min-width: 0; }
   article.faq-panel {
-    display: none;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 16px;
@@ -226,8 +225,10 @@
     box-shadow: var(--shadow);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    margin-bottom: 28px;
+    scroll-margin-top: 96px;
   }
-  article.faq-panel.active { display: block; }
+  article.faq-panel:last-child { margin-bottom: 0; }
   article.faq-panel > h2 {
     font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
     display: flex; align-items: center; gap: 10px;
@@ -367,7 +368,7 @@
         <span data-lang-pt>Primeiros passos</span>
         <span data-lang-it>Per iniziare</span>
       </span>
-      <span class="count">10</span>
+      <span class="count">11</span>
     </a>
     <a class="tab" href="#live-teaching" data-cat="live-teaching">
       <span>
@@ -387,7 +388,7 @@
   </aside>
 
   <main class="content">
-    <article class="faq-panel active" id="getting-started">
+    <article class="faq-panel" id="getting-started">
       <h2>
         🚀
         <span data-lang-en>Getting Started</span>
@@ -491,6 +492,31 @@
           <span data-lang-ja>ツールバーまたはコマンドパレット（<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>）からホワイトボードを起動できます。複数ページをすぐに切り替えられ、無地・方眼・罫線・コーネル式のテンプレート、ダーク調の黒板モード、画像のドラッグ&ドロップ、PDFの読み込みと書き込み、ページ移動用のミニマップ、そして作業中も自動でPDF保存されます。</span>
         </p></div>
         <div class="faq-video-frame" id="video-slot-whiteboard-mode">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3><span class="q-mark">Q.</span>
+          <span><span data-lang-en>How do I switch tools on the toolbar?</span><span data-lang-ko>툴바에서 도구는 어떻게 전환하나요?</span><span data-lang-ja>ツールバーでツールを切り替えるには？</span></span>
+        </h3>
+        <div class="faq-a"><p>
+          <span data-lang-en>Click any tool icon directly on the TeacherPalette toolbar to switch to it instantly — no menus, no memorizing shortcuts. The toolbar floats on top of whatever you're presenting, so moving between the pen, highlighter, eraser, and pointer is always just one click away. If you'd rather keep your hands off the mouse, every tool also has its own keyboard shortcut (see above).</span>
+          <span data-lang-ko>TeacherPalette 툴바에 있는 도구 아이콘을 클릭하면 바로 그 도구로 전환돼요. 메뉴를 열거나 단축키를 외울 필요 없이, 펜·하이라이터·지우개·포인터를 클릭 한 번으로 오갈 수 있어요. 툴바는 화면 위에 항상 떠 있어서 발표 중에도 손이 가는 대로 바로 누를 수 있고, 물론 위에서 설명한 단축키로도 똑같이 전환할 수 있어요.</span>
+          <span data-lang-ja>TeacherPaletteのツールバーにあるツールアイコンをクリックすると、その場ですぐにそのツールに切り替わります。メニューを開いたりショートカットを覚えたりする必要はなく、ペン・ハイライター・消しゴム・ポインターをワンクリックで切り替えられます。ツールバーは常に画面上に浮かんでいるので、発表中でもすぐに手が届きます。もちろん上記のショートカットでも同様に切り替え可能です。</span>
+        </p></div>
+        <div class="faq-video-frame" id="video-slot-toolbar-click-switch">
           <span class="video-icon">🎬</span>
           <span class="video-label">
             <span data-lang-en>Video coming soon</span>
@@ -800,23 +826,25 @@
     fbGroups.forEach(p => p.classList.add('fb-en'));
   })(lang);
 
-  // ── 카테고리 탭 전환 ──
+  // ── 카테고리 스크롤 섹션 (탭 = 스크롤 앵커, 스크롤 위치로 활성 탭 표시) ──
   const tabs = document.querySelectorAll('aside.sidebar a.tab');
   const panels = document.querySelectorAll('article.faq-panel');
-  function showCategory(cat) {
-    tabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
-    panels.forEach(p => p.classList.toggle('active', p.id === cat));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  function setActiveTab(id) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.cat === id));
   }
   tabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      showCategory(tab.dataset.cat);
-      history.replaceState(null, '', '#' + tab.dataset.cat);
+    tab.addEventListener('click', () => {
+      // 기본 앵커 이동(부드러운 스크롤은 html { scroll-behavior: smooth }가 처리)에 맡기고,
+      // 클릭 즉시 해당 탭을 활성화해 스크롤 애니메이션 중에도 하이라이트가 어긋나지 않게 함
+      setActiveTab(tab.dataset.cat);
     });
   });
-  const hash = window.location.hash.slice(1);
-  if (hash && document.getElementById(hash)) showCategory(hash);
+  const sectionSpy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActiveTab(entry.target.id);
+    });
+  }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
+  panels.forEach(p => sectionSpy.observe(p));
 
   // ── 다크 모드 ──
   const themeToggle = document.getElementById('themeToggle');
