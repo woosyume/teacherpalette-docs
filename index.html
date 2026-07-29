@@ -251,6 +251,14 @@
     -webkit-backdrop-filter: saturate(160%) blur(20px);
   }
   .btn-secondary:hover { transform: translateY(-1px); border-color: var(--accent); }
+  /* App Store 심사 제출 전, CTA를 클릭 불가 상태로 표시 (실제 링크 확정 시 제거) */
+  .btn-disabled {
+    opacity: 0.55;
+    cursor: default;
+    pointer-events: none;
+    box-shadow: none;
+  }
+  .btn-disabled:hover { transform: none; box-shadow: none; border-color: inherit; }
 
 
   /* ── Live Demo (Hero 아래) ─────────────────────────────────
@@ -1317,16 +1325,16 @@
   </p>
 
   <div class="cta-row">
-    <a href="#" class="btn btn-primary">
-      <span data-lang-en>Download for macOS</span>
-      <span data-lang-ko>macOS용 다운로드</span>
-      <span data-lang-ja>macOS 版をダウンロード</span>
-      <span data-lang-zh>下载 macOS 版</span>
-      <span data-lang-fr>Télécharger pour macOS</span>
-      <span data-lang-de>Für macOS herunterladen</span>
-      <span data-lang-es>Descargar para macOS</span>
-      <span data-lang-pt>Baixar para macOS</span>
-      <span data-lang-it>Scarica per macOS</span>
+    <a href="#" class="btn btn-primary btn-disabled" aria-disabled="true">
+      <span data-lang-en>Coming Soon</span>
+      <span data-lang-ko>출시 예정</span>
+      <span data-lang-ja>近日公開</span>
+      <span data-lang-zh>即将推出</span>
+      <span data-lang-fr>Bientôt disponible</span>
+      <span data-lang-de>Demnächst verfügbar</span>
+      <span data-lang-es>Próximamente</span>
+      <span data-lang-pt>Em breve</span>
+      <span data-lang-it>Prossimamente</span>
     </a>
     <a href="#features" class="btn btn-secondary">
       <span data-lang-en>See features</span>
@@ -2175,10 +2183,10 @@
             <span data-lang-es>Cancela cuando quieras, sin preguntas</span><span data-lang-pt>Cancele quando quiser, sem perguntas</span><span data-lang-it>Annulla in qualsiasi momento, senza domande</span>
           </li>
         </ul>
-        <a href="#" class="btn btn-secondary pricing-cta">
-          <span data-lang-en>Start free trial</span><span data-lang-ko>무료 체험 시작</span><span data-lang-ja>無料トライアルを開始</span>
-          <span data-lang-zh>开始免费试用</span><span data-lang-fr>Démarrer l'essai gratuit</span><span data-lang-de>Kostenlos testen</span>
-          <span data-lang-es>Iniciar prueba gratuita</span><span data-lang-pt>Iniciar teste gratuito</span><span data-lang-it>Inizia la prova gratuita</span>
+        <a href="#" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true">
+          <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
+          <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
+          <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
         </a>
       </div>
 
@@ -2229,10 +2237,10 @@
             <span data-lang-es>Un solo precio todo el año, sin subidas sorpresa al renovar</span><span data-lang-pt>Um único preço o ano todo, sem aumentos surpresa na renovação</span><span data-lang-it>Un prezzo unico per tutto l'anno, senza rincari a sorpresa al rinnovo</span>
           </li>
         </ul>
-        <a href="#" class="btn btn-primary pricing-cta">
-          <span data-lang-en>Start free trial</span><span data-lang-ko>무료 체험 시작</span><span data-lang-ja>無料トライアルを開始</span>
-          <span data-lang-zh>开始免费试用</span><span data-lang-fr>Démarrer l'essai gratuit</span><span data-lang-de>Kostenlos testen</span>
-          <span data-lang-es>Iniciar prueba gratuita</span><span data-lang-pt>Iniciar teste gratuito</span><span data-lang-it>Inizia la prova gratuita</span>
+        <a href="#" class="btn btn-primary pricing-cta btn-disabled" aria-disabled="true">
+          <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
+          <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
+          <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
         </a>
       </div>
 
@@ -2273,10 +2281,10 @@
             <span data-lang-es>Es tuyo para siempre, en esta Mac</span><span data-lang-pt>Seu para sempre, neste Mac</span><span data-lang-it>Per sempre tuo, su questo Mac</span>
           </li>
         </ul>
-        <a href="#" class="btn btn-secondary pricing-cta">
-          <span data-lang-en>Buy now</span><span data-lang-ko>지금 구매</span><span data-lang-ja>今すぐ購入</span>
-          <span data-lang-zh>立即购买</span><span data-lang-fr>Acheter maintenant</span><span data-lang-de>Jetzt kaufen</span>
-          <span data-lang-es>Comprar ahora</span><span data-lang-pt>Comprar agora</span><span data-lang-it>Acquista ora</span>
+        <a href="#" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true">
+          <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
+          <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
+          <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
         </a>
       </div>
 
