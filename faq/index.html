@@ -296,12 +296,20 @@
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .faq-item.open h3::after { transform: rotate(-135deg); }
+  /* CSS Grid 트릭: max-height/scrollHeight 측정 없이 브라우저가 실제 콘텐츠
+     높이를 그대로 추적하며 0fr→1fr로 트랜지션하므로, 폰트 렌더링·줄바꿈·
+     이미지 로딩 등 어떤 이유로도 높이가 어긋나 텍스트가 잘리는 일이 없다. */
   .faq-item .faq-body {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .faq-item.open .faq-body {
+    grid-template-rows: 1fr;
   }
   .faq-item .faq-body-inner {
+    overflow: hidden;
     opacity: 0;
     transform: translateY(-8px);
     transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
@@ -465,6 +473,32 @@
       </span>
       <span class="count">11</span>
     </a>
+    <div class="subtabs">
+      <a class="subtab" href="#gs-basics">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span data-lang-en>Basics</span>
+        <span data-lang-ko>기본 정보</span>
+        <span data-lang-ja>基本情報</span>
+      </a>
+      <a class="subtab" href="#gs-tools">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span data-lang-en>Using the Tools</span>
+        <span data-lang-ko>도구 사용하기</span>
+        <span data-lang-ja>ツールの使い方</span>
+      </a>
+      <a class="subtab" href="#gs-customize">
+        <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="7" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+        <span data-lang-en>Make It Yours</span>
+        <span data-lang-ko>나만의 설정</span>
+        <span data-lang-ja>自分好みに設定</span>
+      </a>
+      <a class="subtab" href="#gs-help">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-1.5 2-2.5 3"/><circle cx="12" cy="16.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span data-lang-en>Need Help?</span>
+        <span data-lang-ko>도움이 필요할 때</span>
+        <span data-lang-ja>困ったときは</span>
+      </a>
+    </div>
     <a class="tab" href="#live-teaching" data-cat="live-teaching">
       <span>
         <span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 00-4 12.6c.3.24.5.6.5 1v.4h7v-.4c0-.4.2-.76.5-1A7 7 0 0012 2z"/></svg></span>
@@ -564,6 +598,13 @@
         <span data-lang-it>Per iniziare</span>
       </h2>
 
+      <div class="faq-subhead" id="gs-basics">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <span data-lang-en>Basics</span>
+        <span data-lang-ko>기본 정보</span>
+        <span data-lang-ja>基本情報</span>
+      </div>
+
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
           <span><span data-lang-en>What is TeacherPalette?</span><span data-lang-ko>TeacherPalette가 뭔가요?</span><span data-lang-ja>TeacherPaletteとは何ですか？</span></span>
@@ -617,6 +658,13 @@
           <span data-lang-ko>두 가지 모두 기능은 완전히 동일해요. 원타임 구매($17.99)는 한 번 결제하면 평생 쓸 수 있어요 — 갱신이 전혀 없어요. 월간($2.99)·연간($9.99) 구독은 7일 무료 체험이 포함되고 해지하기 전까지 자동으로 갱신돼요. 사용 계획에 맞는 방식을 고르시면 돼요.</span>
           <span data-lang-ja>どちらも機能はまったく同じです。買い切り購入（$17.99）は一度の支払いで永久に使えます — 更新は一切ありません。月額（$2.99）・年額（$9.99）サブスクリプションには7日間の無料トライアルが含まれ、解約するまで自動的に更新されます。使い方に合わせてお選びください。</span>
         </p></div>
+      </div>
+
+      <div class="faq-subhead" id="gs-tools">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
+        <span data-lang-en>Using the Tools</span>
+        <span data-lang-ko>도구 사용하기</span>
+        <span data-lang-ja>ツールの使い方</span>
       </div>
 
       <div class="faq-item">
@@ -694,6 +742,13 @@
         </div>
       </div>
 
+      <div class="faq-subhead" id="gs-customize">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="7" cy="18" r="2" fill="currentColor" stroke="none"/></svg></span>
+        <span data-lang-en>Make It Yours</span>
+        <span data-lang-ko>나만의 설정</span>
+        <span data-lang-ja>自分好みに設定</span>
+      </div>
+
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
           <span><span data-lang-en>What is My Palette?</span><span data-lang-ko>'나만의 팔레트'가 뭔가요?</span><span data-lang-ja>「My Palette」とは何ですか？</span></span>
@@ -742,6 +797,13 @@
             <span data-lang-it>Video in arrivo</span>
           </span>
         </div>
+      </div>
+
+      <div class="faq-subhead" id="gs-help">
+        <span class="subhead-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-1.5 2-2.5 3"/><circle cx="12" cy="16.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <span data-lang-en>Need Help?</span>
+        <span data-lang-ko>도움이 필요할 때</span>
+        <span data-lang-ja>困ったときは</span>
       </div>
 
       <div class="faq-item">
@@ -1478,7 +1540,7 @@
 
   // ── 항목 본문 toggle (기본 접힘, 클릭 시 부드럽게 펼침) ──
   // h3 뒤의 답변/영상 요소를 .faq-body > .faq-body-inner로 감싸서
-  // max-height + opacity + translateY를 함께 트랜지션시키는 방식으로 펼침.
+  // grid-template-rows(0fr↔1fr) + opacity + translateY를 함께 트랜지션시키는 방식으로 펼침.
   document.querySelectorAll('.faq-item > h3').forEach(h3 => {
     const item = h3.closest('.faq-item');
 
@@ -1499,40 +1561,16 @@
     h3.setAttribute('tabindex', '0');
     h3.setAttribute('aria-expanded', 'false');
 
-    // max-height가 계속 고정 px 값으로 남아있으면 폰트 렌더링/줄바꿈이
-    // 미세하게 달라질 때 본문 하단이 잘릴 수 있어서, 펼침 트랜지션이
-    // 끝나면 max-height를 'none'으로 풀어 완전히 자유로운 높이로 둔다.
-    const onOpenTransitionEnd = (e) => {
-      if (e.target !== body || e.propertyName !== 'max-height') return;
-      if (item.classList.contains('open')) body.style.maxHeight = 'none';
-    };
-    body.addEventListener('transitionend', onOpenTransitionEnd);
-
+    // CSS(grid-template-rows: 0fr → 1fr)가 실제 높이 계산을 전부 담당하므로
+    // JS는 open 클래스만 토글하면 된다 — scrollHeight 측정이나 resize 재계산이
+    // 필요 없어 폰트/이미지 로딩 타이밍에 따른 잘림 문제 자체가 발생하지 않는다.
     const toggle = () => {
       const isOpen = item.classList.toggle('open');
       h3.setAttribute('aria-expanded', String(isOpen));
-      if (isOpen) {
-        body.style.maxHeight = inner.scrollHeight + 'px';
-      } else {
-        // max-height가 'none'인 상태(완전히 펼쳐진 뒤)에서 곧바로 0으로
-        // 트랜지션하면 'none' → 숫자 전환이 애니메이션되지 않으므로,
-        // 먼저 현재 실제 높이(px)로 되돌려 리플로우를 강제한 뒤 0으로 애니메이션한다.
-        body.style.maxHeight = inner.scrollHeight + 'px';
-        void body.offsetHeight;
-        body.style.maxHeight = '0px';
-      }
     };
     h3.addEventListener('click', toggle);
     h3.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
-  });
-
-  // 뷰포트 크기가 바뀌면(예: 영상 2단 배치가 모바일에서 세로로 바뀌는 경우)
-  // 열려 있는 항목은 즉시 max-height:none으로 맞춰 잘림 없이 새 높이에 맞춘다.
-  window.addEventListener('resize', () => {
-    document.querySelectorAll('.faq-item.open > .faq-body').forEach(body => {
-      body.style.maxHeight = 'none';
     });
   });
 
