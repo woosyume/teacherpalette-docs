@@ -1540,7 +1540,14 @@
   panels.forEach(p => sectionSpy.observe(p));
 
   // ── 서브 카테고리 스크롤 섹션 (서브탭 = 스크롤 앵커, 스크롤 위치로 활성 서브탭 표시) ──
-  // 상단 카테고리 탭과 동일한 IntersectionObserver 패턴을 .faq-subhead에도 적용.
+  // .faq-subhead는 한 줄짜리 짧은 요소라, 상단 카테고리 패널(sectionSpy)과 같은
+  // rootMargin(-100px)을 그대로 쓰면 .faq-subhead의 scroll-margin-top(96px) 착지
+  // 위치가 관찰 영역 상단 경계(100px)보다 위(96px < 100px)에 걸려버려서, 클릭해
+  // 이동한 항목이 아니라 그 바로 아래의 항목이 active로 잡히는 버그가 생긴다.
+  // 상단 여백을 96px보다 확실히 작게(72px) 줘서 착지 지점이 항상 관찰 영역
+  // 안쪽에 들어오게 하고, 짧은 서브그룹이 인접해 둘 다 걸리는 경우엔 문서상
+  // 가장 아래(=가장 최근에 스크롤로 지난) 항목을 active로 고정해 콜백이 어떤
+  // 순서로 오든 결과가 항상 하나로 정해지게 한다.
   const subtabs = document.querySelectorAll('a.subtab');
   const subheads = document.querySelectorAll('.faq-subhead');
   function setActiveSubtab(id) {
@@ -1551,11 +1558,17 @@
       setActiveSubtab(st.getAttribute('href').slice(1));
     });
   });
+  const subheadState = new Map();
+  subheads.forEach(s => subheadState.set(s.id, false));
+  function refreshActiveSubhead() {
+    let activeId = null;
+    subheads.forEach(s => { if (subheadState.get(s.id)) activeId = s.id; });
+    if (activeId) setActiveSubtab(activeId);
+  }
   const subheadSpy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) setActiveSubtab(entry.target.id);
-    });
-  }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
+    entries.forEach(entry => subheadState.set(entry.target.id, entry.isIntersecting));
+    refreshActiveSubhead();
+  }, { rootMargin: '-72px 0px -55% 0px', threshold: 0 });
   subheads.forEach(s => subheadSpy.observe(s));
 
   // ── 항목 본문 toggle (기본 접힘, 클릭 시 부드럽게 펼침) ──
