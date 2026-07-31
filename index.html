@@ -147,7 +147,63 @@
     border-color: var(--accent);
     color: var(--accent);
   }
-  @media (max-width: 640px) { .header-link { display: none; } }
+  /* 모바일 내비게이션 토글 (햄버거) — 640px 이하에서만 노출 */
+  .nav-toggle {
+    display: none;
+    position: relative;
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .nav-toggle:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .nav-toggle span {
+    position: absolute; left: 8px; right: 8px;
+    height: 1.6px; background: var(--text);
+    border-radius: 1px;
+    transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+  }
+  .nav-toggle span:nth-child(1) { top: 12px; }
+  .nav-toggle span:nth-child(2) { top: 17px; }
+  .nav-toggle span:nth-child(3) { top: 22px; }
+  .nav-toggle.open span:nth-child(1) { top: 17px; transform: rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { top: 17px; transform: rotate(-45deg); }
+  /* 데스크톱에선 래퍼가 레이아웃에 영향을 주지 않도록 display:contents로 무효화 */
+  .mobile-nav { display: contents; }
+  @media (max-width: 640px) {
+    .header-inner { flex-wrap: wrap; }
+    .header-controls { flex-wrap: wrap; justify-content: flex-end; }
+    .nav-toggle { display: inline-block; }
+    .mobile-nav {
+      display: none;
+      order: 10;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 10px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav .header-link {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: none;
+      border-radius: 0;
+      padding: 13px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav .header-link:last-child { border-bottom: none; }
+  }
+  @media (max-width: 400px) {
+    .header-cta { padding: 7px 12px; font-size: 12.5px; }
+    .lang-select { padding: 3px 8px 3px 10px; }
+    .theme-switch button { padding: 5px 8px; }
+  }
   .header-cta {
     text-decoration: none;
     color: #fff;
@@ -1310,26 +1366,31 @@
       <img class="brand-logo" src="img/logo.png" alt="TeacherPalette">
     </a>
     <div class="header-controls">
-      <a class="header-link" href="releases/index.html" id="whats-new-link">
-        <span data-lang-en>What's New</span><span data-lang-ko>업데이트</span><span data-lang-ja>更新履歴</span>
-        <span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span>
-        <span data-lang-es>Novedades</span><span data-lang-pt>Novidades</span><span data-lang-it>Novità</span>
-      </a>
-      <a class="header-link" href="faq/index.html" id="faq-link">
-        <span data-lang-en>Help &amp; Tips</span><span data-lang-ko>도움말 &amp; 팁</span><span data-lang-ja>ヘルプ＆ヒント</span>
-        <span data-lang-zh>帮助与技巧</span><span data-lang-fr>Aide et astuces</span><span data-lang-de>Hilfe &amp; Tipps</span>
-        <span data-lang-es>Ayuda y consejos</span><span data-lang-pt>Ajuda e dicas</span><span data-lang-it>Aiuto e consigli</span>
-      </a>
-      <a class="header-link" href="#privacy">
-        <span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span>
-        <span data-lang-zh>隐私</span><span data-lang-fr>Confidentialité</span><span data-lang-de>Datenschutz</span>
-        <span data-lang-es>Privacidad</span><span data-lang-pt>Privacidade</span><span data-lang-it>Privacy</span>
-      </a>
-      <a class="header-link" href="#terms">
-        <span data-lang-en>Terms</span><span data-lang-ko>이용약관</span><span data-lang-ja>利用規約</span>
-        <span data-lang-zh>服务条款</span><span data-lang-fr>Conditions</span><span data-lang-de>Bedingungen</span>
-        <span data-lang-es>Términos</span><span data-lang-pt>Termos</span><span data-lang-it>Termini</span>
-      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mobile-nav" id="mobileNav">
+        <a class="header-link" href="releases/index.html" id="whats-new-link">
+          <span data-lang-en>What's New</span><span data-lang-ko>업데이트</span><span data-lang-ja>更新履歴</span>
+          <span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span>
+          <span data-lang-es>Novedades</span><span data-lang-pt>Novidades</span><span data-lang-it>Novità</span>
+        </a>
+        <a class="header-link" href="faq/index.html" id="faq-link">
+          <span data-lang-en>Help &amp; Tips</span><span data-lang-ko>도움말 &amp; 팁</span><span data-lang-ja>ヘルプ＆ヒント</span>
+          <span data-lang-zh>帮助与技巧</span><span data-lang-fr>Aide et astuces</span><span data-lang-de>Hilfe &amp; Tipps</span>
+          <span data-lang-es>Ayuda y consejos</span><span data-lang-pt>Ajuda e dicas</span><span data-lang-it>Aiuto e consigli</span>
+        </a>
+        <a class="header-link" href="#privacy">
+          <span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span>
+          <span data-lang-zh>隐私</span><span data-lang-fr>Confidentialité</span><span data-lang-de>Datenschutz</span>
+          <span data-lang-es>Privacidad</span><span data-lang-pt>Privacidade</span><span data-lang-it>Privacy</span>
+        </a>
+        <a class="header-link" href="#terms">
+          <span data-lang-en>Terms</span><span data-lang-ko>이용약관</span><span data-lang-ja>利用規約</span>
+          <span data-lang-zh>服务条款</span><span data-lang-fr>Conditions</span><span data-lang-de>Bedingungen</span>
+          <span data-lang-es>Términos</span><span data-lang-pt>Termos</span><span data-lang-it>Termini</span>
+        </a>
+      </div>
       <label class="lang-select" aria-label="Language">
         <select id="lang-select">
           <option value="en">English</option>
@@ -2881,6 +2942,30 @@
       b.addEventListener('click', () => setTheme(b.dataset.themeBtn));
     });
     setTheme(detectTheme());
+
+    // ── 모바일 헤더 내비게이션 (햄버거 토글) ───────────────────
+    const navToggle = document.getElementById('navToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    if (navToggle && mobileNav) {
+      function setNavOpen(open) {
+        navToggle.classList.toggle('open', open);
+        mobileNav.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      navToggle.addEventListener('click', () => {
+        setNavOpen(!mobileNav.classList.contains('open'));
+      });
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => setNavOpen(false));
+      });
+      document.addEventListener('click', e => {
+        if (!mobileNav.classList.contains('open')) return;
+        if (!mobileNav.contains(e.target) && !navToggle.contains(e.target)) setNavOpen(false);
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 640) setNavOpen(false);
+      });
+    }
   })();
 </script>
 
