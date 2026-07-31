@@ -281,10 +281,10 @@
     cursor: pointer; user-select: none;
   }
   .faq-item h3 .q-mark { color: var(--accent); flex-shrink: 0; }
-  .faq-item .faq-a { color: var(--text-dim); font-size: 14px; line-height: 1.75; padding-left: 24px; }
+  .faq-item .faq-a { color: var(--text-dim); font-size: 14px; line-height: 1.75; padding-left: 24px; margin-top: 10px; }
   .faq-item .faq-a p { margin: 0; }
 
-  /* ── 항목 본문 toggle (기본 접힘, 클릭 시 펼침) ───────────── */
+  /* ── 항목 본문 toggle (기본 접힘, 클릭 시 부드럽게 펼침) ──── */
   .faq-item h3::after {
     content: "";
     margin-left: auto;
@@ -293,15 +293,24 @@
     border-right: 1.5px solid var(--text-muted);
     border-bottom: 1.5px solid var(--text-muted);
     transform: rotate(45deg);
-    transition: transform 0.2s;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .faq-item.open h3::after { transform: rotate(-135deg); }
-  .faq-item .faq-a,
-  .faq-item .faq-video-frame,
-  .faq-item .faq-video-row { display: none; }
-  .faq-item.open .faq-a { display: block; margin-top: 10px; }
-  .faq-item.open .faq-video-frame { display: flex; }
-  .faq-item.open .faq-video-row { display: flex; }
+  .faq-item .faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .faq-item .faq-body-inner {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .faq-item.open .faq-body-inner {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease 0.08s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s;
+  }
 
   /* ── 감성 제안문 스타일 항목 (Live Presentation Tips) ────── */
   .faq-item.tip h3 { color: var(--text); font-size: 16px; }
@@ -1453,19 +1462,46 @@
   }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
   panels.forEach(p => sectionSpy.observe(p));
 
-  // ── 항목 본문 toggle (기본 접힘, 클릭 시 펼침) ──
+  // ── 항목 본문 toggle (기본 접힘, 클릭 시 부드럽게 펼침) ──
+  // h3 뒤의 답변/영상 요소를 .faq-body > .faq-body-inner로 감싸서
+  // max-height + opacity + translateY를 함께 트랜지션시키는 방식으로 펼침.
   document.querySelectorAll('.faq-item > h3').forEach(h3 => {
+    const item = h3.closest('.faq-item');
+
+    const inner = document.createElement('div');
+    inner.className = 'faq-body-inner';
+    let sib = h3.nextElementSibling;
+    while (sib) {
+      const next = sib.nextElementSibling;
+      inner.appendChild(sib);
+      sib = next;
+    }
+    const body = document.createElement('div');
+    body.className = 'faq-body';
+    body.appendChild(inner);
+    h3.after(body);
+
     h3.setAttribute('role', 'button');
     h3.setAttribute('tabindex', '0');
     h3.setAttribute('aria-expanded', 'false');
-    const item = h3.closest('.faq-item');
+
     const toggle = () => {
       const isOpen = item.classList.toggle('open');
       h3.setAttribute('aria-expanded', String(isOpen));
+      body.style.maxHeight = isOpen ? inner.scrollHeight + 'px' : '0px';
     };
     h3.addEventListener('click', toggle);
     h3.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  // 뷰포트 크기가 바뀌면(예: 영상 2단 배치가 모바일에서 세로로 바뀌는 경우)
+  // 열려 있는 항목들의 높이를 다시 계산해준다.
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.faq-item.open > .faq-body').forEach(body => {
+      const inner = body.querySelector('.faq-body-inner');
+      if (inner) body.style.maxHeight = inner.scrollHeight + 'px';
     });
   });
 
