@@ -277,11 +277,31 @@
   .faq-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
   .faq-item h3 {
     font-size: 15.5px; font-weight: 700; line-height: 1.5;
-    display: flex; gap: 8px; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px; margin-bottom: 0;
+    cursor: pointer; user-select: none;
   }
   .faq-item h3 .q-mark { color: var(--accent); flex-shrink: 0; }
   .faq-item .faq-a { color: var(--text-dim); font-size: 14px; line-height: 1.75; padding-left: 24px; }
   .faq-item .faq-a p { margin: 0; }
+
+  /* ── 항목 본문 toggle (기본 접힘, 클릭 시 펼침) ───────────── */
+  .faq-item h3::after {
+    content: "";
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 8px; height: 8px;
+    border-right: 1.5px solid var(--text-muted);
+    border-bottom: 1.5px solid var(--text-muted);
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+  }
+  .faq-item.open h3::after { transform: rotate(-135deg); }
+  .faq-item .faq-a,
+  .faq-item .faq-video-frame,
+  .faq-item .faq-video-row { display: none; }
+  .faq-item.open .faq-a { display: block; margin-top: 10px; }
+  .faq-item.open .faq-video-frame { display: flex; }
+  .faq-item.open .faq-video-row { display: flex; }
 
   /* ── 감성 제안문 스타일 항목 (Live Presentation Tips) ────── */
   .faq-item.tip h3 { color: var(--text); font-size: 16px; }
@@ -320,6 +340,9 @@
   }
   .faq-video-frame .video-icon { font-size: 22px; opacity: 0.6; }
   .faq-video-frame .video-label { font-size: 12px; font-weight: 500; }
+  .faq-video-row { display: flex; gap: 14px; margin-top: 14px; max-width: 480px; }
+  .faq-video-row .faq-video-frame { flex: 1; margin-top: 0; max-width: none; }
+  @media (max-width: 480px) { .faq-video-row { flex-direction: column; } }
 
   /* ── FAQ 패널 내부 하위 그룹 제목 (같은 종류별로 묶기) ───── */
   .faq-subhead {
@@ -446,7 +469,7 @@
         <span data-lang-pt>Dicas para apresentações em tempo real</span>
         <span data-lang-it>Consigli per le presentazioni dal vivo</span>
       </span>
-      <span class="count">20</span>
+      <span class="count">19</span>
     </a>
     <div class="subtabs">
       <a class="subtab" href="#tip-screen-sharing">
@@ -548,9 +571,9 @@
           <span><span data-lang-en>What are the system requirements?</span><span data-lang-ko>시스템 요구사항이 어떻게 되나요?</span><span data-lang-ja>システム要件を教えてください。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>macOS Sequoia 15.0 or later, on Apple Silicon or Intel Macs. The app itself is tiny (about 20 MB). The only permission it ever asks for is Screen Recording, and only because the Magnifier tool needs it to capture your screen — no other data leaves your Mac.</span>
-          <span data-lang-ko>macOS Sequoia 15.0 이상, Apple Silicon·Intel Mac 모두 지원해요. 앱 용량은 아주 작아요(약 20MB). 요청하는 권한은 화면 기록(Screen Recording) 하나뿐인데, 이것도 Magnifier(확대) 도구가 화면을 캡처하기 위해 필요한 것뿐이에요 — 다른 어떤 데이터도 Mac 밖으로 나가지 않아요.</span>
-          <span data-lang-ja>macOS Sequoia 15.0以降、Apple SiliconとIntel Macの両方に対応。アプリ自体はごく小さく（約20MB）。要求する権限は画面録画（Screen Recording）のみで、これはMagnifier（拡大）ツールが画面をキャプチャするために必要なだけです — 他のデータがMacの外に出ることはありません。</span>
+          <span data-lang-en>macOS Sequoia 15.0 or later, on Apple Silicon or Intel Macs. The app itself is tiny (about 20 MB), and no data ever leaves your Mac.</span>
+          <span data-lang-ko>macOS Sequoia 15.0 이상, Apple Silicon·Intel Mac 모두 지원해요. 앱 용량은 아주 작아요(약 20MB). 다른 어떤 데이터도 Mac 밖으로 나가지 않아요.</span>
+          <span data-lang-ja>macOS Sequoia 15.0以降、Apple SiliconとIntel Macの両方に対応。アプリ自体はごく小さく（約20MB）、他のデータがMacの外に出ることはありません。</span>
         </p></div>
       </div>
 
@@ -592,9 +615,9 @@
           <span><span data-lang-en>How do I start drawing on my screen?</span><span data-lang-ko>화면에 그림을 그리려면 어떻게 하나요?</span><span data-lang-ja>画面に描画を始めるには？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Trigger Drawing mode with its shortcut (rebindable, <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span> by default) — a soft halo appears around every screen edge and a HUD confirms it's on. Then pick a tool with <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span>, or scroll while holding <span class="kbd">⌘</span> to cycle tools and <span class="kbd">⌥</span> to cycle your favorite colors.</span>
-          <span data-lang-ko>단축키(기본값 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>, 자유롭게 재설정 가능)로 드로잉 모드를 켜면 화면 가장자리에 은은한 블롭이 나타나고 HUD로 켜졌는지 확인할 수 있어요. 그 다음 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>으로 도구를 고르거나, <span class="kbd">⌘</span>를 누른 채 스크롤해서 도구를, <span class="kbd">⌥</span>를 누른 채 스크롤해서 즐겨찾기 색상을 순환할 수 있어요.</span>
-          <span data-lang-ja>ショートカット（デフォルトは<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>、自由に再設定可能）で描画モードをオンにすると、画面の縁に淡いブロブが現れ、HUDでオンになったことを確認できます。その後、<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>でツールを選ぶか、<span class="kbd">⌘</span>を押しながらスクロールでツールを、<span class="kbd">⌥</span>を押しながらスクロールでお気に入りの色を切り替えられます。</span>
+          <span data-lang-en>Each drawing tool has its own default shortcut — a quick 2-key combo, <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span> (e.g. <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">P</span> for Pen, <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">H</span> for Highlighter, <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">E</span> for Eraser). Press any of them and Drawing mode turns on with that tool instantly — a soft halo appears around every screen edge and a HUD confirms it's on. From there, scroll while holding <span class="kbd">⌘</span> (or just press <span class="kbd">Tab</span>) to cycle tools, and hold <span class="kbd">⌥</span> to cycle your favorite colors.</span>
+          <span data-lang-ko>각 드로잉 도구에는 저마다 기본 단축키가 있어요 — 빠른 2키 조합인 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>이에요(예: 펜은 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">P</span>, 하이라이터는 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">H</span>, 지우개는 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">E</span>). 이 중 하나만 눌러도 그 도구로 곧바로 드로잉 모드가 켜지고, 화면 가장자리에 은은한 블롭이 나타나면서 HUD로 켜졌는지 확인할 수 있어요. 그다음엔 <span class="kbd">⌘</span>를 누른 채 스크롤(또는 <span class="kbd">Tab</span>)로 도구를, <span class="kbd">⌥</span>를 누른 채 스크롤해서 즐겨찾기 색상을 순환할 수 있어요.</span>
+          <span data-lang-ja>各描画ツールには専用のデフォルトショートカットがあります — 素早い2キーの<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>です（例：ペンは<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">P</span>、ハイライターは<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">H</span>、消しゴムは<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">E</span>）。いずれかを押すだけで、そのツールで即座に描画モードがオンになり、画面の縁に淡いブロブが現れてHUDで確認できます。その後は<span class="kbd">⌘</span>を押しながらスクロール（または<span class="kbd">Tab</span>）でツールを、<span class="kbd">⌥</span>を押しながらスクロールでお気に入りの色を切り替えられます。</span>
         </p></div>
         <div class="faq-video-frame" id="video-slot-drawing-shortcuts">
           <span class="video-icon">🎬</span>
@@ -642,9 +665,9 @@
           <span><span data-lang-en>How do I switch tools on the toolbar?</span><span data-lang-ko>툴바에서 도구는 어떻게 전환하나요?</span><span data-lang-ja>ツールバーでツールを切り替えるには？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Click any tool icon directly on the TeacherPalette toolbar to switch to it instantly — no menus, no memorizing shortcuts. The toolbar floats on top of whatever you're presenting, so moving between the pen, highlighter, eraser, and pointer is always just one click away. If you'd rather keep your hands off the mouse, every tool also has its own keyboard shortcut (see above).</span>
-          <span data-lang-ko>TeacherPalette 툴바에 있는 도구 아이콘을 클릭하면 바로 그 도구로 전환돼요. 메뉴를 열거나 단축키를 외울 필요 없이, 펜·하이라이터·지우개·포인터를 클릭 한 번으로 오갈 수 있어요. 툴바는 화면 위에 항상 떠 있어서 발표 중에도 손이 가는 대로 바로 누를 수 있고, 물론 위에서 설명한 단축키로도 똑같이 전환할 수 있어요.</span>
-          <span data-lang-ja>TeacherPaletteのツールバーにあるツールアイコンをクリックすると、その場ですぐにそのツールに切り替わります。メニューを開いたりショートカットを覚えたりする必要はなく、ペン・ハイライター・消しゴム・ポインターをワンクリックで切り替えられます。ツールバーは常に画面上に浮かんでいるので、発表中でもすぐに手が届きます。もちろん上記のショートカットでも同様に切り替え可能です。</span>
+          <span data-lang-en>Click any tool icon directly on the TeacherPalette toolbar to switch to it instantly — no menus, no memorizing shortcuts. The toolbar floats on top of whatever you're presenting, so moving between the pen, highlighter, eraser, and pointer is always just one click away. While you're actively drawing, single keys work too — <span class="kbd">⌫</span> clears everything, <span class="kbd">[</span> <span class="kbd">]</span> resizes your stroke, and <span class="kbd">1</span>–<span class="kbd">5</span> jump straight to your favorite colors.</span>
+          <span data-lang-ko>TeacherPalette 툴바에 있는 도구 아이콘을 클릭하면 바로 그 도구로 전환돼요. 메뉴를 열거나 단축키를 외울 필요 없이, 펜·하이라이터·지우개·포인터를 클릭 한 번으로 오갈 수 있어요. 툴바는 화면 위에 항상 떠 있어서 발표 중에도 손이 가는 대로 바로 누를 수 있어요. 드로잉 중에는 단일 키도 작동해요 — <span class="kbd">⌫</span>는 전체 삭제, <span class="kbd">[</span> <span class="kbd">]</span>는 굵기 조절, <span class="kbd">1</span>~<span class="kbd">5</span>는 즐겨찾기 색상으로 바로 변경돼요.</span>
+          <span data-lang-ja>TeacherPaletteのツールバーにあるツールアイコンをクリックすると、その場ですぐにそのツールに切り替わります。メニューを開いたりショートカットを覚えたりする必要はなく、ペン・ハイライター・消しゴム・ポインターをワンクリックで切り替えられます。ツールバーは常に画面上に浮かんでいるので、発表中でもすぐに手が届きます。描画中は単一キーも使えます — <span class="kbd">⌫</span>で全消去、<span class="kbd">[</span> <span class="kbd">]</span>で太さ調整、<span class="kbd">1</span>〜<span class="kbd">5</span>でお気に入りの色に直接切り替わります。</span>
         </p></div>
         <div class="faq-video-frame" id="video-slot-toolbar-click-switch">
           <span class="video-icon">🎬</span>
@@ -664,7 +687,7 @@
 
       <div class="faq-item">
         <h3><span class="q-mark">Q.</span>
-          <span><span data-lang-en>How do I customize my toolbar (My Palette)?</span><span data-lang-ko>툴바(My Palette)는 어떻게 커스텀하나요?</span><span data-lang-ja>ツールバー（My Palette）はどうカスタマイズしますか？</span></span>
+          <span><span data-lang-en>How do I customize my toolbar (My Palette)?</span><span data-lang-ko>'나만의 팔레트'는 어떻게 커스텀하나요?</span><span data-lang-ja>ツールバー（My Palette）はどうカスタマイズしますか？</span></span>
         </h3>
         <div class="faq-a"><p>
           <span data-lang-en>Open My Palette from Settings to pick exactly which colors and tools you want visible, and hide the rest. Collapse it to a small badge so it stays out of your audience's view — one click brings the full toolbar back, and every shortcut still fires globally even while it's minimized.</span>
@@ -692,9 +715,9 @@
           <span><span data-lang-en>How do I customize keyboard shortcuts?</span><span data-lang-ko>키보드 단축키는 어떻게 바꾸나요?</span><span data-lang-ja>キーボードショートカットの変更方法は？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Every shortcut is rebindable from Settings. By default, tools and effects use a quick 2-key combo (<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span>), while system actions use a 3-key combo (<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span>) to prevent accidental triggers. While actively drawing, single keys also work — <span class="kbd">⌫</span> clears the page, <span class="kbd">[</span> <span class="kbd">]</span> resizes your stroke, and <span class="kbd">1</span>–<span class="kbd">5</span> jump to favorite colors.</span>
-          <span data-lang-ko>모든 단축키는 Settings에서 다시 지정할 수 있어요. 기본값은 도구·이펙트는 빠른 2키 조합(<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>), 시스템 동작은 실수 방지를 위한 3키 조합(<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>)이에요. 드로잉 중에는 단일 키도 작동해요 — <span class="kbd">⌫</span>는 전체 삭제, <span class="kbd">[</span> <span class="kbd">]</span>는 굵기 조절, <span class="kbd">1</span>~<span class="kbd">5</span>는 즐겨찾기 색상으로 바로 이동.</span>
-          <span data-lang-ja>すべてのショートカットは設定から再設定できます。デフォルトでは、ツールやエフェクトは素早い2キー（<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）、システム操作は誤操作防止のための3キー（<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）です。描画中は単一キーも使えます — <span class="kbd">⌫</span>で全消去、<span class="kbd">[</span> <span class="kbd">]</span>で太さ調整、<span class="kbd">1</span>〜<span class="kbd">5</span>でお気に入りの色に直接切り替え。</span>
+          <span data-lang-en>Not every shortcut can be changed. Settings → Shortcuts lets you rebind the letter for tools and effects — Pen, Highlighter, Eraser, Rectangle, Arrow, Text, Spotlight, Laser Pointer, Cursor Highlight, Custom Cursor, and Whiteboard — while the modifier stays fixed (a 2-key <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span> combo for most, a 3-key <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span> combo for Whiteboard). Core actions like Undo, the Command Palette, and Pointer Mode stay fixed by design, so muscle memory never breaks.</span>
+          <span data-lang-ko>모든 단축키를 바꿀 수 있는 건 아니에요. Settings → Shortcuts에서는 펜·하이라이터·지우개·사각형·화살표·텍스트·스포트라이트·레이저 포인터·커서 강조·커스텀 커서·화이트보드 같은 일부 도구·이펙트의 글자 키만 다시 지정할 수 있어요(조합키 자체는 그대로 유지돼요 — 대부분 2키 조합인 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>, 화이트보드는 3키 조합인 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>). 실행 취소, 커맨드 팔레트, 포인터 모드 같은 핵심 동작은 손이 헷갈리지 않도록 고정되어 있어요.</span>
+          <span data-lang-ja>すべてのショートカットを変更できるわけではありません。設定 → ショートカットでは、ペン・ハイライター・消しゴム・四角形・矢印・テキスト・スポットライト・レーザーポインター・カーソル強調・カスタムカーソル・ホワイトボードなど一部のツール・エフェクトの文字キーのみ再設定できます（修飾キー自体はそのまま — ほとんどは2キーの<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>、ホワイトボードは3キーの<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）。取り消し、コマンドパレット、ポインターモードなどの主要操作は、手が迷わないよう固定されています。</span>
         </p></div>
         <div class="faq-video-frame" id="video-slot-custom-shortcuts">
           <span class="video-icon">🎬</span>
@@ -750,10 +773,24 @@
           <span><span data-lang-en>Keep your controls invisible, and your presence in full view.</span><span data-lang-ko>컨트롤은 감추고, 오직 당신만 드러나게.</span><span data-lang-ja>操作は隠して、あなたの発表だけを見せる。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>The floating HUD badges that confirm tool and color changes never show up in your screen share — audiences only ever see your drawing, whiteboard, or spotlight.</span>
-          <span data-lang-ko>도구·색상을 바꿀 때 뜨는 HUD 배지는 화면 공유에는 절대 나타나지 않아요. 청중에게는 오직 당신의 드로잉과 화이트보드, 스포트라이트만 보여요.</span>
-          <span data-lang-ja>ツールや色を切り替えるときのHUDバッジは、画面共有には決して映り込みません。視聴者に見えるのは、あなたの描画やホワイトボード、スポットライトだけです。</span>
+          <span data-lang-en>The floating HUD badges that confirm tool and color changes never show up in your screen share — audiences only ever see your drawing, whiteboard, or spotlight. This is controlled by the "Hide toolbar from screen sharing" toggle in Settings (on by default), so you can turn it off anytime if you'd rather show the toolbar too.</span>
+          <span data-lang-ko>도구·색상을 바꿀 때 뜨는 HUD 배지는 화면 공유에는 절대 나타나지 않아요. 청중에게는 오직 당신의 드로잉과 화이트보드, 스포트라이트만 보여요. 이 동작은 Settings의 '화면 공유 시 툴바 숨기기' 토글로 켜고 끌 수 있어요(기본값은 켜짐). 필요하다면 언제든 꺼서 툴바까지 함께 보여줄 수도 있어요.</span>
+          <span data-lang-ja>ツールや色を切り替えるときのHUDバッジは、画面共有には決して映り込みません。視聴者に見えるのは、あなたの描画やホワイトボード、スポットライトだけです。これは設定の「画面共有時にツールバーを隠す」トグルで制御されており（デフォルトはオン）、必要ならいつでもオフにしてツールバーも表示できます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-hud-hide">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -765,6 +802,20 @@
           <span data-lang-ko>스포트라이트를 켜면 커서 주변만 밝게 남고 나머지는 어두워져요. 레이저 포인터로 궤적을 남기거나, 커스텀 커서와 함께 쓰면 확실한 신호를 줄 수 있어요.</span>
           <span data-lang-ja>スポットライトをオンにすると、カーソルの周りだけ明るく残り、他は暗くなります。レーザーポインターで軌跡を描いたり、カスタムカーソルと組み合わせれば、はっきりとしたサインになります。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-spotlight-eyes">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -776,6 +827,20 @@
           <span data-lang-ko>클릭 강조를 켜면 클릭하는 곳마다 은은한 파동이 번져요 — 레이저 없이도 앱이나 웹사이트를 실시간으로 짚어줄 때 딱이에요. 스포트라이트나 커서 강조와 함께 쓰면 더 확실하게 시선을 모을 수 있어요.</span>
           <span data-lang-ja>クリック強調をオンにすると、クリックした場所にやわらかな波紋が広がります — レーザーなしでも、アプリやウェブサイトをリアルタイムで示すのにぴったり。スポットライトやカーソル強調と組み合わせれば、さらにはっきりと視線を集められます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-click-highlight">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -826,9 +891,9 @@
           <span><span data-lang-en>Make your point with a shape, not just a scribble.</span><span data-lang-ko>낙서 대신 도형으로, 더 정확하게 짚어주세요.</span><span data-lang-ja>落書きではなく、図形でもっと的確に。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Reach for the arrow to point straight at something, or the rectangle to box it in — right alongside pen, highlighter, and text. And every mark can vanish the instant you let go: turn on auto-clear and the pixel or stroke eraser wipes each stroke away the moment you lift your finger, so your screen never gets cluttered.</span>
-          <span data-lang-ko>펜·형광펜·텍스트뿐 아니라, 화살표로 정확히 짚거나 사각형으로 감싸서 강조할 수 있어요. 손을 떼는 순간 그림이 사라지게 할 수도 있어요 — 오토 클리어를 켜면 픽셀/스트로크 지우개가 손을 떼는 즉시 자국을 지워줘서, 화면이 낙서로 어지러워질 일이 없어요.</span>
-          <span data-lang-ja>ペン・マーカー・テキストだけでなく、矢印でまっすぐ指し示したり、四角形で囲んで強調したりできます。手を離した瞬間に描いた線を消すこともできます — オートクリアをオンにすれば、ピクセル/ストローク消しゴムが指を離した瞬間に跡を消してくれるので、画面が落書きで乱れることはありません。</span>
+          <span data-lang-en>Reach for two dedicated shape tools — Arrow to point straight at something, and Rectangle to box it in — right alongside pen, highlighter, and text. You can even customize the arrow's tip to the style you like best (solid, open, or outlined), so it points exactly the way you want. And every mark can vanish the instant you let go: turn on auto-clear and the pixel or stroke eraser wipes each stroke away the moment you lift your finger, so your screen never gets cluttered.</span>
+          <span data-lang-ko>펜·형광펜·텍스트 외에도, 화살표와 사각형 — 이렇게 두 가지 도형 도구를 바로 쓸 수 있어요. 화살표로 정확히 짚고, 사각형으로 감싸서 강조해보세요. 화살표의 꼭지 모양도 원하는 스타일(채워진 삼각형·열린 V자·외곽선)로 바꿀 수 있어서, 딱 원하는 느낌으로 짚을 수 있어요. 손을 떼는 순간 그림이 사라지게 할 수도 있어요 — 오토 클리어를 켜면 픽셀/스트로크 지우개가 손을 떼는 즉시 자국을 지워줘서, 화면이 낙서로 어지러워질 일이 없어요.</span>
+          <span data-lang-ja>ペン・マーカー・テキストに加えて、矢印と四角形という2つの図形ツールをすぐに使えます。矢印でまっすぐ指し示し、四角形で囲んで強調しましょう。矢印の先端の形も好みのスタイル（塗りつぶし三角形・開いたV字・輪郭のみ）に変更できるので、思い通りの指し示し方ができます。手を離した瞬間に描いた線を消すこともできます — オートクリアをオンにすれば、ピクセル/ストローク消しゴムが指を離した瞬間に跡を消してくれるので、画面が落書きで乱れることはありません。</span>
         </p></div>
       </div>
 
@@ -862,10 +927,40 @@
           <span><span data-lang-en>Step away for a moment, without leaving anyone wondering.</span><span data-lang-ko>잠시 자리를 비워도, 청중이 불안하지 않도록.</span><span data-lang-ja>少し席を外しても、誰も不安にさせない。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Trigger the BRB timer for a full-screen countdown so your audience always knows when you'll be back. Choose a preset or a custom time, keep a small floating timer on screen, and a chime plays the moment you return.</span>
-          <span data-lang-ko>BRB 타이머를 실행하면 전체화면 카운트다운이 나와서 청중이 언제 돌아올지 정확히 알 수 있어요. 프리셋이나 원하는 시간을 고르고, 작은 플로팅 타이머를 화면에 띄워두면, 시간이 다 됐을 때 차임이 울려요.</span>
-          <span data-lang-ja>BRBタイマーを起動すると全画面カウントダウンが表示され、視聴者はいつ戻るかを正確に把握できます。プリセットや好きな時間を選び、小さなフローティングタイマーを画面に残せば、時間になるとチャイムが鳴ります。</span>
+          <span data-lang-en>TeacherPalette gives you two timer styles for this. The big timer is a full-screen countdown that fills the display, so your audience always knows exactly when you'll be back — perfect for a clean, unmistakable break screen. The small timer is a compact floating panel that stays in a corner without covering your content, handy for things like running a quiz or needing the countdown and your screen visible at the same time. Both let you choose a preset or a custom time, and a chime plays the moment it hits zero.</span>
+          <span data-lang-ko>TeacherPalette에는 두 가지 타이머 스타일이 있어요. 큰 타이머는 화면을 가득 채우는 전체화면 카운트다운으로, 청중이 언제 돌아올지 확실히 알 수 있는 깔끔한 브레이크 화면을 만들어줘요. 작은 타이머는 구석에 떠 있는 작은 패널로, 화면 내용을 가리지 않아서 퀴즈를 낸다든가 카운트다운과 화면을 동시에 보여줘야 할 때 간단히 쓸 수 있어요. 둘 다 프리셋이나 원하는 시간을 고를 수 있고, 시간이 다 되면 차임이 울려요.</span>
+          <span data-lang-ja>TeacherPaletteには2種類のタイマースタイルがあります。大きいタイマーは画面全体を占める全画面カウントダウンで、視聴者はいつ戻るかを正確に把握できる、すっきりとしたブレイク画面になります。小さいタイマーは画面の隅に浮かぶコンパクトなパネルで、コンテンツを隠さないので、クイズを出すときや、カウントダウンと画面の両方を同時に見せたいときに便利です。どちらもプリセットや好きな時間を選べ、時間になるとチャイムが鳴ります。</span>
         </p></div>
+        <div class="faq-video-row">
+          <div class="faq-video-frame" id="video-slot-brb-big">
+            <span class="video-icon">🎬</span>
+            <span class="video-label">
+              <span data-lang-en>Video coming soon</span>
+              <span data-lang-ko>영상 준비 중</span>
+              <span data-lang-ja>動画準備中</span>
+              <span data-lang-zh>视频即将推出</span>
+              <span data-lang-fr>Vidéo à venir</span>
+              <span data-lang-de>Video folgt in Kürze</span>
+              <span data-lang-es>Video próximamente</span>
+              <span data-lang-pt>Vídeo em breve</span>
+              <span data-lang-it>Video in arrivo</span>
+            </span>
+          </div>
+          <div class="faq-video-frame" id="video-slot-brb-small">
+            <span class="video-icon">🎬</span>
+            <span class="video-label">
+              <span data-lang-en>Video coming soon</span>
+              <span data-lang-ko>영상 준비 중</span>
+              <span data-lang-ja>動画準備中</span>
+              <span data-lang-zh>视频即将推出</span>
+              <span data-lang-fr>Vidéo à venir</span>
+              <span data-lang-de>Video folgt in Kürze</span>
+              <span data-lang-es>Video próximamente</span>
+              <span data-lang-pt>Vídeo em breve</span>
+              <span data-lang-it>Video in arrivo</span>
+            </span>
+          </div>
+        </div>
       </div>
 
       <div class="faq-subhead" id="tip-tools-shortcuts">
@@ -909,6 +1004,20 @@
           <span data-lang-ko>앱 어디서든 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>를 누르면 검색창이 나타나요. 몇 글자만 입력해도 모든 도구·이펙트·설정이 바로 나오고, 클릭이나 방향키로 즉시 실행할 수 있어요.</span>
           <span data-lang-ja>アプリのどこからでも<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>を押すと検索バーが表示されます。数文字入力するだけで、すべてのツール・エフェクト・設定が即座に表示され、クリックや矢印キーで実行できます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-command-palette-search">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -916,9 +1025,9 @@
           <span><span data-lang-en>Let muscle memory carry the moment.</span><span data-lang-ko>손이 기억하게 하면, 발표는 더 매끄러워져요.</span><span data-lang-ja>手が覚えていれば、発表はもっと滑らかになる。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Tools and effects live on a quick 2-key combo (<span class="kbd">⌥</span> + letter); anything irreversible, like quitting or resetting, needs a deliberate 3-key combo (<span class="kbd">⌘⇧</span> + letter) so it never happens by accident. While drawing, single keys work too — <span class="kbd">⌫</span> clears the canvas, <span class="kbd">[</span>/<span class="kbd">]</span> resize your brush. Every shortcut is remappable in Settings.</span>
-          <span data-lang-ko>도구·이펙트는 빠른 2키 조합(<span class="kbd">⌥</span> + 글자)으로, 종료·초기화처럼 되돌릴 수 없는 동작은 신중한 3키 조합(<span class="kbd">⌘⇧</span> + 글자)으로 — 실수로 일어나는 일이 없도록. 그리는 중엔 단일 키도 써요 — <span class="kbd">⌫</span>로 캔버스를 지우고, <span class="kbd">[</span>/<span class="kbd">]</span>로 붓 크기를 조절해요. 모든 단축키는 Settings에서 다시 지정할 수 있어요.</span>
-          <span data-lang-ja>ツール・エフェクトは素早い2キー操作（<span class="kbd">⌥</span> + 文字）、終了やリセットのように取り返しのつかない操作は慎重な3キー操作（<span class="kbd">⌘⇧</span> + 文字）で — うっかり起きることがないように。描画中は単一キーも使えます — <span class="kbd">⌫</span>でキャンバスを消去、<span class="kbd">[</span>/<span class="kbd">]</span>でブラシサイズを調整。すべてのショートカットは設定で再割り当てできます。</span>
+          <span data-lang-en>Tools and effects live on a quick 2-key combo (<span class="kbd">⌥</span> + letter); anything irreversible, like quitting or resetting, needs a deliberate 3-key combo (<span class="kbd">⌘⇧</span> + letter) so it never happens by accident. While drawing, single keys work too — <span class="kbd">⌫</span> clears the canvas, <span class="kbd">[</span>/<span class="kbd">]</span> resize your brush. Most tool and effect shortcuts can be remapped in Settings, though a few core actions stay fixed by design.</span>
+          <span data-lang-ko>도구·이펙트는 빠른 2키 조합(<span class="kbd">⌥</span> + 글자)으로, 종료·초기화처럼 되돌릴 수 없는 동작은 신중한 3키 조합(<span class="kbd">⌘⇧</span> + 글자)으로 — 실수로 일어나는 일이 없도록. 그리는 중엔 단일 키도 써요 — <span class="kbd">⌫</span>로 캔버스를 지우고, <span class="kbd">[</span>/<span class="kbd">]</span>로 붓 크기를 조절해요. 대부분의 도구·이펙트 단축키는 Settings에서 다시 지정할 수 있지만, 일부 핵심 동작은 헷갈리지 않도록 고정되어 있어요.</span>
+          <span data-lang-ja>ツール・エフェクトは素早い2キー操作（<span class="kbd">⌥</span> + 文字）、終了やリセットのように取り返しのつかない操作は慎重な3キー操作（<span class="kbd">⌘⇧</span> + 文字）で — うっかり起きることがないように。描画中は単一キーも使えます — <span class="kbd">⌫</span>でキャンバスを消去、<span class="kbd">[</span>/<span class="kbd">]</span>でブラシサイズを調整。ほとんどのツール・エフェクトのショートカットは設定で再割り当てできますが、一部の主要操作は迷わないよう固定されています。</span>
         </p></div>
         <div class="faq-video-frame" id="video-slot-shortcut-system">
           <span class="video-icon">🎬</span>
@@ -941,10 +1050,24 @@
           <span><span data-lang-en>Set your tools in order, and leave them undisturbed.</span><span data-lang-ko>도구는 원하는 순서로, 흔들리지 않게 고정하세요.</span><span data-lang-ja>ツールは好きな順番で、崩れないように固定。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Lock the toolbar from its menu once you're happy with the order, so an accidental drag mid-presentation never scrambles your layout. Unlock anytime to rearrange.</span>
-          <span data-lang-ko>원하는 순서가 되면 툴바 메뉴에서 잠금을 켜세요. 발표 중에 실수로 드래그해도 순서가 흔들리지 않아요. 다시 바꾸고 싶을 때는 언제든 잠금을 풀면 돼요.</span>
-          <span data-lang-ja>気に入った順番になったら、ツールバーメニューでロックをオンに。発表中に誤ってドラッグしても順番は崩れません。並び替えたいときはいつでもロックを解除できます。</span>
+          <span data-lang-en>Lock the toolbar from its menu once you're happy with the order, so an accidental drag mid-presentation never scrambles your layout. That order also matters beyond the toolbar — holding <span class="kbd">⌘</span> and scrolling, or just pressing <span class="kbd">Tab</span> while Drawing mode is on, cycles through your tools in that exact same sequence, so locking it in makes cycling fully predictable. Unlock anytime to rearrange.</span>
+          <span data-lang-ko>원하는 순서가 되면 툴바 메뉴에서 잠금을 켜세요. 발표 중에 실수로 드래그해도 순서가 흔들리지 않아요. 이 순서는 툴바 밖에서도 그대로 적용돼요 — <span class="kbd">⌘</span>를 누른 채 스크롤하거나 드로잉 모드에서 <span class="kbd">Tab</span>만 눌러도 정확히 이 순서대로 도구가 순환되니까, 순서를 고정해두면 순환도 예측 가능해져요. 다시 바꾸고 싶을 때는 언제든 잠금을 풀면 돼요.</span>
+          <span data-lang-ja>気に入った順番になったら、ツールバーメニューでロックをオンに。発表中に誤ってドラッグしても順番は崩れません。この順番はツールバーの外でも有効です — <span class="kbd">⌘</span>を押しながらスクロールしたり、描画モード中に<span class="kbd">Tab</span>キーを押すだけでも、まさにこの順番でツールが切り替わるので、順番を固定しておけば切り替えも予測しやすくなります。並び替えたいときはいつでもロックを解除できます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-toolbar-lock-order">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -956,6 +1079,20 @@
           <span data-lang-ko>즐겨 쓰는 색상과 도구만 골라 마이 팔레트에 담고, 작은 배지로 접어보세요 — 클릭 한 번이면 다시 풀 툴바로 돌아와요. 완전히 접힌 상태에서도 단축키는 어떤 앱, 어떤 화면에서든 그대로 작동해요.</span>
           <span data-lang-ja>お気に入りの色とツールだけをマイパレットにまとめ、小さなバッジに折りたたんでみましょう — クリック一つでいつでも元のツールバーに戻せます。完全に最小化されていても、ショートカットはどのアプリ・どの画面からでもそのまま作動します。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-my-palette-collapse">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-subhead" id="tip-whiteboard">
@@ -974,6 +1111,20 @@
           <span data-lang-ko>모든 화이트보드 세션은 자동으로 저장돼요. 세션 히스토리에서 이전 세션을 그대로 다시 열거나, 특정 발표에 맞게 이름을 바꾸거나, 하나씩 또는 한 번에 정리할 수 있어요.</span>
           <span data-lang-ja>すべてのホワイトボードセッションは自動保存されます。セッション履歴から過去のセッションをそのまま再度開いたり、特定の発表用に名前を変えたり、個別またはまとめて削除できます。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-whiteboard-session-history">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -999,17 +1150,6 @@
             <span data-lang-it>Video in arrivo</span>
           </span>
         </div>
-      </div>
-
-      <div class="faq-item tip">
-        <h3>
-          <span><span data-lang-en>Bring your slides to life, one page at a time.</span><span data-lang-ko>슬라이드에, 한 페이지씩 생명을 불어넣어보세요.</span><span data-lang-ja>スライドに、1ページずつ命を吹き込む。</span></span>
-        </h3>
-        <div class="faq-a"><p>
-          <span data-lang-en>Load a PDF — slides, worksheets, sheet music — straight into Whiteboard and annotate page by page. The minimap lets you jump anywhere without scrolling through everything.</span>
-          <span data-lang-ko>슬라이드·워크시트·악보 같은 PDF를 화이트보드로 바로 불러와 페이지별로 필기해보세요. 미니맵으로 전체를 스크롤하지 않고도 원하는 페이지로 바로 이동할 수 있어요.</span>
-          <span data-lang-ja>スライド・ワークシート・楽譜などのPDFをそのままホワイトボードに読み込み、ページごとに書き込んでみましょう。ミニマップを使えば、全体をスクロールせずに目的のページへ直接移動できます。</span>
-        </p></div>
       </div>
 
       <div class="faq-item tip">
@@ -1071,6 +1211,20 @@
           <span data-lang-ko>Settings에서 폴더를 한 번만 지정하면, 화이트보드 내용이 계속 그 폴더에 PDF로 저장돼요. 마무리할 때 따로 저장할 필요가 없고, 이후에 공유할 PDF도 바로 준비돼 있어요.</span>
           <span data-lang-ja>設定でフォルダを一度指定すれば、ホワイトボードの内容が継続的にそのフォルダへPDFとして保存されます。終わるときに保存を忘れる心配がなく、後で共有できるPDFもすぐ用意できています。</span>
         </p></div>
+        <div class="faq-video-frame" id="video-slot-whiteboard-autosave">
+          <span class="video-icon">🎬</span>
+          <span class="video-label">
+            <span data-lang-en>Video coming soon</span>
+            <span data-lang-ko>영상 준비 중</span>
+            <span data-lang-ja>動画準備中</span>
+            <span data-lang-zh>视频即将推出</span>
+            <span data-lang-fr>Vidéo à venir</span>
+            <span data-lang-de>Video folgt in Kürze</span>
+            <span data-lang-es>Video próximamente</span>
+            <span data-lang-pt>Vídeo em breve</span>
+            <span data-lang-it>Video in arrivo</span>
+          </span>
+        </div>
       </div>
 
       <div class="faq-item tip">
@@ -1298,6 +1452,22 @@
     });
   }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
   panels.forEach(p => sectionSpy.observe(p));
+
+  // ── 항목 본문 toggle (기본 접힘, 클릭 시 펼침) ──
+  document.querySelectorAll('.faq-item > h3').forEach(h3 => {
+    h3.setAttribute('role', 'button');
+    h3.setAttribute('tabindex', '0');
+    h3.setAttribute('aria-expanded', 'false');
+    const item = h3.closest('.faq-item');
+    const toggle = () => {
+      const isOpen = item.classList.toggle('open');
+      h3.setAttribute('aria-expanded', String(isOpen));
+    };
+    h3.addEventListener('click', toggle);
+    h3.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
 
   // ── 다크 모드 ──
   const themeToggle = document.getElementById('themeToggle');
