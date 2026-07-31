@@ -1540,26 +1540,54 @@
   panels.forEach(p => sectionSpy.observe(p));
 
   // ── 서브 카테고리 스크롤 섹션 (서브탭 = 스크롤 앵커, 스크롤 위치로 활성 서브탭 표시) ──
-  // IntersectionObserver 방식은 두 번 고쳐봐도 계속 문제가 남았다 — 부드러운
-  // 스크롤(smooth-scroll)로 짧은 서브헤드들을 빠르게 지나칠 때, 어떤 서브헤드가
-  // '이탈(isIntersecting: false)'했다는 콜백이 씹혀서 과거 상태가 그대로 남아있는
-  // 경우가 있었고(누적 상태를 쓰는 구조라 한 번 놓치면 계속 true로 고정됨), 그
-  // 결과 여러 서브탭이 동시에 active로 남는 버그가 재현됐다.
-  // → 상태를 누적하는 방식 자체를 버리고, 스크롤마다 매번 새로 각 서브헤드의
-  // 실제 화면 위치(getBoundingClientRect)를 다시 계산해서 "기준선(상단 110px)을
-  // 이미 지난 것 중 문서상 가장 마지막(가장 아래)" 하나만 고르는 방식으로 교체.
-  // 과거 상태를 전혀 기억하지 않고 매번 처음부터 다시 계산하므로, 이벤트가
-  // 누락돼도 다음 스크롤 프레임에서 바로 정확한 값으로 자가 교정된다.
+  // 이전 시도(rootMargin 조정 → stateless getBoundingClientRect 재계산)로도
+  // 남아있던 문제 3가지를 "클릭 시점에 최종 상태를 즉시 확정하고, 스크롤이
+  // 완전히 멈출 때까지 위치 기반 재계산을 잠근다"는 방식으로 해결한다.
+  //  1) 서브탭 클릭 시, 뒤따르는 스크롤 애니메이션 도중 매 프레임 위치를
+  //     재계산하면 아직 화면에서 밀려나지 않은 "이전" 서브헤드가 한두 프레임
+  //     동안 다시 활성으로 잡히는 "따닥" 깜빡임이 있었다.
+  //  2) 카테고리(큰 섹션) 탭을 클릭해도 서브탭 쪽은 손대지 않고 그대로 스크롤
+  //     재계산에 맡겨서, 도착 지점 근처의 서브헤드(그 카테고리에 바로 붙어있는
+  //     첫 서브탭)가 큰 섹션과 함께 활성으로 잡혀버렸다. 큰 섹션만 선택했을
+  //     땐 그 아래 특정 서브탭까지 켜져 보이면 안 된다.
+  //  3) 문서 맨 마지막 서브헤드(발표 시작 3분 전 체크리스트 등)는 그 아래로
+  //     스크롤할 여백이 부족해 목표 위치(상단 96px)까지 스크롤이 도달하지
+  //     못하고 멈추는 경우가 있어, 위치 기준 재계산으로는 그 서브헤드가 영원히
+  //     "기준선을 지났다"고 판정되지 않고 그 위 서브헤드가 계속 활성으로 남았다.
+  // → 클릭 즉시 원하는 최종 상태를 setActiveSubtab으로 확정 설정하고, 그 뒤
+  //   스크롤 이벤트가 연속 250ms 동안 없을 때까지(=애니메이션이 실제로 끝날
+  //   때까지) 위치 기반 재계산을 잠근다. 잠금이 풀린 뒤에는 사용자가 실제로
+  //   더 스크롤해야만 재계산이 다시 일어나므로, 애니메이션 중간값이나 스크롤
+  //   도달 실패가 최종 상태를 어지럽힐 여지가 없다.
   const subtabs = document.querySelectorAll('a.subtab');
   const subheads = Array.from(document.querySelectorAll('.faq-subhead'));
   function setActiveSubtab(id) {
-    subtabs.forEach(st => st.classList.toggle('active', st.getAttribute('href') === '#' + id));
+    subtabs.forEach(st => st.classList.toggle('active', id != null && st.getAttribute('href') === '#' + id));
   }
+
+  let subheadScrollLocked = false;
+  let subheadUnlockTimer = null;
+  function lockSubheadScrollSpy() {
+    subheadScrollLocked = true;
+    clearTimeout(subheadUnlockTimer);
+    subheadUnlockTimer = setTimeout(() => { subheadScrollLocked = false; }, 250);
+  }
+
   subtabs.forEach(st => {
     st.addEventListener('click', () => {
       setActiveSubtab(st.getAttribute('href').slice(1));
+      lockSubheadScrollSpy();
     });
   });
+  // 카테고리(큰 섹션) 탭을 클릭하면 이전에 켜져 있던 서브탭 활성 표시를 지운다.
+  // 이후 사용자가 실제로 스크롤하거나 서브탭을 직접 클릭해야 다시 켜진다.
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      setActiveSubtab(null);
+      lockSubheadScrollSpy();
+    });
+  });
+
   const SUBHEAD_READ_LINE = 110; // 상단 고정 nav + 여유 정도의 기준선(px)
   let subheadTicking = false;
   function updateActiveSubhead() {
@@ -1574,6 +1602,12 @@
     if (activeId) setActiveSubtab(activeId);
   }
   window.addEventListener('scroll', () => {
+    if (subheadScrollLocked) {
+      // 클릭으로 인한 스크롤이 아직 진행 중인 동안은 잠금을 계속 연장해서,
+      // 애니메이션이 완전히 멈출 때까지 위치 기반 재계산이 끼어들지 못하게 한다.
+      lockSubheadScrollSpy();
+      return;
+    }
     if (subheadTicking) return;
     subheadTicking = true;
     requestAnimationFrame(updateActiveSubhead);
