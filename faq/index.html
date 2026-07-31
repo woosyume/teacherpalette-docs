@@ -1540,16 +1540,18 @@
   panels.forEach(p => sectionSpy.observe(p));
 
   // ── 서브 카테고리 스크롤 섹션 (서브탭 = 스크롤 앵커, 스크롤 위치로 활성 서브탭 표시) ──
-  // .faq-subhead는 한 줄짜리 짧은 요소라, 상단 카테고리 패널(sectionSpy)과 같은
-  // rootMargin(-100px)을 그대로 쓰면 .faq-subhead의 scroll-margin-top(96px) 착지
-  // 위치가 관찰 영역 상단 경계(100px)보다 위(96px < 100px)에 걸려버려서, 클릭해
-  // 이동한 항목이 아니라 그 바로 아래의 항목이 active로 잡히는 버그가 생긴다.
-  // 상단 여백을 96px보다 확실히 작게(72px) 줘서 착지 지점이 항상 관찰 영역
-  // 안쪽에 들어오게 하고, 짧은 서브그룹이 인접해 둘 다 걸리는 경우엔 문서상
-  // 가장 아래(=가장 최근에 스크롤로 지난) 항목을 active로 고정해 콜백이 어떤
-  // 순서로 오든 결과가 항상 하나로 정해지게 한다.
+  // IntersectionObserver 방식은 두 번 고쳐봐도 계속 문제가 남았다 — 부드러운
+  // 스크롤(smooth-scroll)로 짧은 서브헤드들을 빠르게 지나칠 때, 어떤 서브헤드가
+  // '이탈(isIntersecting: false)'했다는 콜백이 씹혀서 과거 상태가 그대로 남아있는
+  // 경우가 있었고(누적 상태를 쓰는 구조라 한 번 놓치면 계속 true로 고정됨), 그
+  // 결과 여러 서브탭이 동시에 active로 남는 버그가 재현됐다.
+  // → 상태를 누적하는 방식 자체를 버리고, 스크롤마다 매번 새로 각 서브헤드의
+  // 실제 화면 위치(getBoundingClientRect)를 다시 계산해서 "기준선(상단 110px)을
+  // 이미 지난 것 중 문서상 가장 마지막(가장 아래)" 하나만 고르는 방식으로 교체.
+  // 과거 상태를 전혀 기억하지 않고 매번 처음부터 다시 계산하므로, 이벤트가
+  // 누락돼도 다음 스크롤 프레임에서 바로 정확한 값으로 자가 교정된다.
   const subtabs = document.querySelectorAll('a.subtab');
-  const subheads = document.querySelectorAll('.faq-subhead');
+  const subheads = Array.from(document.querySelectorAll('.faq-subhead'));
   function setActiveSubtab(id) {
     subtabs.forEach(st => st.classList.toggle('active', st.getAttribute('href') === '#' + id));
   }
@@ -1558,18 +1560,25 @@
       setActiveSubtab(st.getAttribute('href').slice(1));
     });
   });
-  const subheadState = new Map();
-  subheads.forEach(s => subheadState.set(s.id, false));
-  function refreshActiveSubhead() {
+  const SUBHEAD_READ_LINE = 110; // 상단 고정 nav + 여유 정도의 기준선(px)
+  let subheadTicking = false;
+  function updateActiveSubhead() {
+    subheadTicking = false;
     let activeId = null;
-    subheads.forEach(s => { if (subheadState.get(s.id)) activeId = s.id; });
+    for (const s of subheads) {
+      // subheads는 문서 순서(위→아래) 그대로이므로, 기준선을 지난 게 하나라도
+      // 나오면 그 뒤로는 전부 아직 기준선 아래에 있다 — 더 볼 필요 없이 중단.
+      if (s.getBoundingClientRect().top <= SUBHEAD_READ_LINE) activeId = s.id;
+      else break;
+    }
     if (activeId) setActiveSubtab(activeId);
   }
-  const subheadSpy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => subheadState.set(entry.target.id, entry.isIntersecting));
-    refreshActiveSubhead();
-  }, { rootMargin: '-72px 0px -55% 0px', threshold: 0 });
-  subheads.forEach(s => subheadSpy.observe(s));
+  window.addEventListener('scroll', () => {
+    if (subheadTicking) return;
+    subheadTicking = true;
+    requestAnimationFrame(updateActiveSubhead);
+  }, { passive: true });
+  updateActiveSubhead();
 
   // ── 항목 본문 toggle (기본 접힘, 클릭 시 부드럽게 펼침) ──
   // h3 뒤의 답변/영상 요소를 .faq-body > .faq-body-inner로 감싸서
