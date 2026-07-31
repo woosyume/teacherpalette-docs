@@ -247,6 +247,7 @@
     transition: background 0.12s, color 0.12s;
   }
   a.subtab:hover { background: var(--accent-soft); color: var(--accent); }
+  a.subtab.active { background: var(--accent-strong); color: var(--accent); font-weight: 600; }
   a.subtab svg {
     width: 12px; height: 12px; flex-shrink: 0;
     stroke: currentColor; fill: none; stroke-width: 2;
@@ -1537,6 +1538,25 @@
     });
   }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
   panels.forEach(p => sectionSpy.observe(p));
+
+  // ── 서브 카테고리 스크롤 섹션 (서브탭 = 스크롤 앵커, 스크롤 위치로 활성 서브탭 표시) ──
+  // 상단 카테고리 탭과 동일한 IntersectionObserver 패턴을 .faq-subhead에도 적용.
+  const subtabs = document.querySelectorAll('a.subtab');
+  const subheads = document.querySelectorAll('.faq-subhead');
+  function setActiveSubtab(id) {
+    subtabs.forEach(st => st.classList.toggle('active', st.getAttribute('href') === '#' + id));
+  }
+  subtabs.forEach(st => {
+    st.addEventListener('click', () => {
+      setActiveSubtab(st.getAttribute('href').slice(1));
+    });
+  });
+  const subheadSpy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActiveSubtab(entry.target.id);
+    });
+  }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
+  subheads.forEach(s => subheadSpy.observe(s));
 
   // ── 항목 본문 toggle (기본 접힘, 클릭 시 부드럽게 펼침) ──
   // h3 뒤의 답변/영상 요소를 .faq-body > .faq-body-inner로 감싸서
