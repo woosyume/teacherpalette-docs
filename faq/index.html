@@ -364,6 +364,17 @@
   }
   .faq-video-frame .video-icon { font-size: 22px; opacity: 0.6; }
   .faq-video-frame .video-label { font-size: 12px; font-weight: 500; }
+  /* ── 실제 데모 영상이 채워진 프레임 ─────────────────────── */
+  .faq-video-frame.has-video {
+    aspect-ratio: 960 / 710;
+    border-style: solid;
+    padding: 0;
+    overflow: hidden;
+    background: #0a0a0f;
+  }
+  .faq-video-frame.has-video video {
+    display: block; width: 100%; height: 100%;
+  }
   .faq-video-row { display: flex; gap: 14px; margin-top: 14px; max-width: 480px; }
   .faq-video-row .faq-video-frame { flex: 1; margin-top: 0; max-width: none; }
   @media (max-width: 480px) { .faq-video-row { flex-direction: column; } }
@@ -683,19 +694,10 @@
           <span data-lang-ko>각 드로잉 도구에는 저마다 기본 단축키가 있어요 — 빠른 2키 조합인 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>이에요(예: 펜은 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">P</span>, 하이라이터는 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">H</span>, 지우개는 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">E</span>). 이 중 하나만 눌러도 그 도구로 곧바로 드로잉 모드가 켜지고, 화면 가장자리에 은은한 블롭이 나타나면서 HUD로 켜졌는지 확인할 수 있어요. 그다음엔 <span class="kbd">⌘</span>를 누른 채 스크롤(또는 <span class="kbd">Tab</span>)로 도구를, <span class="kbd">⌥</span>를 누른 채 스크롤해서 즐겨찾기 색상을 순환할 수 있어요.</span>
           <span data-lang-ja>各描画ツールには専用のデフォルトショートカットがあります — 素早い2キーの<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>です（例：ペンは<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">P</span>、ハイライターは<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">H</span>、消しゴムは<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">E</span>）。いずれかを押すだけで、そのツールで即座に描画モードがオンになり、画面の縁に淡いブロブが現れてHUDで確認できます。その後は<span class="kbd">⌘</span>を押しながらスクロール（または<span class="kbd">Tab</span>）でツールを、<span class="kbd">⌥</span>を押しながらスクロールでお気に入りの色を切り替えられます。</span>
         </p></div>
-        <div class="faq-video-frame" id="video-slot-drawing-shortcuts">
-          <span class="video-icon">🎬</span>
-          <span class="video-label">
-            <span data-lang-en>Video coming soon</span>
-            <span data-lang-ko>영상 준비 중</span>
-            <span data-lang-ja>動画準備中</span>
-            <span data-lang-zh>视频即将推出</span>
-            <span data-lang-fr>Vidéo à venir</span>
-            <span data-lang-de>Video folgt in Kürze</span>
-            <span data-lang-es>Video próximamente</span>
-            <span data-lang-pt>Vídeo em breve</span>
-            <span data-lang-it>Video in arrivo</span>
-          </span>
+        <div class="faq-video-frame has-video" id="video-slot-drawing-shortcuts">
+          <video controls playsinline preload="metadata" poster="../media/drawing-shortcuts-poster.jpg" aria-label="How do I start drawing on my screen?">
+            <source src="../media/drawing-shortcuts.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
 
@@ -708,19 +710,10 @@
           <span data-lang-ko>툴바나 커맨드 팔레트(<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>)에서 화이트보드를 실행할 수 있어요. 여러 페이지를 즉시 전환할 수 있고, 빈 화면·격자·괘선·코넬 노트 템플릿, 다크 톤의 칠판 모드, 이미지 드래그 앤 드롭, PDF 불러오기·필기, 페이지 이동용 미니맵, 그리고 진행 중에도 자동으로 PDF 저장까지 가능해요.</span>
           <span data-lang-ja>ツールバーまたはコマンドパレット（<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span>）からホワイトボードを起動できます。複数ページをすぐに切り替えられ、無地・方眼・罫線・コーネル式のテンプレート、ダーク調の黒板モード、画像のドラッグ&ドロップ、PDFの読み込みと書き込み、ページ移動用のミニマップ、そして作業中も自動でPDF保存されます。</span>
         </p></div>
-        <div class="faq-video-frame" id="video-slot-whiteboard-mode">
-          <span class="video-icon">🎬</span>
-          <span class="video-label">
-            <span data-lang-en>Video coming soon</span>
-            <span data-lang-ko>영상 준비 중</span>
-            <span data-lang-ja>動画準備中</span>
-            <span data-lang-zh>视频即将推出</span>
-            <span data-lang-fr>Vidéo à venir</span>
-            <span data-lang-de>Video folgt in Kürze</span>
-            <span data-lang-es>Video próximamente</span>
-            <span data-lang-pt>Vídeo em breve</span>
-            <span data-lang-it>Video in arrivo</span>
-          </span>
+        <div class="faq-video-frame has-video" id="video-slot-whiteboard-mode">
+          <video controls playsinline preload="metadata" poster="../media/whiteboard-mode-poster.jpg" aria-label="How do I open Whiteboard mode, and what can I do there?">
+            <source src="../media/whiteboard-mode.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
 
@@ -733,19 +726,10 @@
           <span data-lang-ko>TeacherPalette 툴바에 있는 도구 아이콘을 클릭하면 바로 그 도구로 전환돼요. 메뉴를 열거나 단축키를 외울 필요 없이, 펜·하이라이터·지우개·포인터를 클릭 한 번으로 오갈 수 있어요. 툴바는 화면 위에 항상 떠 있어서 발표 중에도 손이 가는 대로 바로 누를 수 있어요. 드로잉 중에는 단일 키도 작동해요 — <span class="kbd">⌫</span>는 전체 삭제, <span class="kbd">[</span> <span class="kbd">]</span>는 굵기 조절, <span class="kbd">1</span>~<span class="kbd">5</span>는 즐겨찾기 색상으로 바로 변경돼요.</span>
           <span data-lang-ja>TeacherPaletteのツールバーにあるツールアイコンをクリックすると、その場ですぐにそのツールに切り替わります。メニューを開いたりショートカットを覚えたりする必要はなく、ペン・ハイライター・消しゴム・ポインターをワンクリックで切り替えられます。ツールバーは常に画面上に浮かんでいるので、発表中でもすぐに手が届きます。描画中は単一キーも使えます — <span class="kbd">⌫</span>で全消去、<span class="kbd">[</span> <span class="kbd">]</span>で太さ調整、<span class="kbd">1</span>〜<span class="kbd">5</span>でお気に入りの色に直接切り替わります。</span>
         </p></div>
-        <div class="faq-video-frame" id="video-slot-toolbar-click-switch">
-          <span class="video-icon">🎬</span>
-          <span class="video-label">
-            <span data-lang-en>Video coming soon</span>
-            <span data-lang-ko>영상 준비 중</span>
-            <span data-lang-ja>動画準備中</span>
-            <span data-lang-zh>视频即将推出</span>
-            <span data-lang-fr>Vidéo à venir</span>
-            <span data-lang-de>Video folgt in Kürze</span>
-            <span data-lang-es>Video próximamente</span>
-            <span data-lang-pt>Vídeo em breve</span>
-            <span data-lang-it>Video in arrivo</span>
-          </span>
+        <div class="faq-video-frame has-video" id="video-slot-toolbar-click-switch">
+          <video controls playsinline preload="metadata" poster="../media/toolbar-click-switch-poster.jpg" aria-label="How do I switch tools on the toolbar?">
+            <source src="../media/toolbar-click-switch.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
 
