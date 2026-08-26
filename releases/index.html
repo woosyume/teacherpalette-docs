@@ -131,6 +131,19 @@
   }
   [data-theme="dark"] nav.topbar .brand-logo { filter: invert(1); }
   nav.topbar .spacer { flex: 1; }
+  nav.topbar .topbar-links {
+    display: flex; align-items: center; gap: 2px;
+    min-width: 0; margin-left: auto;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  nav.topbar .topbar-links::-webkit-scrollbar { display: none; }
+  nav.topbar .topbar-link {
+    flex: 0 0 auto; color: var(--text-dim); text-decoration: none;
+    font-size: 13px; padding: 6px 9px; border-radius: 7px;
+    transition: color 0.15s, background 0.15s; white-space: nowrap;
+  }
+  nav.topbar .topbar-link:hover { color: var(--accent); background: var(--accent-soft); }
+  nav.topbar .topbar-cta { color: var(--accent); font-weight: 600; }
   nav.topbar .theme-toggle {
     background: transparent; border: 1px solid var(--border);
     padding: 6px 10px; border-radius: 8px; cursor: pointer;
@@ -278,6 +291,13 @@
     <img class="brand-icon" src="../img/icon-256.png" alt="">
     <img class="brand-logo" src="../img/logo.png" alt="TeacherPalette">
   </a>
+  <div class="topbar-links" aria-label="Main navigation">
+    <a class="topbar-link" href="../releases/index.html"><span data-lang-en>What's New</span><span data-lang-ko>업데이트</span><span data-lang-ja>更新履歴</span><span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span><span data-lang-es>Novedades</span><span data-lang-pt>Novidades</span><span data-lang-it>Novità</span></a>
+    <a class="topbar-link" href="../faq/index.html"><span data-lang-en>Help &amp; Tips</span><span data-lang-ko>도움말 &amp; 팁</span><span data-lang-ja>ヘルプ＆ヒント</span><span data-lang-zh>帮助与技巧</span><span data-lang-fr>Aide et astuces</span><span data-lang-de>Hilfe &amp; Tipps</span><span data-lang-es>Ayuda y consejos</span><span data-lang-pt>Ajuda e dicas</span><span data-lang-it>Aiuto e consigli</span></a>
+    <a class="topbar-link" href="../index.html#privacy"><span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span><span data-lang-zh>隐私</span><span data-lang-fr>Confidentialité</span><span data-lang-de>Datenschutz</span><span data-lang-es>Privacidad</span><span data-lang-pt>Privacidade</span><span data-lang-it>Privacy</span></a>
+    <a class="topbar-link" href="../index.html#terms"><span data-lang-en>Terms</span><span data-lang-ko>이용약관</span><span data-lang-ja>利用規約</span><span data-lang-zh>服务条款</span><span data-lang-fr>Conditions</span><span data-lang-de>Bedingungen</span><span data-lang-es>Términos</span><span data-lang-pt>Termos</span><span data-lang-it>Termini</span></a>
+    <a class="topbar-link topbar-cta" href="../index.html#pricing"><span data-lang-en>Buy Now</span><span data-lang-ko>구매하기</span><span data-lang-ja>購入</span><span data-lang-zh>立即购买</span><span data-lang-fr>Acheter</span><span data-lang-de>Kaufen</span><span data-lang-es>Comprar</span><span data-lang-pt>Comprar</span><span data-lang-it>Acquista</span></a>
+  </div>
   <div class="spacer"></div>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
 </nav>
@@ -335,7 +355,11 @@
       <span data-lang-pt>Versões</span>
       <span data-lang-it>Versioni</span>
     </div>
-    <a class="tab active" href="#v1.1.7" data-version="v1.1.7">
+    <a class="tab active" href="#v1.1.8" data-version="v1.1.8">
+      <span>1.1.8</span>
+      <span class="date">2026.08</span>
+    </a>
+    <a class="tab" href="#v1.1.7" data-version="v1.1.7">
       <span>1.1.7</span>
       <span class="date">2026.07</span>
     </a>
@@ -350,7 +374,57 @@
   </aside>
 
   <main class="content">
-    <article class="release active" id="v1.1.7">
+    <article class="release active" id="v1.1.8">
+      <h2>
+        TeacherPalette
+        <span class="ver">1.1.8</span>
+      </h2>
+      <div class="meta">
+        <span data-lang-en>August 2026 · A closer look with Magnifier · More natural presentations · A warmer multilingual experience</span>
+        <span data-lang-ko>2026년 8월 · 더 가까이 보는 돋보기 · 더 자연스러운 발표 · 더 따뜻해진 다국어 경험</span>
+        <span data-lang-ja>2026年8月 · もっと近くに見える拡大鏡 · より自然なプレゼン · さらに心地よい多言語体験</span>
+        <span data-lang-zh>2026年8月 · 更近一步的放大镜 · 更自然的演示 · 更贴心的多语言体验</span>
+        <span data-lang-fr>Août 2026 · Une loupe pour voir de plus près · Des présentations plus naturelles · Une expérience multilingue plus chaleureuse</span>
+        <span data-lang-de>August 2026 · Mit der Lupe näher dran · Natürlichere Präsentationen · Ein herzlicheres mehrsprachiges Erlebnis</span>
+        <span data-lang-es>Agosto de 2026 · Una lupa para ver más de cerca · Presentaciones más naturales · Una experiencia multilingüe más cercana</span>
+        <span data-lang-pt>Agosto de 2026 · Uma lupa para ver de perto · Apresentações mais naturais · Uma experiência multilíngue mais acolhedora</span>
+        <span data-lang-it>Agosto 2026 · Una lente per vedere più da vicino · Presentazioni più naturali · Un'esperienza multilingue più accogliente</span>
+      </div>
+
+      <h3>
+        ✨
+        <span data-lang-en>New Features</span>
+        <span data-lang-ko>새로운 기능</span>
+        <span data-lang-ja>新機能</span>
+        <span data-lang-zh>新功能</span>
+        <span data-lang-fr>Nouveautés</span>
+        <span data-lang-de>Neue Funktionen</span>
+        <span data-lang-es>Nuevas funciones</span>
+        <span data-lang-pt>Novos recursos</span>
+        <span data-lang-it>Nuove funzionalità</span>
+      </h3>
+      <ul>
+        <li><strong><span data-lang-en>Magnifier — see every detail</span><span data-lang-ko>돋보기 — 작은 글씨도 또렷하게</span><span data-lang-ja>拡大鏡 — 小さな文字もくっきり</span><span data-lang-zh>放大镜 — 每个细节都清晰可见</span><span data-lang-fr>Loupe — chaque détail en clair</span><span data-lang-de>Lupe — jedes Detail im Blick</span><span data-lang-es>Lupa — cada detalle más claro</span><span data-lang-pt>Lupa — cada detalhe mais nítido</span><span data-lang-it>Lente — ogni dettaglio più nitido</span></strong> — <span data-lang-en>press ⌥M to bring a smooth lens to your pointer. Adjust its size and zoom to make slides, demos, and tiny text easy for everyone to follow. The first time you use it, macOS will ask for Screen Recording permission.</span><span data-lang-ko>⌥M을 누르면 포인터 주변이 부드러운 렌즈로 확대돼요. 크기와 배율을 조절해 슬라이드, 데모, 작은 글씨까지 모두가 편하게 볼 수 있어요. 처음 사용할 때 macOS 화면 기록 권한을 한 번 허용해 주세요.</span><span data-lang-ja>⌥M を押すとポインターの周りをなめらかに拡大できます。サイズと倍率を調整して、スライドやデモ、小さな文字もみんなに見やすく。初回のみ macOS の画面収録許可が必要です。</span><span data-lang-zh>按下 ⌥M 即可放大指针周围的内容。可调节镜头大小和倍率，让幻灯片、演示和小字都更容易看清。首次使用时，macOS 会请求“屏幕录制”权限。</span><span data-lang-fr>appuyez sur ⌥M pour agrandir doucement la zone autour du pointeur. Ajustez la taille et le zoom pour que diapositives, démos et petits textes restent lisibles. macOS vous demandera l’autorisation d’enregistrement de l’écran au premier usage.</span><span data-lang-de>Drücke ⌥M für eine sanfte Lupe rund um den Zeiger. Passe Größe und Zoom an, damit Folien, Demos und kleine Texte gut sichtbar bleiben. Beim ersten Einsatz bittet macOS um die Berechtigung für Bildschirmaufnahmen.</span><span data-lang-es>pulsa ⌥M para ampliar suavemente la zona del puntero. Ajusta el tamaño y el zoom para que diapositivas, demos y textos pequeños se vean con claridad. La primera vez, macOS pedirá permiso para grabar la pantalla.</span><span data-lang-pt>pressione ⌥M para ampliar suavemente a área ao redor do ponteiro. Ajuste o tamanho e o zoom para que slides, demos e textos pequenos fiquem fáceis de acompanhar. Na primeira vez, o macOS pedirá permissão para gravação da tela.</span><span data-lang-it>premi ⌥M per ingrandire con fluidità l'area intorno al puntatore. Regola dimensione e zoom per rendere visibili slide, demo e testi piccoli. Al primo utilizzo macOS chiederà il permesso di registrazione dello schermo.</span></li>
+        <li><strong><span data-lang-en>A timer that tells you when it ends</span><span data-lang-ko>끝나는 시간을 알려주는 타이머</span><span data-lang-ja>終了時刻がわかるタイマー</span><span data-lang-zh>告诉你何时结束的计时器</span><span data-lang-fr>Un minuteur qui vous dit quand il se termine</span><span data-lang-de>Ein Timer, der dir das Ende verrät</span><span data-lang-es>Un temporizador que te dice cuándo termina</span><span data-lang-pt>Um cronômetro que avisa quando termina</span><span data-lang-it>Un timer che ti dice quando finisce</span></strong> — <span data-lang-en>BRB now shows the exact end time, so you can step away with peace of mind and return at just the right moment.</span><span data-lang-ko>BRB에 정확한 종료 시각이 표시돼요. 잠시 자리를 비워도 언제 돌아오면 될지 한눈에 알 수 있어요.</span><span data-lang-ja>BRB に終了時刻が表示されるようになりました。安心して席を離れ、ちょうどいいタイミングで戻れます。</span><span data-lang-zh>BRB 现在会显示准确的结束时间，放心离开片刻，在合适的时间回来。</span><span data-lang-fr>Le BRB affiche désormais l’heure exacte de fin, pour vous absenter l’esprit tranquille et revenir au bon moment.</span><span data-lang-de>BRB zeigt jetzt die genaue Endzeit an, damit du beruhigt kurz weggehen und pünktlich zurückkommen kannst.</span><span data-lang-es>BRB ahora muestra la hora exacta de finalización para que puedas ausentarte tranquilo y volver en el momento justo.</span><span data-lang-pt>O BRB agora mostra a hora exata do fim, para você se ausentar tranquilo e voltar na hora certa.</span><span data-lang-it>BRB ora mostra l'orario esatto di fine, così puoi allontanarti tranquillo e tornare al momento giusto.</span></li>
+        <li><strong><span data-lang-en>Put your custom cursor exactly where it feels right</span><span data-lang-ko>내 커서를 원하는 자리에</span><span data-lang-ja>カスタムカーソルを好きな位置に</span><span data-lang-zh>把自定义光标放在最合适的位置</span><span data-lang-fr>Placez votre curseur personnalisé où vous voulez</span><span data-lang-de>Platziere deinen eigenen Cursor genau richtig</span><span data-lang-es>Coloca tu cursor personalizado donde quieras</span><span data-lang-pt>Posicione seu cursor personalizado como quiser</span><span data-lang-it>Posiziona il cursore personalizzato dove vuoi</span></strong> — <span data-lang-en>use the new position control to fine-tune how your custom cursor sits beside the real pointer.</span><span data-lang-ko>새 위치 조절 기능으로 실제 포인터 옆에 나만의 커서가 보이는 위치를 섬세하게 맞출 수 있어요.</span><span data-lang-ja>新しい位置調整で、実際のポインターのそばに表示されるカスタムカーソルを細かく整えられます。</span><span data-lang-zh>使用新的位置控制，让自定义光标在真实指针旁呈现得恰到好处。</span><span data-lang-fr>Le nouveau réglage de position permet d’ajuster précisément votre curseur personnalisé à côté du pointeur réel.</span><span data-lang-de>Mit der neuen Positionssteuerung kannst du deinen eigenen Cursor neben dem echten Zeiger genau ausrichten.</span><span data-lang-es>Con el nuevo control de posición puedes ajustar con precisión tu cursor personalizado junto al puntero real.</span><span data-lang-pt>Use o novo controle de posição para ajustar seu cursor personalizado ao lado do ponteiro real.</span><span data-lang-it>Con il nuovo controllo di posizione puoi regolare con precisione il cursore personalizzato accanto al puntatore reale.</span></li>
+      </ul>
+
+      <h3>
+        🔧
+        <span data-lang-en>Improvements</span><span data-lang-ko>개선 사항</span><span data-lang-ja>改善</span><span data-lang-zh>改进</span><span data-lang-fr>Améliorations</span><span data-lang-de>Verbesserungen</span><span data-lang-es>Mejoras</span><span data-lang-pt>Melhorias</span><span data-lang-it>Miglioramenti</span>
+      </h3>
+      <ul>
+        <li><span data-lang-en>Color names now follow your chosen language, so every favorite and custom color feels right at home.</span><span data-lang-ko>즐겨찾기와 커스텀 색상의 이름이 선택한 언어로 표시돼서, 어디서든 더 자연스럽게 사용할 수 있어요.</span><span data-lang-ja>お気に入りとカスタムカラーの名前が選択した言語で表示され、より自然に使えます。</span><span data-lang-zh>收藏颜色和自定义颜色现在会使用你选择的语言显示，更加自然亲切。</span><span data-lang-fr>Les noms des couleurs favorites et personnalisées suivent désormais la langue choisie.</span><span data-lang-de>Die Namen deiner Lieblings- und eigenen Farben richten sich jetzt nach deiner gewählten Sprache.</span><span data-lang-es>Los nombres de tus colores favoritos y personalizados ahora siguen el idioma elegido.</span><span data-lang-pt>Os nomes das cores favoritas e personalizadas agora seguem o idioma escolhido.</span><span data-lang-it>I nomi dei colori preferiti e personalizzati ora seguono la lingua scelta.</span></li>
+        <li><span data-lang-en>Purchasing is more reassuring: the paywall now explains loading and connection issues clearly, offers retry and restore options, and never leaves you guessing.</span><span data-lang-ko>구매 화면이 더 든든해졌어요. 로딩이나 연결에 문제가 생겨도 상황을 안내하고, 다시 시도하거나 구매를 복원할 수 있어요.</span><span data-lang-ja>購入画面がより安心できるものになりました。読み込みや接続に問題があっても状況を案内し、再試行や購入の復元ができます。</span><span data-lang-zh>购买页面更令人安心：遇到加载或连接问题时会清楚说明，并提供重试和恢复购买选项。</span><span data-lang-fr>L’achat est plus serein : l’écran explique les problèmes de chargement ou de connexion et propose de réessayer ou de restaurer vos achats.</span><span data-lang-de>Der Kauf ist jetzt entspannter: Bei Lade- oder Verbindungsproblemen gibt es klare Hinweise sowie Optionen zum erneuten Versuch und Wiederherstellen.</span><span data-lang-es>Comprar es más sencillo: la pantalla explica los problemas de carga o conexión y permite reintentar o restaurar las compras.</span><span data-lang-pt>A compra ficou mais tranquila: a tela explica problemas de carregamento ou conexão e oferece tentar novamente ou restaurar compras.</span><span data-lang-it>Acquistare è più sereno: la schermata spiega i problemi di caricamento o connessione e permette di riprovare o ripristinare gli acquisti.</span></li>
+      </ul>
+
+      <div class="upgrade-note">
+        💡 <strong><span data-lang-en>Upgrade note</span><span data-lang-ko>업그레이드 안내</span><span data-lang-ja>アップグレードのご案内</span><span data-lang-zh>升级说明</span><span data-lang-fr>Note de mise à niveau</span><span data-lang-de>Upgrade-Hinweis</span><span data-lang-es>Nota de actualización</span><span data-lang-pt>Nota de atualização</span><span data-lang-it>Nota aggiornamento</span></strong>:
+        <span data-lang-en>When your presentation needs a little more clarity, TeacherPalette is ready to bring the details closer — and help you keep your rhythm.</span><span data-lang-ko>발표에 조금 더 선명함이 필요할 때, TeacherPalette가 디테일은 가까이, 흐름은 자연스럽게 지켜드릴게요.</span><span data-lang-ja>プレゼンにもう少し見やすさが必要なとき、TeacherPaletteが細部を近づけ、流れを自然に支えます。</span><span data-lang-zh>当演示需要更多清晰度时，TeacherPalette 让细节更近，也让你的节奏更从容。</span><span data-lang-fr>Quand votre présentation a besoin d’un peu plus de clarté, TeacherPalette rapproche les détails et préserve votre rythme.</span><span data-lang-de>Wenn deine Präsentation etwas mehr Klarheit braucht, bringt TeacherPalette Details näher und bewahrt deinen Rhythmus.</span><span data-lang-es>Cuando tu presentación necesita un poco más de claridad, TeacherPalette acerca los detalles y mantiene tu ritmo.</span><span data-lang-pt>Quando sua apresentação precisa de um pouco mais de clareza, o TeacherPalette aproxima os detalhes e preserva seu ritmo.</span><span data-lang-it>Quando la tua presentazione ha bisogno di più chiarezza, TeacherPalette avvicina i dettagli e mantiene il tuo ritmo.</span>
+      </div>
+    </article>
+
+    <article class="release" id="v1.1.7">
       <h2>
         TeacherPalette
         <span class="ver">1.1.7</span>

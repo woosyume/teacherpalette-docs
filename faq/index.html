@@ -171,6 +171,19 @@
   }
   [data-theme="dark"] nav.topbar .brand-logo { filter: invert(1); }
   nav.topbar .spacer { flex: 1; }
+  nav.topbar .topbar-links {
+    display: flex; align-items: center; gap: 2px;
+    min-width: 0; margin-left: auto;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  nav.topbar .topbar-links::-webkit-scrollbar { display: none; }
+  nav.topbar .topbar-link {
+    flex: 0 0 auto; color: var(--text-dim); text-decoration: none;
+    font-size: 13px; padding: 6px 9px; border-radius: 7px;
+    transition: color 0.15s, background 0.15s; white-space: nowrap;
+  }
+  nav.topbar .topbar-link:hover { color: var(--accent); background: var(--accent-soft); }
+  nav.topbar .topbar-cta { color: var(--accent); font-weight: 600; }
   nav.topbar .theme-toggle {
     background: transparent; border: 1px solid var(--border);
     padding: 6px 10px; border-radius: 8px; cursor: pointer;
@@ -419,6 +432,13 @@
     <img class="brand-icon" src="../img/icon-256.png" alt="">
     <img class="brand-logo" src="../img/logo.png" alt="TeacherPalette">
   </a>
+  <div class="topbar-links" aria-label="Main navigation">
+    <a class="topbar-link" href="../releases/index.html"><span data-lang-en>What's New</span><span data-lang-ko>업데이트</span><span data-lang-ja>更新履歴</span><span data-lang-zh>更新日志</span><span data-lang-fr>Nouveautés</span><span data-lang-de>Neuerungen</span><span data-lang-es>Novedades</span><span data-lang-pt>Novidades</span><span data-lang-it>Novità</span></a>
+    <a class="topbar-link" href="../faq/index.html"><span data-lang-en>Help &amp; Tips</span><span data-lang-ko>도움말 &amp; 팁</span><span data-lang-ja>ヘルプ＆ヒント</span><span data-lang-zh>帮助与技巧</span><span data-lang-fr>Aide et astuces</span><span data-lang-de>Hilfe &amp; Tipps</span><span data-lang-es>Ayuda y consejos</span><span data-lang-pt>Ajuda e dicas</span><span data-lang-it>Aiuto e consigli</span></a>
+    <a class="topbar-link" href="../index.html#privacy"><span data-lang-en>Privacy</span><span data-lang-ko>개인정보</span><span data-lang-ja>プライバシー</span><span data-lang-zh>隐私</span><span data-lang-fr>Confidentialité</span><span data-lang-de>Datenschutz</span><span data-lang-es>Privacidad</span><span data-lang-pt>Privacidade</span><span data-lang-it>Privacy</span></a>
+    <a class="topbar-link" href="../index.html#terms"><span data-lang-en>Terms</span><span data-lang-ko>이용약관</span><span data-lang-ja>利用規約</span><span data-lang-zh>服务条款</span><span data-lang-fr>Conditions</span><span data-lang-de>Bedingungen</span><span data-lang-es>Términos</span><span data-lang-pt>Termos</span><span data-lang-it>Termini</span></a>
+    <a class="topbar-link topbar-cta" href="../index.html#pricing"><span data-lang-en>Buy Now</span><span data-lang-ko>구매하기</span><span data-lang-ja>購入</span><span data-lang-zh>立即购买</span><span data-lang-fr>Acheter</span><span data-lang-de>Kaufen</span><span data-lang-es>Comprar</span><span data-lang-pt>Comprar</span><span data-lang-it>Acquista</span></a>
+  </div>
   <div class="spacer"></div>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
 </nav>
@@ -628,9 +648,9 @@
           <span><span data-lang-en>What is TeacherPalette?</span><span data-lang-ko>TeacherPalette가 뭔가요?</span><span data-lang-ja>TeacherPaletteとは何ですか？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>TeacherPalette is a native macOS overlay for live teaching and presenting — drawing, spotlight, whiteboard, timer, and cursor tools that run on top of Zoom, Google Meet, Microsoft Teams, or any app on your screen.</span>
-          <span data-lang-ko>TeacherPalette는 실시간 강의·발표를 위한 네이티브 macOS 오버레이 앱이에요. 드로잉, 스포트라이트, 화이트보드, 타이머, 커서 도구를 Zoom·Google Meet·Microsoft Teams는 물론 화면에 떠 있는 어떤 앱 위에서도 그대로 쓸 수 있어요.</span>
-          <span data-lang-ja>TeacherPaletteは、ライブ授業やプレゼンのためのネイティブmacOSオーバーレイアプリです。描画・スポットライト・ホワイトボード・タイマー・カーソルツールをZoom・Google Meet・Microsoft Teams、あるいは画面上のどんなアプリの上でもそのまま使えます。</span>
+          <span data-lang-en>TeacherPalette is a native macOS overlay for live teaching and presenting — drawing, spotlight, laser, magnifier, whiteboard, timer, and cursor tools that run on top of Zoom, Google Meet, Microsoft Teams, or any app on your screen.</span>
+          <span data-lang-ko>TeacherPalette는 실시간 강의·발표를 위한 네이티브 macOS 오버레이 앱이에요. 드로잉, 스포트라이트, 레이저, 돋보기, 화이트보드, 타이머, 커서 도구를 Zoom·Google Meet·Microsoft Teams는 물론 화면에 떠 있는 어떤 앱 위에서도 그대로 쓸 수 있어요.</span>
+          <span data-lang-ja>TeacherPaletteは、ライブ授業やプレゼンのためのネイティブmacOSオーバーレイアプリです。描画・スポットライト・レーザー・拡大鏡・ホワイトボード・タイマー・カーソルツールをZoom・Google Meet・Microsoft Teams、あるいは画面上のどんなアプリの上でもそのまま使えます。</span>
         </p></div>
       </div>
 
@@ -761,9 +781,9 @@
           <span><span data-lang-en>How do I customize keyboard shortcuts?</span><span data-lang-ko>키보드 단축키는 어떻게 바꾸나요?</span><span data-lang-ja>キーボードショートカットの変更方法は？</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Not every shortcut can be changed. Settings → Shortcuts lets you rebind the letter for tools and effects — Pen, Highlighter, Eraser, Rectangle, Arrow, Text, Spotlight, Laser Pointer, Cursor Highlight, Custom Cursor, and Whiteboard — while the modifier stays fixed (a 2-key <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span> combo for most, a 3-key <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span> combo for Whiteboard). Core actions like Undo, the Command Palette, and Pointer Mode stay fixed by design, so muscle memory never breaks.</span>
-          <span data-lang-ko>모든 단축키를 바꿀 수 있는 건 아니에요. Settings → Shortcuts에서는 펜·하이라이터·지우개·사각형·화살표·텍스트·스포트라이트·레이저 포인터·커서 강조·커스텀 커서·화이트보드 같은 일부 도구·이펙트의 글자 키만 다시 지정할 수 있어요(조합키 자체는 그대로 유지돼요 — 대부분 2키 조합인 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>, 화이트보드는 3키 조합인 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>). 실행 취소, 커맨드 팔레트, 포인터 모드 같은 핵심 동작은 손이 헷갈리지 않도록 고정되어 있어요.</span>
-          <span data-lang-ja>すべてのショートカットを変更できるわけではありません。設定 → ショートカットでは、ペン・ハイライター・消しゴム・四角形・矢印・テキスト・スポットライト・レーザーポインター・カーソル強調・カスタムカーソル・ホワイトボードなど一部のツール・エフェクトの文字キーのみ再設定できます（修飾キー自体はそのまま — ほとんどは2キーの<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>、ホワイトボードは3キーの<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）。取り消し、コマンドパレット、ポインターモードなどの主要操作は、手が迷わないよう固定されています。</span>
+          <span data-lang-en>Not every shortcut can be changed. Settings → Shortcuts lets you rebind the letter for tools and effects — Pen, Highlighter, Eraser, Rectangle, Arrow, Text, Spotlight, Laser Pointer, Magnifier, Cursor Highlight, Custom Cursor, and Whiteboard — while the modifier stays fixed (a 2-key <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">letter</span> combo for most, a 3-key <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">letter</span> combo for Whiteboard). Core actions like Undo, the Command Palette, and Pointer Mode stay fixed by design, so muscle memory never breaks.</span>
+          <span data-lang-ko>모든 단축키를 바꿀 수 있는 건 아니에요. Settings → Shortcuts에서는 펜·하이라이터·지우개·사각형·화살표·텍스트·스포트라이트·레이저 포인터·돋보기·커서 강조·커스텀 커서·화이트보드 같은 일부 도구·이펙트의 글자 키만 다시 지정할 수 있어요(조합키 자체는 그대로 유지돼요 — 대부분 2키 조합인 <span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>, 화이트보드는 3키 조합인 <span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">알파벳</span>). 실행 취소, 커맨드 팔레트, 포인터 모드 같은 핵심 동작은 손이 헷갈리지 않도록 고정되어 있어요.</span>
+          <span data-lang-ja>すべてのショートカットを変更できるわけではありません。設定 → ショートカットでは、ペン・ハイライター・消しゴム・四角形・矢印・テキスト・スポットライト・レーザーポインター・拡大鏡・カーソル強調・カスタムカーソル・ホワイトボードなど一部のツール・エフェクトの文字キーのみ再設定できます（修飾キー自体はそのまま — ほとんどは2キーの<span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">文字</span>、ホワイトボードは3キーの<span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">⇧</span><span class="kbd-plus">+</span><span class="kbd">文字</span>）。取り消し、コマンドパレット、ポインターモードなどの主要操作は、手が迷わないよう固定されています。</span>
         </p></div>
         <div class="faq-video-frame has-video" id="video-slot-custom-shortcuts">
           <video controls playsinline preload="metadata" poster="../media/keyboard-shortcuts-poster.jpg" aria-label="How do I customize keyboard shortcuts?">
@@ -833,9 +853,9 @@
           <span><span data-lang-en>Let their eyes go exactly where you want.</span><span data-lang-ko>시선이, 당신이 원하는 곳에만 머물도록.</span><span data-lang-ja>視線を、あなたが望む場所だけに。</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Dim everything but a warm circle of light around your cursor with Spotlight, trace a path with the laser pointer, or pair both with a custom cursor for an unmistakable cue.</span>
-          <span data-lang-ko>스포트라이트를 켜면 커서 주변만 밝게 남고 나머지는 어두워져요. 레이저 포인터로 궤적을 남기거나, 커스텀 커서와 함께 쓰면 확실한 신호를 줄 수 있어요.</span>
-          <span data-lang-ja>スポットライトをオンにすると、カーソルの周りだけ明るく残り、他は暗くなります。レーザーポインターで軌跡を描いたり、カスタムカーソルと組み合わせれば、はっきりとしたサインになります。</span>
+          <span data-lang-en>Dim everything but a warm circle of light around your cursor with Spotlight, trace a path with the laser pointer, or zoom into fine details with Magnifier. Pair them with a custom cursor for an unmistakable cue.</span>
+          <span data-lang-ko>스포트라이트를 켜면 커서 주변만 밝게 남고 나머지는 어두워져요. 레이저 포인터로 궤적을 남기고, 돋보기로 작은 디테일까지 확대해 보세요. 커스텀 커서와 함께 쓰면 확실한 신호를 줄 수 있어요.</span>
+          <span data-lang-ja>スポットライトをオンにすると、カーソルの周りだけ明るく残り、他は暗くなります。レーザーポインターで軌跡を描き、拡大鏡で細部を拡大。カスタムカーソルと組み合わせれば、はっきりとしたサインになります。</span>
         </p></div>
         <div class="faq-video-frame has-video" id="video-slot-spotlight-eyes">
           <video controls playsinline preload="metadata" poster="../media/spotlight-poster.jpg" aria-label="Let their eyes go exactly where you want.">
