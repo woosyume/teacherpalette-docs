@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TeacherPalette — Screen Annotation App for Mac | Draw Over Any App</title>
-<meta name="description" content="TeacherPalette is a screen annotation app for Mac. Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
+<title>TeacherPalette — A Clean, Intuitive Screen Annotation App for Mac | Draw Over Any App</title>
+<meta name="description" content="TeacherPalette is a clean, intuitive screen annotation app for Mac. Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
 <link rel="canonical" href="https://teacherpalette.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://teacherpalette.com/">
-<meta property="og:title" content="TeacherPalette — Screen Annotation App for Mac">
-<meta property="og:description" content="Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
+<meta property="og:title" content="TeacherPalette — A Clean, Intuitive Screen Annotation App for Mac">
+<meta property="og:description" content="A clean, intuitive screen annotation app for Mac. Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
 <meta property="og:image" content="https://teacherpalette.com/media/intro-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TeacherPalette — Screen Annotation App for Mac">
-<meta name="twitter:description" content="Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
+<meta name="twitter:title" content="TeacherPalette — A Clean, Intuitive Screen Annotation App for Mac">
+<meta name="twitter:description" content="A clean, intuitive screen annotation app for Mac. Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
 <meta name="twitter:image" content="https://teacherpalette.com/media/intro-poster.jpg">
 <link rel="icon" href="img/icon-256.png">
 <script type="application/ld+json">
@@ -23,7 +23,7 @@
   "name": "TeacherPalette",
   "url": "https://teacherpalette.com/",
   "image": "https://teacherpalette.com/img/icon-512.png",
-  "description": "A screen annotation app for Mac that lets presenters and teachers draw, highlight, spotlight, and magnify over any app.",
+  "description": "A clean, intuitive screen annotation app for Mac that lets presenters and teachers draw, highlight, spotlight, and magnify over any app.",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "macOS 15.0 or later, Apple Silicon",
   "offers": {
@@ -1431,6 +1431,35 @@
     text-align: center; color: var(--text-dim); font-size: 12.5px;
     max-width: 640px; margin: 40px auto 0; line-height: 1.6;
   }
+  /* ── 1% for Education ─────────────────────────────────────── */
+  .education-commitment {
+    padding: 28px 24px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.22);
+  }
+  [data-theme="dark"] .education-commitment { background: rgba(255, 255, 255, 0.025); }
+  .education-commitment-inner {
+    max-width: 760px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 18px; text-align: left;
+  }
+  .education-commitment-mark {
+    flex: 0 0 auto; width: 46px; height: 46px; border-radius: 14px;
+    display: grid; place-items: center;
+    color: var(--accent); background: var(--accent-soft);
+    font-size: 17px; font-weight: 700; letter-spacing: -0.04em;
+  }
+  .education-commitment-copy { min-width: 0; }
+  .education-commitment-title { margin-bottom: 3px; color: var(--text); font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .education-commitment-text { color: var(--text-dim); font-size: 13px; line-height: 1.55; }
+  .education-commitment-note { margin-top: 4px; color: var(--text-dim); opacity: 0.78; font-size: 11.5px; line-height: 1.45; }
+  @media (max-width: 560px) {
+    .education-commitment-inner { align-items: flex-start; gap: 13px; }
+    .education-commitment-mark { width: 40px; height: 40px; border-radius: 12px; font-size: 15px; }
+    .education-commitment-title { font-size: 14px; }
+    .education-commitment-text { font-size: 12.5px; }
+  }
   @media (max-width: 860px) {
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
     .pricing-card.featured { transform: none; order: -1; }
@@ -1617,7 +1646,7 @@
   </div>
   <h1 style="line-height: 1;">
     <img class="hero-logo" src="img/logo.png" alt="TeacherPalette">
-    <span class="hero-keyword" data-lang-en>Screen Annotation App for Mac</span>
+    <span class="hero-keyword" data-lang-en>A clean, intuitive, and beautifully crafted screen annotation app for Mac</span>
     <span class="hero-keyword" data-lang-ko>Mac을 위한 화면 주석 앱</span>
     <span class="hero-keyword" data-lang-ja>Macのためのスクリーン注釈アプリ</span>
     <span class="hero-keyword" data-lang-zh>适用于 Mac 的屏幕标注应用</span>
@@ -2572,6 +2601,42 @@
   </div>
 </section>
 
+<!-- ═══════════════════════ 1% FOR EDUCATION ═══════════════════════ -->
+<section class="education-commitment" aria-label="1% for Education">
+  <div class="education-commitment-inner">
+    <div class="education-commitment-mark" aria-hidden="true">1%</div>
+    <div class="education-commitment-copy">
+      <div class="education-commitment-title">
+        <span data-lang-en>1% for Education</span><span data-lang-ko>1% for Education</span><span data-lang-ja>1% for Education</span>
+        <span data-lang-zh>1% for Education</span><span data-lang-fr>1% for Education</span><span data-lang-de>1% for Education</span>
+        <span data-lang-es>1% for Education</span><span data-lang-pt>1% for Education</span><span data-lang-it>1% for Education</span>
+      </div>
+      <p class="education-commitment-text">
+        <span data-lang-en>When TeacherPalette begins to make a profit, I plan to give 1% of its net profit to organizations working to reduce educational inequality.</span>
+        <span data-lang-ko>TeacherPalette가 수익을 내기 시작하면, 순수익의 1%를 교육격차 해소를 위해 기부하려고 합니다.</span>
+        <span data-lang-ja>TeacherPaletteが利益を生み出せるようになったら、純利益の1%を教育格差の解消に取り組む団体へ寄付する予定です。</span>
+        <span data-lang-zh>当 TeacherPalette 开始盈利后，我计划将纯利润的 1% 捐给致力于缩小教育差距的组织。</span>
+        <span data-lang-fr>Lorsque TeacherPalette commencera à être rentable, je prévois de donner 1 % des bénéfices nets à des organisations qui réduisent les inégalités éducatives.</span>
+        <span data-lang-de>Wenn TeacherPalette Gewinne erzielt, möchte ich 1 % des Nettogewinns an Organisationen gegen Bildungsungleichheit geben.</span>
+        <span data-lang-es>Cuando TeacherPalette empiece a generar beneficios, planeo donar el 1 % de los beneficios netos a organizaciones que trabajan para reducir la desigualdad educativa.</span>
+        <span data-lang-pt>Quando o TeacherPalette começar a gerar lucro, pretendo doar 1% do lucro líquido a organizações que reduzem a desigualdade educacional.</span>
+        <span data-lang-it>Quando TeacherPalette inizierà a generare profitti, intendo destinare l'1% dell'utile netto a organizzazioni che riducono le disuguaglianze educative.</span>
+      </p>
+      <p class="education-commitment-note">
+        <span data-lang-en>A small promise from a solo developer — not a donation already made or an official partnership.</span>
+        <span data-lang-ko>1인 개발자가 시작하는 작은 약속입니다. 아직 기부 실적이나 공식 제휴를 의미하지 않습니다.</span>
+        <span data-lang-ja>個人開発者からの小さな約束です。現時点での寄付実績や公式提携を示すものではありません。</span>
+        <span data-lang-zh>这是来自一位独立开发者的小小承诺，并不代表已有捐赠记录或正式合作。</span>
+        <span data-lang-fr>La petite promesse d'un développeur indépendant — aucun don ni partenariat officiel à ce jour.</span>
+        <span data-lang-de>Ein kleines Versprechen eines Solo-Entwicklers — bisher ohne Spende oder offizielle Partnerschaft.</span>
+        <span data-lang-es>Una pequeña promesa de un desarrollador independiente; todavía no es una donación ni una asociación oficial.</span>
+        <span data-lang-pt>Uma pequena promessa de um desenvolvedor independente — ainda sem doação ou parceria oficial.</span>
+        <span data-lang-it>Una piccola promessa da uno sviluppatore indipendente — nessuna donazione o partnership ufficiale al momento.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════ PRICING ═════════════════════════════════ -->
 <section id="pricing">
   <div class="section-inner">
@@ -3201,7 +3266,7 @@
     </a>
     <a href="mailto:support@teacherpalette.com">Email</a>
   </div>
-  <div class="copy">© 2026 woosyume. All rights reserved.</div>
+  <div class="copy">© 2026 TeacherPalette. All rights reserved.</div>
 </footer>
 
 <script>
