@@ -3,19 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TeacherPalette — Screen Annotation Tool for macOS</title>
-<meta name="description" content="A macOS screen annotation app for presenters. Draw, highlight, and focus attention during Zoom, Meet, and Teams presentations.">
+<title>TeacherPalette — Screen Annotation App for Mac | Draw Over Any App</title>
+<meta name="description" content="TeacherPalette is a screen annotation app for Mac. Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
 <link rel="canonical" href="https://teacherpalette.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://teacherpalette.com/">
-<meta property="og:title" content="TeacherPalette — Screen Annotation Tool for macOS">
-<meta property="og:description" content="A macOS screen annotation app for presenters. Draw, highlight, and focus attention during Zoom, Meet, and Teams presentations.">
+<meta property="og:title" content="TeacherPalette — Screen Annotation App for Mac">
+<meta property="og:description" content="Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
 <meta property="og:image" content="https://teacherpalette.com/media/intro-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TeacherPalette — Screen Annotation Tool for macOS">
-<meta name="twitter:description" content="A macOS screen annotation app for presenters. Draw, highlight, and focus attention during Zoom, Meet, and Teams presentations.">
+<meta name="twitter:title" content="TeacherPalette — Screen Annotation App for Mac">
+<meta name="twitter:description" content="Draw, highlight, spotlight, and magnify over slides, Zoom, Google Meet, Microsoft Teams, and any app.">
 <meta name="twitter:image" content="https://teacherpalette.com/media/intro-poster.jpg">
 <link rel="icon" href="img/icon-256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "TeacherPalette",
+  "url": "https://teacherpalette.com/",
+  "image": "https://teacherpalette.com/img/icon-512.png",
+  "description": "A screen annotation app for Mac that lets presenters and teachers draw, highlight, spotlight, and magnify over any app.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "macOS 15.0 or later, Apple Silicon",
+  "offers": {
+    "@type": "Offer",
+    "price": "2.99",
+    "priceCurrency": "USD"
+  }
+}
+</script>
 <style>
   :root {
     /* 네이티브 폼 컨트롤(select 팝업, 스크롤바 등)이 OS 기본값이 아니라
@@ -109,7 +126,7 @@
     filter: invert(1);
   }
   .brand-logo { height: 22px; width: auto; }
-  .hero-logo  { height: clamp(56px, 9vw, 96px); width: auto; margin: 0 auto 20px; }
+  .hero-logo  { height: clamp(56px, 9vw, 96px); width: auto; margin: 0 auto 12px; }
 
   /* ── Header ───────────────────────────────────────────────── */
   header {
@@ -333,6 +350,7 @@
     font-size: clamp(40px, 6.5vw, 64px); font-weight: 700;
     margin-bottom: 20px; color: var(--text);
   }
+  .hero-keyword { display: block; font-size: clamp(23px, 3.2vw, 34px); line-height: 1.2; letter-spacing: -0.025em; }
   .hero-sub {
     font-size: clamp(16px, 2vw, 20px); color: var(--text-dim);
     max-width: 620px; margin: 0 auto 32px;
@@ -1494,6 +1512,15 @@
   html[lang="es"] span[data-lang-es],
   html[lang="pt"] span[data-lang-pt],
   html[lang="it"] span[data-lang-it] { display: inline; }
+  html[lang="en"] .hero-keyword[data-lang-en],
+  html[lang="ko"] .hero-keyword[data-lang-ko],
+  html[lang="ja"] .hero-keyword[data-lang-ja],
+  html[lang="zh"] .hero-keyword[data-lang-zh],
+  html[lang="fr"] .hero-keyword[data-lang-fr],
+  html[lang="de"] .hero-keyword[data-lang-de],
+  html[lang="es"] .hero-keyword[data-lang-es],
+  html[lang="pt"] .hero-keyword[data-lang-pt],
+  html[lang="it"] .hero-keyword[data-lang-it] { display: block; }
   /* fallback 클래스: JS가 활성 언어 span이 없는 요소에 자동 부여 */
   html[lang="zh"] .fb-en [data-lang-en],
   html[lang="fr"] .fb-en [data-lang-en],
@@ -1590,11 +1617,20 @@
   </div>
   <h1 style="line-height: 1;">
     <img class="hero-logo" src="img/logo.png" alt="TeacherPalette">
+    <span class="hero-keyword" data-lang-en>Screen Annotation App for Mac</span>
+    <span class="hero-keyword" data-lang-ko>Mac을 위한 화면 주석 앱</span>
+    <span class="hero-keyword" data-lang-ja>Macのためのスクリーン注釈アプリ</span>
+    <span class="hero-keyword" data-lang-zh>适用于 Mac 的屏幕标注应用</span>
+    <span class="hero-keyword" data-lang-fr>L'app d'annotation d'écran pour Mac</span>
+    <span class="hero-keyword" data-lang-de>Die Bildschirm-Annotations-App für Mac</span>
+    <span class="hero-keyword" data-lang-es>La app de anotación de pantalla para Mac</span>
+    <span class="hero-keyword" data-lang-pt>O app de anotação de tela para Mac</span>
+    <span class="hero-keyword" data-lang-it>L'app di annotazione schermo per Mac</span>
   </h1>
   <p class="hero-sub">
-    <span data-lang-en>Draw, spotlight, whiteboard, timer, cursor — everything a live presenter needs, in one effortless macOS overlay that runs quietly over Zoom, Meet, and Teams. So simple you'll forget it's there, so complete every session can feel like a masterclass.</span>
-    <span data-lang-ko>드로잉, 스포트라이트, 화이트보드, 타이머, 커서 — 발표자에게 필요한 모든 것을 하나의 편안한 macOS 오버레이에 담았습니다. Zoom·Meet·Teams 위에서 조용히 작동해요. 너무 단순해서 있다는 걸 잊게 되고, 너무 완전해서 모든 발표가 마스터클래스처럼 느껴지죠.</span>
-    <span data-lang-ja>描画・スポットライト・ホワイトボード・タイマー・カーソル — プレゼンターに必要なすべてを、1 つの心地よい macOS オーバーレイに。Zoom・Meet・Teams の上で静かに動作します。あることを忘れるほどシンプルに、どの発表もマスタークラスのように感じられるほど完全に。</span>
+    <span data-lang-en>Draw, highlight, spotlight, and magnify over any app — slides, Zoom, Google Meet, Microsoft Teams, browsers, and demos. One effortless macOS overlay gives live presenters and teachers everything they need to guide attention without breaking the flow.</span>
+    <span data-lang-ko>슬라이드, Zoom, Google Meet, Microsoft Teams, 브라우저, 데모 등 어떤 앱 위에서도 그리고, 강조하고, 스포트라이트와 돋보기를 사용할 수 있어요. 하나의 편안한 macOS 오버레이로 발표자와 교사가 흐름을 끊지 않고 시선을 이끌 수 있습니다.</span>
+    <span data-lang-ja>スライド、Zoom、Google Meet、Microsoft Teams、ブラウザ、デモなど、どんなアプリの上でも描画・強調・スポットライト・拡大ができます。1つの心地よいmacOSオーバーレイで、プレゼンターや先生が流れを止めずに視線を導けます。</span>
     <span data-lang-zh>绘图、聚光灯、白板、计时器、光标 — 现场演讲者所需的一切,融入一个不打扰的 macOS 悬浮层,在 Zoom、Meet、Teams 之上静静运行。简单到让你忘记它的存在,完整到让每一次演讲都像一场大师课。</span>
     <span data-lang-fr>Dessin, projecteur, tableau blanc, minuteur, curseur — tout ce dont un présentateur a besoin, réuni dans une seule superposition macOS discrète qui tourne silencieusement sur Zoom, Meet et Teams. Assez simple pour qu'on l'oublie, assez complète pour que chaque session ressemble à une masterclass.</span>
     <span data-lang-de>Zeichnen, Spotlight, Whiteboard, Timer, Cursor — alles, was ein Live-Präsentierender braucht, in einem mühelosen macOS-Overlay, das leise über Zoom, Meet und Teams läuft. So einfach, dass man es vergisst. So vollständig, dass sich jede Session wie eine Masterclass anfühlt.</span>
@@ -1791,8 +1827,8 @@
           <span data-lang-es>Herramientas de dibujo</span><span data-lang-pt>Ferramentas de desenho</span><span data-lang-it>Strumenti di disegno</span>
         </h3>
         <p>
-          <span data-lang-en>Pen, highlighter, arrow, rectangle, text, and pixel/stroke eraser. Auto-clear on release.</span>
-          <span data-lang-ko>펜, 형광펜, 화살표, 사각형, 텍스트, 픽셀/획 지우개. 손 뗄 때 자동 삭제 옵션.</span>
+          <span data-lang-en>Draw on any Mac screen with a pen, highlighter, arrow, rectangle, text, or pixel/stroke eraser. Keep quick marks temporary with auto-clear on release.</span>
+          <span data-lang-ko>펜, 하이라이터, 화살표, 사각형, 텍스트, 픽셀/획 지우개로 Mac 화면 어디에나 바로 판서하세요. 빠른 표시는 손을 뗄 때 자동으로 지울 수도 있어요.</span>
           <span data-lang-ja>ペン・マーカー・矢印・四角形・テキスト・ピクセル/ストローク消しゴム。ペンを離すと自動消去可能。</span>
           <span data-lang-zh>画笔、荧光笔、箭头、矩形、文本和像素/笔画橡皮。抬手自动清除可选。</span>
           <span data-lang-fr>Stylo, surligneur, flèche, rectangle, texte et gomme pixel/trait. Effacement auto au relâchement.</span>
@@ -1818,8 +1854,8 @@
           <span data-lang-es>Modo pizarra</span><span data-lang-pt>Modo quadro branco</span><span data-lang-it>Modalità lavagna</span>
         </h3>
         <p>
-          <span data-lang-en>Multi-page whiteboard with instant page switching, drag & drop images, and one-click PDF export.</span>
-          <span data-lang-ko>여러 페이지를 즉시 전환, 이미지 드래그 앤 드롭, 원클릭 PDF 저장까지.</span>
+          <span data-lang-en>A built-in digital whiteboard for Mac presentations: switch pages instantly, drag in images, annotate PDFs, and export your work with one click.</span>
+          <span data-lang-ko>Mac 발표를 위한 빌트인 디지털 화이트보드예요. 페이지를 즉시 전환하고, 이미지를 넣고, PDF 위에 필기한 뒤 한 번에 내보낼 수 있어요.</span>
           <span data-lang-ja>複数ページ即時切替、画像ドラッグ&ドロップ、ワンクリック PDF 保存。</span>
           <span data-lang-zh>多页白板,即时切换、拖放图片、一键导出 PDF。</span>
           <span data-lang-fr>Tableau multi-pages avec changement instantané, glisser-déposer d'images et export PDF en un clic.</span>
@@ -1845,8 +1881,8 @@
           <span data-lang-es>Foco, láser y lupa</span><span data-lang-pt>Holofote, laser e lupa</span><span data-lang-it>Riflettore, laser e lente</span>
         </h3>
         <p>
-          <span data-lang-en>Dim everything except a bright circle around your cursor, trace a path with the laser, or zoom in on the details with Magnifier — all for a clearer, more confident presentation.</span>
-          <span data-lang-ko>커서 주변만 밝게 비추고, 레이저로 시선을 이끌고, 돋보기로 작은 디테일까지 확대해 보세요 — 더 선명하고 자신감 있는 발표를 위해.</span>
+          <span data-lang-en>Use a presentation spotlight to dim the noise, a laser to trace the path, or a Mac screen magnifier to zoom in on the details — all for a clearer, more confident presentation.</span>
+          <span data-lang-ko>프레젠테이션 스포트라이트로 주변을 어둡게 하고, 레이저로 시선을 이끌며, Mac 화면 돋보기로 작은 디테일까지 확대해 보세요 — 더 선명하고 자신감 있는 발표를 위해.</span>
           <span data-lang-ja>カーソル周りだけを明るく照らし、レーザーで視線を導き、拡大鏡で細部を拡大 — より見やすく、自信を持てるプレゼンに。</span>
           <span data-lang-zh>突出光标周围的重点，用激光笔引导视线，再用放大镜看清细节——让演示更清晰、更自信。</span>
           <span data-lang-fr>Éclairez un cercle autour du curseur, guidez les regards avec le laser et agrandissez les détails avec la loupe — pour des présentations plus claires et plus assurées.</span>
@@ -1872,8 +1908,8 @@
           <span data-lang-es>Multi-pantalla</span><span data-lang-pt>Multi-tela</span><span data-lang-it>Multi-schermo</span>
         </h3>
         <p>
-          <span data-lang-en>Full support for multiple monitors and iPad Sidecar. Choose which screen to annotate, whiteboard, or BRB.</span>
-          <span data-lang-ko>여러 모니터와 iPad Sidecar 완벽 지원. 어느 화면에서 그릴지, 화이트보드 띄울지 선택.</span>
+          <span data-lang-en>Full support for multiple monitors and iPad Sidecar. Annotate presentations with Apple Pencil on iPad while your slides stay clear on the Mac.</span>
+          <span data-lang-ko>여러 모니터와 iPad Sidecar를 완벽 지원해요. iPad의 Apple Pencil로 발표 화면에 판서하면서, 맥에서는 슬라이드를 깨끗하게 보여줄 수 있어요.</span>
           <span data-lang-ja>複数モニターと iPad Sidecar に完全対応。描画・ホワイトボード・BRB を任意の画面で。</span>
           <span data-lang-zh>完整支持多显示器和 iPad Sidecar。可选择在哪个屏幕上批注、开白板或显示暂离页。</span>
           <span data-lang-fr>Prise en charge complète de plusieurs écrans et iPad Sidecar. Choisissez sur quel écran annoter, ouvrir le tableau ou afficher la pause.</span>
