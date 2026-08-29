@@ -1219,6 +1219,91 @@
     color: white; letter-spacing: 0.02em;
   }
 
+  /* Magnifier visual — Spotlight와 돋보기의 시선 유도 */
+  .visual-focus { position: relative; width: 100%; height: 100%; min-height: 250px; overflow: hidden; border-radius: 24px; }
+  .focus-canvas { position: absolute; inset: 30px; border-radius: 16px; background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(247,242,250,.78)); border: 1px solid rgba(0,0,0,.06); overflow: hidden; }
+  [data-theme="dark"] .focus-canvas { background: linear-gradient(135deg, rgba(32,35,46,.96), rgba(42,34,53,.88)); border-color: rgba(255,255,255,.08); }
+  .focus-canvas::before { content: ""; position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at 52% 46%, transparent 0 16%, rgba(10,12,20,.08) 22%, rgba(10,12,20,.72) 53%, rgba(10,12,20,.86) 100%); pointer-events: none; }
+  [data-theme="dark"] .focus-canvas::before { background: radial-gradient(circle at 52% 46%, transparent 0 16%, rgba(4,6,12,.12) 22%, rgba(4,6,12,.68) 53%, rgba(4,6,12,.84) 100%); }
+  .focus-canvas::after { content: ""; position: absolute; z-index: 1; left: 16%; top: 27%; width: 52%; height: 12px; border-radius: 10px; background: var(--spot-color); opacity: .5; transform: rotate(-3deg); box-shadow: 0 34px 0 rgba(123,94,167,.42), 34px 68px 0 rgba(22,160,133,.38); }
+  .focus-ring { position: absolute; z-index: 3; left: 52%; top: 46%; width: 142px; height: 142px; border: 2px solid rgba(255,255,255,.8); background: radial-gradient(circle, rgba(255,255,255,.12), rgba(240,180,41,.05) 54%, transparent 70%); border-radius: 50%; box-shadow: 0 0 0 1px var(--spot-color), 0 0 34px var(--spot-soft); opacity: .9; transform: translate(-50%,-50%); animation: focusRing 4s ease-in-out infinite; }
+  .focus-lens { position: absolute; z-index: 4; left: 56%; top: 42%; width: 92px; height: 92px; border-radius: 50%; background: rgba(255,255,255,.16); border: 4px solid rgba(255,255,255,.96); box-shadow: 0 10px 30px rgba(0,0,0,.2), 0 0 0 2px var(--spot-color), 0 0 36px var(--spot-soft); transform: translate(-50%,-50%); animation: lensFloat 4s ease-in-out infinite; backdrop-filter: blur(1px) saturate(150%); }
+  [data-theme="dark"] .focus-lens { background: rgba(28,30,40,.18); border-color: rgba(255,255,255,.88); }
+  .focus-lens::after { content: "Aa"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--spot-color); font: 700 36px ui-rounded, -apple-system, sans-serif; letter-spacing: -.08em; text-shadow: 0 3px 10px var(--spot-soft); }
+  .focus-caption { position: absolute; right: 16%; bottom: 18%; padding: 7px 11px; border-radius: 999px; color: var(--spot-color); background: var(--spot-soft); font: 600 11px ui-rounded, -apple-system, sans-serif; }
+  @keyframes focusRing { 0%,100% { transform: translate(-50%,-50%) scale(.94); opacity: .16; } 50% { transform: translate(-50%,-50%) scale(1.08); opacity: .34; } }
+  @keyframes lensFloat { 0%,100% { transform: translate(-50%,-50%) translate(0,3px); } 50% { transform: translate(-50%,-50%) translate(12px,-8px); } }
+
+  /* Custom cursor visual — 조이스틱으로 포인터 오프셋을 조절하는 모습 */
+  .visual-joystick { position: relative; width: 100%; height: 100%; min-height: 250px; display: flex; align-items: center; justify-content: center; gap: 28px; }
+  .cursor-stage { position: relative; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, var(--spot-soft), transparent 66%); }
+  .cursor-stage::before { content: ""; position: absolute; inset: 32px; border: 1px dashed var(--spot-color); border-radius: 50%; opacity: .32; }
+  .cursor-stage .cursor-shape { position: absolute; left: 58%; top: 42%; font-size: 48px; filter: drop-shadow(0 8px 12px var(--spot-soft)); animation: cursorNudge 3.5s ease-in-out infinite; }
+  .cursor-stage .cursor-dot { position: absolute; left: 58%; top: 42%; width: 9px; height: 9px; border-radius: 50%; background: var(--spot-color); box-shadow: 0 0 0 5px var(--spot-soft); }
+  .joystick { position: relative; width: 104px; height: 104px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.82), rgba(220,224,234,.72)); border: 1px solid rgba(0,0,0,.08); box-shadow: inset 0 2px 5px rgba(255,255,255,.9), 0 12px 24px rgba(0,0,0,.12); }
+  [data-theme="dark"] .joystick { background: radial-gradient(circle at 35% 30%, rgba(100,105,120,.82), rgba(42,45,56,.9)); border-color: rgba(255,255,255,.1); box-shadow: inset 0 2px 5px rgba(255,255,255,.12), 0 12px 24px rgba(0,0,0,.34); }
+  .joystick::before, .joystick::after { content: ""; position: absolute; background: var(--spot-color); opacity: .22; }
+  .joystick::before { left: 18px; right: 18px; top: 51px; height: 1px; }
+  .joystick::after { top: 18px; bottom: 18px; left: 51px; width: 1px; }
+  .joystick-knob { position: absolute; left: 50%; top: 50%; width: 25px; height: 25px; border-radius: 50%; background: var(--spot-color); box-shadow: 0 5px 12px var(--spot-soft), 0 0 0 3px rgba(255,255,255,.7); transform: translate(-50%,-50%); animation: joystickMove 3.5s ease-in-out infinite; }
+  .joystick-label { position: absolute; bottom: 22px; right: 18%; color: var(--text-muted); font-size: 11px; }
+  @keyframes joystickMove { 0%,100% { transform: translate(-50%,-50%); } 25% { transform: translate(-5px,-17px); } 50% { transform: translate(16px,2px); } 75% { transform: translate(-6px,15px); } }
+  @keyframes cursorNudge { 0%,100% { transform: translate(0,0); } 25% { transform: translate(-8px,-11px); } 50% { transform: translate(13px,1px); } 75% { transform: translate(-5px,10px); } }
+
+  /* Whiteboard visual — 저장된 페이지와 PDF 흐름 */
+  .visual-whiteboard { position: relative; width: 100%; height: 100%; min-height: 250px; display: flex; align-items: center; justify-content: center; }
+  .wb-window { width: 72%; height: 72%; border-radius: 15px; background: rgba(255,255,255,.82); border: 1px solid rgba(0,0,0,.08); box-shadow: 0 14px 34px rgba(0,0,0,.13); overflow: hidden; transform: rotate(-2deg); }
+  [data-theme="dark"] .wb-window { background: rgba(31,34,44,.88); border-color: rgba(255,255,255,.09); }
+  .wb-top { height: 28px; display: flex; align-items: center; gap: 5px; padding: 0 10px; border-bottom: 1px solid rgba(0,0,0,.06); }
+  [data-theme="dark"] .wb-top { border-bottom-color: rgba(255,255,255,.08); }
+  .wb-top i { width: 7px; height: 7px; border-radius: 50%; background: #ff6258; } .wb-top i:nth-child(2) { background:#ffbd44; } .wb-top i:nth-child(3) { background:#28c840; }
+  .wb-board { position: relative; height: calc(100% - 28px); background: repeating-linear-gradient(0deg, transparent 0 24px, rgba(1,118,211,.1) 25px 26px); }
+  .wb-board::before { content: ""; position: absolute; left: 18%; top: 28%; width: 44%; height: 32%; border: 3px solid var(--spot-color); border-radius: 7px; transform: rotate(-5deg); opacity: .75; }
+  .wb-board::after { content: "✓"; position: absolute; right: 18%; top: 22%; color: #16a085; font: 700 48px ui-rounded, sans-serif; transform: rotate(-8deg); }
+  .wb-pages { position: absolute; right: 9%; bottom: 16%; display: flex; gap: 5px; }
+  .wb-pages span { width: 26px; height: 34px; border-radius: 4px; background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: 0 3px 8px rgba(0,0,0,.1); } .wb-pages span:nth-child(2) { transform: translateY(-7px); border-color: var(--spot-color); }
+  .wb-pdf { position: absolute; left: 9%; bottom: 17%; padding: 6px 9px; border-radius: 7px; color: #fff; background: #e44d66; font: 700 10px ui-rounded, sans-serif; box-shadow: 0 5px 12px rgba(228,77,102,.28); }
+
+  /* Sidecar visual — MacBook과 iPad 사이의 자연스러운 연결 */
+  .visual-sidecar { position: relative; width: 100%; height: 100%; min-height: 250px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .device { position: relative; border: 4px solid #2f3442; background: linear-gradient(145deg, #fbfbfd, #e9edf7); box-shadow: 0 12px 25px rgba(0,0,0,.18); }
+  [data-theme="dark"] .device { border-color: #858c9c; background: linear-gradient(145deg, #343846, #1f222d); }
+  .device.mac { width: 57%; height: 116px; border-radius: 9px 9px 4px 4px; transform: perspective(400px) rotateY(8deg); }
+  .device.mac::after { content: ""; position: absolute; left: -8%; right: -8%; bottom: -12px; height: 9px; border-radius: 0 0 8px 8px; background: #9ca4b4; }
+  .device.ipad { width: 27%; height: 142px; border-radius: 11px; transform: rotate(6deg); z-index: 2; }
+  .device-screen { position: absolute; inset: 8px; border-radius: 3px; background: linear-gradient(135deg, rgba(1,118,211,.2), rgba(228,77,139,.18)); overflow: hidden; }
+  .device-screen::before { content: ""; position: absolute; left: 20%; top: 35%; width: 52%; height: 26%; border: 2px solid var(--spot-color); border-radius: 5px; transform: rotate(-8deg); }
+  .device-screen::after { content: ""; position: absolute; left: 24%; top: 31%; width: 28px; height: 42px; border-left: 2px solid #e44d66; border-bottom: 2px solid #e44d66; transform: rotate(-35deg); opacity: .8; }
+  .sidecar-link { position: absolute; left: 39%; top: 48%; width: 28%; height: 1px; background: linear-gradient(90deg, var(--spot-color), #e44d8b); box-shadow: 0 0 12px var(--spot-soft); transform: rotate(-9deg); animation: linkPulse 2.4s ease-in-out infinite; }
+  .pencil { position: absolute; z-index: 3; right: 5%; top: 29%; width: 58px; height: 6px; border-radius: 7px; background: linear-gradient(90deg, #e44d66, #f0b429); transform: rotate(-58deg); transform-origin: right center; box-shadow: 0 4px 10px rgba(228,77,102,.3); }
+  .pressure-dot { position: absolute; z-index: 3; left: 43%; bottom: 25%; width: 8px; height: 8px; border-radius: 50%; background: #16a085; box-shadow: 0 0 0 6px rgba(22,160,133,.15), 0 0 20px rgba(22,160,133,.55); animation: pressurePulse 2s ease-in-out infinite; }
+  @keyframes linkPulse { 0%,100% { opacity: .28; } 50% { opacity: .9; } } @keyframes pressurePulse { 50% { transform: scale(1.5); } }
+
+  /* Timer visual — 작은 휴식 알림과 화면을 채우는 집중 타이머 */
+  .visual-timer { position: relative; width: 100%; height: 100%; min-height: 250px; display: grid; place-items: center; overflow: hidden; }
+  .timer-screen { position: absolute; inset: 18px 10%; border-radius: 18px; background: linear-gradient(145deg, rgba(1,118,211,.07), rgba(228,77,139,.08)); border: 1px solid rgba(1,118,211,.12); }
+  [data-theme="dark"] .timer-screen { background: linear-gradient(145deg, rgba(1,118,211,.14), rgba(228,77,139,.12)); border-color: rgba(255,255,255,.1); }
+  .timer-screen::before { content: ""; position: absolute; inset: 14px; border: 1px dashed var(--spot-color); border-radius: 12px; opacity: .22; }
+  .timer-large { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 7px; color: var(--text); transform: translateY(-6px); }
+  .timer-large .timer-time { font: 700 clamp(44px, 7vw, 66px)/1 ui-rounded, "SF Pro Rounded", -apple-system, sans-serif; letter-spacing: -.06em; color: var(--spot-color); text-shadow: 0 8px 24px var(--spot-soft); }
+  .timer-large .timer-label { color: var(--text-muted); font-size: 11px; letter-spacing: .04em; }
+  .timer-progress { width: 130px; height: 5px; border-radius: 99px; background: rgba(1,118,211,.14); overflow: hidden; }
+  .timer-progress::before { content: ""; display: block; width: 68%; height: 100%; border-radius: inherit; background: var(--spot-color); box-shadow: 0 0 12px var(--spot-soft); }
+  .timer-mini { position: absolute; right: 7%; bottom: 14%; width: 156px; padding: 13px 14px 11px; border-radius: 16px; background: rgba(255,255,255,.9); border: 1px solid rgba(0,0,0,.14); box-shadow: 0 14px 30px rgba(0,0,0,.2); color: #26272b; transform: rotate(2deg); animation: timerFloat 4s ease-in-out infinite; }
+  [data-theme="dark"] .timer-mini { background: rgba(35,38,49,.94); border-color: rgba(255,255,255,.14); color: #f6f7fb; box-shadow: 0 14px 30px rgba(0,0,0,.4); }
+  .timer-mini-head { display: flex; align-items: center; gap: 7px; color: var(--spot-color); font-size: 11px; font-weight: 700; }
+  .timer-mini-head::before { content: "◷"; font-size: 19px; line-height: 1; }
+  .timer-mini-time { margin: 5px 0 4px; font: 700 29px/1 ui-rounded, "SF Pro Rounded", -apple-system, sans-serif; letter-spacing: -.05em; }
+  .timer-mini-bar { height: 4px; margin-bottom: 8px; border-radius: 99px; background: rgba(1,118,211,.14); overflow: hidden; }
+  .timer-mini-bar::before { content: ""; display: block; width: 74%; height: 100%; border-radius: inherit; background: var(--spot-color); }
+  .timer-mini-meta { display: flex; justify-content: space-between; color: #878a91; font-size: 9px; }
+  [data-theme="dark"] .timer-mini-meta { color: #aeb3c0; }
+  @keyframes timerFloat { 0%,100% { transform: rotate(2deg) translateY(0); } 50% { transform: rotate(1deg) translateY(-7px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .focus-ring, .focus-lens, .joystick-knob, .cursor-stage .cursor-shape, .sidecar-link, .pressure-dot { animation: none; }
+  }
+
   @media (max-width: 780px) {
     .spotlight { grid-template-columns: 1fr; gap: 32px; }
     .spotlight.reverse { direction: ltr; }
@@ -1895,7 +1980,84 @@
         </div>
       </div>
 
-      <!-- ── 2. 드로잉 모드 활성화 ──────────────────────────────── -->
+      <!-- ── 2. 돋보기와 스포트라이트 ───────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Spotlight &amp; Magnifier</span><span data-lang-ko>스포트라이트 &amp; 돋보기</span><span data-lang-ja>スポットライト &amp; 拡大鏡</span>
+            <span data-lang-zh>聚光灯与放大镜</span><span data-lang-fr>Projecteur &amp; loupe</span><span data-lang-de>Spotlight &amp; Lupe</span>
+            <span data-lang-es>Foco y lupa</span><span data-lang-pt>Holofote e lupa</span><span data-lang-it>Riflettore e lente</span>
+          </span>
+          <h3>
+            <span data-lang-en>Bring the important things a little closer.</span>
+            <span data-lang-ko>중요한 순간을, 조금 더 가까이.</span>
+            <span data-lang-ja>大切な瞬間を、もう少し近くに。</span>
+          </h3>
+          <p>
+            <span data-lang-en>Leave the whole screen behind and let your audience follow the one detail that matters. Spotlight gently clears the stage; Magnifier makes the fine print feel effortless to see.</span>
+            <span data-lang-ko>화면 전체를 보여주는 대신, 지금 중요한 디테일에 시선을 머물게 하세요. 스포트라이트가 무대를 은은하게 비추고, 돋보기가 작은 글씨까지 편안하게 보여줘요.</span>
+            <span data-lang-ja>画面全体ではなく、今大切なディテールへ視線を導きましょう。スポットライトが舞台をやさしく整え、拡大鏡が小さな文字まで見やすくします。</span>
+          </p>
+          <ul>
+            <li><span data-lang-en>Spotlight dims the noise and keeps attention where you point</span><span data-lang-ko>스포트라이트로 주변은 어둡게, 가리키는 곳은 선명하게</span><span data-lang-ja>周囲を暗くして、指し示す場所に視線を集めるスポットライト</span></li>
+            <li><span data-lang-en>Press <strong>⌥M</strong> for a smooth, resizable magnifier lens</span><span data-lang-ko><strong>⌥M</strong>을 누르면 부드럽게 움직이는 돋보기 렌즈</span><span data-lang-ja><strong>⌥M</strong> でなめらかに動くサイズ調整可能な拡大鏡</span></li>
+            <li><span data-lang-en>Perfect for tiny slides, live demos, and the details your audience should not miss</span><span data-lang-ko>작은 슬라이드, 라이브 데모, 놓치면 안 될 디테일에 딱 맞아요</span><span data-lang-ja>小さなスライドやライブデモ、見逃してほしくない細部にぴったり</span></li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-focus" aria-hidden="true">
+            <div class="focus-canvas"></div><div class="focus-ring"></div><div class="focus-lens"></div>
+            <span class="focus-caption">⌥M · 2×</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 3. 나만의 커서 ─────────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Custom Cursor</span><span data-lang-ko>나만의 커서</span><span data-lang-ja>マイカーソル</span>
+            <span data-lang-zh>自定义光标</span><span data-lang-fr>Curseur personnalisé</span><span data-lang-de>Eigener Cursor</span><span data-lang-es>Cursor personalizado</span><span data-lang-pt>Cursor personalizado</span><span data-lang-it>Cursore personalizzato</span>
+          </span>
+          <h3><span data-lang-en>Make your pointer unmistakably yours.</span><span data-lang-ko>당신의 커서는, 당신답게.</span><span data-lang-ja>あなたのポインターを、あなたらしく。</span></h3>
+          <p><span data-lang-en>Choose a paw, a spark, a laser dot, or your own little mascot. Then nudge it into the perfect place with the position joystick — so your pointer always lands exactly where your eyes expect it.</span><span data-lang-ko>발자국, 반짝임, 레이저 점, 나만의 마스코트 중 무엇이든 골라보세요. 위치 조이스틱으로 실제 포인터와의 거리를 조절하면, 시선이 기대하는 자리에 늘 정확히 나타나요.</span><span data-lang-ja>足跡やきらめき、レーザードット、お気に入りのマスコットを選べます。位置ジョイスティックで実際のポインターとの距離を調整すれば、いつも思い通りの場所に表示できます。</span></p>
+          <ul>
+            <li><span data-lang-en>Save up to 6 cursor images and switch them on the fly</span><span data-lang-ko>최대 6개의 커서 이미지를 저장하고 바로 전환</span><span data-lang-ja>最大6個のカーソル画像を保存してすぐ切替</span></li>
+            <li><span data-lang-en>Drag the joystick up, down, left, or right to fine-tune the offset</span><span data-lang-ko>조이스틱을 상하좌우로 움직여 커서 위치를 섬세하게 조절</span><span data-lang-ja>ジョイスティックを上下左右に動かして位置を微調整</span></li>
+            <li><span data-lang-en>Pair it with Spotlight or Laser for a signature way to guide attention</span><span data-lang-ko>스포트라이트·레이저와 함께 쓰면 당신만의 시선 유도</span><span data-lang-ja>スポットライトやレーザーと組み合わせて自分だけの視線誘導</span></li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-joystick" aria-hidden="true">
+            <div class="cursor-stage"><span class="cursor-shape">✨</span><span class="cursor-dot"></span></div>
+            <div class="joystick"><span class="joystick-knob"></span></div><span class="joystick-label">position</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 4. 빌트인 화이트보드 ───────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#7B5EA7;--spot-soft:rgba(123,94,167,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow"><span data-lang-en>Built-in Whiteboard</span><span data-lang-ko>빌트인 화이트보드</span><span data-lang-ja>内蔵ホワイトボード</span><span data-lang-zh>内置白板</span><span data-lang-fr>Tableau blanc intégré</span><span data-lang-de>Integriertes Whiteboard</span><span data-lang-es>Pizarra integrada</span><span data-lang-pt>Quadro branco integrado</span><span data-lang-it>Lavagna integrata</span></span>
+          <h3><span data-lang-en>Write it once. Bring it back whenever you need it.</span><span data-lang-ko>한 번 쓴 판서, 필요할 때 다시 꺼내 쓰세요.</span><span data-lang-ja>一度書いた板書を、必要なときに何度でも。</span></h3>
+          <p><span data-lang-en>Your whiteboard remembers the flow of your lesson. Reopen a saved session, pick up where you left off, or bring a PDF in and annotate it like a presentation-ready viewer.</span><span data-lang-ko>화이트보드가 수업의 흐름을 기억해요. 저장된 세션을 다시 열어 이어서 쓰고, PDF를 불러와 발표용 뷰어처럼 페이지마다 바로 필기할 수도 있어요.</span><span data-lang-ja>ホワイトボードが授業の流れを覚えています。保存したセッションを開いて続きから書いたり、PDFを読み込んでプレゼン用ビューアのようにページごとに注釈を加えられます。</span></p>
+          <ul><li><span data-lang-en>Reuse saved whiteboard sessions instead of starting from a blank page</span><span data-lang-ko>매번 빈 페이지에서 시작하지 않고 저장된 세션을 재사용</span><span data-lang-ja>白紙から始めず、保存したホワイトボードセッションを再利用</span></li><li><span data-lang-en>Import PDFs, annotate page by page, and export your work back to PDF</span><span data-lang-ko>PDF를 불러와 페이지별로 필기하고 다시 PDF로 내보내기</span><span data-lang-ja>PDFを読み込み、ページごとに注釈を加えてPDFとして書き出し</span></li><li><span data-lang-en>Keep every idea ready for the next class, meeting, or rehearsal</span><span data-lang-ko>다음 수업·회의·리허설을 위해 아이디어를 그대로 보관</span><span data-lang-ja>次の授業や会議、リハーサルのためにアイデアをそのまま保存</span></li></ul>
+        </div>
+        <div class="spotlight-visual"><div class="visual-whiteboard" aria-hidden="true"><div class="wb-window"><div class="wb-top"><i></i><i></i><i></i></div><div class="wb-board"></div></div><div class="wb-pages"><span></span><span></span><span></span></div><span class="wb-pdf">PDF ↔</span></div></div>
+      </div>
+
+      <!-- ── 5. Mac + iPad Sidecar ───────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow"><span data-lang-en>Mac + iPad Sidecar</span><span data-lang-ko>맥북 + iPad Sidecar</span><span data-lang-ja>Mac + iPad Sidecar</span><span data-lang-zh>Mac + iPad 随航</span><span data-lang-fr>Mac + iPad Sidecar</span><span data-lang-de>Mac + iPad Sidecar</span><span data-lang-es>Mac + iPad Sidecar</span><span data-lang-pt>Mac + iPad Sidecar</span><span data-lang-it>Mac + iPad Sidecar</span></span>
+          <h3><span data-lang-en>Turn your iPad into the most natural whiteboard in the room.</span><span data-lang-ko>아이패드를 세상에서 가장 자연스러운 화이트보드로.</span><span data-lang-ja>iPadを、その場でいちばん自然なホワイトボードに。</span></h3>
+          <p><span data-lang-en>Connect your MacBook and iPad with Sidecar. TeacherPalette bridges the two screens while Apple Pencil pressure makes every simple shape feel like it belongs on paper.</span><span data-lang-ko>맥북과 아이패드를 Sidecar로 연결해 보세요. TeacherPalette가 두 화면 사이를 이어주고, Apple Pencil의 필압으로 간단한 도형 하나도 종이 위처럼 자연스럽게 그려져요.</span><span data-lang-ja>MacBookとiPadをSidecarでつなぎましょう。TeacherPaletteが2つの画面をつなぎ、Apple Pencilの筆圧でシンプルな図形も紙の上のように自然に描けます。</span></p>
+          <ul><li><span data-lang-en>Draw on iPad while your presentation stays clear on the MacBook</span><span data-lang-ko>아이패드에 그리는 동안 발표 화면은 맥북에서 깨끗하게 유지</span><span data-lang-ja>iPadに描きながら、プレゼン画面はMacBookにきれいに表示</span></li><li><span data-lang-en>Apple Pencil pressure gives your lines a human, expressive touch</span><span data-lang-ko>Apple Pencil 필압으로 선 하나에도 손맛과 생동감을</span><span data-lang-ja>Apple Pencilの筆圧で線に人らしい表情を</span></li><li><span data-lang-en>Great for diagrams, quick sketches, and explaining the idea in your hands</span><span data-lang-ko>도식, 빠른 스케치, 손으로 설명하는 순간에 딱 맞아요</span><span data-lang-ja>図解や素早いスケッチ、手を動かして説明する瞬間に最適</span></li></ul>
+        </div>
+        <div class="spotlight-visual"><div class="visual-sidecar" aria-hidden="true"><div class="device mac"><div class="device-screen"></div></div><span class="sidecar-link"></span><div class="device ipad"><div class="device-screen"></div><span class="pencil"></span><span class="pressure-dot"></span></div></div></div>
+      </div>
+
+      <!-- ── 6. 드로잉 모드 활성화 ──────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -1951,7 +2113,7 @@
         </div>
       </div>
 
-      <!-- ── 3. ⌘K 커맨드 팔레트 ─────────────────────────────────── -->
+      <!-- ── 7. ⌘K 커맨드 팔레트 ─────────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#6C5CE7;--spot-soft:rgba(108,92,231,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2046,7 +2208,7 @@
         </div>
       </div>
 
-      <!-- ── 4. 원핸드 툴/색상 순환 ─────────────────────────────── -->
+      <!-- ── 8. 원핸드 툴/색상 순환 ─────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2097,47 +2259,7 @@
         </div>
       </div>
 
-      <!-- ── 5. 나만의 커서 ─────────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
-        <div class="spotlight-copy">
-          <span class="spotlight-eyebrow">
-            <span data-lang-en>Custom Cursor</span><span data-lang-ko>나만의 커서</span><span data-lang-ja>マイカーソル</span>
-            <span data-lang-zh>自定义光标</span><span data-lang-fr>Curseur personnalisé</span><span data-lang-de>Eigener Cursor</span>
-            <span data-lang-es>Cursor personalizado</span><span data-lang-pt>Cursor personalizado</span><span data-lang-it>Cursore personalizzato</span>
-          </span>
-          <h3>
-            <span data-lang-en>Ditch the arrow. Point with anything.</span>
-            <span data-lang-ko>화살표는 그만. 뭐든지 커서로 삼으세요.</span>
-            <span data-lang-ja>矢印はもう終わり。何でもカーソルに。</span>
-          </h3>
-          <p>
-            <span data-lang-en>Drop in any image — a paw print, a laser dot, your brand mascot — and it becomes your cursor. Save multiple presets and swap on the fly.</span>
-            <span data-lang-ko>어떤 이미지든 넣으면 커서가 됩니다 — 발자국, 레이저 점, 브랜드 마스코트. 여러 프리셋을 저장해 즉시 전환하세요.</span>
-            <span data-lang-ja>どんな画像でもドロップすれば、それがカーソルに — 足跡、レーザードット、ブランドマスコット。複数のプリセットを保存し、即時切替。</span>
-          </p>
-          <ul>
-            <li>
-              <span data-lang-en>Save up to <strong>6 cursor images</strong> as presets</span>
-              <span data-lang-ko>최대 <strong>6개의 커서 이미지</strong>를 프리셋으로 저장</span>
-              <span data-lang-ja>最大 <strong>6 個のカーソル画像</strong> をプリセットとして保存</span>
-            </li>
-            <li>
-              <span data-lang-en>Pair with laser, click highlight, or cursor highlight — layer effects for fresh, purposeful ways to guide attention</span>
-              <span data-lang-ko>레이저·클릭 강조·커서 강조 효과와 병행 사용 — 여러 효과를 겹쳐 신선하고 목적 있는 시선 유도</span>
-              <span data-lang-ja>レーザー・クリック強調・カーソルハイライトと組み合わせて — 効果を重ねて新鮮で目的のある視線誘導</span>
-            </li>
-          </ul>
-        </div>
-        <div class="spotlight-visual">
-          <div class="visual-cursor" aria-hidden="true">
-            <div class="cursor-preview">🐾</div>
-            <div class="cursor-preview active">🎯</div>
-            <div class="cursor-preview">✨</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 6. HUD 알림 ────────────────────────────────────────── -->
+      <!-- ── 9. HUD 알림 ────────────────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2193,7 +2315,52 @@
         </div>
       </div>
 
-      <!-- ── 7. 9개 언어 지원 ────────────────────────────────────── -->
+      <!-- ── 10. 휴식 타이머 ──────────────────────────────────────── -->
+      <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Gentle Timer</span><span data-lang-ko>부드러운 타이머</span><span data-lang-ja>やさしいタイマー</span>
+            <span data-lang-zh>温柔计时器</span><span data-lang-fr>Minuteur doux</span><span data-lang-de>Sanfter Timer</span>
+            <span data-lang-es>Temporizador suave</span><span data-lang-pt>Temporizador suave</span><span data-lang-it>Timer gentile</span>
+          </span>
+          <h3>
+            <span data-lang-en>Make room for a breath between every good idea.</span>
+            <span data-lang-ko>좋은 생각 사이에, 잠깐의 숨을 놓아주세요.</span>
+            <span data-lang-ja>いいアイデアの間に、ひと呼吸の余白を。</span>
+            <span data-lang-zh>在每个好想法之间，留一点呼吸的空间。</span>
+            <span data-lang-fr>Entre chaque bonne idée, laissez place à une respiration.</span>
+            <span data-lang-de>Zwischen jeder guten Idee: Raum für einen Atemzug.</span>
+            <span data-lang-es>Entre cada buena idea, deja espacio para respirar.</span>
+            <span data-lang-pt>Entre cada boa ideia, deixe espaço para respirar.</span>
+            <span data-lang-it>Tra una buona idea e l'altra, lascia spazio a un respiro.</span>
+          </h3>
+          <p>
+            <span data-lang-en>Set a quiet break timer and let TeacherPalette keep the pace for you. Use a small floating timer when your lesson stays in view, or let the big timer become the whole screen when it is time to pause together.</span>
+            <span data-lang-ko>조용한 휴식 타이머를 설정하고, TeacherPalette에게 잠시 속도를 맡겨보세요. 수업 화면을 그대로 보이고 싶을 땐 작은 타이머를, 함께 쉬는 시간에는 화면 전체를 채우는 큰 타이머를 사용할 수 있어요.</span>
+            <span data-lang-ja>静かな休憩タイマーをセットして、TeacherPaletteに少しだけペースを任せましょう。授業画面を見せたままなら小さなタイマーを、一緒に休む時間には画面いっぱいの大きなタイマーを。</span>
+            <span data-lang-zh>设定安静的休息计时，让 TeacherPalette 替你守住节奏。需要保留课堂画面时使用小型悬浮计时器，一起休息时则让大计时器铺满整个屏幕。</span>
+            <span data-lang-fr>Réglez un temps de pause discret et laissez TeacherPalette garder le rythme. Le petit minuteur reste dans un coin, tandis que le grand occupe tout l'écran pour une pause partagée.</span>
+            <span data-lang-de>Stelle einen ruhigen Pausentimer ein und lass TeacherPalette den Rhythmus halten. Der kleine Timer bleibt im Bild, der große füllt den Bildschirm für eine gemeinsame Pause.</span>
+            <span data-lang-es>Configura una pausa tranquila y deja que TeacherPalette cuide el ritmo. El temporizador pequeño permanece en una esquina; el grande llena la pantalla cuando toca descansar juntos.</span>
+            <span data-lang-pt>Defina uma pausa tranquila e deixe o TeacherPalette cuidar do ritmo. O timer pequeno fica no canto; o grande ocupa a tela quando chega a hora de descansar juntos.</span>
+            <span data-lang-it>Imposta una pausa tranquilla e lascia che TeacherPalette tenga il ritmo. Il timer piccolo resta nell'angolo; quello grande riempie lo schermo quando è il momento di fermarsi insieme.</span>
+          </p>
+          <ul>
+            <li><span data-lang-en>Small timer for a gentle reminder without leaving your lesson</span><span data-lang-ko>수업을 떠나지 않고도 휴식을 알려주는 작은 타이머</span><span data-lang-ja>授業を止めずに休憩を知らせる小さなタイマー</span><span data-lang-zh>不离开课堂也能温柔提醒休息的小计时器</span><span data-lang-fr>Un petit minuteur pour rappeler la pause sans quitter la leçon</span><span data-lang-de>Kleiner Timer für eine sanfte Erinnerung mitten im Unterricht</span><span data-lang-es>Un temporizador pequeño para recordar la pausa sin salir de la lección</span><span data-lang-pt>Um timer pequeno para lembrar a pausa sem sair da aula</span><span data-lang-it>Un timer piccolo per ricordare la pausa senza lasciare la lezione</span></li>
+            <li><span data-lang-en>Large timer for a clear, shared pause on the whole screen</span><span data-lang-ko>화면 전체를 채워 모두가 함께 볼 수 있는 큰 타이머</span><span data-lang-ja>画面いっぱいに表示して、みんなで共有できる大きなタイマー</span><span data-lang-zh>铺满整个屏幕、让大家一起看到的大计时器</span><span data-lang-fr>Un grand minuteur visible par tous pour une pause partagée</span><span data-lang-de>Großer Timer für eine klare, gemeinsame Pause auf dem ganzen Bildschirm</span><span data-lang-es>Un temporizador grande y visible para una pausa compartida</span><span data-lang-pt>Um timer grande e visível para uma pausa compartilhada</span><span data-lang-it>Un timer grande e visibile per una pausa condivisa</span></li>
+            <li><span data-lang-en>Choose the size that fits the moment — stay in flow, or make space to reset</span><span data-lang-ko>순간에 맞는 크기를 선택 — 흐름을 이어가거나, 다시 시작할 여백을 만들어요</span><span data-lang-ja>その瞬間に合うサイズを選択 — 流れを保つか、リセットの余白をつくるか</span><span data-lang-zh>选择适合当下的大小 — 保持节奏，或留出重新开始的空间</span><span data-lang-fr>Choisissez la taille du moment — garder le rythme ou s'offrir un nouveau départ</span><span data-lang-de>Wähle die passende Größe — im Fluss bleiben oder Raum für einen Neustart schaffen</span><span data-lang-es>Elige el tamaño adecuado — mantén el ritmo o deja espacio para volver a empezar</span><span data-lang-pt>Escolha o tamanho do momento — mantenha o fluxo ou abra espaço para recomeçar</span><span data-lang-it>Scegli la dimensione giusta — resta nel flusso o crea spazio per ripartire</span></li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-timer" aria-hidden="true">
+            <div class="timer-screen"></div>
+            <div class="timer-large"><span class="timer-time">05:00</span><span class="timer-progress"></span><span class="timer-label">A quiet moment together</span></div>
+            <div class="timer-mini"><div class="timer-mini-head">Break timer</div><div class="timer-mini-time">5:00</div><div class="timer-mini-bar"></div><div class="timer-mini-meta"><span>Ends at 9:28 AM</span><span>▶</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 11. 9개 언어 지원 ────────────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2487,7 +2654,7 @@
           <span data-lang-zh>处理器</span><span data-lang-fr>Processeur</span><span data-lang-de>Prozessor</span>
           <span data-lang-es>Procesador</span><span data-lang-pt>Processador</span><span data-lang-it>Processore</span>
         </div>
-        <div class="req-value">Apple Silicon / Intel</div>
+        <div class="req-value">Apple Silicon</div>
       </div>
       <div class="req-item">
         <div class="req-label">
