@@ -795,9 +795,21 @@
   .feature-card p { color: var(--text-dim); font-size: 14px; line-height: 1.55; }
 
   /* ── Spotlight sections (deep-dive) ────────────────────────
-     핵심 3개 기능(마이 팔레트, 원핸드 도구/색상 순환, 나만의 커서)을
-     alternating 2-column layout으로 크게 강조. 배경에 accent 컬러 wash. */
+     실제 사용 흐름에 맞춘 기능 카드들을 alternating 2-column layout으로 강조. */
   .spotlight-list { display: flex; flex-direction: column; gap: 96px; }
+  /* 사용 흐름: 그리기 시작 → 상태 확인 → 도구 확장 → 발표 보조 기능 */
+  .spotlight-list > .spotlight:nth-child(1) { order: 1; }
+  .spotlight-list > .spotlight:nth-child(2) { order: 3; }
+  .spotlight-list > .spotlight:nth-child(3) { order: 4; }
+  .spotlight-list > .spotlight:nth-child(4) { order: 5; }
+  .spotlight-list > .spotlight:nth-child(5) { order: 6; }
+  .spotlight-list > .spotlight:nth-child(6) { order: 7; }
+  .spotlight-list > .spotlight:nth-child(7) { order: 2; }
+  .spotlight-list > .spotlight:nth-child(8) { order: 8; }
+  .spotlight-list > .spotlight:nth-child(9) { order: 9; }
+  .spotlight-list > .spotlight:nth-child(10) { order: 10; }
+  .spotlight-list > .spotlight:nth-child(11) { order: 11; }
+  .spotlight-list > .spotlight:nth-child(12) { order: 12; }
   .spotlight {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1155,6 +1167,31 @@
     .dm-hud  { animation: none; opacity: 1; }
   }
 
+  /* Drawing tools visual — 메뉴에서 도구를 고르고 화면 위에 바로 판서하는 흐름 */
+  .visual-drawing-tools { position: relative; width: 100%; height: 100%; min-height: 250px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .drawing-menu { position: relative; z-index: 2; width: 34%; min-width: 104px; padding: 14px 10px; border-radius: 15px; background: rgba(35,38,48,.94); border: 1px solid rgba(255,255,255,.12); box-shadow: 0 14px 28px rgba(0,0,0,.2); color: #fff; }
+  .drawing-menu-title { margin: 0 5px 10px; color: #69b4f2; font: 700 9px ui-rounded, -apple-system, sans-serif; letter-spacing: .16em; }
+  .drawing-tool { display: flex; align-items: center; gap: 8px; padding: 8px 7px; border-radius: 8px; color: rgba(255,255,255,.72); font-size: 11px; }
+  .drawing-tool + .drawing-tool { margin-top: 3px; }
+  .drawing-tool.active { background: #0176D3; color: #fff; box-shadow: 0 5px 14px rgba(1,118,211,.35); }
+  .drawing-tool-icon { width: 17px; text-align: center; font-size: 15px; line-height: 1; }
+  .drawing-canvas { position: relative; width: 58%; height: 188px; border-radius: 14px; background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(245,247,252,.8)); border: 1px solid rgba(0,0,0,.08); box-shadow: 0 16px 30px rgba(0,0,0,.14); overflow: hidden; }
+  [data-theme="dark"] .drawing-canvas { background: linear-gradient(145deg, rgba(38,42,54,.96), rgba(27,30,40,.9)); border-color: rgba(255,255,255,.1); }
+  .drawing-canvas::before { content: "YOUR IDEA"; position: absolute; left: 13%; top: 17%; color: var(--text-muted); font: 700 10px ui-rounded, -apple-system, sans-serif; letter-spacing: .14em; opacity: .65; }
+  .drawing-canvas::after { content: "↗"; position: absolute; right: 16%; bottom: 18%; color: #E44D66; font: 700 35px ui-rounded, -apple-system, sans-serif; transform: rotate(-10deg); opacity: .86; }
+  .drawing-stroke { position: absolute; left: 13%; top: 43%; width: 62%; height: 26px; border-top: 5px solid #0176D3; border-radius: 50%; transform: rotate(-5deg); filter: drop-shadow(0 3px 5px rgba(1,118,211,.2)); animation: drawingStroke 3.8s ease-in-out infinite; }
+  .drawing-highlight { position: absolute; left: 12%; top: 37%; width: 66%; height: 18px; border-radius: 10px; background: rgba(240,180,41,.42); transform: rotate(-5deg); animation: drawingHighlight 3.8s ease-in-out infinite; }
+  .drawing-cursor { position: absolute; left: 71%; top: 52%; color: #0176D3; font-size: 22px; filter: drop-shadow(0 4px 5px rgba(1,118,211,.25)); animation: drawingCursor 3.8s ease-in-out infinite; }
+  @keyframes drawingStroke { 0%,12% { clip-path: inset(0 100% 0 0); } 38%,100% { clip-path: inset(0 0 0 0); } }
+  @keyframes drawingHighlight { 0%,35% { opacity: 0; transform: rotate(-5deg) scaleX(.4); transform-origin: left center; } 48%,100% { opacity: 1; transform: rotate(-5deg) scaleX(1); transform-origin: left center; } }
+  @keyframes drawingCursor { 0%,35% { transform: translate(-35px, 20px); opacity: 0; } 48%,70% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(24px, 30px); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .drawing-stroke, .drawing-highlight, .drawing-cursor { animation: none; }
+    .drawing-stroke { clip-path: inset(0 0 0 0); }
+    .drawing-highlight { opacity: 1; }
+    .drawing-cursor { opacity: 1; }
+  }
+
   /* Languages visual — 9 flag cards grid, 활성 언어 highlight */
   .visual-languages {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
@@ -1310,6 +1347,8 @@
     .spotlight-copy { max-width: none; }
     .spotlight-list { gap: 64px; }
     .visual-hud { flex-wrap: wrap; }
+    .visual-drawing-tools { min-height: 230px; }
+    .drawing-menu { min-width: 96px; }
   }
 
   /* ── Pricing ──────────────────────────────────────────────── */
@@ -1351,10 +1390,12 @@
     text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px;
   }
   .pricing-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
+  .pricing-price .pricing-original { font-size: 17px; font-weight: 600; color: var(--text-muted); text-decoration-thickness: 1.5px; text-decoration-color: var(--accent); }
   .pricing-price .amount { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
   .pricing-price .period { font-size: 15px; color: var(--text-dim); font-weight: 500; }
   .pricing-equiv { font-size: 15px; color: var(--text); font-weight: 600; margin-bottom: 8px; }
   .pricing-sub { font-size: 13.5px; color: var(--accent); font-weight: 600; margin-bottom: 24px; min-height: 18px; }
+  .pricing-launch-note { margin: -34px auto 38px; color: var(--text-dim); font-size: 14px; font-weight: 600; }
   .pricing-features { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
   .pricing-features li { font-size: 14px; color: var(--text); padding-left: 24px; position: relative; line-height: 1.5; }
   .pricing-features li::before {
@@ -1906,7 +1947,57 @@
   <div class="section-inner">
     <div class="spotlight-list">
 
-      <!-- ── 1. 마이 팔레트 ─────────────────────────────────────── -->
+      <!-- ── 1. 드로잉 모드 ───────────────────────────────────────── -->
+      <div class="spotlight" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
+        <div class="spotlight-copy">
+          <span class="spotlight-eyebrow">
+            <span data-lang-en>Drawing mode</span><span data-lang-ko>드로잉 모드</span><span data-lang-ja>描画モード</span>
+            <span data-lang-zh>绘图模式</span><span data-lang-fr>Mode dessin</span><span data-lang-de>Zeichenmodus</span>
+            <span data-lang-es>Modo dibujo</span><span data-lang-pt>Modo desenho</span><span data-lang-it>Modalità disegno</span>
+          </span>
+          <h3>
+            <span data-lang-en>Choose a tool. Leave a mark that moves the story forward.</span>
+            <span data-lang-ko>도구 하나를 고르고, 이야기가 나아가는 자리에 흔적을 남겨보세요.</span>
+            <span data-lang-ja>道具を選んで、物語が前に進む場所に印を残しましょう。</span>
+            <span data-lang-zh>选一个工具，在让故事继续前进的地方留下痕迹。</span>
+            <span data-lang-fr>Choisissez un outil. Laissez une trace qui fait avancer l'histoire.</span>
+            <span data-lang-de>Wähle ein Werkzeug. Hinterlasse eine Spur, die die Geschichte voranbringt.</span>
+            <span data-lang-es>Elige una herramienta. Deja una marca que haga avanzar la historia.</span>
+            <span data-lang-pt>Escolha uma ferramenta. Deixe uma marca que leve a história adiante.</span>
+            <span data-lang-it>Scegli uno strumento. Lascia un segno che porta avanti la storia.</span>
+          </h3>
+          <p>
+            <span data-lang-en>Drawing mode turns your presentation into a canvas for the moment. Click Pen to write, Highlighter to make the key line glow, or Arrow to guide every eye — right on the screen your audience is already watching.</span>
+            <span data-lang-ko>드로잉 모드는 발표 화면을 그 순간의 캔버스로 바꿔줘요. 펜으로 쓰고, 하이라이터로 핵심을 빛내고, 화살표로 시선을 이끌어보세요. 청중이 보고 있는 바로 그 화면 위에서요.</span>
+            <span data-lang-ja>描画モードは、プレゼン画面をその瞬間のキャンバスに変えます。ペンで書き、ハイライトで大切な一行を照らし、矢印で視線を導く。みんなが見ている画面の上で、そのまま。</span>
+            <span data-lang-zh>绘图模式让演示画面成为当下的画布。用画笔书写，用荧光笔点亮重点，再用箭头引导视线 — 直接在观众正在观看的屏幕上完成。</span>
+            <span data-lang-fr>Le mode dessin transforme votre présentation en toile du moment. Écrivez au stylo, faites briller l'essentiel avec le surligneur et guidez les regards avec une flèche — directement sur l'écran regardé par votre public.</span>
+            <span data-lang-de>Der Zeichenmodus macht deine Präsentation zur Leinwand des Augenblicks. Schreibe mit dem Stift, hebe Wichtiges hervor und lenke Blicke mit einem Pfeil — direkt auf dem Bildschirm, den alle sehen.</span>
+            <span data-lang-es>El modo dibujo convierte tu presentación en un lienzo para el momento. Escribe con el lápiz, ilumina lo importante con el resaltador y guía las miradas con una flecha — directamente en la pantalla que ya mira tu audiencia.</span>
+            <span data-lang-pt>O modo desenho transforma sua apresentação em uma tela para o momento. Escreva com a caneta, destaque o essencial e guie os olhares com uma seta — direto na tela que todos já estão vendo.</span>
+            <span data-lang-it>La modalità disegno trasforma la presentazione nella tela del momento. Scrivi con la penna, illumina l'essenziale con l'evidenziatore e guida gli sguardi con una freccia — direttamente sullo schermo che tutti stanno guardando.</span>
+          </p>
+          <ul>
+            <li><span data-lang-en>Pen, Highlighter, Arrow, Rectangle, Text, and Eraser ready in one menu</span><span data-lang-ko>펜·하이라이터·화살표·사각형·텍스트·지우개를 한 메뉴에서 바로 선택</span><span data-lang-ja>ペン・ハイライト・矢印・四角形・テキスト・消しゴムを一つのメニューから</span><span data-lang-zh>画笔、荧光笔、箭头、矩形、文字和橡皮擦集中在一个菜单中</span><span data-lang-fr>Stylo, surligneur, flèche, rectangle, texte et gomme dans un seul menu</span><span data-lang-de>Stift, Textmarker, Pfeil, Rechteck, Text und Radierer in einem Menü</span><span data-lang-es>Lápiz, resaltador, flecha, rectángulo, texto y borrador en un solo menú</span><span data-lang-pt>Caneta, marcador, seta, retângulo, texto e borracha em um só menu</span><span data-lang-it>Penna, evidenziatore, freccia, rettangolo, testo e gomma in un unico menu</span></li>
+            <li><span data-lang-en>Annotate the actual screen — no switching windows, no breaking the rhythm</span><span data-lang-ko>실제 화면 위에 바로 판서 — 창을 오갈 필요 없이 흐름을 그대로</span><span data-lang-ja>実際の画面に直接描画 — ウィンドウを切り替えずリズムを保つ</span><span data-lang-zh>直接在真实屏幕上标注 — 无需切换窗口，不打断节奏</span><span data-lang-fr>Annotez l'écran réel — sans changer de fenêtre ni casser le rythme</span><span data-lang-de>Auf dem echten Bildschirm zeichnen — ohne Fensterwechsel, ohne den Rhythmus zu verlieren</span><span data-lang-es>Anota en la pantalla real — sin cambiar de ventana ni romper el ritmo</span><span data-lang-pt>Faça anotações na tela real — sem trocar de janela nem quebrar o ritmo</span><span data-lang-it>Annota sullo schermo reale — senza cambiare finestra né spezzare il ritmo</span></li>
+            <li><span data-lang-en>Clear, undo, and switch tools whenever the idea changes direction</span><span data-lang-ko>아이디어의 방향이 바뀌면 지우고, 되돌리고, 도구를 바꾸기</span><span data-lang-ja>考えの向きが変わったら、消して、戻して、道具を切り替え</span><span data-lang-zh>想法改变方向时，随时清除、撤销并切换工具</span><span data-lang-fr>Effacez, annulez et changez d'outil quand l'idée prend un autre chemin</span><span data-lang-de>Löschen, rückgängig machen und Werkzeuge wechseln, wann immer sich die Idee verändert</span><span data-lang-es>Borra, deshaz y cambia de herramienta cuando la idea cambie de rumbo</span><span data-lang-pt>Apague, desfaça e troque de ferramenta quando a ideia mudar de direção</span><span data-lang-it>Cancella, annulla e cambia strumento quando l'idea prende una nuova direzione</span></li>
+          </ul>
+        </div>
+        <div class="spotlight-visual">
+          <div class="visual-drawing-tools" aria-hidden="true">
+            <div class="drawing-menu">
+              <div class="drawing-menu-title">DRAWING</div>
+              <div class="drawing-tool active"><span class="drawing-tool-icon">╱</span><span>Pen</span></div>
+              <div class="drawing-tool"><span class="drawing-tool-icon">▱</span><span>Highlighter</span></div>
+              <div class="drawing-tool"><span class="drawing-tool-icon">↗</span><span>Arrow</span></div>
+              <div class="drawing-tool"><span class="drawing-tool-icon">⌫</span><span>Eraser</span></div>
+            </div>
+            <div class="drawing-canvas"><span class="drawing-highlight"></span><span class="drawing-stroke"></span><span class="drawing-cursor">⌁</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 3. 마이 팔레트 ─────────────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#E44D8B;--spot-soft:rgba(228,77,139,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -1980,7 +2071,7 @@
         </div>
       </div>
 
-      <!-- ── 2. 돋보기와 스포트라이트 ───────────────────────────── -->
+      <!-- ── 4. 돋보기와 스포트라이트 ───────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2012,7 +2103,7 @@
         </div>
       </div>
 
-      <!-- ── 3. 나만의 커서 ─────────────────────────────────────── -->
+      <!-- ── 5. 나만의 커서 ─────────────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2035,7 +2126,7 @@
         </div>
       </div>
 
-      <!-- ── 4. 빌트인 화이트보드 ───────────────────────────────── -->
+      <!-- ── 6. 빌트인 화이트보드 ───────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#7B5EA7;--spot-soft:rgba(123,94,167,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow"><span data-lang-en>Built-in Whiteboard</span><span data-lang-ko>빌트인 화이트보드</span><span data-lang-ja>内蔵ホワイトボード</span><span data-lang-zh>内置白板</span><span data-lang-fr>Tableau blanc intégré</span><span data-lang-de>Integriertes Whiteboard</span><span data-lang-es>Pizarra integrada</span><span data-lang-pt>Quadro branco integrado</span><span data-lang-it>Lavagna integrata</span></span>
@@ -2046,7 +2137,7 @@
         <div class="spotlight-visual"><div class="visual-whiteboard" aria-hidden="true"><div class="wb-window"><div class="wb-top"><i></i><i></i><i></i></div><div class="wb-board"></div></div><div class="wb-pages"><span></span><span></span><span></span></div><span class="wb-pdf">PDF ↔</span></div></div>
       </div>
 
-      <!-- ── 5. Mac + iPad Sidecar ───────────────────────────────── -->
+      <!-- ── 7. Mac + iPad Sidecar ───────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow"><span data-lang-en>Mac + iPad Sidecar</span><span data-lang-ko>맥북 + iPad Sidecar</span><span data-lang-ja>Mac + iPad Sidecar</span><span data-lang-zh>Mac + iPad 随航</span><span data-lang-fr>Mac + iPad Sidecar</span><span data-lang-de>Mac + iPad Sidecar</span><span data-lang-es>Mac + iPad Sidecar</span><span data-lang-pt>Mac + iPad Sidecar</span><span data-lang-it>Mac + iPad Sidecar</span></span>
@@ -2057,7 +2148,7 @@
         <div class="spotlight-visual"><div class="visual-sidecar" aria-hidden="true"><div class="device mac"><div class="device-screen"></div></div><span class="sidecar-link"></span><div class="device ipad"><div class="device-screen"></div><span class="pencil"></span><span class="pressure-dot"></span></div></div></div>
       </div>
 
-      <!-- ── 6. 드로잉 모드 활성화 ──────────────────────────────── -->
+      <!-- ── 2. 드로잉 모드 활성화 ──────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2071,15 +2162,15 @@
             <span data-lang-ja>描画中かどうかを見逃しません。</span>
           </h3>
           <p>
-            <span data-lang-en>The moment you enable drawing mode, a soft paint-blob halo blooms into every screen edge and a HUD confirms the state. No more accidental clicks, no more guessing which display is active.</span>
-            <span data-lang-ko>드로잉 모드를 켜는 순간, 모든 화면 가장자리에 물감 블롭이 은은하게 번지고 HUD가 상태를 확인해줍니다. 실수로 클릭할 일도, 어느 화면이 활성인지 헷갈릴 일도 없습니다.</span>
-            <span data-lang-ja>描画モードを有効にした瞬間、すべての画面の縁に絵の具ブロブがふわりと広がり、HUD が状態を教えてくれます。誤クリックも、どの画面が有効か迷うこともありません。</span>
+            <span data-lang-en>The moment you enable drawing mode, a soft paint-blob halo blooms along the edges of the app UI and a HUD confirms the state. No more accidental clicks, no more guessing which display is active.</span>
+            <span data-lang-ko>드로잉 모드를 켜는 순간, 앱 UI 가장자리에 물감 블롭이 은은하게 번지고 HUD가 상태를 확인해줍니다. 실수로 클릭할 일도, 어느 화면이 활성인지 헷갈릴 일도 없습니다.</span>
+            <span data-lang-ja>描画モードを有効にした瞬間、アプリUIの縁に絵の具ブロブがふわりと広がり、HUD が状態を教えてくれます。誤クリックも、どの画面が有効か迷うこともありません。</span>
           </p>
           <ul>
             <li>
-              <span data-lang-en>Paint-blob halo animates in around every connected display</span>
-              <span data-lang-ko>연결된 모든 디스플레이 가장자리에 물감 블롭 애니메이션</span>
-              <span data-lang-ja>接続されたすべてのディスプレイの縁で絵の具ブロブがアニメーション</span>
+              <span data-lang-en>Paint-blob halo animates along the edges of the app UI</span>
+              <span data-lang-ko>앱 UI 가장자리에 물감 블롭 애니메이션</span>
+              <span data-lang-ja>アプリUIの縁で絵の具ブロブがアニメーション</span>
             </li>
             <li>
               <span data-lang-en>HUD badge confirms Drawing ON — visible only to you, never to the audience</span>
@@ -2113,7 +2204,7 @@
         </div>
       </div>
 
-      <!-- ── 7. ⌘K 커맨드 팔레트 ─────────────────────────────────── -->
+      <!-- ── 8. ⌘K 커맨드 팔레트 ─────────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#6C5CE7;--spot-soft:rgba(108,92,231,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2208,7 +2299,7 @@
         </div>
       </div>
 
-      <!-- ── 8. 원핸드 툴/색상 순환 ─────────────────────────────── -->
+      <!-- ── 9. 원핸드 툴/색상 순환 ─────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2259,7 +2350,7 @@
         </div>
       </div>
 
-      <!-- ── 9. HUD 알림 ────────────────────────────────────────── -->
+      <!-- ── 10. HUD 알림 ────────────────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2315,7 +2406,7 @@
         </div>
       </div>
 
-      <!-- ── 10. 휴식 타이머 ──────────────────────────────────────── -->
+      <!-- ── 11. 휴식 타이머 ──────────────────────────────────────── -->
       <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2360,7 +2451,7 @@
         </div>
       </div>
 
-      <!-- ── 11. 9개 언어 지원 ────────────────────────────────────── -->
+      <!-- ── 12. 9개 언어 지원 ────────────────────────────────────── -->
       <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
@@ -2471,6 +2562,17 @@
         <span data-lang-pt>Todos os planos desbloqueiam exatamente o mesmo app — sem recursos bloqueados, sem marca d'água. Escolha o que combina com seu jeito de apresentar.</span>
         <span data-lang-it>Ogni piano sblocca esattamente la stessa app — nessuna funzione bloccata, nessuna filigrana. Scegli quello più adatto al tuo modo di presentare.</span>
       </p>
+      <p class="pricing-launch-note">
+        <span data-lang-en>We are celebrating the official launch with special pricing. Prices may change in the future.</span>
+        <span data-lang-ko>정식 출시를 기념해 특별한 가격으로 시작합니다. 향후 가격은 변경될 수 있습니다.</span>
+        <span data-lang-ja>正式リリースを記念した特別価格でスタートします。今後、価格は変更される場合があります。</span>
+        <span data-lang-zh>为庆祝正式发布，我们以特别价格开启。未来价格可能会调整。</span>
+        <span data-lang-fr>Pour célébrer le lancement officiel, nous commençons avec un tarif spécial. Les prix peuvent évoluer à l'avenir.</span>
+        <span data-lang-de>Zur Feier des offiziellen Starts beginnen wir mit Sonderpreisen. Die Preise können sich künftig ändern.</span>
+        <span data-lang-es>Celebramos el lanzamiento oficial con precios especiales. Los precios pueden cambiar en el futuro.</span>
+        <span data-lang-pt>Para celebrar o lançamento oficial, começamos com preços especiais. Os preços podem mudar no futuro.</span>
+        <span data-lang-it>Per celebrare il lancio ufficiale, iniziamo con prezzi speciali. I prezzi potrebbero cambiare in futuro.</span>
+      </p>
     </div>
 
     <div class="pricing-grid">
@@ -2483,6 +2585,7 @@
           <span data-lang-es>Mensual</span><span data-lang-pt>Mensal</span><span data-lang-it>Mensile</span>
         </div>
         <div class="pricing-price">
+          <del class="pricing-original">$3.99</del>
           <span class="amount">$2.99</span>
           <span class="period">
             <span data-lang-en>/ month</span><span data-lang-ko>/ 월</span><span data-lang-ja>/ 月</span>
@@ -2532,6 +2635,7 @@
           <span data-lang-es>Anual</span><span data-lang-pt>Anual</span><span data-lang-it>Annuale</span>
         </div>
         <div class="pricing-price">
+          <del class="pricing-original">$19.99</del>
           <span class="amount">$9.99</span>
           <span class="period">
             <span data-lang-en>/ year</span><span data-lang-ko>/ 년</span><span data-lang-ja>/ 年</span>
@@ -2560,11 +2664,6 @@
             <span data-lang-zh>免费试用 7 天，之后每年 $9.99 — 相当于每月 $0.83</span><span data-lang-fr>Gratuit pendant 7 jours, puis 9,99 $/an — soit 0,83 $ par mois</span><span data-lang-de>7 Tage kostenlos, danach 9,99 $/Jahr — nur 0,83 $ pro Monat</span>
             <span data-lang-es>Gratis 7 días, luego $9.99/año — solo $0.83 al mes</span><span data-lang-pt>Grátis por 7 dias, depois US$ 9,99/ano — apenas US$ 0,83 por mês</span><span data-lang-it>Gratis per 7 giorni, poi 9,99 $/anno — solo 0,83 $ al mese</span>
           </li>
-          <li>
-            <span data-lang-en>One price, all year — no surprise renewals</span><span data-lang-ko>1년 내내 동일한 가격, 갑작스런 인상 없음</span><span data-lang-ja>1年間ずっと同じ価格 — 更新時の値上げなし</span>
-            <span data-lang-zh>全年同一价格，续订不涨价</span><span data-lang-fr>Un seul prix toute l'année, sans hausse surprise au renouvellement</span><span data-lang-de>Ein Preis das ganze Jahr — keine Überraschungen bei der Verlängerung</span>
-            <span data-lang-es>Un solo precio todo el año, sin subidas sorpresa al renovar</span><span data-lang-pt>Um único preço o ano todo, sem aumentos surpresa na renovação</span><span data-lang-it>Un prezzo unico per tutto l'anno, senza rincari a sorpresa al rinnovo</span>
-          </li>
         </ul>
         <a href="#" class="btn btn-primary pricing-cta btn-disabled" aria-disabled="true">
           <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
@@ -2581,6 +2680,7 @@
           <span data-lang-es>Compra única</span><span data-lang-pt>Compra única</span><span data-lang-it>Acquisto unico</span>
         </div>
         <div class="pricing-price">
+          <del class="pricing-original">$34.99</del>
           <span class="amount">$17.99</span>
           <span class="period">
             <span data-lang-en>once</span><span data-lang-ko>1회 결제</span><span data-lang-ja>1回のみ</span>
