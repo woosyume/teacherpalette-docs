@@ -144,6 +144,21 @@
   }
   nav.topbar .topbar-link:hover { color: var(--accent); background: var(--accent-soft); }
   nav.topbar .topbar-cta { color: var(--accent); font-weight: 600; }
+  nav.topbar .lang-select {
+    position: relative; display: inline-flex; align-items: center; flex: 0 0 auto;
+    background: var(--bg-alt); border: 1px solid var(--border); border-radius: 8px;
+    padding: 3px 10px 3px 12px;
+  }
+  nav.topbar .lang-select::before { content: "🌐"; margin-right: 6px; font-size: 12px; }
+  nav.topbar .lang-select::after {
+    content: ""; position: absolute; right: 10px; top: 50%; width: 6px; height: 6px;
+    border-right: 1.5px solid var(--text-dim); border-bottom: 1.5px solid var(--text-dim);
+    transform: translateY(-70%) rotate(45deg); pointer-events: none;
+  }
+  nav.topbar .lang-select select {
+    appearance: none; -webkit-appearance: none; border: none; background: transparent;
+    color: var(--text); padding: 5px 18px 5px 0; font: 500 12px inherit; cursor: pointer; outline: none;
+  }
   nav.topbar .theme-toggle {
     background: transparent; border: 1px solid var(--border);
     padding: 6px 10px; border-radius: 8px; cursor: pointer;
@@ -166,6 +181,8 @@
   @media (max-width: 480px) {
     article.release { padding: 24px 20px; }
     nav.topbar { padding: 12px 20px; }
+    nav.topbar .lang-select::before { display: none; }
+    nav.topbar .lang-select { padding-left: 8px; }
   }
 
   header.title {
@@ -299,6 +316,19 @@
     <a class="topbar-link topbar-cta" href="../index.html#pricing"><span data-lang-en>Buy Now</span><span data-lang-ko>구매하기</span><span data-lang-ja>購入</span><span data-lang-zh>立即购买</span><span data-lang-fr>Acheter</span><span data-lang-de>Kaufen</span><span data-lang-es>Comprar</span><span data-lang-pt>Comprar</span><span data-lang-it>Acquista</span></a>
   </div>
   <div class="spacer"></div>
+  <label class="lang-select" aria-label="Language">
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="ko">한국어</option>
+      <option value="ja">日本語</option>
+      <option value="zh">简体中文</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+      <option value="pt">Português</option>
+      <option value="it">Italiano</option>
+    </select>
+  </label>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
 </nav>
 
@@ -873,11 +903,19 @@
     if (n.startsWith('it')) return 'it';
     return 'en';
   }
+  function setLang(nextLang) {
+    document.documentElement.setAttribute('lang', nextLang);
+    localStorage.setItem(LS_LANG, nextLang);
+    const select = document.getElementById('lang-select');
+    if (select) select.value = nextLang;
+    document.querySelectorAll('#home-link, #back-link').forEach(a => {
+      a.href = '../index.html?lang=' + nextLang;
+    });
+  }
   const lang = detectLang();
-  document.documentElement.setAttribute('lang', lang);
-  // 홈/뒤로 링크에도 언어 유지
-  document.querySelectorAll('#home-link, #back-link').forEach(a => {
-    a.href = '../index.html?lang=' + lang;
+  setLang(lang);
+  document.getElementById('lang-select').addEventListener('change', event => {
+    setLang(event.target.value);
   });
 
   // ── 탭 전환 ──
