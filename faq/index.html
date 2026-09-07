@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAQ — Screen Annotation App for Mac | TeacherPalette</title>
-<meta name="description" content="Answers about using TeacherPalette as a Mac screen annotation app: draw on screen, annotate Zoom, Google Meet, and Teams presentations, use Spotlight, Whiteboard, and iPad Sidecar.">
+<title>Help &amp; Tips — Mac Presentation Toolkit | TeacherPalette</title>
+<meta name="description" content="Learn how to explain things on screen with TeacherPalette: draw and annotate on Mac, guide attention with Spotlight and Laser, magnify details, use Whiteboard and PDF annotation, and present with Sidecar.">
 <link rel="canonical" href="https://teacherpalette.com/faq/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://teacherpalette.com/faq/">
-<meta property="og:title" content="FAQ — Screen Annotation App for Mac | TeacherPalette">
-<meta property="og:description" content="Answers about drawing and annotating on screen during Zoom, Google Meet, Teams, and live Mac presentations.">
+<meta property="og:title" content="Help &amp; Tips — Mac Presentation Toolkit | TeacherPalette">
+<meta property="og:description" content="Practical guidance for explaining things on screen with TeacherPalette — annotation, attention tools, Whiteboard, PDF annotation, Sidecar and presentation shortcuts.">
 <meta property="og:image" content="https://teacherpalette.com/media/intro-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FAQ — Screen Annotation App for Mac | TeacherPalette">
-<meta name="twitter:description" content="Answers about drawing and annotating on screen during Zoom, Google Meet, Teams, and live Mac presentations.">
+<meta name="twitter:title" content="Help &amp; Tips — Mac Presentation Toolkit | TeacherPalette">
+<meta name="twitter:description" content="Practical guidance for explaining things on screen with TeacherPalette — annotation, attention tools, Whiteboard, PDF annotation, Sidecar and presentation shortcuts.">
 <meta name="twitter:image" content="https://teacherpalette.com/media/intro-poster.jpg">
 <link rel="icon" href="../img/icon-256.png">
 <style>
@@ -228,6 +228,29 @@
   header.title { grid-column: 1 / -1; margin-bottom: 8px; }
   header.title h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
   header.title p { color: var(--text-dim); font-size: 15px; }
+  header.title .positioning {
+    display: inline-block; margin: 0 0 12px; color: var(--accent);
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  }
+  .help-flow {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+    margin-top: 26px;
+  }
+  .help-flow a {
+    display: block; padding: 16px 18px; border: 1px solid var(--card-border);
+    border-radius: 14px; background: var(--card-bg); box-shadow: var(--shadow);
+    color: var(--text); text-decoration: none; transition: transform .15s, border-color .15s;
+  }
+  .help-flow a:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .help-flow strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .help-flow span { color: var(--text-dim); font-size: 12px; line-height: 1.45; }
+  .workflow-note {
+    margin-top: 24px; padding: 16px 18px; border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0; background: var(--accent-soft); color: var(--text-dim); font-size: 14px;
+  }
+  .workflow-note strong { color: var(--text); }
+  @media (max-width: 780px) { .help-flow { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { header.title h1 { font-size: 29px; } }
 
   aside.sidebar {
     position: sticky;
@@ -490,28 +513,45 @@
       <span data-lang-pt>Voltar ao início</span>
       <span data-lang-it>Torna alla home</span>
     </a>
+    <div class="positioning">
+      <span data-lang-en>Presentation toolkit for people who explain things on screen</span>
+      <span data-lang-ko>화면으로 설명하는 사람을 위한 프레젠테이션 툴킷</span>
+      <span data-lang-ja>画面で説明する人のためのプレゼンテーションツールキット</span>
+      <span data-lang-zh>为用屏幕讲解的人打造的演示工具包</span>
+      <span data-lang-fr>La boîte à outils pour expliquer à l’écran</span>
+      <span data-lang-de>Das Präsentations-Toolkit für Erklärungen am Bildschirm</span>
+      <span data-lang-es>El kit de presentación para explicar en pantalla</span>
+      <span data-lang-pt>O kit de apresentação para explicar na tela</span>
+      <span data-lang-it>Il toolkit di presentazione per spiegare sullo schermo</span>
+    </div>
     <h1>
-      <span data-lang-en>Ready to add feeling to your presentations?</span>
-      <span data-lang-ko>당신의 발표에 감성을 더하려면?</span>
-      <span data-lang-ja>あなたの発表に、感性を加えるなら？</span>
-      <span data-lang-zh>想为你的演讲增添一份情感？</span>
-      <span data-lang-fr>Envie d'ajouter une touche d'émotion à vos présentations ?</span>
-      <span data-lang-de>Bereit, deinen Präsentationen mehr Gefühl zu verleihen?</span>
-      <span data-lang-es>¿Listo para darle más emoción a tus presentaciones?</span>
-      <span data-lang-pt>Pronto para dar mais emoção às suas apresentações?</span>
-      <span data-lang-it>Pronto ad aggiungere emozione alle tue presentazioni?</span>
+      <span data-lang-en>Help people follow what you show.</span>
+      <span data-lang-ko>화면으로 보여주는 내용을, 더 잘 따라오게.</span>
+      <span data-lang-ja>画面で見せることを、もっと伝わりやすく。</span>
+      <span data-lang-zh>让观众更容易跟上你的讲解。</span>
+      <span data-lang-fr>Aidez votre public à suivre ce que vous montrez.</span>
+      <span data-lang-de>Mach es leichter, deinen Erklärungen zu folgen.</span>
+      <span data-lang-es>Ayuda a tu público a seguir lo que muestras.</span>
+      <span data-lang-pt>Ajude seu público a acompanhar o que você mostra.</span>
+      <span data-lang-it>Aiuta il pubblico a seguire ciò che mostri.</span>
     </h1>
     <p>
-      <span data-lang-en>Practical answers to get started, plus creative ideas to make your live sessions unforgettable.</span>
-      <span data-lang-ko>시작하는 데 필요한 답변부터, 발표를 더 특별하게 만드는 아이디어까지.</span>
-      <span data-lang-ja>始め方の答えから、発表をもっと特別にするアイデアまで。</span>
-      <span data-lang-zh>从入门指南，到让你的演讲更出彩的灵感。</span>
-      <span data-lang-fr>Des réponses pratiques pour démarrer, et des idées pour rendre vos présentations inoubliables.</span>
-      <span data-lang-de>Praktische Antworten für den Einstieg – und Ideen, die deine Präsentationen unvergesslich machen.</span>
-      <span data-lang-es>Respuestas prácticas para empezar, e ideas para hacer inolvidables tus presentaciones.</span>
-      <span data-lang-pt>Respostas práticas para começar, e ideias para tornar suas apresentações inesquecíveis.</span>
-      <span data-lang-it>Risposte pratiche per iniziare, e idee per rendere le tue presentazioni indimenticabili.</span>
+      <span data-lang-en>Use the demos and answers below to draw a point, guide attention, reveal a detail, or build an explanation — in a lesson, product demo, training session, or live presentation.</span>
+      <span data-lang-ko>아래 데모와 설명을 따라 하며 수업, 제품 데모, 교육, 라이브 발표에서 핵심을 그리고 시선을 이끌고 세부를 확대해 보세요.</span>
+      <span data-lang-ja>以下のデモと解説を使って、授業、製品デモ、研修、ライブ発表で要点を描き、視線を導き、細部を見せましょう。</span>
+      <span data-lang-zh>通过下面的演示和说明，在课程、产品演示、培训或直播演讲中画出重点、引导视线并展示细节。</span>
+      <span data-lang-fr>Suivez les démos et les réponses pour souligner un point, guider le regard et révéler un détail — en cours, en démo produit, en formation ou en présentation live.</span>
+      <span data-lang-de>Nutze die Demos und Antworten, um einen Punkt zu zeichnen, Aufmerksamkeit zu lenken und Details zu zeigen — im Unterricht, bei Produktdemos, Trainings oder Live-Präsentationen.</span>
+      <span data-lang-es>Usa las demostraciones y respuestas para señalar un punto, guiar la atención y mostrar detalles — en una clase, demo de producto, formación o presentación en vivo.</span>
+      <span data-lang-pt>Use os exemplos e respostas para destacar um ponto, guiar a atenção e mostrar detalhes — em aulas, demos de produto, treinamentos ou apresentações ao vivo.</span>
+      <span data-lang-it>Usa demo e risposte per indicare un punto, guidare l’attenzione e mostrare i dettagli — in una lezione, demo di prodotto, formazione o presentazione live.</span>
     </p>
+    <div class="help-flow">
+      <a href="?help=gs-tools"><strong><span data-lang-en>Start with the tools</span><span data-lang-ko>도구부터 시작하기</span><span data-lang-ja>まずはツールから</span><span data-lang-zh>从工具开始</span><span data-lang-fr>Commencer par les outils</span><span data-lang-de>Mit den Werkzeugen beginnen</span><span data-lang-es>Empieza por las herramientas</span><span data-lang-pt>Comece pelas ferramentas</span><span data-lang-it>Inizia dagli strumenti</span></strong><span data-lang-en>Drawing, whiteboard and shortcuts</span><span data-lang-ko>드로잉, 화이트보드, 단축키</span><span data-lang-ja>描画、ホワイトボード、ショートカット</span><span data-lang-zh>绘图、白板和快捷键</span><span data-lang-fr>Dessin, tableau blanc et raccourcis</span><span data-lang-de>Zeichnen, Whiteboard und Shortcuts</span><span data-lang-es>Dibujo, pizarra y atajos</span><span data-lang-pt>Desenho, quadro branco e atalhos</span><span data-lang-it>Disegno, lavagna e scorciatoie</span></a>
+      <a href="?help=tip-screen-sharing"><strong><span data-lang-en>Guide attention live</span><span data-lang-ko>라이브에서 시선 이끌기</span><span data-lang-ja>ライブで視線を導く</span><span data-lang-zh>直播中引导注意力</span><span data-lang-fr>Guider l’attention en direct</span><span data-lang-de>Aufmerksamkeit live lenken</span><span data-lang-es>Guía la atención en vivo</span><span data-lang-pt>Guie a atenção ao vivo</span><span data-lang-it>Guida l’attenzione dal vivo</span></strong><span data-lang-en>Spotlight, Laser and Magnifier together</span><span data-lang-ko>스포트라이트, 레이저, 돋보기 함께 쓰기</span><span data-lang-ja>スポットライト、レーザー、拡大鏡を組み合わせる</span><span data-lang-zh>组合使用聚光灯、激光笔和放大镜</span><span data-lang-fr>Projecteur, laser et loupe</span><span data-lang-de>Spotlight, Laser und Lupe kombinieren</span><span data-lang-es>Combina foco, láser y lupa</span><span data-lang-pt>Combine holofote, laser e lupa</span><span data-lang-it>Combina riflettore, laser e lente</span></a>
+      <a href="?help=tip-whiteboard"><strong><span data-lang-en>Build the explanation</span><span data-lang-ko>설명을 완성하기</span><span data-lang-ja>説明を組み立てる</span><span data-lang-zh>构建完整讲解</span><span data-lang-fr>Construire l’explication</span><span data-lang-de>Die Erklärung aufbauen</span><span data-lang-es>Construye la explicación</span><span data-lang-pt>Monte sua explicação</span><span data-lang-it>Costruisci la spiegazione</span></strong><span data-lang-en>Whiteboard, PDF and Sidecar workflows</span><span data-lang-ko>화이트보드, PDF, Sidecar 활용 흐름</span><span data-lang-ja>ホワイトボード、PDF、Sidecarの使い方</span><span data-lang-zh>白板、PDF 和 Sidecar 工作流</span><span data-lang-fr>Workflows tableau blanc, PDF et Sidecar</span><span data-lang-de>Whiteboard-, PDF- und Sidecar-Workflows</span><span data-lang-es>Flujos con pizarra, PDF y Sidecar</span><span data-lang-pt>Fluxos com quadro branco, PDF e Sidecar</span><span data-lang-it>Flussi con lavagna, PDF e Sidecar</span></a>
+    </div>
+    <p class="workflow-note"><strong><span data-lang-en>A useful flow:</span><span data-lang-ko>추천 흐름:</span><span data-lang-ja>おすすめの流れ：</span><span data-lang-zh>推荐流程：</span><span data-lang-fr>Un bon enchaînement :</span><span data-lang-de>Ein hilfreicher Ablauf:</span><span data-lang-es>Un flujo útil:</span><span data-lang-pt>Um fluxo útil:</span><span data-lang-it>Un flusso utile:</span></strong> <span data-lang-en>narrow the view with Spotlight → point with Laser → enlarge with Magnifier → connect the idea with an annotation or Whiteboard.</span><span data-lang-ko>스포트라이트로 시야를 좁히고 → 레이저로 위치를 가리키고 → 돋보기로 확대하고 → 주석이나 화이트보드로 핵심을 연결하세요.</span><span data-lang-ja>スポットライトで視野を絞り → レーザーで位置を示し → 拡大鏡で大きく見せ → 注釈やホワイトボードで考えをつなぎます。</span><span data-lang-zh>用聚光灯聚焦 → 用激光笔指向 → 用放大镜放大 → 用标注或白板串起思路。</span><span data-lang-fr>resserrez le champ avec le projecteur → pointez avec le laser → agrandissez avec la loupe → reliez les idées avec une annotation ou le tableau blanc.</span><span data-lang-de>mit Spotlight fokussieren → mit Laser zeigen → mit Lupe vergrößern → die Idee per Annotation oder Whiteboard verbinden.</span><span data-lang-es>enfoca con el foco → señala con el láser → amplía con la lupa → conecta la idea con una anotación o la pizarra.</span><span data-lang-pt>use o holofote para focar → aponte com o laser → amplie com a lupa → conecte a ideia com uma anotação ou quadro branco.</span><span data-lang-it>restringi la vista con il riflettore → indica con il laser → ingrandisci con la lente → collega l’idea con un’annotazione o la lavagna.</span></p>
   </header>
 
   <aside class="sidebar">
@@ -1471,6 +1511,11 @@
     if (select) select.value = nextLang;
     document.querySelectorAll('#home-link, #back-link').forEach(a => {
       a.href = '../index.html?lang=' + nextLang;
+    });
+    document.querySelectorAll('.help-flow a[href^="?help="]').forEach(a => {
+      const url = new URL(a.getAttribute('href'), location.href);
+      url.searchParams.set('lang', nextLang);
+      a.href = url.pathname + url.search;
     });
     document.querySelectorAll('.fb-en').forEach(el => el.classList.remove('fb-en'));
     applyFallback(nextLang);
