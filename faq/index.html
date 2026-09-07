@@ -1459,9 +1459,14 @@
     if (n.startsWith('it')) return 'it';
     return 'en';
   }
-  function setLang(nextLang) {
+  function setLang(nextLang, updateUrl = false) {
     document.documentElement.setAttribute('lang', nextLang);
     localStorage.setItem(LS_LANG, nextLang);
+    if (updateUrl) {
+      const url = new URL(location.href);
+      url.searchParams.set('lang', nextLang);
+      history.replaceState(null, '', url);
+    }
     const select = document.getElementById('lang-select');
     if (select) select.value = nextLang;
     document.querySelectorAll('#home-link, #back-link').forEach(a => {
@@ -1486,7 +1491,7 @@
     fbGroups.forEach(p => p.classList.add('fb-en'));
   }
   document.getElementById('lang-select').addEventListener('change', event => {
-    setLang(event.target.value);
+    setLang(event.target.value, true);
   });
 
   // ── 카테고리 스크롤 섹션 (탭 = 스크롤 앵커, 스크롤 위치로 활성 탭 표시) ──
@@ -1636,6 +1641,24 @@
     applyTheme(next);
     localStorage.setItem(LS_THEME, next);
   });
+
+  // 공유용 도움말 딥 링크: /faq/?help=magnifier-modes
+  // 기존 hash 링크와 함께 사용할 수 있고, 잘못된 값은 조용히 무시한다.
+  const helpParam = new URLSearchParams(location.search).get('help');
+  if (helpParam) {
+    const helpTarget = document.getElementById(helpParam);
+    if (helpTarget) {
+      window.requestAnimationFrame(() => {
+        helpTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const helpItem = helpTarget.closest('.faq-item');
+        if (helpItem) {
+          helpItem.classList.add('open');
+          const heading = helpItem.querySelector('h3');
+          if (heading) heading.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+  }
 </script>
 
 </body>

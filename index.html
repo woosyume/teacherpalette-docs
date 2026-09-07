@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TeacherPalette — Beautifully Crafted Screen Annotation for Mac</title>
-<meta name="description" content="A clean, intuitive, and beautifully crafted screen annotation app for Mac.">
+<title>TeacherPalette — Presentation Toolkit &amp; Screen Annotation for Mac</title>
+<meta name="description" content="Help your audience follow every step. TeacherPalette brings screen annotation, spotlight, laser and magnifier to Mac demos, lessons and presentations.">
 <link rel="canonical" href="https://teacherpalette.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://teacherpalette.com/">
-<meta property="og:title" content="TeacherPalette — Beautifully Crafted Screen Annotation for Mac">
-<meta property="og:description" content="A clean, intuitive, and beautifully crafted screen annotation app for Mac.">
+<meta property="og:title" content="TeacherPalette — Presentation Toolkit &amp; Screen Annotation for Mac">
+<meta property="og:description" content="Help your audience follow every step. TeacherPalette brings screen annotation, spotlight, laser and magnifier to Mac demos, lessons and presentations.">
 <meta property="og:image" content="https://teacherpalette.com/media/teacherpalette-social-v2.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TeacherPalette">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TeacherPalette — Beautifully Crafted Screen Annotation for Mac">
-<meta name="twitter:description" content="A clean, intuitive, and beautifully crafted screen annotation app for Mac.">
+<meta name="twitter:title" content="TeacherPalette — Presentation Toolkit &amp; Screen Annotation for Mac">
+<meta name="twitter:description" content="Help your audience follow every step. TeacherPalette brings screen annotation, spotlight, laser and magnifier to Mac demos, lessons and presentations.">
 <meta name="twitter:image" content="https://teacherpalette.com/media/teacherpalette-social-v2.png">
 <meta name="twitter:image:alt" content="TeacherPalette">
 <link rel="icon" href="img/icon-256.png">
@@ -28,8 +28,8 @@
   "name": "TeacherPalette",
   "url": "https://teacherpalette.com/",
   "image": "https://teacherpalette.com/img/icon-512.png",
-  "description": "A clean, intuitive, and beautifully crafted screen annotation app for Mac.",
-  "applicationCategory": "EducationalApplication",
+  "description": "Help your audience follow every step. TeacherPalette brings screen annotation, spotlight, laser and magnifier to Mac demos, lessons and presentations.",
+  "applicationCategory": "ProductivityApplication",
   "operatingSystem": "macOS 15.0 or later, Apple Silicon",
   "offers": {
     "@type": "Offer",
@@ -1590,6 +1590,30 @@
   html[lang="es"] span.fb-en[data-lang-en],
   html[lang="pt"] span.fb-en[data-lang-en],
   html[lang="it"] span.fb-en[data-lang-en] { display: inline; }
+
+  /* Outcome-led copy uses the existing palette, cards and responsive rhythm. */
+  [hidden] { display: none !important; }
+  .hero-keyword { max-width: 800px; margin: 0 auto; text-wrap: balance; }
+  .hero-trust { max-width: 680px; margin: 22px auto 0; color: var(--text-dim); font-size: 13px; }
+  .hero-trust a { display: block; margin-top: 4px; }
+  .hero-trust a, .maker-feedback a { color: var(--accent); text-underline-offset: 3px; }
+  .workflow-grid, .customer-stories-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; list-style: none; }
+  .workflow-card, .maker-feedback, .customer-stories-grid article { padding: 28px; border: 1px solid var(--card-border); border-radius: 22px; background: var(--card-bg); box-shadow: var(--shadow); }
+  .workflow-step { color: var(--accent); font-size: 13px; font-weight: 700; }
+  .workflow-card h3 { margin: 10px 0 6px; font-size: 21px; }
+  .workflow-card p, .maker-copy p, .maker-feedback p { color: var(--text-dim); font-size: 15px; }
+  p.workflow-tools { color: var(--accent); font-size: 13px; font-weight: 600; margin-bottom: 14px; }
+  .maker-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+  .maker-copy h2 { font-size: clamp(26px, 3.5vw, 36px); line-height: 1.25; letter-spacing: -.025em; margin-bottom: 20px; text-wrap: balance; }
+  .maker-copy .btn { margin-top: 22px; }
+  .maker-feedback h3 { font-size: 21px; line-height: 1.35; margin-bottom: 14px; }
+  .maker-feedback p { margin-bottom: 20px; }
+  .section-header .pricing-launch-note { margin: 24px auto 0; max-width: 680px; font-size: 14px; font-weight: 500; padding: 16px 20px; border-radius: 14px; background: var(--accent-soft); }
+  a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  @media (max-width: 780px) {
+    .workflow-grid, .customer-stories-grid, .maker-grid { grid-template-columns: 1fr; }
+    .maker-grid { gap: 28px; }
+  }
 </style>
 </head>
 <body>
@@ -1647,11 +1671,15 @@
           <button data-theme-btn="light" title="Light">☀︎</button>
           <button data-theme-btn="dark" title="Dark">☾</button>
         </div>
-        <a class="header-cta" href="#pricing">
-          <span data-lang-en>Buy Now</span><span data-lang-ko>지금 구매하기</span><span data-lang-ja>今すぐ購入</span>
-          <span data-lang-zh>立即购买</span><span data-lang-fr>Acheter maintenant</span><span data-lang-de>Jetzt kaufen</span>
-          <span data-lang-es>Comprar ahora</span><span data-lang-pt>Comprar agora</span><span data-lang-it>Acquista ora</span>
-        </a>
+        <a class="header-cta" href="#pricing"><span data-lang-en>Explore launch pricing</span>
+<span data-lang-ko>출시 가격 보기</span>
+<span data-lang-ja>発売時の価格を見る</span>
+<span data-lang-zh>查看首发价格</span>
+<span data-lang-fr>Voir les tarifs de lancement</span>
+<span data-lang-de>Einführungspreise ansehen</span>
+<span data-lang-es>Ver precios de lanzamiento</span>
+<span data-lang-pt>Ver preços de lançamento</span>
+<span data-lang-it>Vedi i prezzi di lancio</span></a>
       </div>
     </div>
   </div>
@@ -1660,43 +1688,37 @@
 <!-- ═══════════════════════ HERO ═══════════════════════════════════ -->
 <section class="hero">
   <img class="hero-app-icon" src="img/icon-512.png" alt="TeacherPalette app icon">
-  <div class="hero-badge">
-    <span data-lang-en>The all-in-one toolkit for unforgettable presentations</span>
-    <span data-lang-ko>잊지 못할 발표를 위한 올인원 툴킷</span>
-    <span data-lang-ja>忘れられない発表のためのオールインワンツールキット</span>
-    <span data-lang-zh>打造难忘演讲的一体化工具包</span>
-    <span data-lang-fr>La boîte à outils tout-en-un pour des présentations inoubliables</span>
-    <span data-lang-de>Das All-in-One-Toolkit für unvergessliche Präsentationen</span>
-    <span data-lang-es>El kit todo en uno para presentaciones inolvidables</span>
-    <span data-lang-pt>O kit tudo-em-um para apresentações inesquecíveis</span>
-    <span data-lang-it>Il toolkit tutto-in-uno per presentazioni indimenticabili</span>
-  </div>
+  <div class="hero-badge"><span data-lang-en>A presentation toolkit for Mac</span>
+<span data-lang-ko>Mac에서 화면으로 설명하는 사람을 위한 툴킷</span>
+<span data-lang-ja>Macで画面を使って伝えるためのツールキット</span>
+<span data-lang-zh>Mac 演示工具包</span>
+<span data-lang-fr>Une boîte à outils de présentation pour Mac</span>
+<span data-lang-de>Ein Präsentations-Toolkit für Mac</span>
+<span data-lang-es>Un kit de presentación para Mac</span>
+<span data-lang-pt>Um kit de apresentação para Mac</span>
+<span data-lang-it>Un toolkit di presentazione per Mac</span></div>
   <h1 style="line-height: 1;">
-    <img class="hero-logo" src="img/logo.png" alt="TeacherPalette">
-    <span class="hero-keyword" data-lang-en>A clean, intuitive, and beautifully crafted screen annotation app for Mac</span>
-    <span class="hero-keyword" data-lang-ko>Mac을 위한 화면 주석 앱</span>
-    <span class="hero-keyword" data-lang-ja>Macのためのスクリーン注釈アプリ</span>
-    <span class="hero-keyword" data-lang-zh>适用于 Mac 的屏幕标注应用</span>
-    <span class="hero-keyword" data-lang-fr>L'app d'annotation d'écran pour Mac</span>
-    <span class="hero-keyword" data-lang-de>Die Bildschirm-Annotations-App für Mac</span>
-    <span class="hero-keyword" data-lang-es>La app de anotación de pantalla para Mac</span>
-    <span class="hero-keyword" data-lang-pt>O app de anotação de tela para Mac</span>
-    <span class="hero-keyword" data-lang-it>L'app di annotazione schermo per Mac</span>
-  </h1>
-  <p class="hero-sub">
-    <span data-lang-en>Draw, highlight, spotlight, and magnify over any app — slides, Zoom, Google Meet, Microsoft Teams, browsers, and demos. One effortless macOS overlay gives live presenters and teachers everything they need to guide attention without breaking the flow.</span>
-    <span data-lang-ko>슬라이드, Zoom, Google Meet, Microsoft Teams, 브라우저, 데모 등 어떤 앱 위에서도 그리고, 강조하고, 스포트라이트와 돋보기를 사용할 수 있어요. 하나의 편안한 macOS 오버레이로 발표자와 교사가 흐름을 끊지 않고 시선을 이끌 수 있습니다.</span>
-    <span data-lang-ja>スライド、Zoom、Google Meet、Microsoft Teams、ブラウザ、デモなど、どんなアプリの上でも描画・強調・スポットライト・拡大ができます。1つの心地よいmacOSオーバーレイで、プレゼンターや先生が流れを止めずに視線を導けます。</span>
-    <span data-lang-zh>绘图、聚光灯、白板、计时器、光标 — 现场演讲者所需的一切,融入一个不打扰的 macOS 悬浮层,在 Zoom、Meet、Teams 之上静静运行。简单到让你忘记它的存在,完整到让每一次演讲都像一场大师课。</span>
-    <span data-lang-fr>Dessin, projecteur, tableau blanc, minuteur, curseur — tout ce dont un présentateur a besoin, réuni dans une seule superposition macOS discrète qui tourne silencieusement sur Zoom, Meet et Teams. Assez simple pour qu'on l'oublie, assez complète pour que chaque session ressemble à une masterclass.</span>
-    <span data-lang-de>Zeichnen, Spotlight, Whiteboard, Timer, Cursor — alles, was ein Live-Präsentierender braucht, in einem mühelosen macOS-Overlay, das leise über Zoom, Meet und Teams läuft. So einfach, dass man es vergisst. So vollständig, dass sich jede Session wie eine Masterclass anfühlt.</span>
-    <span data-lang-es>Dibujo, foco, pizarra, temporizador, cursor — todo lo que un presentador en vivo necesita, en una única superposición de macOS que funciona discretamente sobre Zoom, Meet y Teams. Tan simple que olvidarás que está ahí, tan completa que cada sesión puede sentirse como una masterclass.</span>
-    <span data-lang-pt>Desenho, holofote, quadro, timer, cursor — tudo que um apresentador ao vivo precisa, em uma única sobreposição do macOS que roda discretamente sobre Zoom, Meet e Teams. Simples o bastante para você esquecer que ela existe, completa o bastante para toda sessão parecer uma masterclass.</span>
-    <span data-lang-it>Disegno, riflettore, lavagna, timer, cursore — tutto ciò che serve a un presentatore live, in un'unica sovrapposizione macOS discreta che funziona silenziosamente sopra Zoom, Meet e Teams. Così semplice da farti scordare che c'è, così completa da far sembrare ogni sessione una masterclass.</span>
-  </p>
+    <img class="hero-logo" src="img/logo.png" alt="TeacherPalette"><span class="hero-keyword" data-lang-en>Make every explanation easier to follow.</span>
+<span class="hero-keyword" data-lang-ko>설명하는 순간마다, 더 쉽게 따라오도록.</span>
+<span class="hero-keyword" data-lang-ja>どんな説明も、もっと伝わる。</span>
+<span class="hero-keyword" data-lang-zh>让每一次讲解都更易理解。</span>
+<span class="hero-keyword" data-lang-fr>Des explications plus faciles à suivre.</span>
+<span class="hero-keyword" data-lang-de>Erklärungen, denen alle leichter folgen.</span>
+<span class="hero-keyword" data-lang-es>Explicaciones más fáciles de seguir.</span>
+<span class="hero-keyword" data-lang-pt>Explicações mais fáceis de acompanhar.</span>
+<span class="hero-keyword" data-lang-it>Spiegazioni più facili da seguire.</span></h1>
+  <p class="hero-sub"><span data-lang-en>For instructors, presenters, developers and trainers who explain things on screen. Guide attention, reveal small details and draw your point over the Mac apps you already use.</span>
+<span data-lang-ko>강사, 발표자, 개발자, 트레이너까지, 화면으로 설명하는 모든 사람을 위해. 사용하던 Mac 앱 위에서 시선을 이끌고, 작은 내용을 확대하고, 핵심을 직접 그려 전달하세요.</span>
+<span data-lang-ja>講師、プレゼンター、開発者、トレーナーなど、画面で説明するすべての人へ。いつものMacアプリの上で視線を導き、細部を拡大し、要点を描いて伝えましょう。</span>
+<span data-lang-zh>为讲师、演讲者、开发者和培训师等用屏幕讲解的人而设计。在常用的 Mac 应用上引导视线、放大细节、画出重点。</span>
+<span data-lang-fr>Pour les enseignants, présentateurs, développeurs et formateurs qui expliquent à l’écran. Guidez le regard, agrandissez les détails et dessinez vos idées sur vos apps Mac habituelles.</span>
+<span data-lang-de>Für Lehrende, Präsentierende, Entwickler und Trainer, die am Bildschirm erklären. Lenke den Blick, vergrößere Details und zeichne deine Ideen direkt über deinen Mac-Apps.</span>
+<span data-lang-es>Para docentes, presentadores, desarrolladores y formadores que explican en pantalla. Guía la atención, amplía los detalles y dibuja tus ideas sobre tus apps de Mac habituales.</span>
+<span data-lang-pt>Para professores, apresentadores, desenvolvedores e instrutores que explicam na tela. Guie a atenção, amplie detalhes e desenhe suas ideias sobre seus apps habituais do Mac.</span>
+<span data-lang-it>Per docenti, presentatori, sviluppatori e formatori che spiegano sullo schermo. Guida lo sguardo, ingrandisci i dettagli e disegna le tue idee sulle app Mac che già usi.</span></p>
 
   <div class="cta-row">
-    <a href="#pricing" class="btn btn-primary btn-disabled" aria-disabled="true">
+    <a href="#pricing" class="btn btn-primary btn-disabled" aria-disabled="true" tabindex="-1">
       <span data-lang-en>Coming Soon</span>
       <span data-lang-ko>출시 예정</span>
       <span data-lang-ja>近日公開</span>
@@ -1707,19 +1729,34 @@
       <span data-lang-pt>Em breve</span>
       <span data-lang-it>Prossimamente</span>
     </a>
-    <a href="#features" class="btn btn-secondary">
-      <span data-lang-en>See features</span>
-      <span data-lang-ko>기능 살펴보기</span>
-      <span data-lang-ja>機能を見る</span>
-      <span data-lang-zh>查看功能</span>
-      <span data-lang-fr>Voir les fonctionnalités</span>
-      <span data-lang-de>Funktionen ansehen</span>
-      <span data-lang-es>Ver funciones</span>
-      <span data-lang-pt>Ver recursos</span>
-      <span data-lang-it>Vedi le funzioni</span>
-    </a>
+    <a href="#workflow" class="btn btn-secondary"><span data-lang-en>See how it works</span>
+<span data-lang-ko>설명 흐름 살펴보기</span>
+<span data-lang-ja>使い方を見る</span>
+<span data-lang-zh>了解使用流程</span>
+<span data-lang-fr>Voir comment ça marche</span>
+<span data-lang-de>So funktioniert es</span>
+<span data-lang-es>Descubre cómo funciona</span>
+<span data-lang-pt>Veja como funciona</span>
+<span data-lang-it>Scopri come funziona</span></a>
   </div>
 
+<div class="hero-trust"><span data-lang-en>No account. No app analytics or tracking. Your annotations stay on your Mac.</span>
+<span data-lang-ko>계정 없이. 앱 분석·추적 없이. 주석은 내 Mac에 그대로.</span>
+<span data-lang-ja>アカウント不要。アプリの利用分析・追跡なし。注釈はMacの中に。</span>
+<span data-lang-zh>无需账户。无应用分析或追踪。标注留在你的 Mac 上。</span>
+<span data-lang-fr>Sans compte, sans analyse d’usage ni suivi dans l’app. Vos annotations restent sur votre Mac.</span>
+<span data-lang-de>Kein Konto. Keine App-Analyse oder Tracking. Deine Anmerkungen bleiben auf deinem Mac.</span>
+<span data-lang-es>Sin cuenta, análisis de uso ni rastreo en la app. Tus anotaciones se quedan en tu Mac.</span>
+<span data-lang-pt>Sem conta, análise de uso ou rastreamento no app. Suas anotações ficam no Mac.</span>
+<span data-lang-it>Nessun account, analisi d’uso o tracciamento nell’app. Le annotazioni restano sul Mac.</span><a href="#privacy"><span data-lang-en>Privacy details</span>
+<span data-lang-ko>개인정보 보호 안내</span>
+<span data-lang-ja>プライバシーの詳細</span>
+<span data-lang-zh>隐私详情</span>
+<span data-lang-fr>Confidentialité</span>
+<span data-lang-de>Datenschutz</span>
+<span data-lang-es>Privacidad</span>
+<span data-lang-pt>Privacidade</span>
+<span data-lang-it>Privacy</span></a></div>
   <a id="hero-whats-new" class="whats-new-pill" href="releases/index.html">
     <span class="dot"></span>
     <span data-lang-en>New in 1.1.8 — Magnifier · Custom cursor control</span>
@@ -1842,34 +1879,49 @@
 </section>
 
 <!-- ═══════════════════════ FEATURES ═══════════════════════════════ -->
-<section id="features">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2>
-        <span data-lang-en>Simple enough for anyone. Complete enough for a masterclass.</span>
-        <span data-lang-ko>누구나 쓸 수 있을 만큼 단순하게, 마스터클래스급으로 완전하게.</span>
-        <span data-lang-ja>誰でも使えるほどシンプルに、マスタークラス級に完璧に。</span>
-        <span data-lang-zh>简单到人人可用,完整到堪比大师课。</span>
-        <span data-lang-fr>Assez simple pour tous. Assez complet pour une masterclass.</span>
-        <span data-lang-de>Einfach genug für alle. Vollständig genug für eine Masterclass.</span>
-        <span data-lang-es>Lo bastante simple para cualquiera. Lo bastante completo para una masterclass.</span>
-        <span data-lang-pt>Simples o bastante para qualquer pessoa. Completo o bastante para uma masterclass.</span>
-        <span data-lang-it>Semplice per chiunque. Completo per una masterclass.</span>
-      </h2>
-      <p>
-        <span data-lang-en>Drawing, whiteboard, spotlight, laser, magnifier, custom cursor, palette, timer — one download replaces a whole toolbox of single-purpose apps. Loaded with features, yet every one stays simple enough to actually use — no buried settings, no learning curve. The result: presentations that feel less like a call, and more like a masterclass.</span>
-        <span data-lang-ko>드로잉, 화이트보드, 스포트라이트, 레이저, 돋보기, 커스텀 커서, 팔레트, 타이머까지 — 한 번의 설치로 여러 개의 개별 앱을 대체합니다. 기능은 많지만 설정은 늘 단순해서 진짜로 다 쓰게 돼요 — 파묻힌 설정도, 학습 곡선도 없어요. 그 결과, 발표는 그냥 화상통화가 아니라 한 편의 마스터클래스처럼 느껴집니다.</span>
-        <span data-lang-ja>描画、ホワイトボード、スポットライト、レーザー、拡大鏡、カスタムカーソル、パレット、タイマー — 個別アプリの寄せ集めを、1 つのダウンロードでまとめて置き換え。機能は豊富でも、どれも実際に使えるくらいシンプルなまま — 埋もれた設定も、学習コストもありません。その結果、発表はただの通話ではなく、まるでマスタークラスのように感じられます。</span>
-        <span data-lang-zh>绘图、白板、聚光灯、激光笔、放大镜、自定义光标、调色板、计时器 — 一次下载替代一整套单一功能应用。功能丰富，却始终简单到真正会去用 —— 没有藏得很深的设置，也没有学习门槛。结果就是：演讲不再只是一场通话，而更像一场大师课。</span>
-        <span data-lang-fr>Dessin, tableau blanc, projecteur, laser, loupe, curseur personnalisé, palette, minuteur — un seul téléchargement remplace toute une boîte à outils d'apps à usage unique. Riche en fonctionnalités, mais chacune reste assez simple pour être vraiment utilisée — pas de réglages enfouis, pas de courbe d'apprentissage. Résultat : des présentations qui ressemblent moins à un appel, et plus à une masterclass.</span>
-        <span data-lang-de>Zeichnen, Whiteboard, Spotlight, Laser, Lupe, eigener Cursor, Palette, Timer — ein einziger Download ersetzt eine ganze Werkzeugkiste von Einzelzweck-Apps. Vollgepackt mit Funktionen, doch jede davon bleibt so einfach, dass man sie wirklich nutzt — keine verschachtelten Einstellungen, keine Lernkurve. Das Ergebnis: Präsentationen, die sich weniger wie ein Call anfühlen und mehr wie eine Masterclass.</span>
-        <span data-lang-es>Dibujo, pizarra, foco, láser, lupa, cursor personalizado, paleta, temporizador — una sola descarga reemplaza toda una caja de herramientas de apps de un solo propósito. Repleto de funciones, pero cada una sigue siendo lo bastante sencilla para usarla de verdad — sin ajustes escondidos, sin curva de aprendizaje. El resultado: presentaciones que se sienten menos como una llamada y más como una masterclass.</span>
-        <span data-lang-pt>Desenho, quadro branco, holofote, laser, lupa, cursor personalizado, paleta, timer — um único download substitui uma caixa inteira de apps de propósito único. Repleto de recursos, mas cada um continua simples o bastante para você realmente usar — sem ajustes escondidos, sem curva de aprendizado. O resultado: apresentações que parecem menos uma chamada e mais uma masterclass.</span>
-        <span data-lang-it>Disegno, lavagna, riflettore, laser, lente, cursore personalizzato, palette, timer — un unico download sostituisce un'intera cassetta di app monoscopo. Pieno di funzionalità, eppure ognuna resta abbastanza semplice da usare davvero — nessuna impostazione nascosta, nessuna curva di apprendimento. Il risultato: presentazioni che sembrano meno una chiamata e più una masterclass.</span>
-      </p>
-    </div>
-
-    <div class="features">
+<!-- A practical sequence, not a claim that all modes run simultaneously. -->
+<section id="workflow" aria-labelledby="workflow-title"><div class="section-inner">
+<div class="section-header"><h2 id="workflow-title"><span data-lang-en>One explanation. A natural flow.</span>
+<span data-lang-ko>하나의 설명, 자연스러운 흐름.</span>
+<span data-lang-ja>ひとつの説明を、自然な流れで。</span></h2><p><span data-lang-en>Walk through a product demo, a code example or a lesson. Bring in each tool when your audience needs it.</span>
+<span data-lang-ko>제품 데모, 코드 예제, 수업을 설명해 보세요. 청중에게 필요한 순간마다 알맞은 도구를 꺼내세요.</span>
+<span data-lang-ja>製品デモ、コード例、授業を説明するときに。聞き手が必要とするタイミングで、道具を使い分けましょう。</span></p></div><ol class="workflow-grid"><li class="workflow-card"><span class="workflow-step" aria-hidden="true">01</span><h3><span data-lang-en>Guide the eye</span>
+<span data-lang-ko>시선을 이끌고</span>
+<span data-lang-ja>視線を導く</span></h3><p class="workflow-tools"><span data-lang-en>Custom Cursor · Laser</span>
+<span data-lang-ko>나만의 커서 · 레이저</span>
+<span data-lang-ja>カスタムカーソル · レーザー</span></p><p><span data-lang-en>Start with a visible cursor as you navigate. Use Laser to point out the button, line of code or next step you are explaining.</span>
+<span data-lang-ko>눈에 잘 띄는 커서로 화면을 안내하세요. 레이저로 설명 중인 버튼, 코드 한 줄, 다음 단계를 짚어주세요.</span>
+<span data-lang-ja>見やすいカーソルで画面を案内。レーザーで、説明中のボタンやコードの一行、次の手順を指し示します。</span></p></li><li class="workflow-card"><span class="workflow-step" aria-hidden="true">02</span><h3><span data-lang-en>Make the detail visible</span>
+<span data-lang-ko>세부를 보여주고</span>
+<span data-lang-ja>細部を見せる</span></h3><p class="workflow-tools"><span data-lang-en>Spotlight · Magnifier</span>
+<span data-lang-ko>스포트라이트 · 돋보기</span>
+<span data-lang-ja>スポットライト · 拡大鏡</span></p><p><span data-lang-en>Use Spotlight to focus on one area. When a label or value is too small, switch to Magnifier so the audience can read it.</span>
+<span data-lang-ko>스포트라이트로 한 영역에 집중시키세요. 글자나 값이 작다면 돋보기로 전환해 읽기 쉽게 보여주세요.</span>
+<span data-lang-ja>スポットライトでひとつの領域に注目。文字や数値が小さければ、拡大鏡に切り替えて読みやすく見せます。</span></p></li><li class="workflow-card"><span class="workflow-step" aria-hidden="true">03</span><h3><span data-lang-en>Connect the idea</span>
+<span data-lang-ko>핵심을 연결하세요</span>
+<span data-lang-ja>考えをつなぐ</span></h3><p class="workflow-tools"><span data-lang-en>Annotation</span>
+<span data-lang-ko>화면 주석</span>
+<span data-lang-ja>画面への注釈</span></p><p><span data-lang-en>Draw an arrow between related ideas or underline the takeaway. Clear your marks when you are ready to move on.</span>
+<span data-lang-ko>관련된 내용 사이에 화살표를 그리고, 핵심에 밑줄을 그으세요. 다음 설명으로 넘어갈 때 표시를 지우면 됩니다.</span>
+<span data-lang-ja>関連する内容を矢印で結び、要点に下線を。次の説明へ進むときは、描いたものを消せます。</span></p></li></ol></div></section>
+<section id="features"><div class="section-inner"><div class="section-header"><h2><span data-lang-en>The tools behind a clearer explanation.</span>
+<span data-lang-ko>더 명확한 설명을 만드는 도구들.</span>
+<span data-lang-ja>伝わる説明を支える道具。</span>
+<span data-lang-zh>让讲解更清晰的工具。</span>
+<span data-lang-fr>Les outils pour des explications plus claires.</span>
+<span data-lang-de>Werkzeuge für klarere Erklärungen.</span>
+<span data-lang-es>Herramientas para explicar con claridad.</span>
+<span data-lang-pt>Ferramentas para explicar com clareza.</span>
+<span data-lang-it>Gli strumenti per spiegare con chiarezza.</span></h2><p><span data-lang-en>Point out what matters, sketch an idea and keep your session moving. Explore the tools you can bring into your next presentation.</span>
+<span data-lang-ko>중요한 곳을 짚고, 아이디어를 그리며, 설명을 이어가세요. 다음 발표에서 활용할 도구를 살펴보세요.</span>
+<span data-lang-ja>大切な箇所を示し、考えを描き、説明を進める。次のプレゼンで使える道具をご覧ください。</span>
+<span data-lang-zh>指出重点、画出思路，让讲解顺畅进行。探索下次演示可用的工具。</span>
+<span data-lang-fr>Montrez l’essentiel, esquissez une idée et poursuivez votre présentation. Découvrez les outils pour votre prochaine session.</span>
+<span data-lang-de>Zeige das Wesentliche, skizziere eine Idee und führe deine Präsentation weiter. Entdecke die Werkzeuge für deinen nächsten Vortrag.</span>
+<span data-lang-es>Señala lo importante, dibuja una idea y sigue con tu presentación. Explora las herramientas para tu próxima sesión.</span>
+<span data-lang-pt>Destaque o que importa, desenhe uma ideia e siga com a apresentação. Explore as ferramentas para sua próxima sessão.</span>
+<span data-lang-it>Indica ciò che conta, abbozza un’idea e prosegui la presentazione. Scopri gli strumenti per la tua prossima sessione.</span></p></div>
+<div class="features">
       <!-- Drawing tools — 파랑 -->
       <div class="feature-card" style="--icon-color:#0176D3;--icon-color-2:#4EA5F0;--icon-shadow:rgba(1,118,211,0.45);">
         <div class="feature-icon">
@@ -2040,7 +2092,7 @@
     <div class="spotlight-list">
 
       <!-- ── 1. 드로잉 모드 ───────────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
+      <div class="spotlight" id="drawing-tools" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Drawing mode</span><span data-lang-ko>드로잉 모드</span><span data-lang-ja>描画モード</span>
@@ -2090,7 +2142,7 @@
       </div>
 
       <!-- ── 3. 마이 팔레트 ─────────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#E44D8B;--spot-soft:rgba(228,77,139,0.14);">
+      <div class="spotlight" id="my-palette" style="--spot-color:#E44D8B;--spot-soft:rgba(228,77,139,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>My Palette</span><span data-lang-ko>마이 팔레트</span><span data-lang-ja>マイパレット</span>
@@ -2164,7 +2216,7 @@
       </div>
 
       <!-- ── 4. 돋보기와 스포트라이트 ───────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.16);">
+      <div class="spotlight reverse" id="spotlight-magnifier" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Spotlight &amp; Magnifier</span><span data-lang-ko>스포트라이트 &amp; 돋보기</span><span data-lang-ja>スポットライト &amp; 拡大鏡</span>
@@ -2196,7 +2248,7 @@
       </div>
 
       <!-- ── 5. 나만의 커서 ─────────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
+      <div class="spotlight" id="custom-cursor" style="--spot-color:#E44D66;--spot-soft:rgba(228,77,102,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Custom Cursor</span><span data-lang-ko>나만의 커서</span><span data-lang-ja>マイカーソル</span>
@@ -2219,7 +2271,7 @@
       </div>
 
       <!-- ── 6. 빌트인 화이트보드 ───────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#7B5EA7;--spot-soft:rgba(123,94,167,0.16);">
+      <div class="spotlight reverse" id="whiteboard" style="--spot-color:#7B5EA7;--spot-soft:rgba(123,94,167,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow"><span data-lang-en>Built-in Whiteboard</span><span data-lang-ko>빌트인 화이트보드</span><span data-lang-ja>内蔵ホワイトボード</span><span data-lang-zh>内置白板</span><span data-lang-fr>Tableau blanc intégré</span><span data-lang-de>Integriertes Whiteboard</span><span data-lang-es>Pizarra integrada</span><span data-lang-pt>Quadro branco integrado</span><span data-lang-it>Lavagna integrata</span></span>
           <h3><span data-lang-en>Write it once. Bring it back whenever you need it.</span><span data-lang-ko>한 번 쓴 판서, 필요할 때 다시 꺼내 쓰세요.</span><span data-lang-ja>一度書いた板書を、必要なときに何度でも。</span></h3>
@@ -2230,7 +2282,7 @@
       </div>
 
       <!-- ── 7. Mac + iPad Sidecar ───────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
+      <div class="spotlight" id="sidecar" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow"><span data-lang-en>Mac + iPad Sidecar</span><span data-lang-ko>맥북 + iPad Sidecar</span><span data-lang-ja>Mac + iPad Sidecar</span><span data-lang-zh>Mac + iPad 随航</span><span data-lang-fr>Mac + iPad Sidecar</span><span data-lang-de>Mac + iPad Sidecar</span><span data-lang-es>Mac + iPad Sidecar</span><span data-lang-pt>Mac + iPad Sidecar</span><span data-lang-it>Mac + iPad Sidecar</span></span>
           <h3><span data-lang-en>Turn your iPad into the most natural whiteboard in the room.</span><span data-lang-ko>아이패드를 세상에서 가장 자연스러운 화이트보드로.</span><span data-lang-ja>iPadを、その場でいちばん自然なホワイトボードに。</span></h3>
@@ -2241,7 +2293,7 @@
       </div>
 
       <!-- ── 2. 드로잉 모드 활성화 ──────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
+      <div class="spotlight reverse" id="drawing-mode" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Drawing mode</span><span data-lang-ko>드로잉 모드</span><span data-lang-ja>描画モード</span>
@@ -2297,7 +2349,7 @@
       </div>
 
       <!-- ── 8. ⌘K 커맨드 팔레트 ─────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#6C5CE7;--spot-soft:rgba(108,92,231,0.16);">
+      <div class="spotlight" id="command-palette" style="--spot-color:#6C5CE7;--spot-soft:rgba(108,92,231,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Command Palette</span><span data-lang-ko>커맨드 팔레트</span><span data-lang-ja>コマンドパレット</span>
@@ -2392,7 +2444,7 @@
       </div>
 
       <!-- ── 9. 원핸드 툴/색상 순환 ─────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
+      <div class="spotlight reverse" id="one-hand-cycling" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>One-hand cycling</span><span data-lang-ko>원핸드 순환</span><span data-lang-ja>片手サイクル</span>
@@ -2443,7 +2495,7 @@
       </div>
 
       <!-- ── 10. HUD 알림 ────────────────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
+      <div class="spotlight reverse" id="live-hud" style="--spot-color:#F0B429;--spot-soft:rgba(240,180,41,0.14);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Live HUD</span><span data-lang-ko>실시간 HUD</span><span data-lang-ja>ライブ HUD</span>
@@ -2499,7 +2551,7 @@
       </div>
 
       <!-- ── 11. 휴식 타이머 ──────────────────────────────────────── -->
-      <div class="spotlight reverse" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
+      <div class="spotlight reverse" id="timer" style="--spot-color:#0176D3;--spot-soft:rgba(1,118,211,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>Gentle Timer</span><span data-lang-ko>부드러운 타이머</span><span data-lang-ja>やさしいタイマー</span>
@@ -2544,7 +2596,7 @@
       </div>
 
       <!-- ── 12. 9개 언어 지원 ────────────────────────────────────── -->
-      <div class="spotlight" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
+      <div class="spotlight" id="languages" style="--spot-color:#16A085;--spot-soft:rgba(22,160,133,0.16);">
         <div class="spotlight-copy">
           <span class="spotlight-eyebrow">
             <span data-lang-en>9 languages</span><span data-lang-ko>9개 언어</span><span data-lang-ja>9 言語</span>
@@ -2629,6 +2681,30 @@
 </section>
 
 <!-- ═══════════════════════ PRICING ═════════════════════════════════ -->
+<section id="maker" aria-labelledby="maker-title"><div class="section-inner maker-grid"><div class="maker-copy"><p class="workflow-tools"><span data-lang-en>Independent by design</span>
+<span data-lang-ko>1인 개발자의 제품</span>
+<span data-lang-ja>個人開発のプロダクト</span></p><h2 id="maker-title"><span data-lang-en>Built by an instructor, for people who explain things on screen.</span>
+<span data-lang-ko>화면으로 설명하는 사람들을 위해, 실제 강사가 만들었습니다.</span>
+<span data-lang-ja>画面で説明する人のために、講師がつくりました。</span></h2><p><span data-lang-en>TeacherPalette is made by a solo developer who is also a working instructor. The focus is practical: help people follow what you are showing, whether you are teaching a class, presenting a product or walking through code.</span>
+<span data-lang-ko>TeacherPalette는 현업 강사이자 1인 개발자가 만듭니다. 수업을 하든, 제품을 소개하든, 코드를 설명하든, 화면을 보는 사람이 설명을 쉽게 따라오도록 돕는 데 집중합니다.</span>
+<span data-lang-ja>TeacherPaletteをつくっているのは、現役の講師でもある個人開発者です。授業でも、製品紹介でも、コードの解説でも、画面を見る人が説明についていけることを大切にしています。</span></p><a class="btn btn-secondary" href="mailto:support@teacherpalette.com"><span data-lang-en>Talk to the developer</span>
+<span data-lang-ko>개발자에게 이야기하기</span>
+<span data-lang-ja>開発者に相談する</span></a></div><aside class="maker-feedback" aria-labelledby="feedback-title"><h3 id="feedback-title"><span data-lang-en>Your next explanation can shape what comes next.</span>
+<span data-lang-ko>여러분의 설명 경험이 다음 개선의 시작입니다.</span>
+<span data-lang-ja>あなたの説明体験を、次の改善へ。</span></h3><p><span data-lang-en>Tried TeacherPalette in a lesson, demo or training session? Tell the developer what helped and what got in the way.</span>
+<span data-lang-ko>수업, 데모, 교육에서 TeacherPalette를 사용해 보셨나요? 도움이 된 점과 불편했던 점을 개발자에게 알려주세요.</span>
+<span data-lang-ja>授業やデモ、研修でTeacherPaletteを使いましたか？役立ったことや困ったことを、開発者にお聞かせください。</span></p><a href="mailto:support@teacherpalette.com"><span data-lang-en>Share your experience</span>
+<span data-lang-ko>사용 경험 나누기</span>
+<span data-lang-ja>使った感想を送る</span></a></aside></div></section>
+<!-- Future social proof: add genuine, permission-approved quotes with attribution
+     and source links as articles in this grid. Unhide only after real content is added.
+     Do not add placeholder endorsements, ratings, counts or aggregateRating schema. -->
+<section id="customer-stories" hidden aria-labelledby="customer-stories-title">
+  <div class="section-inner"><div class="section-header"><h2 id="customer-stories-title"><span data-lang-en>From the people using TeacherPalette</span>
+<span data-lang-ko>TeacherPalette 사용자의 이야기</span>
+<span data-lang-ja>TeacherPaletteを使う人の声</span></h2></div>
+  <div class="customer-stories-grid"></div></div>
+</section>
 <section id="pricing">
   <div class="section-inner">
     <div class="section-header">
@@ -2654,17 +2730,15 @@
         <span data-lang-pt>Todos os planos desbloqueiam exatamente o mesmo app — sem recursos bloqueados, sem marca d'água. Escolha o que combina com seu jeito de apresentar.</span>
         <span data-lang-it>Ogni piano sblocca esattamente la stessa app — nessuna funzione bloccata, nessuna filigrana. Scegli quello più adatto al tuo modo di presentare.</span>
       </p>
-      <p class="pricing-launch-note">
-        <span data-lang-en>We are celebrating the official launch with special pricing. Prices may change in the future.</span>
-        <span data-lang-ko>정식 출시를 기념해 특별한 가격으로 시작합니다. 향후 가격은 변경될 수 있습니다.</span>
-        <span data-lang-ja>正式リリースを記念した特別価格でスタートします。今後、価格は変更される場合があります。</span>
-        <span data-lang-zh>为庆祝正式发布，我们以特别价格开启。未来价格可能会调整。</span>
-        <span data-lang-fr>Pour célébrer le lancement officiel, nous commençons avec un tarif spécial. Les prix peuvent évoluer à l'avenir.</span>
-        <span data-lang-de>Zur Feier des offiziellen Starts beginnen wir mit Sonderpreisen. Die Preise können sich künftig ändern.</span>
-        <span data-lang-es>Celebramos el lanzamiento oficial con precios especiales. Los precios pueden cambiar en el futuro.</span>
-        <span data-lang-pt>Para celebrar o lançamento oficial, começamos com preços especiais. Os preços podem mudar no futuro.</span>
-        <span data-lang-it>Per celebrare il lancio ufficiale, iniziamo con prezzi speciali. I prezzi potrebbero cambiare in futuro.</span>
-      </p>
+      <p class="pricing-launch-note"><span data-lang-en>Early adopter launch pricing. These introductory prices may change as TeacherPalette grows. No end date has been announced.</span>
+<span data-lang-ko>얼리 어답터를 위한 출시 가격입니다. TeacherPalette가 성장하며 가격은 변경될 수 있습니다. 종료일은 아직 정해지지 않았습니다.</span>
+<span data-lang-ja>初期ユーザー向けの発売記念価格です。TeacherPaletteの成長に伴い、価格が変更される場合があります。終了日は未定です。</span>
+<span data-lang-zh>面向早期用户的首发价格。随着 TeacherPalette 的发展，价格可能调整。目前尚未公布结束日期。</span>
+<span data-lang-fr>Tarifs de lancement pour les premiers utilisateurs. Ces prix pourront évoluer avec TeacherPalette. Aucune date de fin n’a été annoncée.</span>
+<span data-lang-de>Einführungspreise für frühe Nutzer. Diese Preise können sich mit TeacherPalette weiterentwickeln. Ein Enddatum wurde noch nicht angekündigt.</span>
+<span data-lang-es>Precios de lanzamiento para los primeros usuarios. Podrán cambiar a medida que TeacherPalette crezca. No se ha anunciado una fecha de finalización.</span>
+<span data-lang-pt>Preços de lançamento para os primeiros usuários. Podem mudar conforme o TeacherPalette cresce. Nenhuma data de término foi anunciada.</span>
+<span data-lang-it>Prezzi di lancio per i primi utenti. Potranno cambiare con la crescita di TeacherPalette. Non è stata annunciata una data di fine.</span></p>
     </div>
 
     <div class="pricing-grid">
@@ -2707,7 +2781,7 @@
             <span data-lang-es>Cancela cuando quieras, sin preguntas</span><span data-lang-pt>Cancele quando quiser, sem perguntas</span><span data-lang-it>Annulla in qualsiasi momento, senza domande</span>
           </li>
         </ul>
-        <a href="#pricing" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true">
+        <a href="#pricing" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true" tabindex="-1">
           <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
           <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
           <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
@@ -2757,7 +2831,7 @@
             <span data-lang-es>Gratis 7 días, luego $9.99/año — solo $0.83 al mes</span><span data-lang-pt>Grátis por 7 dias, depois US$ 9,99/ano — apenas US$ 0,83 por mês</span><span data-lang-it>Gratis per 7 giorni, poi 9,99 $/anno — solo 0,83 $ al mese</span>
           </li>
         </ul>
-        <a href="#pricing" class="btn btn-primary pricing-cta btn-disabled" aria-disabled="true">
+        <a href="#pricing" class="btn btn-primary pricing-cta btn-disabled" aria-disabled="true" tabindex="-1">
           <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
           <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
           <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
@@ -2802,7 +2876,7 @@
             <span data-lang-es>Es tuyo para siempre, en esta Mac</span><span data-lang-pt>Seu para sempre, neste Mac</span><span data-lang-it>Per sempre tuo, su questo Mac</span>
           </li>
         </ul>
-        <a href="#pricing" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true">
+        <a href="#pricing" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true" tabindex="-1">
           <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
           <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
           <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
@@ -3320,6 +3394,11 @@
       return 'en';
     }
     function detectLang() {
+      const urlLang = new URLSearchParams(location.search).get('lang');
+      if (urlLang && SUPPORTED.includes(urlLang)) {
+        localStorage.setItem(LS_LANG, urlLang);
+        return urlLang;
+      }
       const saved = localStorage.getItem(LS_LANG);
       if (saved && SUPPORTED.includes(saved)) return saved;
       return langFromNavigator();
@@ -3347,9 +3426,14 @@
       fbGroups.forEach(p => p.classList.add('fb-en'));
     }
 
-    function setLang(lang) {
+    function setLang(lang, updateUrl = false) {
       root.setAttribute('lang', lang);
       localStorage.setItem(LS_LANG, lang);
+      if (updateUrl) {
+        const url = new URL(location.href);
+        url.searchParams.set('lang', lang);
+        history.replaceState(null, '', url);
+      }
       const sel = document.getElementById('lang-select');
       if (sel) sel.value = lang;
       applyFallback(lang);
@@ -3372,7 +3456,7 @@
       });
     }
     const sel = document.getElementById('lang-select');
-    if (sel) sel.addEventListener('change', e => setLang(e.target.value));
+    if (sel) sel.addEventListener('change', e => setLang(e.target.value, true));
     setLang(detectLang());
 
     // ── 테마 초기값: localStorage → prefers-color-scheme → 'light' ───
@@ -3415,6 +3499,14 @@
       window.addEventListener('resize', () => {
         if (window.innerWidth > 640) setNavOpen(false);
       });
+    }
+
+    // 공유용 딥 링크: /?feature=spotlight-magnifier 또는 /?help=... 형태를
+    // 사용해도 실제 문서의 안정적인 id 앵커로 이동한다.
+    const featureParam = new URLSearchParams(location.search).get('feature');
+    if (featureParam) {
+      const target = document.getElementById(featureParam);
+      if (target) window.requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
   })();
 </script>
