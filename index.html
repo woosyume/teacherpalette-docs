@@ -413,14 +413,7 @@
     -webkit-backdrop-filter: saturate(160%) blur(20px);
   }
   .btn-secondary:hover { transform: translateY(-1px); border-color: var(--accent); }
-  /* App Store 심사 제출 전, CTA를 클릭 불가 상태로 표시 (실제 링크 확정 시 제거) */
-  .btn-disabled {
-    opacity: 0.55;
-    cursor: default;
-    pointer-events: none;
-    box-shadow: none;
-  }
-  .btn-disabled:hover { transform: none; box-shadow: none; border-color: inherit; }
+  .app-store-icon { width: 17px; height: 21px; flex: 0 0 auto; fill: currentColor; }
 
 
   /* ── Live Demo (Hero 아래) ─────────────────────────────────
@@ -1718,16 +1711,17 @@
 <span data-lang-it>Per docenti, presentatori, sviluppatori e formatori che spiegano sullo schermo. Guida lo sguardo, ingrandisci i dettagli e disegna le tue idee sulle app Mac che già usi.</span></p>
 
   <div class="cta-row">
-    <a href="#pricing" class="btn btn-primary btn-disabled" aria-disabled="true" tabindex="-1">
-      <span data-lang-en>Coming Soon</span>
-      <span data-lang-ko>출시 예정</span>
-      <span data-lang-ja>近日公開</span>
-      <span data-lang-zh>即将推出</span>
-      <span data-lang-fr>Bientôt disponible</span>
-      <span data-lang-de>Demnächst verfügbar</span>
-      <span data-lang-es>Próximamente</span>
-      <span data-lang-pt>Em breve</span>
-      <span data-lang-it>Prossimamente</span>
+    <a href="https://apps.apple.com/jp/app/teacherpalette/id6783567350?l=en-US&amp;mt=12" class="btn btn-primary" target="_blank" rel="noopener">
+      <svg class="app-store-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.9-17.9 31.9 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3 8.8-26.6 12.1-40.1 18.9-68.1-56.9-26.8-80.7-77.3-80.7-123.8zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span data-lang-en>Download on the App Store</span>
+      <span data-lang-ko>App Store에서 다운로드</span>
+      <span data-lang-ja>App Storeからダウンロード</span>
+      <span data-lang-zh>从 App Store 下载</span>
+      <span data-lang-fr>Télécharger sur l’App Store</span>
+      <span data-lang-de>Im App Store laden</span>
+      <span data-lang-es>Descargar en el App Store</span>
+      <span data-lang-pt>Baixar na App Store</span>
+      <span data-lang-it>Scarica dall’App Store</span>
     </a>
     <a href="#workflow" class="btn btn-secondary"><span data-lang-en>See how it works</span>
 <span data-lang-ko>설명 흐름 살펴보기</span>
@@ -2781,10 +2775,11 @@
             <span data-lang-es>Cancela cuando quieras, sin preguntas</span><span data-lang-pt>Cancele quando quiser, sem perguntas</span><span data-lang-it>Annulla in qualsiasi momento, senza domande</span>
           </li>
         </ul>
-        <a href="#pricing" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true" tabindex="-1">
-          <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
-          <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
-          <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
+        <a href="https://apps.apple.com/jp/app/teacherpalette/id6783567350?l=en-US&amp;mt=12" class="btn btn-secondary pricing-cta" target="_blank" rel="noopener">
+          <svg class="app-store-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.9-17.9 31.9 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3 8.8-26.6 12.1-40.1 18.9-68.1-56.9-26.8-80.7-77.3-80.7-123.8zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span data-lang-en>View on the App Store</span><span data-lang-ko>App Store에서 보기</span><span data-lang-ja>App Storeで見る</span>
+          <span data-lang-zh>在 App Store 查看</span><span data-lang-fr>Voir sur l’App Store</span><span data-lang-de>Im App Store ansehen</span>
+          <span data-lang-es>Ver en el App Store</span><span data-lang-pt>Ver na App Store</span><span data-lang-it>Vedi sull’App Store</span>
         </a>
       </div>
 
@@ -2831,10 +2826,11 @@
             <span data-lang-es>Gratis 7 días, luego $9.99/año — solo $0.83 al mes</span><span data-lang-pt>Grátis por 7 dias, depois US$ 9,99/ano — apenas US$ 0,83 por mês</span><span data-lang-it>Gratis per 7 giorni, poi 9,99 $/anno — solo 0,83 $ al mese</span>
           </li>
         </ul>
-        <a href="#pricing" class="btn btn-primary pricing-cta btn-disabled" aria-disabled="true" tabindex="-1">
-          <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
-          <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
-          <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
+        <a href="https://apps.apple.com/jp/app/teacherpalette/id6783567350?l=en-US&amp;mt=12" class="btn btn-primary pricing-cta" target="_blank" rel="noopener">
+          <svg class="app-store-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.9-17.9 31.9 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3 8.8-26.6 12.1-40.1 18.9-68.1-56.9-26.8-80.7-77.3-80.7-123.8zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span data-lang-en>View on the App Store</span><span data-lang-ko>App Store에서 보기</span><span data-lang-ja>App Storeで見る</span>
+          <span data-lang-zh>在 App Store 查看</span><span data-lang-fr>Voir sur l’App Store</span><span data-lang-de>Im App Store ansehen</span>
+          <span data-lang-es>Ver en el App Store</span><span data-lang-pt>Ver na App Store</span><span data-lang-it>Vedi sull’App Store</span>
         </a>
       </div>
 
@@ -2876,10 +2872,11 @@
             <span data-lang-es>Es tuyo para siempre, en esta Mac</span><span data-lang-pt>Seu para sempre, neste Mac</span><span data-lang-it>Per sempre tuo, su questo Mac</span>
           </li>
         </ul>
-        <a href="#pricing" class="btn btn-secondary pricing-cta btn-disabled" aria-disabled="true" tabindex="-1">
-          <span data-lang-en>Coming Soon</span><span data-lang-ko>출시 예정</span><span data-lang-ja>近日公開</span>
-          <span data-lang-zh>即将推出</span><span data-lang-fr>Bientôt disponible</span><span data-lang-de>Demnächst verfügbar</span>
-          <span data-lang-es>Próximamente</span><span data-lang-pt>Em breve</span><span data-lang-it>Prossimamente</span>
+        <a href="https://apps.apple.com/jp/app/teacherpalette/id6783567350?l=en-US&amp;mt=12" class="btn btn-secondary pricing-cta" target="_blank" rel="noopener">
+          <svg class="app-store-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.9-17.9 31.9 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3 8.8-26.6 12.1-40.1 18.9-68.1-56.9-26.8-80.7-77.3-80.7-123.8zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span data-lang-en>View on the App Store</span><span data-lang-ko>App Store에서 보기</span><span data-lang-ja>App Storeで見る</span>
+          <span data-lang-zh>在 App Store 查看</span><span data-lang-fr>Voir sur l’App Store</span><span data-lang-de>Im App Store ansehen</span>
+          <span data-lang-es>Ver en el App Store</span><span data-lang-pt>Ver na App Store</span><span data-lang-it>Vedi sull’App Store</span>
         </a>
       </div>
 
