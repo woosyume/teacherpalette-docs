@@ -1,0 +1,139 @@
+/* Home art direction: warm paper, ink typography, restrained blue accents. */
+:root {
+  --bg: #faf9f6;
+  --bg-alt: #f0efeb;
+  --text: #242723;
+  --text-dim: #646963;
+  --text-muted: #646963;
+  --accent: #2466b4;
+  --accent-soft: rgba(36, 102, 180, .07);
+  --border: rgba(36, 39, 35, .12);
+  --card-bg: #fffefa;
+  --card-border: rgba(36, 39, 35, .10);
+  --shadow: 0 4px 18px rgba(36, 39, 35, .025);
+  --shadow-hover: 0 12px 28px rgba(36, 39, 35, .065);
+}
+[data-theme="dark"] {
+  --bg: #151817;
+  --bg-alt: #1c201e;
+  --text: #f1f0e9;
+  --text-dim: #b0b7ae;
+  --text-muted: #b0b7ae;
+  --accent: #96beef;
+  --accent-soft: rgba(150, 190, 239, .09);
+  --border: rgba(241, 240, 233, .14);
+  --card-bg: #1c201e;
+  --card-border: rgba(241, 240, 233, .12);
+  --shadow: 0 4px 18px #00000012;
+  --shadow-hover: 0 12px 28px #00000024;
+}
+html { overflow-x: clip; }
+body::before { display: none; }
+.visual-drawmode { contain: paint; }
+header { background: rgba(250, 249, 246, .92); }
+[data-theme="dark"] header { background: rgba(21, 24, 23, .92); }
+.header-inner { max-width: 1200px; padding-block: 18px; }
+.brand-icon { box-shadow: none; }
+.header-link { border-color: transparent; color: var(--text-dim); }
+.header-cta { box-shadow: none; }
+.hero {
+  position: relative;
+  padding: 68px 24px 80px;
+  background: radial-gradient(ellipse 55% 34% at 50% 84%, rgba(177, 196, 216, .19), transparent 100%);
+}
+.hero-app-icon { width: 54px; height: 54px; border-radius: 13px; margin-bottom: 20px; box-shadow: 0 5px 14px #24272310; }
+.hero-badge { padding: 0; background: transparent; color: var(--text-dim); font-size: 12px; letter-spacing: .09em; font-weight: 500; margin-bottom: 22px; }
+.hero h1 { max-width: 980px; margin: 0 auto 24px; }
+.hero-logo { height: 25px; margin-bottom: 24px; }
+.hero-keyword { max-width: 880px; font-size: clamp(40px, 5.7vw, 76px); font-weight: 650; line-height: 1.08; letter-spacing: -.052em; text-wrap: balance; }
+html:lang(ko) .hero-keyword, html:lang(ja) .hero-keyword, html:lang(zh) .hero-keyword { line-height: 1.22; letter-spacing: -.055em; word-break: keep-all; }
+.hero-sub { max-width: 610px; font-size: 17px; line-height: 1.8; margin-bottom: 28px; text-wrap: pretty; }
+.btn { min-height: 48px; padding: 13px 22px; border-radius: 9px; font-size: 14px; }
+.btn-primary { background: #2466b4; box-shadow: 0 3px 7px #2466b418; }
+.btn-primary:hover { background: #1b5496; box-shadow: 0 6px 16px #2466b426; }
+.btn-secondary { background: transparent; border-color: var(--border); backdrop-filter: none; }
+.hero-trust { font-size: 11px; margin-top: 20px; }
+.hero-trust a { display: inline-block; margin-left: 8px; color: var(--text-dim); }
+.whats-new-pill { margin-top: 22px; border: 0; border-radius: 0; padding: 0 0 3px; background: transparent; color: var(--text-dim); font-weight: 450; box-shadow: none; }
+.whats-new-pill:hover { box-shadow: none; color: var(--accent); }
+.whats-new-pill .dot { width: 5px; height: 5px; background: #74947a; animation: none; box-shadow: none; }
+.hero-video-frame { max-width: 1040px; margin-top: 52px; border-radius: 13px; border-color: var(--border); box-shadow: 0 30px 70px -30px #24272345, 0 3px 10px #2427230a; }
+.hero-video-chrome { padding: 12px 16px; background: var(--bg-alt); }
+.hero-video-chrome .hvc-dot { width: 8px; height: 8px; }
+.hero-video { aspect-ratio: 16 / 9; object-fit: contain; }
+/* Functional diagrams share one visual vocabulary and a readable outcome. */
+.feature-diagram::before { display: none; }
+.feature-diagram figure { width: 100%; margin: 0; padding: 16px 16px 24px; }
+.feature-diagram svg { display: block; width: 100%; height: auto; }
+.feature-diagram text { fill: var(--text); font-family: inherit; font-weight: 500; }
+.diagram-paper { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+.diagram-line { fill: none; stroke: var(--text-dim); stroke-width: 3; stroke-linecap: round; opacity: .35; }
+.diagram-arrow { fill: none; stroke: var(--text-dim); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.diagram-selection { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.diagram-mark { fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; }
+.diagram-highlight { stroke: #e2b954; stroke-width: 14; opacity: .5; }
+.diagram-pencil { fill: var(--text); }
+.feature-diagram figcaption { text-align: center; color: var(--text-dim); font-size: 13px; line-height: 1.6; text-wrap: balance; }
+.spotlight-visual .vp-window, .spotlight-visual .cmd-window { transform: none; }
+.spotlight-visual .cursor-shape, .spotlight-visual .joystick-knob { animation: none; }
+.spotlight-visual .dm-blob { display: none; }
+.spotlight-visual .dm-hud { animation: none; }
+.section-inner { max-width: 1080px; }
+section { padding-block: 96px; }
+.section-header { margin-bottom: 48px; }
+.section-header h2 { font-size: clamp(30px, 4vw, 46px); letter-spacing: -.04em; font-weight: 600; line-height: 1.18; text-wrap: balance; }
+.section-header p { font-size: 16px; line-height: 1.75; }
+.demo-section { padding-top: 28px; padding-bottom: 54px; }
+.workflow-grid { gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.workflow-card { border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 30px; }
+.workflow-card + .workflow-card { border-left: 1px solid var(--border); }
+.workflow-step { color: var(--text-dim); font-weight: 450; font-variant-numeric: tabular-nums; }
+.workflow-card h3 { font-weight: 600; letter-spacing: -.025em; }
+.features { gap: 16px; }
+.feature-card { padding: 30px; border-radius: 14px; backdrop-filter: none; }
+.feature-icon { background: var(--accent-soft); color: var(--accent); width: 42px; height: 42px; border-radius: 10px; box-shadow: none; }
+.feature-icon svg { width: 23px; height: 23px; stroke-width: 1.6; }
+.feature-card:hover .feature-icon { transform: none; }
+.feature-card h3 { font-size: 18px; }
+.feature-card p { line-height: 1.75; }
+.spotlight-list { gap: 120px; }
+.spotlight-eyebrow { padding: 0; background: transparent; color: var(--text-dim); font-weight: 500; letter-spacing: .06em; }
+.spotlight-copy h3 { font-size: clamp(28px, 3.2vw, 39px); letter-spacing: -.035em; font-weight: 600; text-wrap: balance; }
+.spotlight-copy p { line-height: 1.8; }
+.spotlight-copy li::before { box-shadow: none; }
+.spotlight-visual { border-radius: 18px; box-shadow: none; }
+.pricing-card { border-radius: 16px; box-shadow: none; }
+.pricing-card.featured { transform: none; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.pricing-card.featured:hover { transform: translateY(-3px); }
+.pricing-ribbon { background: #2466b4; box-shadow: none; }
+.maker-feedback { border-radius: 16px; box-shadow: none; }
+footer { border-top: 1px solid var(--border); }
+@media (max-width: 1000px) and (min-width: 641px) {
+  .header-inner { padding-inline: 16px; gap: 10px; }
+  .header-controls { gap: 4px; }
+  .header-link { padding-inline: 7px; }
+  .brand-logo { height: 19px; }
+}
+@media (max-width: 780px) {
+  .workflow-card + .workflow-card { border-left: 0; border-top: 1px solid var(--border); }
+  .spotlight-list { gap: 72px; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 42px 20px 48px; }
+  .hero-app-icon { width: 46px; height: 46px; margin-bottom: 16px; }
+  .hero-badge { font-size: 11px; margin-bottom: 18px; }
+  .hero-logo { height: 22px; margin-bottom: 20px; }
+  .hero-keyword { font-size: clamp(34px, 8.6vw, 50px); }
+  .hero-sub { font-size: 15px; line-height: 1.75; }
+  .hero-trust { max-width: 300px; line-height: 1.7; }
+  .hero-video-frame { margin-top: 34px; border-radius: 9px; }
+  .whats-new-pill { font-size: 10px; }
+  section { padding: 64px 20px; }
+  .demo-section { padding-block: 20px 36px; }
+  .header-inner { padding: 13px 16px; }
+  .mobile-nav { background: var(--bg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
