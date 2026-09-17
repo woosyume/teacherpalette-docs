@@ -249,7 +249,23 @@
     border-radius: 0 12px 12px 0; background: var(--accent-soft); color: var(--text-dim); font-size: 14px;
   }
   .workflow-note strong { color: var(--text); }
+  .guide-links { margin-top: 36px; padding: 32px; border: 1px solid #e9dfd3; border-radius: 22px; background: #faf6ef; }
+  .guide-links h2 { font-size: 24px; letter-spacing: -0.035em; margin-bottom: 8px; color: #38352f; }
+  .guide-links > p { margin: 0; font-size: 14px; }
+  .guide-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin-top: 24px; }
+  .guide-card { position: relative; display: block; padding: 23px 30px 23px 0; border-top: 1px solid #e5dcd0; color: #38352f; text-decoration: none; transition: color .15s; }
+  .guide-card::after { content: '↗'; position: absolute; top: 23px; right: 3px; color: #9c8062; font-size: 20px; transition: transform .15s; }
+  .guide-card:hover { color: #806145; }
+  .guide-card:hover::after { transform: translate(2px, -2px); }
+  .guide-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+  .guide-card strong { display: block; margin-bottom: 8px; font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.5; }
+  .guide-card > span { color: #7c746a; font-size: 13px; line-height: 1.7; }
+  [data-theme="dark"] .guide-links { background: #24221f; border-color: #423a32; }
+  [data-theme="dark"] .guide-links h2, [data-theme="dark"] .guide-card { color: #eee5da; }
+  [data-theme="dark"] .guide-card { border-color: #423a32; }
+  [data-theme="dark"] .guide-card > span { color: #bfb2a3; }
   @media (max-width: 780px) { .help-flow { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .guide-grid { grid-template-columns: 1fr; } .guide-links { padding: 24px 20px; } }
   @media (max-width: 480px) { header.title h1 { font-size: 29px; } }
 
   aside.sidebar {
@@ -551,6 +567,17 @@
       <a href="?help=tip-screen-sharing"><strong><span data-lang-en>Guide attention live</span><span data-lang-ko>라이브에서 시선 이끌기</span><span data-lang-ja>ライブで視線を導く</span><span data-lang-zh>直播中引导注意力</span><span data-lang-fr>Guider l’attention en direct</span><span data-lang-de>Aufmerksamkeit live lenken</span><span data-lang-es>Guía la atención en vivo</span><span data-lang-pt>Guie a atenção ao vivo</span><span data-lang-it>Guida l’attenzione dal vivo</span></strong><span data-lang-en>Spotlight, Laser and Magnifier together</span><span data-lang-ko>스포트라이트, 레이저, 돋보기 함께 쓰기</span><span data-lang-ja>スポットライト、レーザー、拡大鏡を組み合わせる</span><span data-lang-zh>组合使用聚光灯、激光笔和放大镜</span><span data-lang-fr>Projecteur, laser et loupe</span><span data-lang-de>Spotlight, Laser und Lupe kombinieren</span><span data-lang-es>Combina foco, láser y lupa</span><span data-lang-pt>Combine holofote, laser e lupa</span><span data-lang-it>Combina riflettore, laser e lente</span></a>
       <a href="?help=tip-whiteboard"><strong><span data-lang-en>Build the explanation</span><span data-lang-ko>설명을 완성하기</span><span data-lang-ja>説明を組み立てる</span><span data-lang-zh>构建完整讲解</span><span data-lang-fr>Construire l’explication</span><span data-lang-de>Die Erklärung aufbauen</span><span data-lang-es>Construye la explicación</span><span data-lang-pt>Monte sua explicação</span><span data-lang-it>Costruisci la spiegazione</span></strong><span data-lang-en>Whiteboard, PDF and Sidecar workflows</span><span data-lang-ko>화이트보드, PDF, Sidecar 활용 흐름</span><span data-lang-ja>ホワイトボード、PDF、Sidecarの使い方</span><span data-lang-zh>白板、PDF 和 Sidecar 工作流</span><span data-lang-fr>Workflows tableau blanc, PDF et Sidecar</span><span data-lang-de>Whiteboard-, PDF- und Sidecar-Workflows</span><span data-lang-es>Flujos con pizarra, PDF y Sidecar</span><span data-lang-pt>Fluxos com quadro branco, PDF e Sidecar</span><span data-lang-it>Flussi con lavagna, PDF e Sidecar</span></a>
     </div>
+    <section class="guide-links" aria-labelledby="guide-links-title">
+      <h2 id="guide-links-title"><span data-lang-en>Practical guides</span><span data-lang-ko>실전 가이드</span><span data-lang-ja>実践ガイド</span></h2>
+      <p><span data-lang-en>Step-by-step articles for the moments you explain on screen.</span><span data-lang-ko>화면으로 설명하는 순간에 바로 참고할 수 있는 단계별 글입니다.</span><span data-lang-ja>画面で説明する場面にすぐ役立つ、ステップごとの記事です。</span></p>
+      <div class="guide-grid">
+        <a class="guide-card" data-guide-key="screen-writing" href="../en/draw-on-screen-mac/index.html"><strong><span data-lang-en>Draw on your Mac screen</span><span data-lang-ko>맥 화면에 필기하는 방법</span><span data-lang-ja>Macの画面に書き込む方法</span></strong><span data-lang-en>Explain without leaving the app you are showing.</span><span data-lang-ko>보여주는 앱을 벗어나지 않고 설명하세요.</span><span data-lang-ja>見せているアプリを離れずに説明できます。</span></a>
+        <a class="guide-card" data-guide-key="cursor-highlight" href="../en/cursor-highlight-mac/index.html"><strong><span data-lang-en>Make your cursor easier to follow</span><span data-lang-ko>커서를 더 잘 보이게 하는 방법</span><span data-lang-ja>カーソルを見つけやすくする方法</span></strong><span data-lang-en>Guide attention through a live screen share.</span><span data-lang-ko>실시간 화면 공유에서 시선을 이끄세요.</span><span data-lang-ja>ライブの画面共有で視線を導きます。</span></a>
+        <a class="guide-card" data-guide-key="whiteboard" href="../en/presentation-whiteboard-mac/index.html"><strong><span data-lang-en>Use a presentation whiteboard</span><span data-lang-ko>발표용 화이트보드 활용법</span><span data-lang-ja>発表用ホワイトボードの使い方</span></strong><span data-lang-en>Save explanations you will use again.</span><span data-lang-ko>다시 쓸 설명을 저장해 두세요.</span><span data-lang-ja>また使う説明を保存しておけます。</span></a>
+        <a class="guide-card" data-guide-key="pdf-annotation" href="../en/annotate-pdf-presenting-mac/index.html"><strong><span data-lang-en>Annotate a PDF while presenting</span><span data-lang-ko>PDF에 필기하며 발표하는 방법</span><span data-lang-ja>PDFに書き込みながら発表する方法</span></strong><span data-lang-en>Keep the page context visible as you explain.</span><span data-lang-ko>문맥을 살리면서 핵심을 설명하세요.</span><span data-lang-ja>ページの文脈を残して要点を説明します。</span></a>
+        <a class="guide-card" data-guide-key="software-demo" href="../en/live-software-demo-tools-mac/index.html"><strong><span data-lang-en>Run a clearer software demo</span><span data-lang-ko>더 명확한 소프트웨어 데모 만들기</span><span data-lang-ja>より伝わるソフトウェアデモの作り方</span></strong><span data-lang-en>Keep every action easy to see in real time.</span><span data-lang-ko>모든 조작이 실시간으로 잘 보이게 하세요.</span><span data-lang-ja>操作の一つひとつをリアルタイムで見せます。</span></a>
+      </div>
+    </section>
     <p class="workflow-note"><strong><span data-lang-en>A useful flow:</span><span data-lang-ko>추천 흐름:</span><span data-lang-ja>おすすめの流れ：</span><span data-lang-zh>推荐流程：</span><span data-lang-fr>Un bon enchaînement :</span><span data-lang-de>Ein hilfreicher Ablauf:</span><span data-lang-es>Un flujo útil:</span><span data-lang-pt>Um fluxo útil:</span><span data-lang-it>Un flusso utile:</span></strong> <span data-lang-en>narrow the view with Spotlight → point with Laser → enlarge with Magnifier → connect the idea with an annotation or Whiteboard.</span><span data-lang-ko>스포트라이트로 시야를 좁히고 → 레이저로 위치를 가리키고 → 돋보기로 확대하고 → 주석이나 화이트보드로 핵심을 연결하세요.</span><span data-lang-ja>スポットライトで視野を絞り → レーザーで位置を示し → 拡大鏡で大きく見せ → 注釈やホワイトボードで考えをつなぎます。</span><span data-lang-zh>用聚光灯聚焦 → 用激光笔指向 → 用放大镜放大 → 用标注或白板串起思路。</span><span data-lang-fr>resserrez le champ avec le projecteur → pointez avec le laser → agrandissez avec la loupe → reliez les idées avec une annotation ou le tableau blanc.</span><span data-lang-de>mit Spotlight fokussieren → mit Laser zeigen → mit Lupe vergrößern → die Idee per Annotation oder Whiteboard verbinden.</span><span data-lang-es>enfoca con el foco → señala con el láser → amplía con la lupa → conecta la idea con una anotación o la pizarra.</span><span data-lang-pt>use o holofote para focar → aponte com o laser → amplie com a lupa → conecte a ideia com uma anotação ou quadro branco.</span><span data-lang-it>restringi la vista con il riflettore → indica con il laser → ingrandisci con la lente → collega l’idea con un’annotazione o la lavagna.</span></p>
   </header>
 
@@ -1541,6 +1568,17 @@
       const url = new URL(a.getAttribute('href'), location.href);
       url.searchParams.set('lang', nextLang);
       a.href = url.pathname + url.search;
+    });
+    const guideLang = nextLang === 'ko' || nextLang === 'ja' ? nextLang : 'en';
+    const guidePaths = {
+      'screen-writing': { en: '../en/draw-on-screen-mac/', ko: '../ko/mac-screen-writing/', ja: '../ja/mac-screen-writing/' },
+      'cursor-highlight': { en: '../en/cursor-highlight-mac/', ko: '../ko/mac-cursor-highlight/', ja: '../ja/mac-cursor-highlight/' },
+      'whiteboard': { en: '../en/presentation-whiteboard-mac/', ko: '../ko/mac-presentation-whiteboard/', ja: '../ja/mac-presentation-whiteboard/' },
+      'pdf-annotation': { en: '../en/annotate-pdf-presenting-mac/', ko: '../ko/mac-pdf-presentation-annotation/', ja: '../ja/mac-pdf-presentation-annotation/' },
+      'software-demo': { en: '../en/live-software-demo-tools-mac/', ko: '../ko/mac-demo-presentation-tools/', ja: '../ja/mac-demo-presentation-tools/' }
+    };
+    document.querySelectorAll('[data-guide-key]').forEach(a => {
+      a.href = guidePaths[a.dataset.guideKey][guideLang] + 'index.html';
     });
     document.querySelectorAll('.fb-en').forEach(el => el.classList.remove('fb-en'));
     applyFallback(nextLang);
