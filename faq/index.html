@@ -260,6 +260,9 @@
   .guide-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
   .guide-card strong { display: block; margin-bottom: 8px; font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.5; }
   .guide-card > span { color: #7c746a; font-size: 13px; line-height: 1.7; }
+  .guide-card [data-lang-en], .guide-card [data-lang-ko], .guide-card [data-lang-ja], .guide-card [data-lang-zh], .guide-card [data-lang-fr], .guide-card [data-lang-de], .guide-card [data-lang-es], .guide-card [data-lang-pt], .guide-card [data-lang-it] { display: none !important; }
+  html[lang="en"] .guide-card [data-lang-en], html[lang="ko"] .guide-card [data-lang-ko], html[lang="ja"] .guide-card [data-lang-ja], html[lang="zh"] .guide-card [data-lang-zh], html[lang="fr"] .guide-card [data-lang-fr], html[lang="de"] .guide-card [data-lang-de], html[lang="es"] .guide-card [data-lang-es], html[lang="pt"] .guide-card [data-lang-pt], html[lang="it"] .guide-card [data-lang-it] { display: block !important; }
+  html[lang="zh"] .guide-card [data-lang-en], html[lang="fr"] .guide-card [data-lang-en], html[lang="de"] .guide-card [data-lang-en], html[lang="es"] .guide-card [data-lang-en], html[lang="pt"] .guide-card [data-lang-en], html[lang="it"] .guide-card [data-lang-en] { display: block !important; }
   [data-theme="dark"] .guide-links { background: #24221f; border-color: #423a32; }
   [data-theme="dark"] .guide-links h2, [data-theme="dark"] .guide-card { color: #eee5da; }
   [data-theme="dark"] .guide-card { border-color: #423a32; }
@@ -1569,13 +1572,13 @@
       url.searchParams.set('lang', nextLang);
       a.href = url.pathname + url.search;
     });
-    const guideLang = nextLang === 'ko' || nextLang === 'ja' ? nextLang : 'en';
+    const guideLang = nextLang;
     const guidePaths = {
-      'screen-writing': { en: '../en/draw-on-screen-mac/', ko: '../ko/mac-screen-writing/', ja: '../ja/mac-screen-writing/' },
-      'cursor-highlight': { en: '../en/cursor-highlight-mac/', ko: '../ko/mac-cursor-highlight/', ja: '../ja/mac-cursor-highlight/' },
-      'whiteboard': { en: '../en/presentation-whiteboard-mac/', ko: '../ko/mac-presentation-whiteboard/', ja: '../ja/mac-presentation-whiteboard/' },
-      'pdf-annotation': { en: '../en/annotate-pdf-presenting-mac/', ko: '../ko/mac-pdf-presentation-annotation/', ja: '../ja/mac-pdf-presentation-annotation/' },
-      'software-demo': { en: '../en/live-software-demo-tools-mac/', ko: '../ko/mac-demo-presentation-tools/', ja: '../ja/mac-demo-presentation-tools/' }
+      'screen-writing': { en: '../en/draw-on-screen-mac/', ja: '../ja/mac-screen-writing/', ko: '../ko/mac-screen-writing/', zh: '../zh/mac-screen-writing/', fr: '../fr/mac-screen-writing/', de: '../de/mac-screen-writing/', es: '../es/mac-screen-writing/', pt: '../pt/mac-screen-writing/', it: '../it/mac-screen-writing/' },
+      'cursor-highlight': { en: '../en/cursor-highlight-mac/', ja: '../ja/mac-cursor-highlight/', ko: '../ko/mac-cursor-highlight/', zh: '../zh/mac-cursor-highlight/', fr: '../fr/mac-cursor-highlight/', de: '../de/mac-cursor-highlight/', es: '../es/mac-cursor-highlight/', pt: '../pt/mac-cursor-highlight/', it: '../it/mac-cursor-highlight/' },
+      'whiteboard': { en: '../en/presentation-whiteboard-mac/', ja: '../ja/mac-presentation-whiteboard/', ko: '../ko/mac-presentation-whiteboard/', zh: '../zh/mac-presentation-whiteboard/', fr: '../fr/mac-presentation-whiteboard/', de: '../de/mac-presentation-whiteboard/', es: '../es/mac-presentation-whiteboard/', pt: '../pt/mac-presentation-whiteboard/', it: '../it/mac-presentation-whiteboard/' },
+      'pdf-annotation': { en: '../en/annotate-pdf-presenting-mac/', ja: '../ja/mac-pdf-presentation-annotation/', ko: '../ko/mac-pdf-presentation-annotation/', zh: '../zh/mac-pdf-presentation-annotation/', fr: '../fr/mac-pdf-presentation-annotation/', de: '../de/mac-pdf-presentation-annotation/', es: '../es/mac-pdf-presentation-annotation/', pt: '../pt/mac-pdf-presentation-annotation/', it: '../it/mac-pdf-presentation-annotation/' },
+      'software-demo': { en: '../en/live-software-demo-tools-mac/', ja: '../ja/mac-demo-presentation-tools/', ko: '../ko/mac-demo-presentation-tools/', zh: '../zh/mac-demo-presentation-tools/', fr: '../fr/mac-demo-presentation-tools/', de: '../de/mac-demo-presentation-tools/', es: '../es/mac-demo-presentation-tools/', pt: '../pt/mac-demo-presentation-tools/', it: '../it/mac-demo-presentation-tools/' }
     };
     document.querySelectorAll('[data-guide-key]').forEach(a => {
       a.href = guidePaths[a.dataset.guideKey][guideLang] + 'index.html';

@@ -30,3 +30,9 @@ a:focus-visible { outline: 2px solid #346a83; outline-offset: 5px; }
   h2 { font-size: 22px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+/* The help link doubles as a clear way back to the guide index. */
+.top a:not(.brand) { color: #6d675f; border: 1px solid #e4ddd4; border-radius: 999px; padding: 7px 14px; transition: background .15s, color .15s, border-color .15s; }
+.top a:not(.brand)::before { content: none; }
+.top a:not(.brand):not(.back-link)::before { content: '←'; margin-right: 7px; color: #9a8065; }
+.top a:not(.brand):hover { background: #f0e9de; color: #806145; border-color: #cdbba8; }
