@@ -385,8 +385,10 @@
   .hero-video-chrome .hvc-g { background: #28C840; }
   .hero-video {
     display: block; width: 100%; height: auto;
-    aspect-ratio: 2402 / 1178;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
     background: #0a0a0f;
+    border: 0;
   }
   @media (max-width: 640px) {
     .hero-video-frame { margin-top: 32px; border-radius: 12px; }
@@ -1601,6 +1603,24 @@
   .maker-copy .btn { margin-top: 22px; }
   .maker-feedback h3 { font-size: 21px; line-height: 1.35; margin-bottom: 14px; }
   .maker-feedback p { margin-bottom: 20px; }
+  /* Founder story — personal note, deliberately without a portrait or a card. */
+  #maker.founder-story { padding: 112px 24px; }
+  .founder-story .section-inner { max-width: 790px; }
+  .founder-kicker { color: var(--text-dim); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 28px; }
+  .founder-identity { display: flex; align-items: baseline; gap: 10px; color: var(--text-dim); font-size: 14px; margin-bottom: 26px; }
+  .founder-identity strong { color: var(--text); font-size: 15px; }
+  .founder-story h2 { max-width: 620px; font-size: clamp(32px, 4.4vw, 50px); line-height: 1.12; letter-spacing: -.035em; margin-bottom: 30px; text-wrap: balance; }
+  .founder-copy { max-width: 660px; }
+  .founder-copy p { color: var(--text-dim); font-size: 17px; line-height: 1.8; margin-bottom: 20px; text-wrap: pretty; }
+  .founder-copy .founder-conclusion { color: var(--text); font-size: clamp(19px, 2.2vw, 23px); font-weight: 600; line-height: 1.45; margin-top: 34px; }
+  @media (max-width: 640px) {
+    #maker.founder-story { padding: 76px 24px; }
+    .founder-kicker { margin-bottom: 20px; }
+    .founder-identity { display: block; line-height: 1.55; margin-bottom: 20px; }
+    .founder-identity span { display: block; }
+    .founder-story h2 { margin-bottom: 24px; }
+    .founder-copy p { font-size: 16px; }
+  }
   .section-header .pricing-launch-note { margin: 24px auto 0; max-width: 680px; font-size: 14px; font-weight: 500; padding: 16px 20px; border-radius: 14px; background: var(--accent-soft); }
   a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   @media (max-width: 780px) {
@@ -1768,9 +1788,7 @@
     <div class="hero-video-chrome" aria-hidden="true">
       <span class="hvc-dot hvc-r"></span><span class="hvc-dot hvc-y"></span><span class="hvc-dot hvc-g"></span>
     </div>
-    <video class="hero-video" autoplay muted loop playsinline poster="media/intro-poster.jpg" aria-label="TeacherPalette intro demo">
-      <source src="media/teacherpalette-intro.mp4" type="video/mp4">
-    </video>
+    <iframe class="hero-video" src="https://www.youtube.com/embed/zqQS5rKdw8I?rel=0&amp;origin=https%3A%2F%2Fteacherpalette.com" title="TeacherPalette workflow demo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -2675,21 +2693,25 @@
 </section>
 
 <!-- ═══════════════════════ PRICING ═════════════════════════════════ -->
-<section id="maker" aria-labelledby="maker-title"><div class="section-inner maker-grid"><div class="maker-copy"><p class="workflow-tools"><span data-lang-en>Independent by design</span>
-<span data-lang-ko>1인 개발자의 제품</span>
-<span data-lang-ja>個人開発のプロダクト</span></p><h2 id="maker-title"><span data-lang-en>Built by an instructor, for people who explain things on screen.</span>
-<span data-lang-ko>화면으로 설명하는 사람들을 위해, 실제 강사가 만들었습니다.</span>
-<span data-lang-ja>画面で説明する人のために、講師がつくりました。</span></h2><p><span data-lang-en>TeacherPalette is made by a solo developer who is also a working instructor. The focus is practical: help people follow what you are showing, whether you are teaching a class, presenting a product or walking through code.</span>
-<span data-lang-ko>TeacherPalette는 현업 강사이자 1인 개발자가 만듭니다. 수업을 하든, 제품을 소개하든, 코드를 설명하든, 화면을 보는 사람이 설명을 쉽게 따라오도록 돕는 데 집중합니다.</span>
-<span data-lang-ja>TeacherPaletteをつくっているのは、現役の講師でもある個人開発者です。授業でも、製品紹介でも、コードの解説でも、画面を見る人が説明についていけることを大切にしています。</span></p><a class="btn btn-secondary" href="mailto:support@teacherpalette.com"><span data-lang-en>Talk to the developer</span>
-<span data-lang-ko>개발자에게 이야기하기</span>
-<span data-lang-ja>開発者に相談する</span></a></div><aside class="maker-feedback" aria-labelledby="feedback-title"><h3 id="feedback-title"><span data-lang-en>Your next explanation can shape what comes next.</span>
-<span data-lang-ko>여러분의 설명 경험이 다음 개선의 시작입니다.</span>
-<span data-lang-ja>あなたの説明体験を、次の改善へ。</span></h3><p><span data-lang-en>Tried TeacherPalette in a lesson, demo or training session? Tell the developer what helped and what got in the way.</span>
-<span data-lang-ko>수업, 데모, 교육에서 TeacherPalette를 사용해 보셨나요? 도움이 된 점과 불편했던 점을 개발자에게 알려주세요.</span>
-<span data-lang-ja>授業やデモ、研修でTeacherPaletteを使いましたか？役立ったことや困ったことを、開発者にお聞かせください。</span></p><a href="mailto:support@teacherpalette.com"><span data-lang-en>Share your experience</span>
-<span data-lang-ko>사용 경험 나누기</span>
-<span data-lang-ja>使った感想を送る</span></a></aside></div></section>
+<section id="maker" class="founder-story" aria-labelledby="maker-title">
+  <div class="section-inner">
+    <p class="founder-kicker"><span data-lang-en>Founder Story</span><span data-lang-ko>Founder Story</span><span data-lang-ja>Founder Story</span><span data-lang-zh>创始人故事</span><span data-lang-fr>Histoire du fondateur</span><span data-lang-de>Die Geschichte des Gründers</span><span data-lang-es>Historia del fundador</span><span data-lang-pt>História do fundador</span><span data-lang-it>La storia del fondatore</span></p>
+    <div class="founder-identity">
+      <strong>Kim</strong>
+      <span data-lang-en>Technical Instructor &amp; Indie Developer</span>
+      <span data-lang-ko>기술 강사 · 인디 개발자</span>
+      <span data-lang-ja>テクニカルインストラクター &amp; インディー開発者</span>
+      <span data-lang-zh>技术讲师 · 独立开发者</span><span data-lang-fr>Formateur technique · développeur indépendant</span><span data-lang-de>Technischer Dozent · unabhängiger Entwickler</span><span data-lang-es>Instructor técnico · desarrollador independiente</span><span data-lang-pt>Instrutor técnico · desenvolvedor independente</span><span data-lang-it>Istruttore tecnico · sviluppatore indipendente</span>
+    </div>
+    <h2 id="maker-title"><span data-lang-en>Why I built TeacherPalette</span><span data-lang-ko>TeacherPalette를 만든 이유</span><span data-lang-ja>TeacherPaletteをつくった理由</span><span data-lang-zh>我为什么打造 TeacherPalette</span><span data-lang-fr>Pourquoi j’ai créé TeacherPalette</span><span data-lang-de>Warum ich TeacherPalette entwickelt habe</span><span data-lang-es>Por qué creé TeacherPalette</span><span data-lang-pt>Por que criei o TeacherPalette</span><span data-lang-it>Perché ho creato TeacherPalette</span></h2>
+    <div class="founder-copy">
+      <p><span data-lang-en>I’m Kim, a technical instructor and the solo developer behind TeacherPalette.</span><span data-lang-ko>저는 Kim입니다. 기술 강사이자 TeacherPalette를 혼자 만들고 있는 개발자예요.</span><span data-lang-ja>Kimです。テクニカルインストラクターであり、TeacherPaletteを一人でつくっています。</span><span data-lang-zh>我是 Kim，一名技术讲师，也是 TeacherPalette 背后的独立开发者。</span><span data-lang-fr>Je m’appelle Kim. Je suis formateur technique et le développeur indépendant derrière TeacherPalette.</span><span data-lang-de>Ich bin Kim, technischer Dozent und der unabhängige Entwickler hinter TeacherPalette.</span><span data-lang-es>Soy Kim, instructor técnico y desarrollador independiente de TeacherPalette.</span><span data-lang-pt>Sou Kim, instrutor técnico e desenvolvedor independente por trás do TeacherPalette.</span><span data-lang-it>Sono Kim, istruttore tecnico e sviluppatore indipendente di TeacherPalette.</span></p>
+      <p><span data-lang-en>I spend a lot of time explaining things on screen, and I wanted something I couldn’t quite find: a lightweight presentation toolkit I could quickly open, use anywhere on my Mac, and come back to later.</span><span data-lang-ko>화면으로 설명하는 시간이 많았고, 꼭 필요하지만 찾기 어려웠던 무언가가 있었어요. Mac 어디에서나 빠르게 열어 쓰고, 나중에 다시 이어갈 수 있는 가벼운 발표 도구였습니다.</span><span data-lang-ja>画面で説明する時間が多いなかで、どうしても見つからないものがありました。Macのどこでもすぐ開いて使え、あとからまた戻れる軽いプレゼンテーションツールです。</span><span data-lang-zh>我经常需要通过屏幕进行讲解，也一直想要一种难以找到的工具：轻量的演示工具，可以在 Mac 上随时快速打开、在任何地方使用，并在之后继续回来使用。</span><span data-lang-fr>Je passe beaucoup de temps à expliquer des choses à l’écran et je cherchais un outil que je ne trouvais nulle part : une boîte à outils de présentation légère, que je puisse ouvrir rapidement, utiliser partout sur mon Mac et retrouver plus tard.</span><span data-lang-de>Ich verbringe viel Zeit damit, Dinge am Bildschirm zu erklären, und suchte etwas, das ich kaum finden konnte: ein leichtes Präsentations-Toolkit, das ich auf meinem Mac schnell öffnen, überall nutzen und später wieder aufgreifen kann.</span><span data-lang-es>Dedico mucho tiempo a explicar cosas en pantalla y buscaba algo que no lograba encontrar: un kit de presentación ligero que pudiera abrir rápidamente, usar en cualquier lugar de mi Mac y retomar más tarde.</span><span data-lang-pt>Passo muito tempo explicando coisas na tela e queria algo que não encontrava: um kit de apresentação leve, que eu pudesse abrir rapidamente, usar em qualquer lugar do Mac e retomar depois.</span><span data-lang-it>Passo molto tempo a spiegare cose sullo schermo e cercavo qualcosa che non riuscivo a trovare: un toolkit di presentazione leggero, da aprire rapidamente, usare ovunque sul mio Mac e riprendere in seguito.</span></p>
+      <p><span data-lang-en>I wanted to reuse my whiteboards instead of drawing the same explanations again. I wanted presentation effects that felt more polished, and tools designed around how I actually present. And I didn’t want another account or cloud workspace to manage.</span><span data-lang-ko>같은 설명을 매번 다시 그리지 않고 화이트보드를 재사용하고 싶었어요. 더 정돈된 발표 효과와 실제 발표 흐름에 맞춘 도구도 원했습니다. 또 하나의 계정이나 클라우드 작업 공간을 관리하고 싶지는 않았습니다.</span><span data-lang-ja>同じ説明を毎回描き直すのではなく、ホワイトボードを再利用したかったのです。もっと洗練されたプレゼンテーション効果と、実際の発表の流れに合う道具も欲しかった。そして、また別のアカウントやクラウドワークスペースを管理したくはありませんでした。</span><span data-lang-zh>我希望重复使用自己的白板，而不是一次又一次地重画相同的解释。我希望演示效果更加精致，也希望工具真正围绕我的演示方式设计。同时，我不想再管理另一个账户或云端工作空间。</span><span data-lang-fr>Je voulais réutiliser mes tableaux blancs plutôt que redessiner les mêmes explications. Je voulais des effets de présentation plus soignés et des outils pensés pour ma façon réelle de présenter. Et je ne voulais pas avoir à gérer un compte ou un espace de travail cloud supplémentaire.</span><span data-lang-de>Ich wollte meine Whiteboards wiederverwenden, statt dieselben Erklärungen immer neu zu zeichnen. Ich wollte Präsentationseffekte, die ausgereifter wirken, und Werkzeuge, die sich an meiner tatsächlichen Art zu präsentieren orientieren. Und ich wollte kein weiteres Konto und keinen zusätzlichen Cloud-Arbeitsbereich verwalten.</span><span data-lang-es>Quería reutilizar mis pizarras en lugar de volver a dibujar las mismas explicaciones. Quería efectos de presentación más cuidados y herramientas diseñadas para mi forma real de presentar. Y no quería tener que gestionar otra cuenta ni otro espacio de trabajo en la nube.</span><span data-lang-pt>Queria reutilizar os meus quadros brancos em vez de redesenhar as mesmas explicações. Queria efeitos de apresentação mais refinados e ferramentas pensadas para a forma como realmente apresento. E não queria gerir outra conta nem outro espaço de trabalho na nuvem.</span><span data-lang-it>Volevo riutilizzare le mie lavagne invece di ridisegnare ogni volta le stesse spiegazioni. Volevo effetti di presentazione più curati e strumenti progettati intorno al mio modo reale di presentare. E non volevo gestire un altro account o uno spazio di lavoro sul cloud.</span></p>
+      <p class="founder-conclusion"><span data-lang-en>TeacherPalette grew out of that need: a presentation toolkit shaped by the work of explaining, not the work of managing software.</span><span data-lang-ko>TeacherPalette는 바로 그 필요에서 시작됐습니다. 소프트웨어를 관리하는 일이 아니라, 더 잘 설명하는 일에 집중할 수 있는 발표 도구입니다.</span><span data-lang-ja>TeacherPaletteは、その必要性から生まれました。ソフトウェアを管理するためではなく、よりよく伝える仕事に集中するためのプレゼンテーションツールです。</span><span data-lang-zh>TeacherPalette 正是源于这种需要：一套由讲解工作塑造的演示工具，而不是让人忙于管理软件。</span><span data-lang-fr>TeacherPalette est né de ce besoin : une boîte à outils façonnée par le travail d’expliquer, pas par la gestion d’un logiciel.</span><span data-lang-de>TeacherPalette ist aus diesem Bedürfnis entstanden: ein Präsentations-Toolkit, das vom Erklären geprägt ist, nicht vom Verwalten von Software.</span><span data-lang-es>TeacherPalette nació de esa necesidad: un kit de presentación pensado para explicar, no para dedicar tiempo a gestionar software.</span><span data-lang-pt>O TeacherPalette nasceu dessa necessidade: um kit de apresentação moldado pelo ato de explicar, não pela gestão de software.</span><span data-lang-it>TeacherPalette nasce da questa esigenza: un toolkit di presentazione plasmato dal lavoro di spiegare, non dalla gestione del software.</span></p>
+    </div>
+  </div>
+</section>
 <!-- Future social proof: add genuine, permission-approved quotes with attribution
      and source links as articles in this grid. Unhide only after real content is added.
      Do not add placeholder endorsements, ratings, counts or aggregateRating schema. -->
