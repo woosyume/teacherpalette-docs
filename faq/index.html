@@ -403,6 +403,26 @@
   .faq-item.tip h3 { color: var(--text); font-size: 16px; }
   .faq-item.tip .faq-a { padding-left: 0; }
 
+  /* ── 빠른 단축키 표 ─────────────────────────────────────── */
+  .shortcut-table-wrap {
+    margin: 16px 0 4px;
+    overflow-x: auto;
+    scroll-margin-top: 96px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card-bg);
+  }
+  .shortcut-table { width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.55; }
+  .shortcut-table caption { padding: 12px 14px 8px; color: var(--text); font-weight: 600; text-align: left; }
+  .shortcut-table th, .shortcut-table td { padding: 11px 14px; text-align: left; vertical-align: top; }
+  .shortcut-table th { color: var(--text); font-weight: 600; background: var(--bg-alt); white-space: nowrap; }
+  .shortcut-table td { color: var(--text-dim); border-top: 1px solid var(--border); }
+  .shortcut-table td:first-child { white-space: nowrap; }
+  @media (max-width: 560px) {
+    .shortcut-table { min-width: 540px; }
+    .shortcut-table th, .shortcut-table td { padding: 10px 12px; }
+  }
+
   /* ── 키캡 스타일 배지 (단축키 표기) ────────────────────── */
   .kbd {
     display: inline-flex; align-items: center; justify-content: center;
@@ -568,6 +588,7 @@
     <div class="help-flow">
       <a href="?help=gs-tools"><strong><span data-lang-en>Start with the tools</span><span data-lang-ko>도구부터 시작하기</span><span data-lang-ja>まずはツールから</span><span data-lang-zh>从工具开始</span><span data-lang-fr>Commencer par les outils</span><span data-lang-de>Mit den Werkzeugen beginnen</span><span data-lang-es>Empieza por las herramientas</span><span data-lang-pt>Comece pelas ferramentas</span><span data-lang-it>Inizia dagli strumenti</span></strong><span data-lang-en>Drawing, whiteboard and shortcuts</span><span data-lang-ko>드로잉, 화이트보드, 단축키</span><span data-lang-ja>描画、ホワイトボード、ショートカット</span><span data-lang-zh>绘图、白板和快捷键</span><span data-lang-fr>Dessin, tableau blanc et raccourcis</span><span data-lang-de>Zeichnen, Whiteboard und Shortcuts</span><span data-lang-es>Dibujo, pizarra y atajos</span><span data-lang-pt>Desenho, quadro branco e atalhos</span><span data-lang-it>Disegno, lavagna e scorciatoie</span></a>
       <a href="?help=tip-screen-sharing"><strong><span data-lang-en>Guide attention live</span><span data-lang-ko>라이브에서 시선 이끌기</span><span data-lang-ja>ライブで視線を導く</span><span data-lang-zh>直播中引导注意力</span><span data-lang-fr>Guider l’attention en direct</span><span data-lang-de>Aufmerksamkeit live lenken</span><span data-lang-es>Guía la atención en vivo</span><span data-lang-pt>Guie a atenção ao vivo</span><span data-lang-it>Guida l’attenzione dal vivo</span></strong><span data-lang-en>Spotlight, Laser and Magnifier together</span><span data-lang-ko>스포트라이트, 레이저, 돋보기 함께 쓰기</span><span data-lang-ja>スポットライト、レーザー、拡大鏡を組み合わせる</span><span data-lang-zh>组合使用聚光灯、激光笔和放大镜</span><span data-lang-fr>Projecteur, laser et loupe</span><span data-lang-de>Spotlight, Laser und Lupe kombinieren</span><span data-lang-es>Combina foco, láser y lupa</span><span data-lang-pt>Combine holofote, laser e lupa</span><span data-lang-it>Combina riflettore, laser e lente</span></a>
+      <a href="?help=shortcut-reference"><strong><span data-lang-en>Shortcut quick reference</span><span data-lang-ko>단축키 한눈에 보기</span><span data-lang-ja>ショートカット早見表</span><span data-lang-zh>快捷键一览</span><span data-lang-fr>Raccourcis essentiels</span><span data-lang-de>Tastenkürzel auf einen Blick</span><span data-lang-es>Atajos de un vistazo</span><span data-lang-pt>Atalhos essenciais</span><span data-lang-it>Scorciatoie in breve</span></strong><span data-lang-en>Shift twice, Esc and everyday shortcuts</span><span data-lang-ko>Shift 두 번, Esc, 자주 쓰는 단축키</span><span data-lang-ja>Shift 2回、Esc、よく使うショートカット</span><span data-lang-zh>Shift 按两次、Esc 和常用快捷键</span><span data-lang-fr>Shift deux fois, Esc et raccourcis courants</span><span data-lang-de>Zweimal Shift, Esc und häufige Tastenkürzel</span><span data-lang-es>Shift dos veces, Esc y atajos habituales</span><span data-lang-pt>Shift duas vezes, Esc e atalhos comuns</span><span data-lang-it>Shift due volte, Esc e scorciatoie comuni</span></a>
       <a href="?help=tip-whiteboard"><strong><span data-lang-en>Build the explanation</span><span data-lang-ko>설명을 완성하기</span><span data-lang-ja>説明を組み立てる</span><span data-lang-zh>构建完整讲解</span><span data-lang-fr>Construire l’explication</span><span data-lang-de>Die Erklärung aufbauen</span><span data-lang-es>Construye la explicación</span><span data-lang-pt>Monte sua explicação</span><span data-lang-it>Costruisci la spiegazione</span></strong><span data-lang-en>Whiteboard, PDF and Sidecar workflows</span><span data-lang-ko>화이트보드, PDF, Sidecar 활용 흐름</span><span data-lang-ja>ホワイトボード、PDF、Sidecarの使い方</span><span data-lang-zh>白板、PDF 和 Sidecar 工作流</span><span data-lang-fr>Workflows tableau blanc, PDF et Sidecar</span><span data-lang-de>Whiteboard-, PDF- und Sidecar-Workflows</span><span data-lang-es>Flujos con pizarra, PDF y Sidecar</span><span data-lang-pt>Fluxos com quadro branco, PDF e Sidecar</span><span data-lang-it>Flussi con lavagna, PDF e Sidecar</span></a>
     </div>
     <section class="guide-links" aria-labelledby="guide-links-title">
@@ -1133,16 +1154,16 @@
 
       <div class="faq-item tip">
         <h3>
-          <span><span data-lang-en>Keep your hands moving, and your rhythm unbroken.</span><span data-lang-ko>손은 계속 움직이고, 흐름은 끊기지 않게.</span><span data-lang-ja>手を止めずに、リズムを崩さない。</span></span>
+          <span><span data-lang-en>Easy tool and color switching.</span><span data-lang-ko>간편한 도구 및 색상 변경</span><span data-lang-ja>ツールと色を簡単に切り替え</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Hold <span class="kbd">⌘</span> and scroll to cycle drawing tools, or <span class="kbd">⌥</span> and scroll for your favorite colors — a quiet corner HUD confirms the change every time.</span>
-          <span data-lang-ko><span class="kbd">⌘</span>를 누른 채 스크롤하면 드로잉 도구가, <span class="kbd">⌥</span>를 누른 채 스크롤하면 즐겨찾기 색상이 순환돼요 — 구석의 조용한 HUD가 매번 변경을 확인해줘요.</span>
-          <span data-lang-ja><span class="kbd">⌘</span>を押しながらスクロールで描画ツールが、<span class="kbd">⌥</span>を押しながらスクロールでお気に入りの色が切り替わります — コーナーの静かなHUDがそのたびに変更を確認します。</span>
+          <span data-lang-en>While Drawing mode is on, hold <span class="kbd">⌘</span> and scroll or use the arrow keys to cycle through tools; press <span class="kbd">⌘</span> with <span class="kbd">1–9</span> to jump to a tool in toolbar order. Hold <span class="kbd">⌥</span> and scroll or use the arrow keys to cycle through favorite colors; press <span class="kbd">⌥</span> with <span class="kbd">1–9</span> to choose a color by its favorite order. These shortcuts work from any app.</span>
+          <span data-lang-ko>드로잉 모드에서 <span class="kbd">⌘</span>를 누른 채 스크롤하거나 화살표 키를 누르면 도구가 순환돼요. <span class="kbd">⌘</span>와 <span class="kbd">1~9</span>를 누르면 툴바 순서에 따라 도구를 바로 선택할 수 있어요. <span class="kbd">⌥</span>를 누른 채 스크롤하거나 화살표 키를 누르면 즐겨찾기 색상이 순환되고, <span class="kbd">⌥</span>와 <span class="kbd">1~9</span>로 색상을 바로 선택할 수 있어요. 이 단축키는 다른 앱을 사용 중일 때도 작동해요.</span>
+          <span data-lang-ja>描画モード中に<span class="kbd">⌘</span>を押しながらスクロールするか矢印キーを押すと、ツールを切り替えられます。<span class="kbd">⌘</span>と<span class="kbd">1〜9</span>でツールバーの順番に応じたツールを直接選べます。<span class="kbd">⌥</span>を押しながらスクロールするか矢印キーを押すと、お気に入りの色が切り替わり、<span class="kbd">⌥</span>と<span class="kbd">1〜9</span>で色を直接選べます。これらのショートカットは他のアプリを使用中でも動作します。</span>
         </p></div>
         <div class="faq-video-frame has-video" id="video-slot-tool-color-switch">
-          <video controls playsinline preload="metadata" poster="../media/hands-moving-poster.jpg" aria-label="Keep your hands moving, and your rhythm unbroken.">
-            <source src="../media/hands-moving.mp4" type="video/mp4">
+          <video controls playsinline preload="metadata" poster="../media/shortcut-switching-poster.jpg" aria-label="Easy tool and color switching.">
+            <source src="../media/shortcut-switching.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -1193,7 +1214,71 @@
           <span data-lang-en>Tools and effects live on a quick 2-key combo (<span class="kbd">⌥</span> + letter); anything irreversible, like quitting or resetting, needs a deliberate 3-key combo (<span class="kbd">⌘⇧</span> + letter) so it never happens by accident. While drawing, single keys work too — <span class="kbd">⌫</span> clears the canvas, <span class="kbd">[</span>/<span class="kbd">]</span> resize your brush. Most tool and effect shortcuts can be remapped in Settings, though a few core actions stay fixed by design.</span>
           <span data-lang-ko>도구·이펙트는 빠른 2키 조합(<span class="kbd">⌥</span> + 글자)으로, 종료·초기화처럼 되돌릴 수 없는 동작은 신중한 3키 조합(<span class="kbd">⌘⇧</span> + 글자)으로 — 실수로 일어나는 일이 없도록. 그리는 중엔 단일 키도 써요 — <span class="kbd">⌫</span>로 캔버스를 지우고, <span class="kbd">[</span>/<span class="kbd">]</span>로 붓 크기를 조절해요. 대부분의 도구·이펙트 단축키는 Settings에서 다시 지정할 수 있지만, 일부 핵심 동작은 헷갈리지 않도록 고정되어 있어요.</span>
           <span data-lang-ja>ツール・エフェクトは素早い2キー操作（<span class="kbd">⌥</span> + 文字）、終了やリセットのように取り返しのつかない操作は慎重な3キー操作（<span class="kbd">⌘⇧</span> + 文字）で — うっかり起きることがないように。描画中は単一キーも使えます — <span class="kbd">⌫</span>でキャンバスを消去、<span class="kbd">[</span>/<span class="kbd">]</span>でブラシサイズを調整。ほとんどのツール・エフェクトのショートカットは設定で再割り当てできますが、一部の主要操作は迷わないよう固定されています。</span>
-        </p></div>
+        </p>
+        <div class="shortcut-table-wrap" id="shortcut-reference" role="region" tabindex="0" aria-labelledby="shortcut-table-title">
+          <table class="shortcut-table">
+            <caption id="shortcut-table-title"><span data-lang-en>Quick shortcut reference</span><span data-lang-ko>자주 쓰는 단축키</span><span data-lang-ja>よく使うショートカット</span></caption>
+            <thead>
+              <tr>
+                <th scope="col"><span data-lang-en>Shortcut</span><span data-lang-ko>단축키</span><span data-lang-ja>ショートカット</span></th>
+                <th scope="col"><span data-lang-en>When</span><span data-lang-ko>사용 조건</span><span data-lang-ja>使用条件</span></th>
+                <th scope="col"><span data-lang-en>What it does</span><span data-lang-ko>동작</span><span data-lang-ja>動作</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="kbd">⇧</span> <span data-lang-en>twice quickly</span><span data-lang-ko>빠르게 두 번</span><span data-lang-ja>素早く2回</span></td>
+                <td><span data-lang-en>When there is drawing content</span><span data-lang-ko>그려 둔 내용이 있을 때</span><span data-lang-ja>描画内容があるとき</span></td>
+                <td><span data-lang-en>Clears all drawing content. If Drawing mode is on, it turns it off too.</span><span data-lang-ko>그려 둔 내용을 모두 지워요. 드로잉 모드가 켜져 있으면 함께 종료해요.</span><span data-lang-ja>描画内容をすべて消去します。描画モードがオンの場合は、モードも終了します。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Esc</span></td>
+                <td><span data-lang-en>While a tool, effect, or timer is active</span><span data-lang-ko>도구·이펙트·타이머가 켜져 있을 때</span><span data-lang-ja>ツール・エフェクト・タイマーが有効なとき</span></td>
+                <td><span data-lang-en>Turns off active tools, effects, and timers. Whiteboard and drawing content stay in place.</span><span data-lang-ko>켜진 도구·이펙트·타이머를 모두 꺼요. 화이트보드와 그려 둔 내용은 유지돼요.</span><span data-lang-ja>有効なツール・エフェクト・タイマーをすべてオフにします。ホワイトボードと描画内容はそのまま残ります。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⌘</span><span class="kbd-plus">+</span><span class="kbd">K</span></td>
+                <td><span data-lang-en>Anywhere in TeacherPalette</span><span data-lang-ko>TeacherPalette 어디서나</span><span data-lang-ja>TeacherPaletteのどこでも</span></td>
+                <td><span data-lang-en>Opens or closes the Command Palette.</span><span data-lang-ko>커맨드 팔레트를 열거나 닫아요.</span><span data-lang-ja>コマンドパレットを開閉します。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">P</span> / <span class="kbd">H</span> / <span class="kbd">E</span></td>
+                <td><span data-lang-en>From any app · default keys</span><span data-lang-ko>어떤 앱에서든 · 기본 키</span><span data-lang-ja>どのアプリからでも · デフォルトキー</span></td>
+                <td><span data-lang-en>Starts Drawing mode with Pen, Highlighter, or Eraser.</span><span data-lang-ko>펜·하이라이터·지우개로 드로잉 모드를 시작해요.</span><span data-lang-ja>ペン・ハイライター・消しゴムで描画モードを開始します。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">Tab</span></td>
+                <td><span data-lang-en>While Drawing mode is on</span><span data-lang-ko>드로잉 모드 중</span><span data-lang-ja>描画モード中</span></td>
+                <td><span data-lang-en>Cycles through drawing tools.</span><span data-lang-ko>드로잉 도구를 차례로 전환해요.</span><span data-lang-ja>描画ツールを順番に切り替えます。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⌘ +&nbsp;<span data-lang-en>arrows</span><span data-lang-ko>화살표</span><span data-lang-ja>矢印</span><span data-lang-zh>方向键</span><span data-lang-fr>flèches</span><span data-lang-de>Pfeiltasten</span><span data-lang-es>flechas</span><span data-lang-pt>setas</span><span data-lang-it>frecce</span></span> / <span class="kbd">⌘ + 1–9</span></td>
+                <td><span data-lang-en>While Drawing mode is on</span><span data-lang-ko>드로잉 모드 중</span><span data-lang-ja>描画モード中</span></td>
+                <td><span data-lang-en>←/↓ and →/↑ cycle through drawing tools; 1–9 selects a tool by its toolbar order.</span><span data-lang-ko>←/↓와 →/↑로 드로잉 도구를 순환하고, 1~9로 툴바 순서에 따라 바로 선택해요.</span><span data-lang-ja>←/↓と→/↑で描画ツールを切り替え、1〜9でツールバーの順番に応じたツールを選びます。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⌥ +&nbsp;<span data-lang-en>arrows</span><span data-lang-ko>화살표</span><span data-lang-ja>矢印</span><span data-lang-zh>方向键</span><span data-lang-fr>flèches</span><span data-lang-de>Pfeiltasten</span><span data-lang-es>flechas</span><span data-lang-pt>setas</span><span data-lang-it>frecce</span></span> / <span class="kbd">⌥ + 1–9</span></td>
+                <td><span data-lang-en>While Drawing mode is on</span><span data-lang-ko>드로잉 모드 중</span><span data-lang-ja>描画モード中</span></td>
+                <td><span data-lang-en>←/↓ and →/↑ cycle through favorite colors; 1–9 selects a color by its favorite order.</span><span data-lang-ko>←/↓와 →/↑로 즐겨찾기 색상을 순환하고, 1~9로 즐겨찾기 순서에 따라 바로 선택해요.</span><span data-lang-ja>←/↓と→/↑でお気に入りの色を切り替え、1〜9でお気に入りの順番に応じた色を選びます。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">⌫</span></td>
+                <td><span data-lang-en>While drawing</span><span data-lang-ko>그리는 중</span><span data-lang-ja>描画中</span></td>
+                <td><span data-lang-en>Clears all drawing content and keeps Drawing mode on.</span><span data-lang-ko>그려 둔 내용을 모두 지우고 드로잉 모드는 유지해요.</span><span data-lang-ja>描画内容をすべて消去し、描画モードは維持します。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">[</span> / <span class="kbd">]</span></td>
+                <td><span data-lang-en>While drawing</span><span data-lang-ko>그리는 중</span><span data-lang-ja>描画中</span></td>
+                <td><span data-lang-en>Decreases or increases the stroke width.</span><span data-lang-ko>선 굵기를 줄이거나 키워요.</span><span data-lang-ja>線の太さを小さく、または大きくします。</span></td>
+              </tr>
+              <tr>
+                <td><span class="kbd">1</span>–<span class="kbd">9</span></td>
+                <td><span data-lang-en>While drawing</span><span data-lang-ko>그리는 중</span><span data-lang-ja>描画中</span></td>
+                <td><span data-lang-en>Selects a favorite color.</span><span data-lang-ko>즐겨찾기 색상을 선택해요.</span><span data-lang-ja>お気に入りの色を選択します。</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div></div>
         <div class="faq-video-frame has-video" id="video-slot-shortcut-system">
           <video controls playsinline preload="metadata" poster="../media/muscle-memory-poster.jpg" aria-label="Let muscle memory carry the moment.">
             <source src="../media/muscle-memory.mp4" type="video/mp4">
@@ -1274,24 +1359,17 @@
 
       <div class="faq-item tip">
         <h3>
-          <span><span data-lang-en>A photo, a link, a screenshot — right where you need it.</span><span data-lang-ko>사진 한 장, 링크 하나가, 필요한 순간 바로 그 자리에.</span><span data-lang-ja>写真もリンクも、必要な瞬間にすぐそこへ。</span></span>
+          <span><span data-lang-en>Drop files onto the Whiteboard; paste links as cards.</span><span data-lang-ko>이미지·파일은 드래그 앤 드롭, 링크는 썸네일로</span><span data-lang-ja>画像やファイルはドラッグ、リンクはサムネイルで</span></span>
         </h3>
         <div class="faq-a"><p>
-          <span data-lang-en>Copy an image or link from your browser and paste it straight onto the Whiteboard canvas — it drops in at full resolution, ready to annotate on top of. No need to leave the app or dig through Finder for a quick visual aid.</span>
-          <span data-lang-ko>브라우저에서 이미지나 링크를 복사한 뒤 화이트보드 캔버스에 바로 붙여넣어보세요 — 원본 해상도 그대로 놓이고, 그 위에 바로 필기할 수 있어요. Finder를 뒤질 필요 없이, 앱을 벗어나지 않고도 빠르게 시각 자료를 준비할 수 있어요.</span>
-          <span data-lang-ja>ブラウザから画像やリンクをコピーして、ホワイトボードのキャンバスにそのまま貼り付けてみましょう — 元の解像度のまま配置され、その上にすぐ書き込めます。Finderを探す必要もなく、アプリを離れずに素早く視覚資料を用意できます。</span>
+          <span data-lang-en>Drag an image or file from Finder onto the Whiteboard to add it to your canvas. When you drop a PDF, choose to add its pages to the current Whiteboard, keeping your existing notes, or open it in a new Whiteboard. Copy a link and paste it onto the canvas to add a thumbnail preview card.</span>
+          <span data-lang-ko>Finder에서 이미지나 파일을 화이트보드로 드래그 앤 드롭하면 캔버스에 바로 추가돼요. PDF를 놓으면 기존 화이트보드에 페이지를 이어 붙여 필기 내용을 유지할지, 새 화이트보드에서 열지 선택할 수 있어요. 링크를 복사해 캔버스에 붙여넣으면 썸네일 미리보기 카드로 추가돼요.</span>
+          <span data-lang-ja>Finderから画像やファイルをホワイトボードへドラッグ＆ドロップすると、キャンバスに追加できます。PDFをドロップしたときは、既存の書き込みを残したまま現在のホワイトボードにページを追加するか、新しいホワイトボードで開くかを選べます。リンクをコピーしてキャンバスに貼り付けると、サムネイル付きのプレビューカードとして追加されます。</span>
         </p></div>
-        <div class="faq-video-row">
-          <div class="faq-video-frame has-video" id="video-slot-whiteboard-dragdrop-left">
-            <video controls playsinline preload="metadata" poster="../media/image-drop-left-poster.jpg" aria-label="Paste image from clipboard (left)">
-              <source src="../media/image-drop-left.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="faq-video-frame has-video" id="video-slot-whiteboard-dragdrop-right">
-            <video controls playsinline preload="metadata" poster="../media/image-drop-right-poster.jpg" aria-label="Paste image from clipboard (right)">
-              <source src="../media/image-drop-right.mp4" type="video/mp4">
-            </video>
-          </div>
+        <div class="faq-video-frame has-video" id="video-slot-whiteboard-dragdrop">
+          <video controls playsinline preload="metadata" poster="../media/whiteboard-importing-poster.jpg" aria-label="Drag files onto the Whiteboard and choose how to import PDFs.">
+            <source src="../media/whiteboard-importing.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
 
@@ -1759,15 +1837,16 @@
   if (helpParam) {
     const helpTarget = document.getElementById(helpParam);
     if (helpTarget) {
-      window.requestAnimationFrame(() => {
-        helpTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        const helpItem = helpTarget.closest('.faq-item');
-        if (helpItem) {
-          helpItem.classList.add('open');
-          const heading = helpItem.querySelector('h3');
-          if (heading) heading.setAttribute('aria-expanded', 'true');
-        }
-      });
+      const scrollToHelpTarget = () => helpTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const helpItem = helpTarget.closest('.faq-item');
+      if (helpItem) {
+        helpItem.classList.add('open');
+        const heading = helpItem.querySelector('h3');
+        if (heading) heading.setAttribute('aria-expanded', 'true');
+        window.setTimeout(scrollToHelpTarget, 520);
+      } else {
+        window.requestAnimationFrame(scrollToHelpTarget);
+      }
     }
   }
 </script>
