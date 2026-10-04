@@ -321,31 +321,6 @@
     border-radius: 999px; font-size: 12px; font-weight: 600;
     margin-bottom: 20px; letter-spacing: 0.02em;
   }
-  /* "New in 1.1.6" pill — hero 하단, 릴리스 노트 링크 */
-  .whats-new-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px; margin-top: 14px;
-    background: linear-gradient(135deg, rgba(1,118,211,0.10), rgba(123,94,167,0.10));
-    border: 1px solid rgba(1,118,211,0.25);
-    border-radius: 999px;
-    font-size: 12px; font-weight: 600; color: var(--accent);
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .whats-new-pill:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(1,118,211,0.18);
-  }
-  .whats-new-pill .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #FF6B00;
-    box-shadow: 0 0 0 3px rgba(255,107,0,0.18);
-    animation: pillPulse 2s ease-in-out infinite;
-  }
-  @keyframes pillPulse {
-    0%, 100% { box-shadow: 0 0 0 3px rgba(255,107,0,0.18); }
-    50%      { box-shadow: 0 0 0 6px rgba(255,107,0,0.05); }
-  }
   .hero-app-icon {
     width: 128px; height: 128px; margin: 0 auto 24px; display: block;
     border-radius: 28px;
@@ -1771,19 +1746,6 @@
 <span data-lang-es>Privacidad</span>
 <span data-lang-pt>Privacidade</span>
 <span data-lang-it>Privacy</span></a></div>
-  <a id="hero-whats-new" class="whats-new-pill" href="releases/index.html">
-    <span class="dot"></span>
-    <span data-lang-en>New in 1.1.8 — Magnifier · Custom cursor control</span>
-    <span data-lang-ko>1.1.8 신규 — 돋보기 · 나만의 커서 조절</span>
-    <span data-lang-ja>1.1.8 新機能 — 拡大鏡 · カスタムカーソル調整</span>
-    <span data-lang-zh>1.1.8 新增 — 放大镜 · 自定义光标控制</span>
-    <span data-lang-fr>Nouveau dans 1.1.8 — Loupe · Contrôle du curseur personnalisé</span>
-    <span data-lang-de>Neu in 1.1.8 — Lupe · Steuerung des eigenen Cursors</span>
-    <span data-lang-es>Nuevo en 1.1.8 — Lupa · Control del cursor personalizado</span>
-    <span data-lang-pt>Novo na 1.1.8 — Lupa · Controle do cursor personalizado</span>
-    <span data-lang-it>Novità in 1.1.8 — Lente · Controllo del cursore personalizzato</span>
-  </a>
-
   <div class="hero-video-frame">
     <div class="hero-video-chrome" aria-hidden="true">
       <span class="hvc-dot hvc-r"></span><span class="hvc-dot hvc-y"></span><span class="hvc-dot hvc-g"></span>
@@ -3463,8 +3425,6 @@
       // What's New 링크에 현재 언어 파라미터 유지
       const whatsNewLink = document.getElementById('whats-new-link');
       if (whatsNewLink) whatsNewLink.href = 'releases/index.html?lang=' + lang;
-      const heroWhatsNew = document.getElementById('hero-whats-new');
-      if (heroWhatsNew) heroWhatsNew.href = 'releases/index.html?lang=' + lang;
       // Footer의 What's New 링크도 동기화 (있으면)
       document.querySelectorAll('a[href^="releases/"], a[href^="releases/index.html"]').forEach(a => {
         a.href = 'releases/index.html?lang=' + lang;
