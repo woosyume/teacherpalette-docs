@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "id": "presentify-alternative-mac",
+      "category": "comparisons",
+      "related": ["annotate-screen-mac", "screen-annotation-teachers-mac"],
+      "locales": {
+        "en": {
+          "title": "Presentify Alternative for Mac",
+          "heading": "Looking for a Presentify Alternative for Mac?",
+          "description": "Looking beyond screen annotation? Explore TeacherPalette’s drawing tools, Spotlight, Magnifier, multi-page Whiteboard and PDF workflow for Mac presentations.",
+          "summary": "Explore a presentation workflow that connects screen annotation, attention tools, Whiteboard and PDFs.",
+          "lead": "TeacherPalette goes beyond screen annotation with tools for drawing, focusing attention, working on a multi-page Whiteboard, and presenting with PDFs.",
+          "body": "en/presentify-alternative-mac.html",
+          "demo": {
+            "video": "teacherpalette-workflow-promo.mp4",
+            "poster": "workflow-promo-poster.jpg",
+            "caption": "See screen annotation, attention tools and Whiteboard in the existing TeacherPalette workflow demo. Press play to watch."
+          }
+        }
+      }
+    },
+    {
+      "id": "annotate-screen-mac",
+      "category": "guides",
+      "related": ["screen-annotation-teachers-mac", "presentify-alternative-mac"],
+      "locales": {
+        "en": {
+          "title": "How to Annotate Your Screen on Mac",
+          "heading": "How to Annotate Your Screen on Mac",
+          "description": "Learn a practical Mac screen annotation workflow: choose a drawing tool, make readable marks over apps, clear between steps, and use Whiteboard for longer explanations.",
+          "summary": "A step-by-step guide to marking up the apps you present, keeping annotations readable and returning to your demo.",
+          "lead": "A quick arrow or underline can explain something faster than a paragraph. Here is how to mark up the Mac app you are showing, keep your audience oriented, and return to the task without leaving a screen full of ink.",
+          "body": "en/annotate-screen-mac.html",
+          "demo": {
+            "video": "drawing-shortcuts.mp4",
+            "poster": "drawing-shortcuts-poster.jpg",
+            "caption": "Watch TeacherPalette’s drawing tools and shortcuts in action. The steps below also explain the workflow in text."
+          }
+        }
+      }
+    },
+    {
+      "id": "screen-annotation-teachers-mac",
+      "category": "use-cases",
+      "related": ["annotate-screen-mac", "presentify-alternative-mac"],
+      "locales": {
+        "en": {
+          "title": "Screen Annotation for Teachers on Mac",
+          "heading": "Screen Annotation for Teachers on Mac",
+          "description": "Plan clearer Mac lessons with screen annotation: explain slides, websites, code and PDFs, then move to a multi-page Whiteboard when students need a worked example.",
+          "summary": "Practical lesson ideas for slides, websites, software demos, code, diagrams and PDF materials.",
+          "lead": "In a lesson, students need to see both the material and the point you are making. Screen annotation lets you connect those two things while you explain a slide, walk through software, or respond to a question.",
+          "body": "en/screen-annotation-teachers-mac.html",
+          "demo": {
+            "video": "whiteboard-page-workflow.mp4",
+            "poster": "whiteboard-page-workflow-poster.jpg",
+            "caption": "The existing Whiteboard demo shows how separate pages can keep a growing explanation organized."
+          }
+        }
+      }
+    }
+  ]
+}
