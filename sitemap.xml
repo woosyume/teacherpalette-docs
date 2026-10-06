@@ -10,9 +10,6 @@
     <loc>https://teacherpalette.com/releases/</loc>
   </url>
   <url>
-    <loc>https://teacherpalette.com/en/draw-on-screen-mac/</loc>
-  </url>
-  <url>
     <loc>https://teacherpalette.com/ja/mac-screen-writing/</loc>
   </url>
   <url>
@@ -64,6 +61,8 @@
   <url><loc>https://teacherpalette.com/ja/resources/</loc></url>
   <url><loc>https://teacherpalette.com/ko/resources/</loc></url>
   <url><loc>https://teacherpalette.com/en/resources/presentify-alternative-mac/</loc></url>
+  <url><loc>https://teacherpalette.com/ja/resources/presentify-alternative-mac/</loc></url>
+  <url><loc>https://teacherpalette.com/ko/resources/presentify-alternative-mac/</loc></url>
   <url><loc>https://teacherpalette.com/en/resources/annotate-screen-mac/</loc></url>
   <url><loc>https://teacherpalette.com/en/resources/screen-annotation-teachers-mac/</loc></url>
 </urlset>

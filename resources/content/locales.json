@@ -29,7 +29,6 @@
     "libraries": "Resource libraries",
     "home": "Home",
     "legacyPaths": [
-      "draw-on-screen-mac",
       "cursor-highlight-mac",
       "presentation-whiteboard-mac",
       "annotate-pdf-presenting-mac",
@@ -44,21 +43,23 @@
     "ctaBody": "Bring your own slides, apps and documents to TeacherPalette.",
     "midCta": "Rehearse your next explanation with TeacherPalette.",
     "watch": "Watch the TeacherPalette demo",
-    "footer": "Footer"
+    "footer": "Footer",
+    "articleLanguages": "Article language",
+    "breadcrumb": "Breadcrumb"
   },
   "ja": {
     "name": "日本語",
-    "label": "ガイド",
-    "title": "Macでの授業・プレゼンテーションに役立つガイド",
+    "label": "活用情報",
+    "title": "Macでの授業・プレゼンテーションに役立つ活用情報",
     "description": "Macの画面への書き込み、カーソルの強調、ホワイトボード、PDFへの注釈。TeacherPaletteで授業やデモをわかりやすく伝えるためのガイドです。",
     "lead": "Macでの授業やデモ、プレゼンテーションをわかりやすく伝えるためのヒント。",
-    "featured": "画面で伝えるためのガイド",
+    "featured": "比較と活用のヒント",
     "practical": "ツールの使い方",
     "practicalLead": "TeacherPaletteを授業やプレゼンテーションで使うための実践ガイドです。",
     "homeLead": "次の授業やデモで使える、画面への書き込み・ホワイトボード・PDFのヒント。",
-    "all": "すべてのガイドを見る",
-    "read": "ガイドを読む",
-    "related": "関連ガイド",
+    "all": "すべての活用情報を見る",
+    "read": "記事を読む",
+    "related": "あわせて読みたい記事",
     "categories": {
       "guides": "使い方ガイド",
       "comparisons": "比較",
@@ -73,7 +74,7 @@
     "menu": "メニュー",
     "theme": "テーマを切り替える",
     "skip": "本文へ移動",
-    "libraries": "ガイドの言語",
+    "libraries": "活用情報の言語",
     "home": "ホーム",
     "legacyPaths": [
       "mac-screen-writing",
@@ -82,7 +83,7 @@
       "mac-pdf-presentation-annotation",
       "mac-demo-presentation-tools"
     ],
-    "toc": "このガイドの内容",
+    "toc": "この記事の内容",
     "action": "TeacherPaletteの動作を見る",
     "trial": "TeacherPaletteを7日間無料で試す",
     "trialNote": "新規サブスクリプション利用者が対象です。解約しない限り自動更新されます。",
@@ -91,21 +92,23 @@
     "ctaBody": "授業のスライドやアプリ、資料をTeacherPaletteで使ってみましょう。",
     "midCta": "次の授業やプレゼンをTeacherPaletteでリハーサルしてみましょう。",
     "watch": "TeacherPaletteのデモを見る",
-    "footer": "フッター"
+    "footer": "フッター",
+    "articleLanguages": "記事の言語",
+    "breadcrumb": "パンくずリスト"
   },
   "ko": {
     "name": "한국어",
-    "label": "가이드",
-    "title": "Mac 수업과 발표를 위한 가이드",
+    "label": "활용 자료",
+    "title": "Mac 수업과 발표를 위한 활용 자료",
     "description": "Mac 화면 필기, 커서 강조, 화이트보드와 PDF 주석 활용법. TeacherPalette로 수업과 소프트웨어 데모를 더 명확하게 설명하는 방법을 알아보세요.",
     "lead": "Mac에서 수업하고, 시연하고, 더 명확하게 설명하는 데 도움이 되는 가이드.",
-    "featured": "화면으로 설명하는 방법",
+    "featured": "비교와 활용 아이디어",
     "practical": "도구 활용 가이드",
     "practicalLead": "수업과 실시간 발표에서 TeacherPalette의 도구를 활용하는 방법을 알아보세요.",
     "homeLead": "다음 수업과 데모에 활용할 화면 필기, 화이트보드, PDF 설명 팁.",
-    "all": "모든 가이드 보기",
-    "read": "가이드 읽기",
-    "related": "관련 가이드",
+    "all": "모든 활용 자료 보기",
+    "read": "글 읽기",
+    "related": "함께 읽을 자료",
     "categories": {
       "guides": "사용 가이드",
       "comparisons": "비교",
@@ -120,7 +123,7 @@
     "menu": "메뉴",
     "theme": "화면 테마 전환",
     "skip": "본문으로 이동",
-    "libraries": "가이드 언어",
+    "libraries": "활용 자료 언어",
     "home": "홈",
     "legacyPaths": [
       "mac-screen-writing",
@@ -129,7 +132,7 @@
       "mac-pdf-presentation-annotation",
       "mac-demo-presentation-tools"
     ],
-    "toc": "가이드 목차",
+    "toc": "글 목차",
     "action": "TeacherPalette 동작 보기",
     "trial": "TeacherPalette 7일 무료 체험",
     "trialNote": "신규 구독자에게 제공됩니다. 취소하지 않으면 구독이 자동 갱신됩니다.",
@@ -138,6 +141,8 @@
     "ctaBody": "사용하던 슬라이드, 앱, 자료로 TeacherPalette를 체험해 보세요.",
     "midCta": "다음 수업이나 발표를 TeacherPalette로 연습해 보세요.",
     "watch": "TeacherPalette 데모 보기",
-    "footer": "하단 메뉴"
+    "footer": "하단 메뉴",
+    "articleLanguages": "글 언어",
+    "breadcrumb": "경로"
   }
 }

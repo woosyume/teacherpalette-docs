@@ -21,8 +21,13 @@ HTML alongside its source. Python 3.9+ is only needed when editing content.
 - `../scripts/verify_resources.py`: checks generated output, metadata, schemas,
   local links, assets, sitemap coverage and existing URL preservation.
 
-The existing `/guides/` editorial collection and all practical-guide URLs remain
-available. The new library links to them without moving or redirecting them.
+The existing `/guides/` editorial collection and localized practical-guide URLs
+remain available. The retired English `/en/draw-on-screen-mac/` now contains an
+instant HTML redirect and canonical to `/en/resources/annotate-screen-mac/`.
+The current GitHub Pages host still returns HTTP 200 for this static file; this
+is not an HTTP 301. Server-level redirects require a capable hosting/edge layer,
+which this repository does not configure. Do not add inert `_redirects` files.
+The old URL is absent from internal links and the sitemap.
 
 ## Add a new article
 
@@ -78,22 +83,32 @@ and attribution deliberately if the editorial workflow later requires them.
 
 ## Localization
 
-The EN, JA and KO library indexes are localized now. JA and KO currently list
-their existing local practical guides; they do not display the English articles.
+The EN, JA and KO library indexes are localized. Presentify Alternative is
+published in all three languages with locally written content and metadata.
+JA and KO also list their existing local practical guides; they do not display
+English-only articles.
 
 To publish an article in Japanese or Korean, add a `ja` or `ko` entry under that
 article's `locales` with its own metadata, heading, lead, demo caption and body
 path, and write the corresponding HTML fragment. Only published variants appear
-in an article's hreflang links or local related cards. Libraries remain separate
-from article translations: the language links explicitly say “Resource libraries.”
+in an article's hreflang links or local related cards. The `localeAlternates`
+field can also identify existing, genuinely equivalent localized practical
+guides. The consolidated English screen-annotation article uses that field to
+preserve reciprocal alternates with the eight existing local screen guides.
+Libraries remain separate from article translations: the library links say
+“Resource libraries” and a separate article language row links translated
+variants directly. When translated related articles do not exist, related cards
+link to local practical guides instead of falling back to English.
 Do not create English fallback pages under Japanese or Korean article URLs.
 
 The homepage preserves its existing nine-language switch. EN/JA/KO point to their
 own libraries. The other six languages clearly label the English library in the
 menu and section heading, following the existing English fallback behavior.
 
-When a locale gains articles, the home builder uses those article cards instead
-of the existing practical-guide selection. Do not modify generated pages directly.
+Home cards prioritize published local articles, then fill the remaining slots
+with local practical guides. Navigation and section headings use `Resources`,
+`活用情報`, and `활용 자료`, consistently with `content/locales.json`. Categories
+remain independent (`Guides`, `Comparisons`, `Use Cases`). Do not modify generated pages directly.
 The index has no hard item limit; the home shows up to three articles. For larger
 collections, category filtering or pagination can be added to this registry later.
 

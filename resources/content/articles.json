@@ -3,7 +3,10 @@
     {
       "id": "presentify-alternative-mac",
       "category": "comparisons",
-      "related": ["annotate-screen-mac", "screen-annotation-teachers-mac"],
+      "related": [
+        "annotate-screen-mac",
+        "screen-annotation-teachers-mac"
+      ],
       "locales": {
         "en": {
           "title": "Presentify Alternative for Mac",
@@ -17,13 +20,42 @@
             "poster": "workflow-promo-poster.jpg",
             "caption": "See screen annotation, attention tools and Whiteboard in the existing TeacherPalette workflow demo. Press play to watch."
           }
+        },
+        "ja": {
+          "title": "Presentifyの代替アプリをお探しの方へ",
+          "heading": "Presentifyの代替アプリをお探しですか？",
+          "description": "Macの画面に書き込むだけでなく、資料を拡大し、ホワイトボードで図解し、PDFに残したい方へ。TeacherPaletteを授業やプレゼンの流れで試すポイントを紹介します。",
+          "summary": "Macの画面注釈から拡大鏡、ホワイトボード、PDFまで。授業やプレゼンに合う道具の選び方。",
+          "lead": "Macで画面に書き込みながら説明したい。さらに、小さな文字を見せたり、図を描いたり、資料に注釈を残したりしたい。TeacherPaletteは、そんな授業やプレゼンの流れを支える選択肢です。",
+          "body": "ja/presentify-alternative-mac.html",
+          "demo": {
+            "video": "teacherpalette-workflow-promo.mp4",
+            "poster": "workflow-promo-poster.jpg",
+            "caption": "画面への書き込み、視線を導く道具、ホワイトボードを使う流れを動画で確認できます。再生するとデモが始まります。"
+          }
+        },
+        "ko": {
+          "title": "Presentify 대체 앱: Mac 화면 필기와 발표 도구",
+          "heading": "Presentify 대체 앱을 찾고 계신가요?",
+          "description": "맥 화면 필기에서 돋보기, 여러 페이지의 화이트보드, PDF 주석까지. Presentify 대안을 찾는 분을 위해 수업과 데모에서 TeacherPalette를 비교하고 시험할 기준을 정리했습니다.",
+          "summary": "맥 화면 필기부터 돋보기, 화이트보드, PDF까지. 내 수업과 발표에 맞는 도구를 고르는 기준.",
+          "lead": "Mac 화면에 표시하면서 설명하다 보면 작은 글자를 확대하거나, 질문에 답할 그림을 그리거나, PDF 자료에 필기한 내용을 남길 때가 있습니다. TeacherPalette는 화면 주석에서 시작해 이런 발표 흐름을 이어갈 수 있는 대안입니다.",
+          "body": "ko/presentify-alternative-mac.html",
+          "demo": {
+            "video": "teacherpalette-workflow-promo.mp4",
+            "poster": "workflow-promo-poster.jpg",
+            "caption": "화면 필기, 시선 유도 도구, 화이트보드를 이어 쓰는 기존 TeacherPalette 데모입니다. 재생 버튼을 눌러 확인하세요."
+          }
         }
       }
     },
     {
       "id": "annotate-screen-mac",
       "category": "guides",
-      "related": ["screen-annotation-teachers-mac", "presentify-alternative-mac"],
+      "related": [
+        "screen-annotation-teachers-mac",
+        "presentify-alternative-mac"
+      ],
       "locales": {
         "en": {
           "title": "How to Annotate Your Screen on Mac",
@@ -38,12 +70,25 @@
             "caption": "Watch TeacherPalette’s drawing tools and shortcuts in action. The steps below also explain the workflow in text."
           }
         }
+      },
+      "localeAlternates": {
+        "ja": "/ja/mac-screen-writing/",
+        "ko": "/ko/mac-screen-writing/",
+        "zh": "/zh/mac-screen-writing/",
+        "fr": "/fr/mac-screen-writing/",
+        "de": "/de/mac-screen-writing/",
+        "es": "/es/mac-screen-writing/",
+        "pt": "/pt/mac-screen-writing/",
+        "it": "/it/mac-screen-writing/"
       }
     },
     {
       "id": "screen-annotation-teachers-mac",
       "category": "use-cases",
-      "related": ["annotate-screen-mac", "presentify-alternative-mac"],
+      "related": [
+        "annotate-screen-mac",
+        "presentify-alternative-mac"
+      ],
       "locales": {
         "en": {
           "title": "Screen Annotation for Teachers on Mac",

@@ -17,7 +17,7 @@ ORIGIN = "https://teacherpalette.com"
 LOCALES = json.loads((SOURCE / "locales.json").read_text())
 ARTICLES = json.loads((SOURCE / "articles.json").read_text())["articles"]
 TEMPLATE = (ROOT / "resources/templates/page.html").read_text()
-LABELS = {"en": "Resources", "ja": "ガイド", "ko": "가이드", "zh": "资源（英语）",
+LABELS = {**{code: data["label"] for code, data in LOCALES.items()}, "zh": "资源（英语）",
           "fr": "Ressources (anglais)", "de": "Ressourcen (Englisch)",
           "es": "Recursos (inglés)", "pt": "Recursos (inglês)", "it": "Risorse (inglese)"}
 
@@ -43,6 +43,12 @@ def render(template, values):
 
 def translated_articles(locale):
     return [a for a in ARTICLES if locale in a["locales"]]
+
+
+def article_alternates(article):
+    # Preserve the existing localized screen guides when consolidating their EN variant.
+    return {**article.get("localeAlternates", {}),
+            **{code: path(code, article["id"]) for code in article["locales"]}}
 
 
 def article_card(article, locale):
@@ -75,12 +81,20 @@ def spans(values):
     return "".join(f'<span data-lang-{locale}>{esc(text)}</span>' for locale, text in values.items())
 
 
-def libraries(locale, article=False):
+def libraries(locale, article=None):
     links = []
     for code, data in LOCALES.items():
         current = ' aria-current="page"' if code == locale and not article else ""
         links.append(f'<a href="{path(code)}" lang="{code}" hreflang="{code}"{current}>{data["name"]}</a>')
-    return f'<nav class="resource-languages" aria-label="{esc(LOCALES[locale]["libraries"])}"><span>{esc(LOCALES[locale]["libraries"])}</span>{"".join(links)}</nav>'
+    result = f'<nav class="resource-languages" aria-label="{esc(LOCALES[locale]["libraries"])}"><span>{esc(LOCALES[locale]["libraries"])}</span>{"".join(links)}</nav>'
+    if article and len(article["locales"]) > 1:
+        label = LOCALES[locale]["articleLanguages"]
+        article_links = "".join(
+            f'<a href="{path(code, article["id"])}" lang="{code}" hreflang="{code}"' +
+            (' aria-current="page"' if code == locale else '') + f'>{LOCALES[code]["name"]}</a>'
+            for code in article["locales"])
+        result += f'<nav class="resource-languages" aria-label="{esc(label)}"><span>{esc(label)}</span>{article_links}</nav>'
+    return result
 
 
 def chrome(locale, article=False):
@@ -144,7 +158,7 @@ def build_article(article, locale, store):
         if not (ROOT / "media" / asset).is_file():
             raise ValueError(f"Missing demo asset: {asset}")
     video = f'''<figure id="demo" class="resource-demo">
-  <video controls playsinline preload="none" poster="/media/{esc(demo['poster'])}" aria-label="{esc(plain(data['heading']))} — TeacherPalette demo">
+  <video controls playsinline preload="none" poster="/media/{esc(demo['poster'])}" aria-label="{esc(plain(data['heading']))} — {esc(l['watch'])}">
     <source src="/media/{esc(demo['video'])}" type="video/mp4">
     <p><a href="/media/{esc(demo['video'])}">{esc(l['watch'])}</a></p>
   </video><figcaption>{esc(demo['caption'])}</figcaption>
@@ -154,9 +168,13 @@ def build_article(article, locale, store):
         target = next(a for a in ARTICLES if a["id"] == slug)
         if locale in target["locales"]:
             related.append(article_card(target, locale))
+    if not related:
+        # No translated related Resources yet: keep readers in their own local guides.
+        guides = legacy_cards(locale)
+        related = [guides[i][1] for i in (0, 2)]
     url = path(locale, article["id"])
-    content = libraries(locale, True) + f'''<article class="resource-article">
-<nav class="resource-breadcrumb" aria-label="Breadcrumb"><a href="/?lang={locale}">TeacherPalette</a><span aria-hidden="true">/</span><a href="{path(locale)}">{esc(LOCALES[locale]['label'])}</a></nav>
+    content = libraries(locale, article) + f'''<article class="resource-article">
+<nav class="resource-breadcrumb" aria-label="{esc(l['breadcrumb'])}"><a href="/?lang={locale}">TeacherPalette</a><span aria-hidden="true">/</span><a href="{path(locale)}">{esc(LOCALES[locale]['label'])}</a></nav>
 <p class="resource-eyebrow">{esc(LOCALES[locale]['categories'][article['category']])} · Mac</p>
 <h1>{esc(data['heading'])}</h1><p class="resource-lead">{esc(data['lead'])}</p>
 <div class="resource-actions"><a class="resource-button resource-button-primary" href="{esc(store)}">{esc(l['trial'])}</a><a class="resource-button resource-button-secondary" href="#demo">{esc(l['action'])}</a></div>
@@ -174,7 +192,7 @@ def build_article(article, locale, store):
             {"@type": "ListItem", "position": 1, "name": "TeacherPalette", "item": ORIGIN + "/"},
             {"@type": "ListItem", "position": 2, "name": LOCALES[locale]["label"], "item": ORIGIN + path(locale)},
             {"@type": "ListItem", "position": 3, "name": data["title"], "item": ORIGIN + url}]}]}
-    available = {code: path(code, article["id"]) for code in article["locales"]}
+    available = article_alternates(article)
     return page(locale, data["title"], data["description"], url, content, available, schema, True)
 
 
@@ -208,7 +226,11 @@ def build_home(source):
     panels = []
     for locale, l in LOCALES.items():
         featured = translated_articles(locale)
-        cards = [article_card(a, locale) for a in featured[:3]] if featured else [legacy_cards(locale)[i][1] for i in (0, 2, 3)]
+        cards = [article_card(a, locale) for a in featured[:3]]
+        if len(cards) < 3:
+            guides = legacy_cards(locale)
+            cards.extend(guides[i][1] for i in (0, 2, 3))
+            cards = cards[:3]
         panels.append(f'<div data-lang-{locale} lang="{locale}"><div class="resource-grid">{"".join(cards)}</div><a class="resource-all" href="{path(locale)}">{esc(l["all"])} <span aria-hidden="true">→</span></a></div>')
     section = f'''<section id="resources" class="home-resources" aria-labelledby="home-resources-title"><div class="section-inner">
 <div class="section-header"><h2 id="home-resources-title">{spans(LABELS)}</h2><p>{spans({code: l['homeLead'] for code, l in LOCALES.items()})}</p></div>
@@ -219,7 +241,8 @@ def build_home(source):
 
 def build_sitemap(urls):
     source = (ROOT / "sitemap.xml").read_text()
-    # Preserve every existing non-resource URL and its metadata verbatim.
+    # Preserve existing routes except the retired English screen-annotation page.
+    source = re.sub(r"\s*<url>\s*<loc>https://teacherpalette\.com/en/draw-on-screen-mac/</loc>\s*</url>", "", source)
     source = re.sub(r"\s*<url>\s*<loc>https://teacherpalette\.com/(?:en|ja|ko)/resources/.*?</url>", "", source, flags=re.S)
     additions = "".join(f"  <url><loc>{ORIGIN + url}</loc></url>\n" for url in urls)
     result = source.replace("</urlset>", additions + "</urlset>")

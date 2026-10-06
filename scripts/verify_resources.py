@@ -9,7 +9,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 from urllib.request import urlopen
 from xml.etree import ElementTree as ET
 
-from build_resources import ARTICLES, LOCALES, ORIGIN, ROOT, path
+from build_resources import ARTICLES, LOCALES, ORIGIN, ROOT, article_alternates, path
 
 
 class Page(HTMLParser):
@@ -81,9 +81,16 @@ def main():
     sitemap = sitemap_urls((ROOT / "sitemap.xml").read_text())
     errors = []
     titles, descriptions = [], []
-    # Every pre-existing sitemap URL and HTML page remains reachable.
+    # The single intentionally consolidated EN route is no longer a sitemap destination.
+    retired = ORIGIN + "/en/draw-on-screen-mac/"
+    primary = ORIGIN + "/en/resources/annotate-screen-mac/"
     original = subprocess.check_output(["git", "show", "HEAD:sitemap.xml"], cwd=ROOT, text=True)
-    assert sitemap_urls(original) <= sitemap, "Existing sitemap URLs removed"
+    assert sitemap_urls(original) - {retired} <= sitemap, "Unrelated sitemap URLs removed"
+    assert retired not in sitemap and primary in sitemap, "Consolidated sitemap route is incorrect"
+    moved = pages[file_for(retired)]
+    assert moved.find("link", rel="canonical") == [{"rel": "canonical", "href": primary}]
+    assert moved.find("meta", **{"http-equiv": "refresh"})[0]["content"] == "0; url=/en/resources/annotate-screen-mac/"
+    assert not moved.schemas and not moved.find("link", rel="alternate"), "Retired page still has article SEO definitions"
     for url in sitemap:
         assert file_for(url).is_file(), f"Missing sitemap destination: {url}"
     for url in generated:
@@ -105,10 +112,23 @@ def main():
         alternates = page.find("link", rel="alternate")
         if url.count("/") > 3:  # Article equivalents must actually be published in that language.
             article = next(a for a in ARTICLES if a["id"] == url.rstrip("/").split("/")[-1])
-            expected = set(article["locales"]) | ({"x-default"} if "en" in article["locales"] else set())
+            variants = article_alternates(article)
+            expected = set(variants) | ({"x-default"} if "en" in variants else set())
             assert {a["hreflang"] for a in alternates} == expected, url
+            for alternate in alternates:
+                code = alternate["hreflang"]
+                expected_url = ORIGIN + variants['en' if code == 'x-default' else code]
+                assert alternate['href'] == expected_url, url
+                target = pages[file_for(expected_url)]
+                assert any(a['hreflang'] == url.split('/')[1] and a['href'] == ORIGIN + url
+                           for a in target.find('link', rel='alternate')), f"Missing reciprocal alternate: {url}"
             schema_article = next(s for s in page.schemas[0]["@graph"] if s["@type"] == "Article")
             assert not any(k in schema_article for k in ("aggregateRating", "review", "author")), url
+            assert schema_article['url'] == ORIGIN + url and schema_article['inLanguage'] == url.split('/')[1], url
+            if article['id'] == 'presentify-alternative-mac' and url.split('/')[1] in ('ja','ko'):
+                local = url.split('/')[1]
+                related = [a for a in page.find('a') if a.get('class') == 'resource-card']
+                assert related and all(a['href'].startswith('/' + local + '/') for a in related), url
         descriptions.append(description)
         titles.append(page.find("meta", property="og:title")[0]["content"])
         if args.base_url:
@@ -117,6 +137,16 @@ def main():
     assert len(set(titles)) == len(titles) and len(set(descriptions)) == len(descriptions), "Duplicate resource metadata"
     for filename, page in list(pages.items()):
         errors.extend(check_links(filename, page, pages))
+        for tag, attrs in page.elements:
+            for key in ('href','src','poster'):
+                value = attrs.get(key)
+                if value:
+                    full = urljoin(ORIGIN + '/' + str(filename.relative_to(ROOT)), value)
+                    assert not urlsplit(full).path.startswith('/en/draw-on-screen-mac/'), f"Retired URL reference in {filename}"
+    if args.base_url:
+        # HTML fallback accurately remains HTTP 200; never pretend this is a server 301.
+        with urlopen(args.base_url.rstrip('/') + '/en/draw-on-screen-mac/') as response:
+            assert response.status == 200 and response.read().decode() == file_for(retired).read_text()
     # Distinguish pre-existing link errors instead of silently changing unrelated content.
     baseline_errors = set()
     for filename in pages:
@@ -131,7 +161,8 @@ def main():
     print(f"Verified {len(generated)} resources: unique SEO metadata, schemas, CTA IDs, media and sitemap.")
     print(f"Checked links and assets across {len(pages)} static HTML pages: {len(introduced)} new broken links.")
     print(f"Pre-existing broken links: {len(set(errors) & baseline_errors)}.")
-    print(f"Sitemap: {len(sitemap)} valid destinations; all original URLs preserved. HTTP: {'passed' if args.base_url else 'not requested'}.")
+    print(f"Sitemap: {len(sitemap)} valid destinations; retired EN URL removed, all other URLs preserved. HTTP: {'passed' if args.base_url else 'not requested'}.")
+    print("Consolidation: instant HTML redirect + canonical validated; HTTP 301 is unavailable on the current static host.")
 
 
 if __name__ == "__main__":
