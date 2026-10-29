@@ -1408,6 +1408,21 @@
     text-align: center; color: var(--text-dim); font-size: 12.5px;
     max-width: 640px; margin: 40px auto 0; line-height: 1.6;
   }
+  .institutional-pricing {
+    max-width: 980px; margin: 32px auto 0; padding: 28px 30px;
+    display: flex; align-items: center; justify-content: space-between; gap: 28px;
+    text-align: left; background: var(--accent-soft);
+    border: 1px solid var(--border); border-radius: 16px;
+  }
+  .institutional-pricing-copy { flex: 1; min-width: 0; }
+  .institutional-pricing h3 { font-size: 20px; line-height: 1.4; margin-bottom: 10px; }
+  .institutional-pricing p { color: var(--text-dim); font-size: 14px; line-height: 1.75; }
+  .institutional-pricing p + p { margin-top: 6px; }
+  .institutional-pricing .btn { flex: 0 0 auto; text-align: center; }
+  @media (max-width: 780px) {
+    .institutional-pricing { flex-direction: column; align-items: stretch; gap: 20px; padding: 24px; }
+    .institutional-pricing .btn { align-self: flex-start; max-width: 100%; }
+  }
   /* ── 1% for Education ─────────────────────────────────────── */
   .education-commitment-inner {
     position: relative; width: calc(100% - 48px); max-width: 900px; margin: 0 auto;
@@ -2881,6 +2896,55 @@
       <span data-lang-pt>Os preços exibidos são em USD, apenas para referência. O preço final, a moeda e os impostos aplicáveis são definidos pela App Store do seu país.</span>
       <span data-lang-it>I prezzi mostrati sono in USD, a titolo indicativo. Il prezzo finale, la valuta e le eventuali imposte sono stabiliti dall'App Store del tuo paese.</span>
     </p>
+
+    <aside class="institutional-pricing" aria-labelledby="institutional-pricing-title">
+      <div class="institutional-pricing-copy">
+        <h3 id="institutional-pricing-title">
+          <span data-lang-en>For schools and businesses</span>
+          <span data-lang-ko>학교·기업 도입 안내</span>
+          <span data-lang-ja>学校・企業での導入について</span>
+          <span data-lang-zh>学校与企业采购</span>
+          <span data-lang-fr>Pour les écoles et les entreprises</span>
+          <span data-lang-de>Für Schulen und Unternehmen</span>
+          <span data-lang-es>Para centros educativos y empresas</span>
+          <span data-lang-pt>Para escolas e empresas</span>
+          <span data-lang-it>Per scuole e aziende</span>
+        </h3>
+        <p>
+          <span data-lang-en>TeacherPalette fully supports Apple Business Manager and Apple School Manager.</span>
+          <span data-lang-ko>TeacherPalette는 Apple Business Manager와 Apple School Manager를 완전히 지원합니다.</span>
+          <span data-lang-ja>TeacherPaletteはApple Business ManagerとApple School Managerに完全対応しています。</span>
+          <span data-lang-zh>TeacherPalette 全面支持 Apple Business Manager 和 Apple School Manager。</span>
+          <span data-lang-fr>TeacherPalette prend entièrement en charge Apple Business Manager et Apple School Manager.</span>
+          <span data-lang-de>TeacherPalette unterstützt Apple Business Manager und Apple School Manager vollständig.</span>
+          <span data-lang-es>TeacherPalette es totalmente compatible con Apple Business Manager y Apple School Manager.</span>
+          <span data-lang-pt>O TeacherPalette é totalmente compatível com o Apple Business Manager e o Apple School Manager.</span>
+          <span data-lang-it>TeacherPalette supporta pienamente Apple Business Manager e Apple School Manager.</span>
+        </p>
+        <p>
+          <span data-lang-en>Contact us for pricing for your school or organization.</span>
+          <span data-lang-ko>학교 및 기업·기관 도입 가격은 별도로 문의해 주세요.</span>
+          <span data-lang-ja>学校・企業・組織向けの導入価格については、お問い合わせください。</span>
+          <span data-lang-zh>如需了解学校、企业或机构的采购价格，请联系我们。</span>
+          <span data-lang-fr>Contactez-nous pour connaître les tarifs pour votre école ou votre organisation.</span>
+          <span data-lang-de>Kontaktiere uns für Preise für deine Schule oder Organisation.</span>
+          <span data-lang-es>Contáctanos para conocer los precios para tu centro educativo u organización.</span>
+          <span data-lang-pt>Entre em contato para saber os preços para sua escola ou organização.</span>
+          <span data-lang-it>Contattaci per conoscere i prezzi per la tua scuola o organizzazione.</span>
+        </p>
+      </div>
+      <a href="mailto:support@teacherpalette.com?subject=Apple%20Business%20Manager%20%2F%20Apple%20School%20Manager%20pricing%20inquiry" class="btn btn-secondary">
+          <span data-lang-en>Contact us for institutional pricing</span>
+          <span data-lang-ko>기관 도입 가격 문의</span>
+          <span data-lang-ja>組織向け価格のお問い合わせ</span>
+          <span data-lang-zh>咨询机构采购价格</span>
+          <span data-lang-fr>Demander les tarifs pour votre organisation</span>
+          <span data-lang-de>Preise für Organisationen anfragen</span>
+          <span data-lang-es>Consultar precios para organizaciones</span>
+          <span data-lang-pt>Consultar preços para organizações</span>
+          <span data-lang-it>Richiedi i prezzi per organizzazioni</span>
+      </a>
+    </aside>
   </div>
 
 <!-- ═══════════════════════ 1% FOR EDUCATION ═══════════════════════ -->
